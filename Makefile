@@ -2,14 +2,14 @@ NAME = cub3D
 
 CC = cc
 
-CFLAGS	 =	-Wextra -Wall -Werror 
+# CFLAGS	 =	-Wextra -Wall -Werror 
 CFLAGS	+= -I inc
 CFLAGS	+= -I libft
 CFLAGS	+= -I include
-# CFLAGS	+= -O3 -> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS
+#CFLAGS	+= -O3 #-> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS
 #CFLAGS	+= -lglfw
 
-DEBUG	 =	-fsanitize=address,leak -g3
+DEBUG	 =	-fsanitize=address -g3
 
 CPPFLAGS =	-MMD
 LIBFT	= ./libft

@@ -77,6 +77,12 @@ int	main(int argc, char **argv)
 {
 	t_map map;
 
+	char *str = malloc(20 * 1024 * 1024);
+	str = malloc(20 * 1024 * 1024);
+	printf("%p\n", str);
+	exit(1);
+		return(0);
+
 	if (argc != 2)
 	{
 		printf(RED"ERROR: Invalid arguments\n"STD"  → Usage: ./cub3D maps/map.cub\n\n");
