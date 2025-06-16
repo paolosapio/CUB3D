@@ -5,14 +5,11 @@ CC = cc
 CFLAGS	 =	-Wextra -Wall -Werror 
 CFLAGS	+= -I inc
 CFLAGS	+= -I libft
-CFLAGS	+= -O0
-CFLAGS	+= -g3
-CFLAGS	+= -Iinclude
-CFLAGS	+= -lglfw
+CFLAGS	+= -I include
+# CFLAGS	+= -O3 -> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS
+#CFLAGS	+= -lglfw
 
-READLINE	= -lreadline
-
-DEBUG	 =	-fsanitize=address
+DEBUG	 =	-fsanitize=address,leak -g3
 
 CPPFLAGS =	-MMD
 LIBFT	= ./libft
@@ -27,8 +24,11 @@ LIST_DIR = list_functions/
 PRINT_DIR = printers/
 PEPEX_DIR = srcs/pepex/
 
-SRCS=			\
-				$(SRC_DIR)test.c
+SRCS=	$(SRC_DIR)main.c\
+		$(SRC_DIR)draw_map.c\
+		$(SRC_DIR)gnl/get_next_line.c\
+		$(SRC_DIR)gnl/get_next_line_utils.c
+
 
 OBJS = $(patsubst srcs/%.c, objs/srcs/%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)
@@ -39,16 +39,18 @@ libft:
 	@make -C $(LIBFT)
 
 $(NAME): $(OBJS)
-	$(CC) $(DEBUG) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) $(MLX42) $(READLINE) $(CFLAGS) && printf "Linking: $(NAME)\n"
+	echo $(OBJS)
+
+	$(CC) $(DEBUG) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) $(MLX42) $(READLINE) $(CFLAGS) -lglfw && printf "Linking: $(NAME)\n"
 
 objs/srcs/%.o: ./srcs/%.c
-	@mkdir -p $(dir $@)
-	@$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
+	mkdir -p $(dir $@)
+	$(CC) $(DEBUG) $(CPPFLAGS) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
 
 clean:
-	@rm -rf objs
-	@rm -rf $(LIBMLX)/build
-	@make fclean -C $(LIBFT)
+	rm -rf objs
+	rm -rf $(LIBMLX)/build
+	make fclean -C $(LIBFT)
 
 fclean: clean
 	@rm -rf $(NAME)
