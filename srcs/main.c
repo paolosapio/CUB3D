@@ -20,17 +20,26 @@ void	handle_hook(void *params)
 	}
 }
 
+t_images init_images(mlx_t*	mlx)
+{
+	t_images		images;
+	mlx_texture_t	*texture;
 
+	texture = mlx_load_png("PNG/mirilla.png");
+	images.mirilla = mlx_texture_to_image(mlx, texture);
+	//mlx_delete_texture(texture);
+	return (images);
+}
 
 void	init_mlx_connection(t_map map)
 {
 	mlx_t*	mlx;
+	t_images images;
 
 	mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", true);
 
-	draw_sky(mlx, map);
-	draw_floor(mlx, map);
-	draw_map(mlx, map);
+	images = init_images(mlx);
+	draw_game(mlx, map, images);
 	mlx_loop_hook(mlx, &handle_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

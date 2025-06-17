@@ -30,6 +30,8 @@
 #define ORANG "\033[1;33m"
 #define WHITE "\033[1;37m"
 
+
+/*   test vectores   */
 #define X 1
 #define Y 0
 
@@ -47,16 +49,8 @@ typedef struct	s_player
 
 }				t_player;
 
-typedef struct s_img
-{
-	void	*img_ptr;
-	char	*addr;
-	int		height;
-	int		width;
-	int		bpp;
-	int		endian;
-	int		line_len;
-}				t_img;
+
+/*   STRUCTURAS   */
 
 typedef struct	s_map
 {
@@ -64,16 +58,22 @@ typedef struct	s_map
 	char	*map_line;
 	char	*map_line_buf;
 	char	**map;
-	t_img	map_texture[4];
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
-	mlx_image_t		*image_mirilla;
 }				t_map;
 
+typedef struct	s_images
+{
+	mlx_image_t		*mirilla;
+	mlx_image_t		*map_texture_N;
+	mlx_image_t		*map_texture_S;
+	mlx_image_t		*map_texture_E;
+	mlx_image_t		*map_texture_O;
+}				t_images;
 
 //draw_map.c
 
-void	draw_map(mlx_t *mlx, t_map map);
+void	draw_game(mlx_t *mlx, t_map map, t_images images);
 void	draw_sky(mlx_t *mlx, t_map map);
 void	draw_floor(mlx_t *mlx, t_map map);
 

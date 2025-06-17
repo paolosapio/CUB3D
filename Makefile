@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = cc
 
-# CFLAGS	 =	-Wextra -Wall -Werror 
+CFLAGS	 =	-Wextra -Wall -Werror 
 CFLAGS	+= -I inc
 CFLAGS	+= -I libft
 CFLAGS	+= -I include
@@ -25,7 +25,7 @@ PRINT_DIR = printers/
 PEPEX_DIR = srcs/pepex/
 
 SRCS=	$(SRC_DIR)main.c\
-		$(SRC_DIR)draw_map.c\
+		$(SRC_DIR)draw_game.c\
 		$(SRC_DIR)gnl/get_next_line.c\
 		$(SRC_DIR)gnl/get_next_line_utils.c
 

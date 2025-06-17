@@ -33,7 +33,7 @@ void	draw_minimap(mlx_t *mlx, t_map map)
 	int	y;
 	t_player	player;
 	
-	mlx_image_t	*img_minimap = mlx_new_image(mlx, 640, 480);
+	mlx_image_t	*img_minimap = mlx_new_image(mlx, WIDTH, HEIGHT);
 	y = -1;
 	while (map.map[++y])
 	{
@@ -60,17 +60,14 @@ void	draw_minimap(mlx_t *mlx, t_map map)
 }
 
 
-void	draw_reticle(mlx_t *mlx, t_map map)
+void	draw_reticle(mlx_t *mlx, mlx_image_t *mirilla)
 {
-	mlx_texture_t	*mirilla;
-	
-	int a = 20;
-	int b = 20;
-	
-	mirilla = mlx_load_png("PNG/mirilla.png");
-	map.image_mirilla = mlx_texture_to_image(mlx, mirilla);
-	mlx_resize_image(map.image_mirilla, a, b);
-	mlx_image_to_window(mlx, map.image_mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
+	// int a = 20;
+	// int b = 20;
+
+	// mlx_resize_image(mirilla, a, b);
+	printf("mirilla? %p\n", mirilla);
+	mlx_image_to_window(mlx, mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 }
 
 void draw_sky(mlx_t *mlx, t_map map)
@@ -109,10 +106,10 @@ void draw_floor(mlx_t *mlx, t_map map)
 	mlx_image_to_window(mlx, img_floor, 0, HEIGHT / 2);
 }
 
-void	draw_map(mlx_t *mlx, t_map map)
+void	draw_game(mlx_t *mlx, t_map map, t_images images)
 {
 	draw_sky(mlx, map);
 	draw_floor(mlx, map);
 	draw_minimap(mlx, map);
-	draw_reticle(mlx, map);
+	draw_reticle(mlx, images.mirilla);
 }
