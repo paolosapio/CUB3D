@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-#define TILE_SIZE 20
+#define TILE_SIZE 4
 
 void	draw_tile(mlx_image_t *image, int map_x, int map_y, uint32_t color)
 {
@@ -30,9 +30,18 @@ void	draw_tile(mlx_image_t *image, int map_x, int map_y, uint32_t color)
 
 void	draw_map(mlx_t *mlx, t_map map)
 {
+	mlx_texture_t	*mirilla;
 	int	x;
 	int	y;
-	mlx_image_t	*image = mlx_new_image(mlx, WIDTH, HEIGHT);
+	mlx_image_t	*img_minimap = mlx_new_image(mlx, 640, 480);
+
+	int a = 20;
+	int b = 20;
+
+	mirilla = mlx_load_png("PNG/mirilla.png");
+	map.image_mirilla = mlx_texture_to_image(mlx, mirilla);
+	mlx_resize_image(map.image_mirilla, a, b);
+	mlx_image_to_window(mlx, map.image_mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 
 	y = -1;
 	while (map.map[++y])
@@ -41,12 +50,48 @@ void	draw_map(mlx_t *mlx, t_map map)
 		while (map.map[y][++x])
 		{
 			if (map.map[y][x] == '1')
-				draw_tile(image, x, y, 0xFFFFFFFF);
+				draw_tile(img_minimap, x, y, 0xFFFFFF55);
 			else if (map.map[y][x] == '0')
-				draw_tile(image, x, y, 0x000000FF);
+				draw_tile(img_minimap, x, y, 0x00000055);
 			else if (map.map[y][x] == 'N')
-				draw_tile(image, x, y, 0x000FFFFF);
+				draw_tile(img_minimap, x, y, 0x000FFF55);
 		}
 	}
-	mlx_image_to_window(mlx, image, 0, 0);
+	mlx_image_to_window(mlx, img_minimap, 10, 10);
+}
+
+void draw_sky(mlx_t *mlx, t_map map)
+{
+	int	x;
+	int	y;
+	mlx_image_t	*img_sky = mlx_new_image(mlx, 640, 480 / 2);
+
+	y = -1;
+	while (++y < HEIGHT / 2)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			mlx_put_pixel(img_sky, x, y, 0x6D8196FF);
+		}
+	}
+	mlx_image_to_window(mlx, img_sky, 0, 0);
+}
+
+void draw_floor(mlx_t *mlx, t_map map)
+{
+	int	x;
+	int	y;
+	mlx_image_t	*img_floor = mlx_new_image(mlx, 640, 480 / 2);
+
+	y = -1;
+	while (++y < HEIGHT / 2)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			mlx_put_pixel(img_floor, x, y, 0x968C6E);
+		}
+	}
+	mlx_image_to_window(mlx, img_floor, 0, HEIGHT / 2);
 }

@@ -8,6 +8,16 @@ void	handle_hook(void *params)
 	{
 		mlx_close_window(mlx);
 	}
+
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+	{
+		mlx_close_window(mlx);
+	}
+	
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+	{
+		mlx_close_window(mlx);
+	}
 }
 
 
@@ -18,6 +28,8 @@ void	init_mlx_connection(t_map map)
 
 	mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", true);
 
+	draw_sky(mlx, map);
+	draw_floor(mlx, map);
 	draw_map(mlx, map);
 	mlx_loop_hook(mlx, &handle_hook, mlx);
 	mlx_loop(mlx);
@@ -52,7 +64,7 @@ t_map	open_map(const char *map_path)
 		map.map_line_buf = get_next_line(map.map_fd);
 		if (!(map.map_line_buf))
 		{
-			//TODO separar mejor, mmeter en el map.map solo el mapa y no toda la información de este.
+			//TODO separar mejor, meter en el map.map solo el mapa y no toda la información de este.
 			map.map = ft_split(map.map_line, '\n');
 			for (int i = 0; map.map[i]; i++)
 				printf("%s\n", map.map[i]);
@@ -76,12 +88,6 @@ t_map	open_map(const char *map_path)
 int	main(int argc, char **argv)
 {
 	t_map map;
-
-	char *str = malloc(20 * 1024 * 1024);
-	str = malloc(20 * 1024 * 1024);
-	printf("%p\n", str);
-	exit(1);
-		return(0);
 
 	if (argc != 2)
 	{

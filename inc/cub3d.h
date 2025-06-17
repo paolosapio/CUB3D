@@ -12,11 +12,8 @@
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "libft.h"
 
-// #define WIDTH 640
-// #define HEIGHT 480
-
-#define WIDTH 1800
-#define HEIGHT 1500
+#define WIDTH 640
+#define HEIGHT 480
 
 // GNL BUFFER SIZE
 # ifndef BUFFER_SIZE
@@ -53,12 +50,15 @@ typedef struct	s_map
 	t_img	map_texture[4];
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
+	mlx_image_t		*image_mirilla;
 }				t_map;
 
 
 //draw_map.c
 
 void	draw_map(mlx_t *mlx, t_map map);
+void	draw_sky(mlx_t *mlx, t_map map);
+void	draw_floor(mlx_t *mlx, t_map map);
 
 
 //get_next_line.c
