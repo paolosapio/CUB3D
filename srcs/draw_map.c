@@ -14,35 +14,20 @@
 
 #define TILE_SIZE 4
 
-void	draw_tile(mlx_image_t *image, int map_x, int map_y, uint32_t color)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y <= TILE_SIZE)
-	{
-		x = -1;
-		while (++x <= TILE_SIZE)
-			mlx_put_pixel(image, (map_x * TILE_SIZE) + x, (map_y * TILE_SIZE) + y, color);
-	}
-}
-
 void	draw_map(mlx_t *mlx, t_map map)
 {
-	mlx_texture_t	*mirilla;
+	draw_sky(mlx, map);
+	draw_floor(mlx, map);
+	draw_minimap(mlx, map);
+	draw_reticle(mlx, map);
+}
+
+void	draw_minimap(mlx_t *mlx, t_map map)
+{
 	int	x;
 	int	y;
+
 	mlx_image_t	*img_minimap = mlx_new_image(mlx, 640, 480);
-
-	int a = 20;
-	int b = 20;
-
-	mirilla = mlx_load_png("PNG/mirilla.png");
-	map.image_mirilla = mlx_texture_to_image(mlx, mirilla);
-	mlx_resize_image(map.image_mirilla, a, b);
-	mlx_image_to_window(mlx, map.image_mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
-
 	y = -1;
 	while (map.map[++y])
 	{
@@ -57,7 +42,35 @@ void	draw_map(mlx_t *mlx, t_map map)
 				draw_tile(img_minimap, x, y, 0x000FFF55);
 		}
 	}
+	
 	mlx_image_to_window(mlx, img_minimap, 10, 10);
+}
+
+void	draw_tile(mlx_image_t *image, int map_x, int map_y, uint32_t color)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y <= TILE_SIZE)
+	{
+		x = -1;
+		while (++x <= TILE_SIZE)
+			mlx_put_pixel(image, (map_x * TILE_SIZE) + x, (map_y * TILE_SIZE) + y, color);
+	}
+}
+
+void	draw_reticle(mlx_t *mlx, t_map map)
+{
+	mlx_texture_t	*mirilla;
+
+	int a = 20;
+	int b = 20;
+
+	mirilla = mlx_load_png("PNG/mirilla.png");
+	map.image_mirilla = mlx_texture_to_image(mlx, mirilla);
+	mlx_resize_image(map.image_mirilla, a, b);
+	mlx_image_to_window(mlx, map.image_mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 }
 
 void draw_sky(mlx_t *mlx, t_map map)
