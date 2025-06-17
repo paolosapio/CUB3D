@@ -30,6 +30,23 @@
 #define ORANG "\033[1;33m"
 #define WHITE "\033[1;37m"
 
+#define X 1
+#define Y 0
+
+typedef double t_coor;
+
+typedef struct	s_vector
+{
+	t_coor	start[2];
+	t_coor	end[2];
+}				t_vector;
+
+typedef struct	s_player
+{
+	t_vector	pos;
+
+}				t_player;
+
 typedef struct s_img
 {
 	void	*img_ptr;

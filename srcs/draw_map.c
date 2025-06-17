@@ -14,38 +14,6 @@
 
 #define TILE_SIZE 4
 
-void	draw_map(mlx_t *mlx, t_map map)
-{
-	draw_sky(mlx, map);
-	draw_floor(mlx, map);
-	draw_minimap(mlx, map);
-	draw_reticle(mlx, map);
-}
-
-void	draw_minimap(mlx_t *mlx, t_map map)
-{
-	int	x;
-	int	y;
-
-	mlx_image_t	*img_minimap = mlx_new_image(mlx, 640, 480);
-	y = -1;
-	while (map.map[++y])
-	{
-		x = -1;
-		while (map.map[y][++x])
-		{
-			if (map.map[y][x] == '1')
-				draw_tile(img_minimap, x, y, 0xFFFFFF55);
-			else if (map.map[y][x] == '0')
-				draw_tile(img_minimap, x, y, 0x00000055);
-			else if (map.map[y][x] == 'N')
-				draw_tile(img_minimap, x, y, 0x000FFF55);
-		}
-	}
-	
-	mlx_image_to_window(mlx, img_minimap, 10, 10);
-}
-
 void	draw_tile(mlx_image_t *image, int map_x, int map_y, uint32_t color)
 {
 	int	x;
@@ -56,17 +24,49 @@ void	draw_tile(mlx_image_t *image, int map_x, int map_y, uint32_t color)
 	{
 		x = -1;
 		while (++x <= TILE_SIZE)
-			mlx_put_pixel(image, (map_x * TILE_SIZE) + x, (map_y * TILE_SIZE) + y, color);
+		mlx_put_pixel(image, (map_x * TILE_SIZE) + x, (map_y * TILE_SIZE) + y, color);
 	}
 }
+void	draw_minimap(mlx_t *mlx, t_map map)
+{
+	int	x;
+	int	y;
+	t_player	player;
+	
+	mlx_image_t	*img_minimap = mlx_new_image(mlx, 640, 480);
+	y = -1;
+	while (map.map[++y])
+	{
+		x = -1;
+		while (map.map[y][++x])
+		{
+			if (map.map[y][x] == '1')
+				draw_tile(img_minimap, x, y, 0xFFFFFF55);
+				else if (map.map[y][x] == '0')
+				draw_tile(img_minimap, x, y, 0x00000055);
+				else if (map.map[y][x] == 'N')
+				{
+					player.pos.start[X] = x;
+					player.pos.start[Y] = y;
+					player.pos.end[X] = x;
+					player.pos.end[Y] = y - 10;
+					draw_tile(img_minimap, x, y, 0x000FFF55);
+					mlx_put_pixel(img_minimap, player.pos.start[X] * TILE_SIZE, player.pos.start[Y] * TILE_SIZE, 0xFF0000FF);
+					mlx_put_pixel(img_minimap, player.pos.end[X] * TILE_SIZE, player.pos.end[Y] * TILE_SIZE, 0xFF0000FF);
+				}
+		}
+	}
+	mlx_image_to_window(mlx, img_minimap, 10, 10);
+}
+
 
 void	draw_reticle(mlx_t *mlx, t_map map)
 {
 	mlx_texture_t	*mirilla;
-
+	
 	int a = 20;
 	int b = 20;
-
+	
 	mirilla = mlx_load_png("PNG/mirilla.png");
 	map.image_mirilla = mlx_texture_to_image(mlx, mirilla);
 	mlx_resize_image(map.image_mirilla, a, b);
@@ -78,7 +78,7 @@ void draw_sky(mlx_t *mlx, t_map map)
 	int	x;
 	int	y;
 	mlx_image_t	*img_sky = mlx_new_image(mlx, 640, 480 / 2);
-
+	
 	y = -1;
 	while (++y < HEIGHT / 2)
 	{
@@ -96,7 +96,7 @@ void draw_floor(mlx_t *mlx, t_map map)
 	int	x;
 	int	y;
 	mlx_image_t	*img_floor = mlx_new_image(mlx, 640, 480 / 2);
-
+	
 	y = -1;
 	while (++y < HEIGHT / 2)
 	{
@@ -107,4 +107,12 @@ void draw_floor(mlx_t *mlx, t_map map)
 		}
 	}
 	mlx_image_to_window(mlx, img_floor, 0, HEIGHT / 2);
+}
+
+void	draw_map(mlx_t *mlx, t_map map)
+{
+	draw_sky(mlx, map);
+	draw_floor(mlx, map);
+	draw_minimap(mlx, map);
+	draw_reticle(mlx, map);
 }
