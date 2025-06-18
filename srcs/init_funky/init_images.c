@@ -1,13 +1,12 @@
 #include "cub3d.h"
 
-t_images *init_images(mlx_t*	mlx)
+void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 {
-	t_images		*images;
 	mlx_texture_t	*texture;
 
-	images = malloc(sizeof(t_images));
 	texture = mlx_load_png("PNG/mirilla.png");
 	images->mirilla = mlx_texture_to_image(mlx, texture);
-	//mlx_delete_texture(texture);
-	return (images);
+	images->minimap = create_minimap(mlx, map);
+	images->floor = create_floor(mlx, map);
+	images->sky = create_sky(mlx, map);
 }

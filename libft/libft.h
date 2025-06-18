@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:35:09 by psapio            #+#    #+#             */
-/*   Updated: 2025/06/16 19:43:20 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:06:55 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ char	*ft_strchrtrim(char	*str, char c);
 int		ft_nstrchr(const char *s, int c);
 char	*ft_ltoa(long n);
 long	ft_atol(const char *nptr);
+size_t	ft_arraylen(const char **s);
 
 // GET_NEXT_LINE
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1000
 # endif
 
 typedef struct s_data

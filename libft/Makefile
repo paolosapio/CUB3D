@@ -41,7 +41,8 @@ SRCS	= \
 		ft_ternary.c\
 		ft_nstrchr.c\
 		ft_atol.c\
-		ft_ltoa.c
+		ft_ltoa.c\
+		ft_arraylen.c
 
 		
 OBJS	=	$(SRCS:.c=.o)

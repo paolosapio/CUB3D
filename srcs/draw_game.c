@@ -6,32 +6,32 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:09:48 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/06/18 15:52:17 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:32:54 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define TILE_SIZE 4
+// #define TILE_SIZE 19
 
-void	draw_tile(mlx_image_t *image, int map_x, int map_y, uint32_t color)
+void	draw_tile(mlx_image_t *image, int map_x, int map_y, uint32_t color, int len_map_w)
 {
 	int	x;
 	int	y;
-
+	
 	y = -1;
-	while (++y <= TILE_SIZE)
+	while (++y <= 640/len_map_w)
 	{
 		x = -1;
-		while (++x <= TILE_SIZE)
-		mlx_put_pixel(image, (map_x * TILE_SIZE) + x, (map_y * TILE_SIZE) + y, color);
+		while (++x <= 640/len_map_w)
+			mlx_put_pixel(image, (map_x * (640/len_map_w)) + x, (map_y * (640/len_map_w)) + y, color);
 	}
 }
-void	draw_minimap(mlx_t *mlx, t_map *map)
+mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 {
 	int	x;
 	int	y;
-	t_player	player;
+	int len_map_w = ft_strlen(map->map_array[0]);
 	
 	mlx_image_t	*img_minimap = mlx_new_image(mlx, WIDTH, HEIGHT);
 	y = -1;
@@ -41,36 +41,18 @@ void	draw_minimap(mlx_t *mlx, t_map *map)
 		while (map->map_array[y][++x])
 		{
 			if (map->map_array[y][x] == '1')
-				draw_tile(img_minimap, x, y, 0xFFFFFF55);
-				else if (map->map_array[y][x] == '0')
-				draw_tile(img_minimap, x, y, 0x00000055);
-				else if (map->map_array[y][x] == 'N')
-				{
-					player.pos.start[X] = x;
-					player.pos.start[Y] = y;
-					player.pos.end[X] = x;
-					player.pos.end[Y] = y - 10;
-					draw_tile(img_minimap, x, y, 0x000FFF55);
-					mlx_put_pixel(img_minimap, player.pos.start[X] * TILE_SIZE, player.pos.start[Y] * TILE_SIZE, 0xFF0000FF);
-					mlx_put_pixel(img_minimap, player.pos.end[X] * TILE_SIZE, player.pos.end[Y] * TILE_SIZE, 0xFF0000FF);
-				}
+				draw_tile(img_minimap, x, y, 0xFFFFFF55, len_map_w);
+			else if (map->map_array[y][x] == '0')
+				draw_tile(img_minimap, x, y, 0x00000055, len_map_w);
+			else if (map->map_array[y][x] == 'N')
+				draw_tile(img_minimap, x, y, 0x000FFF55, len_map_w);
 		}
 	}
-	mlx_image_to_window(mlx, img_minimap, 10, 10);
+	return (img_minimap);
 }
 
 
-void	draw_reticle(mlx_t *mlx, mlx_image_t *mirilla)
-{
-	// int a = 20;
-	// int b = 20;
-
-	// mlx_resize_image(mirilla, a, b);
-	printf("mirilla? %p\n", mirilla);
-	mlx_image_to_window(mlx, mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
-}
-
-void draw_sky(mlx_t *mlx, t_map *map)
+mlx_image_t	*create_sky(mlx_t *mlx, t_map *map)
 {
 	int	x;
 	int	y;
@@ -86,10 +68,10 @@ void draw_sky(mlx_t *mlx, t_map *map)
 			mlx_put_pixel(img_sky, x, y, 0x6D8196FF);
 		}
 	}
-	mlx_image_to_window(mlx, img_sky, 0, 0);
+	return (img_sky);
 }
 
-void draw_floor(mlx_t *mlx, t_map *map)
+mlx_image_t	*create_floor(mlx_t *mlx, t_map *map)
 {
 	int	x;
 	int	y;
@@ -104,13 +86,13 @@ void draw_floor(mlx_t *mlx, t_map *map)
 			mlx_put_pixel(img_floor, x, y, 0x968C6E);
 		}
 	}
-	mlx_image_to_window(mlx, img_floor, 0, HEIGHT / 2);
+	return (img_floor);
 }
 
-void	draw_game(t_game game)
+void	draw_game(t_game *game)
 {
-	draw_sky(game.mlx, game.map);
-	draw_floor(game.mlx, game.map);
-	draw_minimap(game.mlx, game.map);
-	draw_reticle(game.mlx, game.images->mirilla);
+	mlx_image_to_window(game->mlx, game->images.sky, 0, 0);
+	mlx_image_to_window(game->mlx, game->images.floor, 0, HEIGHT / 2);
+	mlx_image_to_window(game->mlx, game->images.minimap, 0, 0);
+	mlx_image_to_window(game->mlx, game->images.mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 }

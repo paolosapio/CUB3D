@@ -7,32 +7,28 @@ void	handle_hook(mlx_key_data_t keydata, void *params)
 	if (keydata.action == MLX_RELEASE)
 		return ;
 	if (keydata.key == MLX_KEY_ESCAPE)
-	{
 		mlx_close_window(game->mlx);
-	}
 
 	if (keydata.key == MLX_KEY_M)
 	{
-		printf("eo\n");
-		game->images->mirilla->enabled = !(game->images->mirilla->enabled);
+
+		game->images.minimap->enabled = !(game->images.minimap->enabled);
 	}
 	
 }
 
-void	init_mlx_connection(t_map *map)
+void	init_mlx_connection(t_game *game)
 {
-	t_game game;
 
-	game = init_game_struct(map);
+	init_game_struct(game);
 	draw_game(game);
 //	mlx_loop_hook(game.mlx, &handle_hook, &game);
-	mlx_key_hook(game.mlx, &handle_hook, &game);
-	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
-	free_double_pointer(game.map->map_array);
+	mlx_key_hook(game->mlx, &handle_hook, &game);
+	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
 }
 
-t_map	open_map(const char *map_path)
+/* t_map	open_map(const char *map_path)
 {
 	//TODO validate map_path extension;
 	t_map	map;
@@ -49,8 +45,9 @@ t_map	open_map(const char *map_path)
 		map.map_line_buf = get_next_line(map.map_fd);
 		if (!(map.map_line_buf))
 		{
-			//TODO separar mejor, meter en el map.map solo el mapa y no toda la información de este.
+			//TODO separar mejor, meter en el map.map_array solo el mapa y no toda la información de este.
 			map.map_array = ft_split(map.map_line, '\n');
+			get_map_info(map);
 			for (int i = 0; map.map_array[i]; i++)
 				printf("%s\n", map.map_array[i]);
 			free(map.map_line);
@@ -66,20 +63,21 @@ t_map	open_map(const char *map_path)
 	}
 	//TODO map validation;
 	return (map);
-}
+} */
 
 
 
 int	main(int argc, char **argv)
 {
-	t_map map;
+	t_game	game;
 
+	ft_memset(&game, 0, sizeof(t_game));
 	if (argc != 2)
 	{
 		printf(RED"ERROR: Invalid arguments\n"STD"  → Usage: ./cub3D maps/map.cub\n\n");
 		printf(PURPLE"You can find different maps inside the map folder\n"STD);
 		exit(1);
 	}
-	map = open_map(argv[1]);
-	init_mlx_connection(&map);
+	check_map(argv[1], &game.map);
+	init_mlx_connection(&game);
 }

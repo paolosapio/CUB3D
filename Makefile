@@ -9,7 +9,7 @@ CFLAGS	+= -I include
 #CFLAGS	+= -O3 #-> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS
 #CFLAGS	+= -lglfw
 
-DEBUG	 =	-fsanitize=address -g3
+DEBUG	 =	-g3 -fsanitize=address
 
 CPPFLAGS =	-MMD
 LIBFT	= ./libft
@@ -25,12 +25,11 @@ PRINT_DIR = printers/
 INIT_FUNKY = srcs/init_funky/
 
 SRCS=	$(SRC_DIR)main.c\
+		$(SRC_DIR)check_map.c\
 		$(SRC_DIR)draw_game.c\
-		$(SRC_DIR)gnl/get_next_line.c\
-		$(SRC_DIR)gnl/get_next_line_utils.c\
+		$(SRC_DIR)get_map_info.c\
 		$(INIT_FUNKY)init_game_struct.c\
 		$(INIT_FUNKY)init_images.c\
-		$(INIT_FUNKY)init_map.c
 
 OBJS = $(patsubst srcs/%.c, objs/srcs/%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)

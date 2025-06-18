@@ -15,11 +15,6 @@
 #define WIDTH 640
 #define HEIGHT 480
 
-// GNL BUFFER SIZE
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
 /*   COLORS   */
 
 #define STD "\033[0m"
@@ -30,10 +25,24 @@
 #define ORANG "\033[1;33m"
 #define WHITE "\033[1;37m"
 
+/* MAP INFO */
+
+#define NORTH_TEXTURE 0
+#define EAST_TEXTURE 1
+#define SOUTH_TEXTURE 2
+#define WEST_TEXTURE 3
+#define FLOOR 4
+#define SKY 5
 
 /*   test vectores   */
+
 #define X 1
 #define Y 0
+
+#define NORTH 0
+#define EAST 1
+#define SOUTH 2
+#define WEST 3
 
 typedef double t_coor;
 
@@ -55,17 +64,25 @@ typedef struct	s_player
 
 typedef struct	s_map
 {
-	int		map_fd;
-	char	*map_line;
-	char	*map_line_buf;
+	char	*map_info_north_texture;
+	char	*map_info_east_texture;
+	char	*map_info_south_texture;
+	char	*map_info_west_texture;
+	char	*map_info_floor;
+	char	*map_info_sky;
+
 	char	**map_array;
+
 	unsigned int	floor_color;
-	unsigned int	ceiling_color;
+	unsigned int	sky_color;
 }				t_map;
 
 typedef struct	s_images
 {
+	mlx_image_t		*sky;
+	mlx_image_t		*floor;
 	mlx_image_t		*mirilla;
+	mlx_image_t		*minimap;
 	mlx_image_t		*map_texture_N;
 	mlx_image_t		*map_texture_S;
 	mlx_image_t		*map_texture_E;
@@ -74,16 +91,16 @@ typedef struct	s_images
 
 typedef struct	s_game
 {
-	t_images	*images;
-	t_map		*map;
+	t_images	images;
+	t_map		map;
 	mlx_t		*mlx;
 }				t_game;
 //draw_map.c
 
-void	draw_game(t_game game);
-void	draw_sky(mlx_t *mlx, t_map *map);
-void	draw_floor(mlx_t *mlx, t_map *map);
-
+void		draw_game(t_game *game);
+mlx_image_t	*create_sky(mlx_t *mlx, t_map *map);
+mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
+mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
 
 //get_next_line.c
 
@@ -100,6 +117,13 @@ char			*gnl_strdup(char *s1, int n);
 
 
 //INIT FUNKY
-t_game init_game_struct(t_map *map);
-t_images *init_images(mlx_t*	mlx);
+void init_game_struct(t_game *game);
+void	init_images(mlx_t* mlx, t_map *map, t_images *images);
 t_map	init_map(void);
+
+//get_map_info.c
+void	get_map_info(t_map map);
+
+
+// check_map.c
+void check_map(char *arg_map, t_map *map);
