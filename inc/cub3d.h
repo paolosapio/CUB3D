@@ -37,6 +37,7 @@
 
 typedef double t_coor;
 
+
 typedef struct	s_vector
 {
 	t_coor	start[2];
@@ -57,7 +58,7 @@ typedef struct	s_map
 	int		map_fd;
 	char	*map_line;
 	char	*map_line_buf;
-	char	**map;
+	char	**map_array;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
 }				t_map;
@@ -71,11 +72,17 @@ typedef struct	s_images
 	mlx_image_t		*map_texture_O;
 }				t_images;
 
+typedef struct	s_game
+{
+	t_images	*images;
+	t_map		*map;
+	mlx_t		*mlx;
+}				t_game;
 //draw_map.c
 
-void	draw_game(mlx_t *mlx, t_map map, t_images images);
-void	draw_sky(mlx_t *mlx, t_map map);
-void	draw_floor(mlx_t *mlx, t_map map);
+void	draw_game(t_game game);
+void	draw_sky(mlx_t *mlx, t_map *map);
+void	draw_floor(mlx_t *mlx, t_map *map);
 
 
 //get_next_line.c
@@ -90,3 +97,9 @@ char			*gnl_strnjoin(char *s1, char *s2, int n);
 
 void			ft_free(char **str);
 char			*gnl_strdup(char *s1, int n);
+
+
+//INIT FUNKY
+t_game init_game_struct(t_map *map);
+t_images *init_images(mlx_t*	mlx);
+t_map	init_map(void);

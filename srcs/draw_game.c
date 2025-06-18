@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:09:48 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/06/16 20:59:41 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/06/18 15:52:17 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_tile(mlx_image_t *image, int map_x, int map_y, uint32_t color)
 		mlx_put_pixel(image, (map_x * TILE_SIZE) + x, (map_y * TILE_SIZE) + y, color);
 	}
 }
-void	draw_minimap(mlx_t *mlx, t_map map)
+void	draw_minimap(mlx_t *mlx, t_map *map)
 {
 	int	x;
 	int	y;
@@ -35,16 +35,16 @@ void	draw_minimap(mlx_t *mlx, t_map map)
 	
 	mlx_image_t	*img_minimap = mlx_new_image(mlx, WIDTH, HEIGHT);
 	y = -1;
-	while (map.map[++y])
+	while (map->map_array[++y])
 	{
 		x = -1;
-		while (map.map[y][++x])
+		while (map->map_array[y][++x])
 		{
-			if (map.map[y][x] == '1')
+			if (map->map_array[y][x] == '1')
 				draw_tile(img_minimap, x, y, 0xFFFFFF55);
-				else if (map.map[y][x] == '0')
+				else if (map->map_array[y][x] == '0')
 				draw_tile(img_minimap, x, y, 0x00000055);
-				else if (map.map[y][x] == 'N')
+				else if (map->map_array[y][x] == 'N')
 				{
 					player.pos.start[X] = x;
 					player.pos.start[Y] = y;
@@ -70,10 +70,11 @@ void	draw_reticle(mlx_t *mlx, mlx_image_t *mirilla)
 	mlx_image_to_window(mlx, mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 }
 
-void draw_sky(mlx_t *mlx, t_map map)
+void draw_sky(mlx_t *mlx, t_map *map)
 {
 	int	x;
 	int	y;
+	(void)map;
 	mlx_image_t	*img_sky = mlx_new_image(mlx, 640, 480 / 2);
 	
 	y = -1;
@@ -88,12 +89,12 @@ void draw_sky(mlx_t *mlx, t_map map)
 	mlx_image_to_window(mlx, img_sky, 0, 0);
 }
 
-void draw_floor(mlx_t *mlx, t_map map)
+void draw_floor(mlx_t *mlx, t_map *map)
 {
 	int	x;
 	int	y;
 	mlx_image_t	*img_floor = mlx_new_image(mlx, 640, 480 / 2);
-	
+	(void)map;
 	y = -1;
 	while (++y < HEIGHT / 2)
 	{
@@ -106,10 +107,10 @@ void draw_floor(mlx_t *mlx, t_map map)
 	mlx_image_to_window(mlx, img_floor, 0, HEIGHT / 2);
 }
 
-void	draw_game(mlx_t *mlx, t_map map, t_images images)
+void	draw_game(t_game game)
 {
-	draw_sky(mlx, map);
-	draw_floor(mlx, map);
-	draw_minimap(mlx, map);
-	draw_reticle(mlx, images.mirilla);
+	draw_sky(game.mlx, game.map);
+	draw_floor(game.mlx, game.map);
+	draw_minimap(game.mlx, game.map);
+	draw_reticle(game.mlx, game.images->mirilla);
 }
