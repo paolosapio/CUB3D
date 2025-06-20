@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/06/20 17:27:03 by anfi             ###   ########.fr       */
+/*   Updated: 2025/06/20 21:45:47 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	save_map_info(char *line_map_to_check, char **map_info)
 	if (*map_info)
 		return (ERROR);
 	splitted = ft_split(line_map_to_check, ' ');
-	printf("_%s_\n", splitted[2]);
-	printf("%ld\n", ft_arraylen((const char **)splitted));
 	if (ft_arraylen((const char **)splitted) == 2 ||
 		(ft_arraylen((const char **)splitted) == 3 && splitted[2][0] == '\n'))
 	{
@@ -37,11 +35,51 @@ int	save_map_info(char *line_map_to_check, char **map_info)
 	return (ERROR);
 }
 
-
-int	line_checkeitor(char *line_map_to_check, t_map *map)
+bool	is_empty_line(char *line)
 {
-	if (ft_strncmp(line_map_to_check, "\n", 1) == 0 ||
-		ft_strcmp(line_map_to_check, " \n") == 0)
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_strchr(" \n", line[i]) == NULL)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+int	one_to_one_line_checkeitor(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			i++;
+		else
+			break ;
+	}
+
+	if (line[i] && line[i] == '1')
+	{
+		while (line[i])
+			i++;
+		if (line[i - 1] == '1')
+			return (OK);
+		else
+			return (ERROR);
+	}
+	return (ERROR);
+}
+
+int	line_checkeitor(char *line_map_to_check, t_map *map, int *fd)
+{
+	int	map_len;
+
+	map_len = 0;
+
+	if (is_empty_line(line_map_to_check) == true)
 		return (printf("empty_line\n"), 0);
 	if (ft_strncmp(line_map_to_check, "NO ", 3) == 0)
 		return (save_map_info(line_map_to_check,&map->map_info_north_texture));
@@ -57,7 +95,20 @@ int	line_checkeitor(char *line_map_to_check, t_map *map)
 		return (save_map_info(line_map_to_check,&map->map_info_sky));
 	else
 	{
-		printf("line: %ld-%s.", ft_strlen(line_map_to_check), line_map_to_check);
+		printf("aaaa\n");
+		map_len = 0;
+		line_map_to_check = get_next_line(*fd);
+		while (line_map_to_check)
+		{
+			map_len++;
+			free(line_map_to_check);
+			line_map_to_check = get_next_line(*fd);
+			printf("-> %s", line_map_to_check);
+		}
+		printf("map_len =) %d\n", map_len);
+
+		// if (one_to_one_line_checkeitor(line_map_to_check) == OK)
+		// 	map_len++;
 		return (0);
 	}
 }
@@ -78,13 +129,13 @@ void check_map(char *arg_map, t_map *map)
 		line_map_to_check = get_next_line(fd);
 		if (line_map_to_check == NULL)
 			break ;
-		if (line_checkeitor(line_map_to_check, map) == ERROR)
+		if (line_checkeitor(line_map_to_check, map, &fd) == ERROR)
 		{
 			printf("invalid line: %s", line_map_to_check);
 			free(line_map_to_check);
 			break ;
-
 		}
+		printf("💩%s", line_map_to_check);
 		free(line_map_to_check);
 	}
 	printf("%s", map->map_info_north_texture);
