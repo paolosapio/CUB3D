@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
+/*   Updated: 2025/06/20 17:27:03 by anfi             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 //ponemos la texture en map_info[NORTH_TEXTURE]
@@ -11,21 +23,25 @@ int	save_map_info(char *line_map_to_check, char **map_info)
 
 	if (*map_info)
 		return (ERROR);
-	splitted = ft_split(line_map_to_check, ' ');//! si tiene espacios al final, da error porque lo añade
-	if (ft_arraylen((const char **)splitted) != 2)
+	splitted = ft_split(line_map_to_check, ' ');
+	printf("_%s_\n", splitted[2]);
+	printf("%ld\n", ft_arraylen((const char **)splitted));
+	if (ft_arraylen((const char **)splitted) == 2 ||
+		(ft_arraylen((const char **)splitted) == 3 && splitted[2][0] == '\n'))
 	{
+		*map_info = ft_strdup(splitted[1]);
 		free_double_pointer(splitted);
-		return (ERROR);
+		return (OK);
 	}
-	*map_info = ft_strdup(splitted[1]);
 	free_double_pointer(splitted);
-	return (OK);
+	return (ERROR);
 }
 
 
 int	line_checkeitor(char *line_map_to_check, t_map *map)
 {
-	if (ft_strncmp(line_map_to_check, "\n", 1) == 0 || ft_strcmp(line_map_to_check, " \n") == 0)
+	if (ft_strncmp(line_map_to_check, "\n", 1) == 0 ||
+		ft_strcmp(line_map_to_check, " \n") == 0)
 		return (printf("empty_line\n"), 0);
 	if (ft_strncmp(line_map_to_check, "NO ", 3) == 0)
 		return (save_map_info(line_map_to_check,&map->map_info_north_texture));
