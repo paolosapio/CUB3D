@@ -15,6 +15,9 @@
 #define WIDTH 640
 #define HEIGHT 480
 
+#define OK 0
+#define ERROR 1
+
 /*   COLORS   */
 
 #define STD "\033[0m"
@@ -44,6 +47,8 @@
 #define SOUTH 2
 #define WEST 3
 
+#define VALID_CHARS "10NSEO \n"
+
 typedef double t_coor;
 
 
@@ -65,7 +70,11 @@ typedef struct	s_player
 typedef struct	s_map
 {
 	int		line_that_start_map;
+
 	int		longest_line;
+	int		map_len;
+	int		tile_size;
+
 	char	*arg_map_fd;
 	char	*map_info_north_texture;
 	char	*map_info_east_texture;
@@ -135,3 +144,11 @@ void	get_map_info(t_map map);
 
 // check_map.c
 void check_map(char *arg_map, t_map *map);
+
+//check_line.c
+bool	is_empty_line(char *line);
+int	one_to_one_line_checkeitor(char *line);
+int	is_valid_line(char **map, int current);
+
+//map_encasketeitor.c
+int	str_map_encasketeitor(t_map *map, int fd);

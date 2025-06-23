@@ -6,16 +6,12 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/06/23 16:38:18 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:52:26 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//ponemos la texture en map_info[NORTH_TEXTURE]
-
-#define OK 0
-#define ERROR 1
 
 int	save_map_info(char *line_map_to_check, char **map_info)
 {
@@ -35,75 +31,25 @@ int	save_map_info(char *line_map_to_check, char **map_info)
 	return (ERROR);
 }
 
-bool	is_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (ft_strchr(" \n", line[i]) == NULL)
-			return (false);
-		i++;
-	}
-	return (true);
-}
-int	one_to_one_line_checkeitor(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == ' ')
-			i++;
-		else
-			break ;
-	}
-
-	if (line[i] && line[i] == '1')
-	{
-		while (line[i])
-			i++;
-		if (line[i - 1] == '1')
-			return (OK);
-		else
-			return (ERROR);
-	}
-	return (ERROR);
-}
-
-void str_map_encasketeitor(t_map *map, int fd)
-{
-	char	*line;
-	int		map_line_index;
-
-	fd = open(map->arg_map_fd, O_RDONLY);
-	map_line_index = 0;
-	while (map->line_that_start_map-- > 0)
-		free(get_next_line(fd));
-	while (true)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		if ((int)ft_strlen(line) > map->longest_line)
-			map->longest_line = ft_strlen(line);
-		map->map_array[map_line_index] = line;
-		map_line_index++;
-	}
-
-	printf("IMPRESION FINAL DEL MAPA\n\n");
-	for (int i = 0; map->map_array[i]; i++)
-		printf("%s", map->map_array[i]);
-}
-
-int	line_checkeitor(char *line_map_to_check, t_map *map, int fd)
+void	allocate_map_size(char *line_map_to_check, t_map *map, int fd)
 {
 	int	map_len;
 
 	map_len = 0;
 
+	line_map_to_check = get_next_line(fd);
+	while (line_map_to_check)
+	{
+		map_len++;
+		free(line_map_to_check);
+		line_map_to_check = get_next_line(fd);
+	}
+	map->map_array = malloc((map_len + 2) * sizeof(char *));
+	map->map_array[map_len + 1] = NULL;
+}
+
+int	line_checkeitor(char *line_map_to_check, t_map *map, int fd)
+{
 	if (is_empty_line(line_map_to_check) == true)
 		return (printf("empty_line\n"), 0);
 	if (ft_strncmp(line_map_to_check, "NO ", 3) == 0)
@@ -120,23 +66,8 @@ int	line_checkeitor(char *line_map_to_check, t_map *map, int fd)
 		return (save_map_info(line_map_to_check,&map->map_info_sky));
 	else
 	{
-		map_len = 0;
-		line_map_to_check = get_next_line(fd);
-		printf("-- %d\n", map->line_that_start_map);
-		while (line_map_to_check)
-		{
-			map_len++;
-			free(line_map_to_check);
-			line_map_to_check = get_next_line(fd);
-			printf("-> %s", line_map_to_check);
-		}
-		// close(fd);
-		map->map_array = malloc((map_len + 2) * sizeof(char *));
-		map->map_array[map_len + 1] = NULL;
-		str_map_encasketeitor(map, fd);
-		// if (one_to_one_line_checkeitor(line_map_to_check) == OK)
-		// 	map_len++;
-		return (0);
+		allocate_map_size(line_map_to_check, map, fd);
+		return (str_map_encasketeitor(map, fd));
 	}
 }
 

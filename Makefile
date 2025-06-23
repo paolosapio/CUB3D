@@ -29,10 +29,12 @@ SRCS=	$(SRC_DIR)main.c\
 		$(SRC_DIR)check_map.c\
 		$(SRC_DIR)draw_game.c\
 		$(SRC_DIR)get_map_info.c\
+		$(SRC_DIR)map_encasketeitor.c\
 		$(FUNKY_INIT)init_game_struct.c\
 		$(FUNKY_INIT)init_images.c\
 		$(FUNKY_DESTROY)destroy_map.c\
-		$(FUNKY_DESTROY)destroy_images.c
+		$(FUNKY_DESTROY)destroy_images.c\
+		$(SRC_DIR)check_line.c
 	
 OBJS = $(patsubst srcs/%.c, objs/srcs/%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)
