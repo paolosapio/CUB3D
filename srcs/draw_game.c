@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:09:48 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/06/18 20:32:54 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:46:13 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 {
 	int	x;
 	int	y;
-	int len_map_w = ft_strlen(map->map_array[0]);
-	
+	int len_map_w = map->longest_line;
+
 	mlx_image_t	*img_minimap = mlx_new_image(mlx, WIDTH, HEIGHT);
 	y = -1;
 	while (map->map_array[++y])

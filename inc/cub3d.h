@@ -64,6 +64,9 @@ typedef struct	s_player
 
 typedef struct	s_map
 {
+	int		line_that_start_map;
+	int		longest_line;
+	char	*arg_map_fd;
 	char	*map_info_north_texture;
 	char	*map_info_east_texture;
 	char	*map_info_south_texture;
@@ -116,10 +119,15 @@ void			ft_free(char **str);
 char			*gnl_strdup(char *s1, int n);
 
 
-//INIT FUNKY
-void init_game_struct(t_game *game);
+//FUNKY INIT
+void	init_game_struct(t_game *game);
 void	init_images(mlx_t* mlx, t_map *map, t_images *images);
 t_map	init_map(void);
+
+
+//FUNKy_DESTROY
+void	destroy_map(t_map *map);
+void	destroy_images(mlx_t *mlx, t_images *images);
 
 //get_map_info.c
 void	get_map_info(t_map map);
