@@ -12,6 +12,13 @@ void	skip_lines(t_map *map, int fd)
 		free(get_next_line(fd));
 }
 
+int	line_len_meter(int size_line, int old_bigger_line)
+{
+	if (size_line > old_bigger_line)
+		return (size_line);
+	return (old_bigger_line);
+}
+
 int	str_map_encasketeitor(t_map *map, int fd)
 {
 	char	*line;
@@ -25,19 +32,11 @@ int	str_map_encasketeitor(t_map *map, int fd)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if ((int)ft_strlen(line) > map->longest_line)
-			map->longest_line = ft_strlen(line);
+		map->longest_line = line_len_meter(ft_strlen(line), map->longest_line);
 		map->map_array[map_line_index] = line;
-		if (is_valid_line(map->map_array, map_line_index) == ERROR)
-		{
-			printf("\nINVALID LIIIIIIIIIIIIIIIIIIIINE!!!!!!!!!\n");
-			printf("_%s_", line);
-			return (ERROR);
-		}
 		map_line_index++;
 	}
 	map->map_len = map_line_index;
-
 	if (map->longest_line >= map->map_len)
 		map->tile_size = WIDTH/map->longest_line;
 	else

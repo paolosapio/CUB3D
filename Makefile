@@ -24,17 +24,20 @@ LIST_DIR = list_functions/
 PRINT_DIR = printers/
 FUNKY_INIT = srcs/funky_init/
 FUNKY_DESTROY = srcs/funky_destroy/
+PARSER = srcs/parser/
+
 
 SRCS=	$(SRC_DIR)main.c\
-		$(SRC_DIR)check_map.c\
 		$(SRC_DIR)draw_game.c\
-		$(SRC_DIR)get_map_info.c\
-		$(SRC_DIR)map_encasketeitor.c\
 		$(FUNKY_INIT)init_game_struct.c\
 		$(FUNKY_INIT)init_images.c\
 		$(FUNKY_DESTROY)destroy_map.c\
 		$(FUNKY_DESTROY)destroy_images.c\
-		$(SRC_DIR)check_line.c
+		$(PARSER)check_line.c\
+		$(PARSER)check_map.c\
+		$(PARSER)map_encasketeitor.c
+
+
 	
 OBJS = $(patsubst srcs/%.c, objs/srcs/%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)

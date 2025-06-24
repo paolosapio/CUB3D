@@ -26,11 +26,11 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 		while (map->map_array[y][++x])
 		{
 			if (map->map_array[y][x] == '1')
-				mlx_put_pixel(img_minimap, x, y, 0xFFFFFF55);
+				mlx_put_pixel(img_minimap, x, y, 0xFFFFFF99);
 			else if (map->map_array[y][x] == '0')
-				mlx_put_pixel(img_minimap, x, y, 0x00000055);
+				mlx_put_pixel(img_minimap, x, y, 0x00000099);
 			else if (map->map_array[y][x] == 'N')
-				mlx_put_pixel(img_minimap, x, y, 0xFF000055);
+				// mlx_put_pixel(img_minimap, x, y, 0xFF000099);
 		}
 	}
 	return (img_minimap);
@@ -78,6 +78,7 @@ void	draw_game(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->images.sky, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.floor, 0, HEIGHT / 2);
+	mlx_image_to_window(game->mlx, game->images.mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 	printf("width: %u height: %u\n", game->images.minimap->width, game->images.minimap->height);
 	mlx_resize_image(game->images.minimap, WIDTH, HEIGHT);
 	printf("width: %u height: %u\n", game->images.minimap->width, game->images.minimap->height);
@@ -85,5 +86,4 @@ void	draw_game(t_game *game)
 		WIDTH / 2 - (WIDTH / 2),
 		HEIGHT / 2 - (HEIGHT / 2));  //? celda x == y
 	// mlx_image_to_window(game->mlx, game->images.minimap, 0, 0); //?  celda x != y 
-	mlx_image_to_window(game->mlx, game->images.mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 }

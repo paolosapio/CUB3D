@@ -1,0 +1,20 @@
+vericficar qeu el mapa tenga porlomenos 3 lineas 
+y la linea mas lagra tenga porlomenos 3 caracteres
+vericficar uqe el mapa contenga el carcter N, O, W, S en su interior
+
+111
+1N1
+111
+
+MAPA IRREGULAR:
+
+verificar que el mapa tenga paredes esteriores (me vale irregular tambien):
+
+ 1 11
+101001
+1001001
+101 1001
+10010001
+ 100N01
+  1011
+   1
