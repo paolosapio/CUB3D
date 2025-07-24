@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:09:48 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/06/23 20:47:34 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/07/24 15:21:40 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 			else if (map->map_array[y][x] == '0')
 				mlx_put_pixel(img_minimap, x, y, 0x00000099);
 			else if (map->map_array[y][x] == 'N')
-				// mlx_put_pixel(img_minimap, x, y, 0xFF000099);
+				mlx_put_pixel(img_minimap, x, y, 0xFF000099);
 		}
 	}
 	return (img_minimap);

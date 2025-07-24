@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/06/23 22:04:56 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:34:32 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ bool	is_empty_line(char *line)
 	return (true);
 }
 
+int check_first_line_map(char *line_map_to_check)
+{
+	int i;
+
+	i = 0;
+	while (line_map_to_check[i] != '\0' && line_map_to_check[i] != '\n')
+	{
+		if (line_map_to_check[i] != '1' && line_map_to_check[i] != ' ')
+			return (ERROR);
+		i++;
+	}
+	return (OK);
+}
 
 // int	is_valid_line(char **map, int current)
 // {

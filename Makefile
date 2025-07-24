@@ -5,19 +5,20 @@ CC = cc
 CFLAGS	 =	-Wextra -Wall -Werror 
 CFLAGS	+= -I inc
 CFLAGS	+= -I libft
-CFLAGS	+= -I include
 #CFLAGS	+= -O3 #-> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS
 #CFLAGS	+= -lglfw
 
-DEBUG	 =	-g3 -fsanitize=address
+DEBUG	 =	-g3 -fsanitize=address,leak
 
-CPPFLAGS =	-MMD
-LIBFT	= ./libft
+CPPFLAGS = -MMD
 
-HEADERS = -I ./inc -I $(LIBFT)  
+LIBFT = ./libft
+MLX42 = ./MLX42
 
-LIBS	+=	$(LIBFT)/libft.a
-MLX42	+=	MLX42/build/libmlx42.a
+HEADERS = -I ./inc -I $(LIBFT) -I $(MLX42)/include
+
+LIBS = $(LIBFT)/libft.a
+LIBS += $(MLX42)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 SRC_DIR = srcs/
 LIST_DIR = list_functions/
@@ -34,23 +35,34 @@ SRCS=	$(SRC_DIR)main.c\
 		$(FUNKY_DESTROY)destroy_map.c\
 		$(FUNKY_DESTROY)destroy_images.c\
 		$(PARSER)check_line.c\
-		$(PARSER)check_map.c\
-		$(PARSER)map_encasketeitor.c
+		$(PARSER)check_meta_map.c\
+		$(PARSER)map_encasketeitor.c\
+		$(PARSER)check_map.c
 
 
 	
 OBJS = $(patsubst srcs/%.c, objs/srcs/%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)
 
-all: libft $(NAME)
+all: $(NAME)
 
 libft:
 	@make -C $(LIBFT)
 
-$(NAME): $(OBJS)
-	echo $(OBJS)
+MLX_LIB = $(MLX42)/build/libmlx42.a
 
-	$(CC) $(DEBUG) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) $(MLX42) $(READLINE) $(CFLAGS) -lglfw && printf "Linking: $(NAME)\n"
+$(MLX_LIB):
+	@cmake -S $(MLX42) -B $(MLX42)/build
+	@cmake --build $(MLX42)/build -j4
+
+LIBFT_LIB = $(LIBFT)/libft.a
+
+$(LIBFT_LIB):
+	@make -C $(LIBFT)
+
+$(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS)
+	echo $(OBJS)
+	$(CC) $(DEBUG) $(CFLAGS) $(OBJS) $(LIBS)  $(HEADERS) -o $(NAME) && printf "Linking: $(NAME)\n"
 
 objs/srcs/%.o: ./srcs/%.c
 	mkdir -p $(dir $@)
@@ -58,7 +70,7 @@ objs/srcs/%.o: ./srcs/%.c
 
 clean:
 	rm -rf objs
-	rm -rf $(LIBMLX)/build
+	rm -rf $(MLX_LIB)/build
 	make fclean -C $(LIBFT)
 
 fclean: clean

@@ -40,7 +40,6 @@ if(UNIX AND NOT EMSCRIPTEN)
 		-Wall
 		-Werror
 		-Wunreachable-code
-		-fsanitize=address,leak
 
 		# Some low priority warnings that are annoying.
 		-Wno-char-subscripts

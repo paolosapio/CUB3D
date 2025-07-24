@@ -33,7 +33,7 @@ void	init_mlx_connection(t_game *game)
 int	main(int argc, char **argv)
 {
 	t_game	game;
-
+	
 	ft_memset(&game, 0, sizeof(t_game));
 	if (argc != 2)
 	{
@@ -45,3 +45,19 @@ int	main(int argc, char **argv)
 	init_mlx_connection(&game);
 	sayonara_baby(&game);
 }
+// todo 2025.07.24
+/*	tareas grandes:
+		parsear mapa
+		ray casting
+		toda la parte grafica
+ */
+
+//	todo parsear mapa:
+
+
+//	todo ray casting:
+
+
+//	todo toda la parte grafica:
+
+

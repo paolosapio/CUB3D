@@ -47,7 +47,7 @@
 #define SOUTH 2
 #define WEST 3
 
-#define VALID_CHARS "10NSEO \n"
+#define VALID_CHARS "10NSEW \n"
 
 typedef double t_coor;
 
@@ -73,7 +73,7 @@ typedef struct	s_map
 
 	int		longest_line;
 	int		map_len;
-	int		tile_size;
+	//int		tile_size; //!se puede queitar seguramente!
 
 	char	*arg_map_fd;
 	char	*map_info_north_texture;
@@ -85,8 +85,8 @@ typedef struct	s_map
 
 	char	**map_array;
 
-	unsigned int	floor_color;
-	unsigned int	sky_color;
+	// unsigned int	floor_color;
+	// unsigned int	sky_color;
 }				t_map;
 
 typedef struct	s_images
@@ -141,14 +141,17 @@ void	destroy_images(mlx_t *mlx, t_images *images);
 //get_map_info.c
 void	get_map_info(t_map map);
 
+//check_meta_map.c
+int	line_checkeitor(char *line_map_to_check, t_map *map, int fd);
 
 // check_map.c
-void check_map(char *arg_map, t_map *map);
+void	check_map(char *arg_map, t_map *map);
 
 //check_line.c
 bool	is_empty_line(char *line);
-int	one_to_one_line_checkeitor(char *line);
-int	is_valid_line(char **map, int current);
+int		one_to_one_line_checkeitor(char *line);
+int		is_valid_line(char **map, int current);
+int		check_first_line_map(char *line_map_to_check);
 
 //map_encasketeitor.c
 int	str_map_encasketeitor(t_map *map, int fd);
