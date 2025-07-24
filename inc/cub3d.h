@@ -15,8 +15,8 @@
 #define WIDTH 640
 #define HEIGHT 480
 
-#define OK 0
-#define ERROR 1
+// #define OK 0
+// #define ERROR 1
 
 /*   COLORS   */
 
@@ -50,8 +50,12 @@
 #define VALID_CHARS "10NSEW \n"
 
 typedef double	t_coor;
-typedef int		t_errok; //t_error_ok.
 
+typedef enum	e_error_ok
+{
+	OK,
+	ERROR,
+}				t_errok;
 
 typedef struct	s_vector
 {
