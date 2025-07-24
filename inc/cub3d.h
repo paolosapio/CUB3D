@@ -49,7 +49,8 @@
 
 #define VALID_CHARS "10NSEW \n"
 
-typedef double t_coor;
+typedef double	t_coor;
+typedef int		t_errok; //t_error_ok.
 
 
 typedef struct	s_vector

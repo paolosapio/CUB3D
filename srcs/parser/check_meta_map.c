@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/07/24 19:34:22 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/07/24 21:24:33 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	allocate_map_size(char *line_map_to_check, t_map *map, int fd)
 	line_map_to_check = get_next_line(fd);
 	while (line_map_to_check)
 	{
-		printf("line_map_to_check: %s\n", line_map_to_check);
 		map_len++;
 		free(line_map_to_check);
 		line_map_to_check = get_next_line(fd);
