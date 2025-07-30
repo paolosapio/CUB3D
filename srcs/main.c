@@ -39,7 +39,12 @@ int	main(int argc, char **argv)
 	{
 		printf(RED"ERROR: Invalid arguments\n"STD"  → Usage: ./cub3D maps/map.cub\n\n");
 		printf(PURPLE"You can find different maps inside the map folder\n"STD);
-		exit(1);
+		return (1);
+	}
+	if (check_file(argv[1]) == ERROR)
+	{
+		printf("ERROR FILE NAME\n");
+		return (2);
 	}
 	check_map(argv[1], &game.map);
 	init_mlx_connection(&game);
@@ -48,6 +53,10 @@ int	main(int argc, char **argv)
 // todo 2025.07.24
 /*	tareas grandes:
 		parsear mapa
+		falta:
+			estenciones archivos
+			el salto de linea al final infflueye sobre el minimapa
+
 		ray casting
 		toda la parte grafica
  */

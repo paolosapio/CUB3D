@@ -28,13 +28,13 @@
 #define ORANG "\033[1;33m"
 #define WHITE "\033[1;37m"
 
-/* MAP INFO */
+/* MAP INFO creo que al final no usamos esto*/
 
 #define NORTH_TEXTURE 0
 #define EAST_TEXTURE 1
 #define SOUTH_TEXTURE 2
 #define WEST_TEXTURE 3
-#define FLOOR 4
+// #define FLOOR 4
 #define SKY 5
 
 /*   test vectores   */
@@ -48,6 +48,23 @@
 #define WEST 3
 
 #define VALID_CHARS "10NSEW \n"
+
+/*   Errors    */
+typedef enum	e_staterror
+{
+	INVALID_CHAR = 1,
+	NOT_ENCLOSED_MAP,
+	TOO_MANY_PLAYERS,
+	INVALID_PLAYER_POSITION,
+	NO_PLAYER,
+	EMPTY_MAP,
+}				t_staterror;
+
+/*   map chars   */
+#define FLOOR "0"
+#define WALL "1"
+#define PLAYER "NEWS"
+#define SPACE " "
 
 typedef double	t_coor;
 
@@ -65,8 +82,9 @@ typedef struct	s_vector
 
 typedef struct	s_player
 {
-	t_vector	pos;
-
+	//t_vector	pos;
+	t_coor	pos[2];
+	int		vision_angle;
 }				t_player;
 
 
@@ -89,7 +107,7 @@ typedef struct	s_map
 	char	*map_info_sky;
 
 	char	**map_array;
-
+	t_player	player[1];
 	// unsigned int	floor_color;
 	// unsigned int	sky_color;
 }				t_map;
@@ -153,10 +171,13 @@ int	line_checkeitor(char *line_map_to_check, t_map *map, int fd);
 void	check_map(char *arg_map, t_map *map);
 
 //check_line.c
-bool	is_empty_line(char *line);
-int		one_to_one_line_checkeitor(char *line);
+t_errok	is_empty_line(char *line);
 int		is_valid_line(char **map, int current);
-int		check_first_line_map(char *line_map_to_check);
+t_errok	check_first_line_map(char *line_map_to_check);
+
+//check_file.c
+t_errok	check_file(char *path_map);
+
 
 //map_encasketeitor.c
 int	str_map_encasketeitor(t_map *map, int fd);

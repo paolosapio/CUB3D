@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/07/30 14:39:16 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:25:49 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	check_textures_path(t_map *map)
 		map->map_info_floor == NULL ||
 		map->map_info_sky == NULL)
 	{	
-		printf("salida por path null\n");
+		write(2, "INVALID PATH\n", 14);
 		exit(0);
 	}
 }

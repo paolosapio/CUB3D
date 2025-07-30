@@ -37,7 +37,8 @@ SRCS=	$(SRC_DIR)main.c\
 		$(PARSER)check_line.c\
 		$(PARSER)check_meta_map.c\
 		$(PARSER)map_encasketeitor.c\
-		$(PARSER)check_map.c
+		$(PARSER)check_map.c\
+		$(PARSER)check_file.c
 
 
 	

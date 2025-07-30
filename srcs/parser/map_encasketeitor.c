@@ -37,12 +37,9 @@ int	str_map_encasketeitor(t_map *map, int fd)
 		map_line_index++;
 	}
 	map->map_len = map_line_index;
-	// if (map->longest_line >= map->map_len)
-	// 	map->tile_size = WIDTH/map->longest_line;
-	// else
-	// 	map->tile_size = HEIGHT/(map->map_len - 2);
-	// printf("tile_size = %d, y = %d, x = %d\n", map->tile_size, map->map_len, map->longest_line);
-	// printf("IMPRESION FINAL DEL MAPA\n\n");
+	if (ft_strcmp(map->map_array[map->map_len - 1], "\n") == 0)
+		return (ERROR);
+
 	for (int i = 0; map->map_array[i]; i++)
 		printf("%s", map->map_array[i]);
 	return (OK);
