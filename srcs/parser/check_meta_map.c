@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/07/24 21:24:33 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:39:16 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	save_map_info(char *line_map_to_check, char **map_info)
 	if (*map_info)
 		return (ERROR);
 	splitted = ft_split(line_map_to_check, ' ');
-	printf("holaaa %zu\n", ft_arraylen((const char **)splitted));
-	printf("|_%s - %s_|\n", splitted[0], splitted[1]);
 	if ((ft_arraylen((const char **)splitted) == 2 && splitted[1][0] != '\n')||
 		(ft_arraylen((const char **)splitted) == 3 && splitted[2][0] == '\n'))
 	{
@@ -67,7 +65,7 @@ void	check_textures_path(t_map *map)
 int	line_checkeitor(char *line_map_to_check, t_map *map, int fd)
 {
 	if (is_empty_line(line_map_to_check) == true)
-		return (printf("empty_line\n"), 0);
+		return (OK);
 	if (ft_strncmp(line_map_to_check, "NO ", 3) == 0)
 		return (save_map_info(line_map_to_check,&map->map_info_north_texture));
 	if (ft_strncmp(line_map_to_check, "WE ", 3) == 0)

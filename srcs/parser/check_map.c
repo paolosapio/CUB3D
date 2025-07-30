@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/07/24 21:23:10 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:20:40 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,25 @@
 
 t_errok is_around_space_ok(t_map *map, int x, int y)
 {
-	//printf("\nCARACTE MISTERIOSO [%c]\n", map->map_array[y][x - 1]);
 	//arriba
-	if (y > 0 && ft_strchr(" 1\n", map->map_array[y - 1][x]) == NULL)
+	if (y > 0 && (x <= (int)ft_strlen(map->map_array[y - 1])) && ft_strchr(" 1\n", map->map_array[y - 1][x]) == NULL)
 	{
 		printf("error desde arriba\n");
 		return (ERROR);
 	}	
-		
 	// derecha
 	if (map->map_array[y][x + 1] != '\0' && ft_strchr(" 1\n", map->map_array[y][x + 1]) == NULL)
 	{
 		printf("error desde derecha\n");
 		return (ERROR);
 	}	
-		
 	// abajo
-	if (y + 1 < map->map_len  && ft_strchr(" 1\n", map->map_array[y + 1][x]) == NULL)
+	if (y + 1 < map->map_len && (ft_strlen(map->map_array[y]) <= ft_strlen(map->map_array[y + 1])) && ft_strchr(" 1\n", map->map_array[y + 1][x]) == NULL)
 	{
 		printf("error desde abajo\n");
 		return (ERROR);
 	}
-
-	// ezquierda
+	// izquierda
 	if (x > 0 && ft_strchr(" 1\n", map->map_array[y][x - 1]) == NULL)
 	{
 		printf("error desde ezquerda\n");
@@ -57,7 +53,14 @@ void check_valid_map(t_map *map)
 		while(map->map_array[y][x])
 		{
 			if (ft_strchr(" \n", map->map_array[y][x]) != NULL)
-				is_around_space_ok(map, x, y);
+			{
+				if (is_around_space_ok(map, x, y) == ERROR)
+				{
+					destroy_map(map);
+					printf("INVALID MAP\n");
+					exit (1);
+				}
+			}
 			x++;
 		}
 		y++;

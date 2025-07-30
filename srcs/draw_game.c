@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:09:48 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/07/24 15:21:40 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:07:24 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,15 @@ mlx_image_t	*create_floor(mlx_t *mlx, t_map *map)
 	return (img_floor);
 }
 
+//TODO: Hacer que no se deforme la imagen con mapas muy largos o anchos.
+//* Usar la misma relación que el mapa pero si es muy grande mostrar solo
+//* la parte en la que se encuentre el usuario y que se adapte en base a su posición.
 void	draw_game(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->images.sky, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.floor, 0, HEIGHT / 2);
 	mlx_image_to_window(game->mlx, game->images.mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
-	printf("width: %u height: %u\n", game->images.minimap->width, game->images.minimap->height);
 	mlx_resize_image(game->images.minimap, WIDTH, HEIGHT);
-	printf("width: %u height: %u\n", game->images.minimap->width, game->images.minimap->height);
 	mlx_image_to_window(game->mlx, game->images.minimap,
 		WIDTH / 2 - (WIDTH / 2),
 		HEIGHT / 2 - (HEIGHT / 2));  //? celda x == y
