@@ -9,5 +9,6 @@ void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 	images->minimap = create_minimap(mlx, map);
 	images->floor = create_floor(mlx, map);
 	images->sky = create_sky(mlx, map);
+	images->map_player = create_player_minimap(mlx, map);
 	mlx_delete_texture(texture);
 }

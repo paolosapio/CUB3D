@@ -122,6 +122,8 @@ typedef struct	s_images
 	mlx_image_t		*map_texture_S;
 	mlx_image_t		*map_texture_E;
 	mlx_image_t		*map_texture_O;
+	mlx_image_t		*map_player;
+
 }				t_images;
 
 typedef struct	s_game
@@ -136,6 +138,7 @@ void		draw_game(t_game *game);
 mlx_image_t	*create_sky(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
+mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map);
 
 //get_next_line.c
 

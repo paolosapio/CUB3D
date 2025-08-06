@@ -10,22 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//.cub
-
 #include "cub3d.h"
-//?.cub.cub			OK
-//? maps/.cub.cub	OK
-//? .cub			error
-//? maps/.cub		error
-//?.culo				error
-//? maps/culo		error
-//?.c				error
-
-// ft_strrchr 
-// ft_strnstr
-// ft_strlen
-// ft_split
-// ft_strncmp
 
 t_errok check_file(char *path_map)
 {

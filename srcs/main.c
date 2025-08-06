@@ -48,25 +48,29 @@ int	main(int argc, char **argv)
 	}
 	check_map(argv[1], &game.map);
 	init_mlx_connection(&game);
+	while (1)
+	{
+		usleep(1);
+		game.map.player->pos[X]++;
+	}
 	sayonara_baby(&game);
 }
 // todo 2025.07.24
-/*	tareas grandes:
-		parsear mapa
-		falta:
-			estenciones archivos
-			el salto de linea al final infflueye sobre el minimapa
 
+/*	tareas pequeas:
+		minimapa personaje
+		que se vean los rayos en el minimapa tipo embudo
+
+personaje movinientos:
+	w adelante 
+	a paso del cangrejo ez
+	s atras
+	d paso del cangrejo dr
+	< gira ez
+	> gira dr
+
+*/
+/*	tareas grandes:
 		ray casting
 		toda la parte grafica
  */
-
-//	todo parsear mapa:
-
-
-//	todo ray casting:
-
-
-//	todo toda la parte grafica:
-
-

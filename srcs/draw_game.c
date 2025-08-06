@@ -13,12 +13,22 @@
 #include "cub3d.h"
 
 
+mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map)
+{
+	mlx_image_t	*map_player;
+
+	map_player = mlx_new_image(mlx, map->longest_line, map->map_len);
+	mlx_put_pixel(map_player, map->player->pos[X], map->player->pos[Y], 0xFFFF0099);
+	return (map_player);
+}
+
 mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 {
 	int	x;
 	int	y;
+	mlx_image_t	*img_minimap;
 
-	mlx_image_t	*img_minimap = mlx_new_image(mlx, map->longest_line, map->map_len);
+	img_minimap = mlx_new_image(mlx, map->longest_line, map->map_len);
 	y = -1;
 	while (map->map_array[++y])
 	{
@@ -27,10 +37,8 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 		{
 			if (map->map_array[y][x] == '1')
 				mlx_put_pixel(img_minimap, x, y, 0xFFFFFF99);
-			else if (map->map_array[y][x] == '0')
+			else if (ft_strchr("NSWE0", map->map_array[y][x]) != NULL)
 				mlx_put_pixel(img_minimap, x, y, 0x00000099);
-			else if (map->map_array[y][x] == 'N')
-				mlx_put_pixel(img_minimap, x, y, 0xFF000099);
 		}
 	}
 	return (img_minimap);
@@ -85,6 +93,7 @@ void	draw_game(t_game *game)
 	mlx_resize_image(game->images.minimap, WIDTH, HEIGHT);
 	mlx_image_to_window(game->mlx, game->images.minimap,
 		WIDTH / 2 - (WIDTH / 2),
-		HEIGHT / 2 - (HEIGHT / 2));  //? celda x == y
-	// mlx_image_to_window(game->mlx, game->images.minimap, 0, 0); //?  celda x != y 
+		HEIGHT / 2 - (HEIGHT / 2));
+	mlx_resize_image(game->images.map_player, WIDTH, HEIGHT);
+	mlx_image_to_window(game->mlx, game->images.map_player, 0, 0);
 }
