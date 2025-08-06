@@ -1,22 +1,43 @@
 #include "cub3d.h"
 
 
+/* void	handle_hook(mlx_key_data_t keydata, void *params)
+{
+	t_game *game;
+	(void)keydata;
+	game = (t_game *)params;
+	if(mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
+		mlx_close_window(game->mlx);
+} */
+
+void movimineto_personaje(void *params)
+{
+	t_game *game;
+	game = (t_game *)params;
+
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+		game->images.map_player->instances->y--;
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+		game->images.map_player->instances->y++;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		game->images.map_player->instances->x++;
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+		game->images.map_player->instances->x--;
+}
+
+
 void	handle_hook(mlx_key_data_t keydata, void *params)
 {
-	t_game *game = (t_game *)params;
-	if (keydata.action == MLX_RELEASE)
-		return ;
-	if (keydata.key == MLX_KEY_ESCAPE)
+	t_game *game;
+	(void)keydata;
+	game = (t_game *)params;
+	if(mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
 		mlx_close_window(game->mlx);
-	if (keydata.key == MLX_KEY_M)
-	{
-		game->images.minimap->enabled = !(game->images.minimap->enabled);
-	}
-	
 }
 
 void	sayonara_baby(t_game *game)
 {
+	printf("ññññññññññññññññññ\n");
 	destroy_map(&game->map);
 	destroy_images(game->mlx, &game->images);
 	mlx_terminate(game->mlx);
@@ -27,6 +48,7 @@ void	init_mlx_connection(t_game *game)
 	init_game_struct(game);
 	draw_game(game);
 	mlx_key_hook(game->mlx, &handle_hook, game);
+	mlx_loop_hook(game->mlx, &movimineto_personaje, game);
 	mlx_loop(game->mlx);
 }
 
@@ -48,11 +70,6 @@ int	main(int argc, char **argv)
 	}
 	check_map(argv[1], &game.map);
 	init_mlx_connection(&game);
-	while (1)
-	{
-		usleep(1);
-		game.map.player->pos[X]++;
-	}
 	sayonara_baby(&game);
 }
 // todo 2025.07.24

@@ -49,6 +49,18 @@
 
 #define VALID_CHARS "10NSEW \n"
 
+typedef enum	e_player_movements
+{
+	PLAYER_STOP_RIGHT,
+	PLAYER_LEFT,
+	PLAYER_RIGHT,
+	PLAYER_UP,
+	PLAYER_DOWN,
+	PLAYER_STOP_LEFT,
+	PLAYER_STOP_UP,
+	PLAYER_STOP_DOWN,
+}				t_player_movements;
+
 /*   Errors    */
 typedef enum	e_staterror
 {
@@ -85,6 +97,7 @@ typedef struct	s_player
 	//t_vector	pos;
 	t_coor	pos[2];
 	int		vision_angle;
+	t_player_movements movement;
 }				t_player;
 
 
