@@ -127,6 +127,7 @@ typedef struct	s_map
 
 typedef struct	s_images
 {
+	mlx_image_t		*nose;
 	mlx_image_t		*sky;
 	mlx_image_t		*floor;
 	mlx_image_t		*mirilla;
@@ -145,13 +146,14 @@ typedef struct	s_game
 	t_map		map;
 	mlx_t		*mlx;
 }				t_game;
-//draw_map.c
+//create_images.c
 
 void		draw_game(t_game *game);
 mlx_image_t	*create_sky(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map);
+mlx_image_t	*create_pinocchio_nose(mlx_t *mlx, t_map *map);
 
 //get_next_line.c
 

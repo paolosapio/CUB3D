@@ -26,10 +26,11 @@ PRINT_DIR = printers/
 FUNKY_INIT = srcs/funky_init/
 FUNKY_DESTROY = srcs/funky_destroy/
 PARSER = srcs/parser/
+DRAW_GAME = srcs/draw_game/
 
 
 SRCS=	$(SRC_DIR)main.c\
-		$(SRC_DIR)draw_game.c\
+		$(DRAW_GAME)create_images.c\
 		$(FUNKY_INIT)init_game_struct.c\
 		$(FUNKY_INIT)init_images.c\
 		$(FUNKY_DESTROY)destroy_map.c\

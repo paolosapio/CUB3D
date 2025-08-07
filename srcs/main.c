@@ -16,13 +16,28 @@ void movimineto_personaje(void *params)
 	game = (t_game *)params;
 
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+	{
 		game->images.map_player->instances->y--;
+		game->images.nose->instances->y--;
+	}
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+	{
 		game->images.map_player->instances->y++;
+		game->images.nose->instances->y++;
+
+	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+	{
 		game->images.map_player->instances->x++;
+		game->images.nose->instances->x++;
+
+	}
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+	{
 		game->images.map_player->instances->x--;
+		game->images.nose->instances->x--;
+
+	}
 }
 
 
@@ -46,7 +61,7 @@ void	sayonara_baby(t_game *game)
 void	init_mlx_connection(t_game *game)
 {
 	init_game_struct(game);
-	draw_game(game);
+	//draw_game(game);
 	mlx_key_hook(game->mlx, &handle_hook, game);
 	mlx_loop_hook(game->mlx, &movimineto_personaje, game);
 	mlx_loop(game->mlx);
