@@ -49,6 +49,8 @@
 
 #define VALID_CHARS "10NSEW \n"
 
+#define size_of_tile 10
+
 typedef enum	e_player_movements
 {
 	PLAYER_STOP_RIGHT,
@@ -78,7 +80,11 @@ typedef enum	e_staterror
 #define PLAYER "NEWS"
 #define SPACE " "
 
-typedef double	t_coor;
+typedef struct	s_coor
+{
+	int x;
+	int y;
+}				t_coor;
 
 typedef enum	e_error_ok
 {
@@ -86,16 +92,18 @@ typedef enum	e_error_ok
 	ERROR,
 }				t_errok;
 
+#define LIMIT_FOV 50
 typedef struct	s_vector
 {
-	t_coor	start[2];
-	t_coor	end[2];
+	t_coor	start;
+	t_coor	end;
 }				t_vector;
 
 typedef struct	s_player
 {
 	//t_vector	pos;
-	t_coor	pos[2];
+	t_coor	pos;
+	t_coor	end;
 	int		vision_angle;
 	t_player_movements movement;
 }				t_player;
@@ -199,3 +207,6 @@ t_errok	check_file(char *path_map);
 
 //map_encasketeitor.c
 int	str_map_encasketeitor(t_map *map, int fd);
+
+//bresenham.c
+void	bresenham_algorithm(mlx_image_t *player, int x1, int y1, int x2, int y2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/07/30 20:15:38 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/10 23:11:36 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,36 @@ t_errok is_around_space_ok(t_map *map, int x, int y)
 
 void	check_player(t_map *map, int x, int y)
 {
-	if (map->player->pos[X] != 0)
+	if (map->player->pos.x != 0)
 		error_exit_invalid_map(map, TOO_MANY_PLAYERS);
 	if (is_around_space_ok(map, x, y) == ERROR)
 		error_exit_invalid_map(map, INVALID_PLAYER_POSITION);
-	map->player->pos[X] = x;
-	map->player->pos[Y] = y;
+	map->player->pos.x = x;
+	map->player->pos.y = y;
 	if (map->map_array[y][x] == 'N')
-		map->player->vision_angle = 0;
+	{
+		map->player->vision_angle = 0; //! creo que sería mejor hacerlo en base al eje X Por si luego tenemos que hacer la tangente, ergo esto sería 90.
+		map->player->end.x = x;
+		map->player->end.y = y - LIMIT_FOV;
+	}
 	else if (map->map_array[y][x] == 'E')
-		map->player->vision_angle = 90;
+	{
+		map->player->vision_angle = 90; //! 0
+		map->player->end.x = x + LIMIT_FOV;
+		map->player->end.y = y;
+	}
 	else if (map->map_array[y][x] == 'S')
-		map->player->vision_angle = 180;
+	{
+		map->player->vision_angle = 180; //!270
+		map->player->end.x = x;
+		map->player->end.y = y + LIMIT_FOV;
+	}
 	else if (map->map_array[y][x] == 'W')
-		map->player->vision_angle = 270;
+	{
+		map->player->vision_angle = 270; // !180
+		map->player->end.x = x - LIMIT_FOV;
+		map->player->end.y = y;
+	}
 }
 
 void check_valid_map(t_map *map)
@@ -141,6 +157,6 @@ void check_map(char *path_map, t_map *map)
 		free(line_map_to_check);
 	}
 	check_valid_map(map);
-	if (map->player->pos[X] == 0)
+	if (map->player->pos.x == 0)
 		error_exit_invalid_map(map, NO_PLAYER);
 }

@@ -61,7 +61,7 @@ void	sayonara_baby(t_game *game)
 void	init_mlx_connection(t_game *game)
 {
 	init_game_struct(game);
-	//draw_game(game);
+	draw_game(game);
 	mlx_key_hook(game->mlx, &handle_hook, game);
 	mlx_loop_hook(game->mlx, &movimineto_personaje, game);
 	mlx_loop(game->mlx);

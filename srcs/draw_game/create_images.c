@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_game.c                                        :+:      :+:    :+:   */
+/*   create_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:09:48 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/08/06 18:19:36 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/10 23:39:34 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-# define size_of_tile 10
 
 void	paint_direction(mlx_image_t	*img_minimap, int x_map, int y_map, int32_t color)
 {
@@ -34,10 +33,10 @@ void	paint_tile(mlx_image_t	*img_minimap, int x_map, int y_map, int32_t color)
 	int	y;
 
 	y = -1;
-	while (y++ <= size_of_tile)
+	while (++y <= size_of_tile)
 	{
 		x = -1;
-		while (x++ <= size_of_tile)
+		while (++x <= size_of_tile)
 		{
 			mlx_put_pixel(img_minimap, x + (x_map* size_of_tile), y + (y_map* size_of_tile), color);
 		}
@@ -49,7 +48,7 @@ mlx_image_t	*create_pinocchio_nose(mlx_t *mlx, t_map *map)
 	mlx_image_t	*nose;
 
 	nose = mlx_new_image(mlx, map->longest_line * size_of_tile, map->map_len * size_of_tile);
-	paint_direction(nose, map->player->pos[X], map->player->pos[Y], 0xFF0000FF);
+	paint_direction(nose, map->player->pos.x, map->player->pos.y, 0xFF0000FF);
 	return (nose);
 }
 
@@ -58,7 +57,11 @@ mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map)
 	mlx_image_t	*map_player;
 
 	map_player = mlx_new_image(mlx, map->longest_line * size_of_tile, map->map_len * size_of_tile);
-	paint_tile(map_player, map->player->pos[X], map->player->pos[Y], 0xFF6600FF);
+	paint_tile(map_player, map->player->pos.x, map->player->pos.y, 0xFF6600FF);
+	bresenham_algorithm(map_player, map->player->pos.x * size_of_tile + 1,
+		map->player->pos.y * size_of_tile + 1,
+		map->player->end.x * size_of_tile,
+		map->player->end.y * size_of_tile);
 	return (map_player);
 }
 
@@ -81,7 +84,7 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 		{
 			if (map->map_array[y][x] == '1')
 			{
-					paint_tile(img_minimap, x, y, 0xFFFFFF99);
+				paint_tile(img_minimap, x, y, 0xFFFFFF99);
 			}
 			else if (ft_strchr("NSWE0", map->map_array[y][x]) != NULL)
 				paint_tile(img_minimap, x, y, 0x00000099);
