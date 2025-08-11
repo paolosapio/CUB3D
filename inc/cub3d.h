@@ -1,13 +1,9 @@
 #ifndef CUB3D_H
 # define CUB3D_H
-#endif
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "libft.h"
@@ -15,10 +11,7 @@
 #define WIDTH 640
 #define HEIGHT 480
 
-// #define OK 0
-// #define ERROR 1
-
-/*   COLORS   */
+/*   COLORS PRINTF  */
 
 #define STD "\033[0m"
 #define RED "\033[1;31m"
@@ -28,27 +21,7 @@
 #define ORANG "\033[1;33m"
 #define WHITE "\033[1;37m"
 
-/* MAP INFO creo que al final no usamos esto*/
-
-#define NORTH_TEXTURE 0
-#define EAST_TEXTURE 1
-#define SOUTH_TEXTURE 2
-#define WEST_TEXTURE 3
-// #define FLOOR 4
-#define SKY 5
-
-/*   test vectores   */
-
-#define X 1
-#define Y 0
-
-#define NORTH 0
-#define EAST 1
-#define SOUTH 2
-#define WEST 3
-
-#define VALID_CHARS "10NSEW \n"
-
+//habria que ponerlo en otra estrucutra!
 #define size_of_tile 10
 
 typedef enum	e_player_movements
@@ -63,22 +36,17 @@ typedef enum	e_player_movements
 	PLAYER_STOP_DOWN,
 }				t_player_movements;
 
-/*   Errors    */
-typedef enum	e_staterror
-{
-	INVALID_CHAR = 1,
-	NOT_ENCLOSED_MAP,
-	TOO_MANY_PLAYERS,
-	INVALID_PLAYER_POSITION,
-	NO_PLAYER,
-	EMPTY_MAP,
-}				t_staterror;
 
-/*   map chars   */
-#define FLOOR "0"
-#define WALL "1"
-#define PLAYER "NEWS"
-#define SPACE " "
+
+// typedef enum	e_error_ok
+// {
+// 	OK,
+// 	ERROR,
+// }				t_errok;
+
+#define LIMIT_FOV 50
+
+/*   STRUCTURAS   */
 
 typedef struct	s_coor
 {
@@ -86,18 +54,14 @@ typedef struct	s_coor
 	int y;
 }				t_coor;
 
-typedef enum	e_error_ok
-{
-	OK,
-	ERROR,
-}				t_errok;
+typedef  t_coor t_vector;
 
-#define LIMIT_FOV 50
-typedef struct	s_vector
+typedef struct	s_segment
 {
 	t_coor	start;
 	t_coor	end;
-}				t_vector;
+}				t_segment;
+
 
 typedef struct	s_player
 {
@@ -109,28 +73,15 @@ typedef struct	s_player
 }				t_player;
 
 
-/*   STRUCTURAS   */
-
 typedef struct	s_map
 {
-	int		line_that_start_map;
 
 	int		longest_line;
 	int		map_len;
-	//int		tile_size; //!se puede queitar seguramente!
 
-	char	*arg_map_fd;
-	char	*map_info_north_texture;
-	char	*map_info_east_texture;
-	char	*map_info_south_texture;
-	char	*map_info_west_texture;
-	char	*map_info_floor;
-	char	*map_info_sky;
 
 	char	**map_array;
 	t_player	player[1];
-	// unsigned int	floor_color;
-	// unsigned int	sky_color;
 }				t_map;
 
 typedef struct	s_images
@@ -145,11 +96,11 @@ typedef struct	s_images
 	mlx_image_t		*map_texture_E;
 	mlx_image_t		*map_texture_O;
 	mlx_image_t		*map_player;
-
 }				t_images;
 
 typedef struct	s_game
 {
+	//t_player player.
 	t_images	images;
 	t_map		map;
 	mlx_t		*mlx;
@@ -210,3 +161,5 @@ int	str_map_encasketeitor(t_map *map, int fd);
 
 //bresenham.c
 void	bresenham_algorithm(mlx_image_t *player, int x1, int y1, int x2, int y2);
+
+#endif

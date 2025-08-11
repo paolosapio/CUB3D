@@ -78,6 +78,7 @@ int	main(int argc, char **argv)
 		printf(PURPLE"You can find different maps inside the map folder\n"STD);
 		return (1);
 	}
+	parser(argv[1]);
 	if (check_file(argv[1]) == ERROR)
 	{
 		printf("ERROR FILE NAME\n");

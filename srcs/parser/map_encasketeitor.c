@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "parser.h"
 
 void	reopen_map(char *map_path, int fd)
 {
@@ -6,7 +6,7 @@ void	reopen_map(char *map_path, int fd)
 	fd = open(map_path, O_RDONLY);
 }
 
-void	skip_lines(t_map *map, int fd)
+void	skip_lines(t_parser_map *map, int fd)
 {
 	while (map->line_that_start_map-- > 0)
 		free(get_next_line(fd));
@@ -19,14 +19,14 @@ int	line_len_meter(int size_line, int old_bigger_line)
 	return (old_bigger_line);
 }
 
-int	str_map_encasketeitor(t_map *map, int fd)
+int	str_map_encasketeitor(t_parser_map *parser_map, t_map *map, int fd)
 {
 	char	*line;
 	int		map_line_index;
 
 	map_line_index = 0;
-	reopen_map(map->arg_map_fd, fd);
-	skip_lines(map, fd);
+	reopen_map(parser_map->arg_map_fd, fd);
+	skip_lines(parser_map, fd);
 	while (true)
 	{
 		line = get_next_line(fd);

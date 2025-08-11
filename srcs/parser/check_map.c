@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/08/10 23:11:36 by anfi             ###   ########.fr       */
+/*   Updated: 2025/08/11 20:50:08 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parser.h"
 
 void	error_exit_invalid_map(t_map *map, int error)
 {
@@ -128,7 +128,7 @@ void check_valid_map(t_map *map)
 	}
 }
 
-void check_map(char *path_map, t_map *map)
+void check_map(char *path_map, t_parser_map *map)
 {
 	char *line_map_to_check;
 	int  fd;
@@ -157,6 +157,6 @@ void check_map(char *path_map, t_map *map)
 		free(line_map_to_check);
 	}
 	check_valid_map(map);
-	if (map->player->pos.x == 0)
+	if (map->parser_player->player_x == 0)
 		error_exit_invalid_map(map, NO_PLAYER);
 }

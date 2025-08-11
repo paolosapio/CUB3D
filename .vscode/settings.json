@@ -8,6 +8,8 @@
         "atomic": "c",
         "types.h": "c",
         "libft.h": "c",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "iostream": "cpp",
+        "parser.h": "c"
     }
 }

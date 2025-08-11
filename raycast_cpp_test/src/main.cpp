@@ -17,7 +17,7 @@ public:
 
 	bool OnUserCreate() override
 	{
-		vecMap.resize(vMapSize.x, vMapSize.y);
+		vecMap.resize(vMapSize.x * vMapSize.y);
 		return true;
 	}
 
@@ -31,18 +31,13 @@ public:
 			vecMap[vCell.y * vMapSize.x + vCell.x] = 1;
 		
 		// Modify player's position
-		if (GetKey(olc::Key::W).bHeld)
-		{
-			//vecMap[vMapCheck.y * vMapSize.x + vMapCheck.x] == 1
-			if (vecMap[(vPlayer.y - 25.0f) * vMapSize.x + vPlayer.x] != 1)
-				vPlayer.y -= 25.0f * fElapsedTime; //speed constant * fElapsedTime. This makes it consistent by frame (?).
-		}
+		std::cout << fElapsedTime << std::endl;
+		if (GetKey(olc::Key::W).bHeld) vPlayer.y -= 25.0f * fElapsedTime; //speed constant * fElapsedTime. This makes it consistent by frame (?).
 		if (GetKey(olc::Key::A).bHeld) vPlayer.x -= 25.0f * fElapsedTime;
 		if (GetKey(olc::Key::S).bHeld) vPlayer.y += 25.0f * fElapsedTime;
 		if (GetKey(olc::Key::D).bHeld) vPlayer.x += 25.0f * fElapsedTime;
 
 		//DDA ALGORITHM ----------------------------------------
-
 
 		//Form ray cast from player into scene.
 		olc::vf2d vRayStart = vPlayer; // Initial coordinates.
@@ -127,6 +122,10 @@ public:
 		}
 
 
+
+
+
+
 		Clear(olc::BLACK);
 		//draw map
 		for (int y = 0; y < vMapSize.y; y++)
@@ -160,7 +159,10 @@ public:
 int main()
 {
 	Example demo;
-	if (demo.Construct(200, 200, 2, 2))
+	if (demo.Construct(480, 400, 2, 2))
+	{
+
 		demo.Start();
+	}
 	return 0;
 }

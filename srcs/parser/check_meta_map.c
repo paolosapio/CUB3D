@@ -6,11 +6,11 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/07/30 20:25:49 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/11 20:51:47 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parser.h"
 
 
 int	save_map_info(char *line_map_to_check, char **map_info)
@@ -31,7 +31,7 @@ int	save_map_info(char *line_map_to_check, char **map_info)
 	return (ERROR);
 }
 
-void	allocate_map_size(char *line_map_to_check, t_map *map, int fd)
+void	allocate_map_size(char *line_map_to_check, t_parser_map *map, int fd)
 {
 	int	map_len;
 
@@ -48,7 +48,7 @@ void	allocate_map_size(char *line_map_to_check, t_map *map, int fd)
 	map->map_array[map_len + 1] = NULL;
 }
 
-void	check_textures_path(t_map *map)
+void	check_textures_path(t_parser_map *map)
 {
 	if(map->map_info_north_texture == NULL ||
 		map->map_info_east_texture == NULL ||
@@ -62,7 +62,7 @@ void	check_textures_path(t_map *map)
 	}
 }
 
-int	line_checkeitor(char *line_map_to_check, t_map *map, int fd)
+int	line_checkeitor(char *line_map_to_check, t_parser_map *map, int fd)
 {
 	if (is_empty_line(line_map_to_check) == true)
 		return (OK);

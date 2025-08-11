@@ -6,11 +6,11 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/07/30 20:32:11 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/11 20:19:38 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parser.h"
 
 t_errok	is_empty_line(char *line)
 {
