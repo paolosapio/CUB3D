@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:09:48 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/08/11 18:32:34 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:00:28 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,17 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 
 	img_minimap = mlx_new_image(mlx, map->longest_line * size_of_tile, map->map_len * size_of_tile);
 	y = -1;
-	while (map->map_array[++y])
+	while (map->array[++y])
 	{
 		slider++;
 		x = -1;
-		while (map->map_array[y][++x])
+		while (map->array[y][++x])
 		{
-			if (map->map_array[y][x] == '1')
+			if (map->array[y][x] == '1')
 			{
 				paint_tile(img_minimap, x, y, 0xFFFFFF99);
 			}
-			else if (ft_strchr("NSWE0", map->map_array[y][x]) != NULL)
+			else if (ft_strchr("NSWE0", map->array[y][x]) != NULL)
 				paint_tile(img_minimap, x, y, 0x00000099);
 		}
 	}

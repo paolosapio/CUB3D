@@ -7,6 +7,8 @@
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "libft.h"
+#include "../srcs/map/map.h"
+#include "../srcs/player/player.h"
 
 #define WIDTH 640
 #define HEIGHT 480
@@ -36,8 +38,6 @@ typedef enum	e_player_movements
 	PLAYER_STOP_DOWN,
 }				t_player_movements;
 
-
-
 // typedef enum	e_error_ok
 // {
 // 	OK,
@@ -62,28 +62,6 @@ typedef struct	s_segment
 	t_coor	end;
 }				t_segment;
 
-
-typedef struct	s_player
-{
-	//t_vector	pos;
-	t_coor	pos;
-	t_coor	end;
-	int		vision_angle;
-	t_player_movements movement;
-}				t_player;
-
-
-typedef struct	s_map
-{
-
-	int		longest_line;
-	int		map_len;
-
-
-	char	**map_array;
-	t_player	player[1];
-}				t_map;
-
 typedef struct	s_images
 {
 	mlx_image_t		*nose;
@@ -105,6 +83,8 @@ typedef struct	s_game
 	t_map		map;
 	mlx_t		*mlx;
 }				t_game;
+
+
 //create_images.c
 
 void		draw_game(t_game *game);
@@ -138,22 +118,6 @@ t_map	init_map(void);
 void	destroy_map(t_map *map);
 void	destroy_images(mlx_t *mlx, t_images *images);
 
-//get_map_info.c
-void	get_map_info(t_map map);
-
-//check_meta_map.c
-int	line_checkeitor(char *line_map_to_check, t_map *map, int fd);
-
-// check_map.c
-void	check_map(char *arg_map, t_map *map);
-
-//check_line.c
-t_errok	is_empty_line(char *line);
-int		is_valid_line(char **map, int current);
-t_errok	check_first_line_map(char *line_map_to_check);
-
-//check_file.c
-t_errok	check_file(char *path_map);
 
 
 //map_encasketeitor.c
@@ -161,5 +125,8 @@ int	str_map_encasketeitor(t_map *map, int fd);
 
 //bresenham.c
 void	bresenham_algorithm(mlx_image_t *player, int x1, int y1, int x2, int y2);
+
+
+t_map	*parser(char *pat_path, t_map *map);
 
 #endif

@@ -1,5 +1,5 @@
-#include "cub3d.h"
 
+#include "cub3d.h"
 
 /* void	handle_hook(mlx_key_data_t keydata, void *params)
 {
@@ -78,13 +78,7 @@ int	main(int argc, char **argv)
 		printf(PURPLE"You can find different maps inside the map folder\n"STD);
 		return (1);
 	}
-	parser(argv[1]);
-	if (check_file(argv[1]) == ERROR)
-	{
-		printf("ERROR FILE NAME\n");
-		return (2);
-	}
-	check_map(argv[1], &game.map);
+	parser(argv[1], &game.map);
 	init_mlx_connection(&game);
 	sayonara_baby(&game);
 }

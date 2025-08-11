@@ -33,14 +33,14 @@ int	str_map_encasketeitor(t_parser_map *parser_map, t_map *map, int fd)
 		if (line == NULL)
 			break ;
 		map->longest_line = line_len_meter(ft_strlen(line), map->longest_line);
-		map->map_array[map_line_index] = line;
+		map->array[map_line_index] = line;
 		map_line_index++;
 	}
 	map->map_len = map_line_index;
-	if (ft_strcmp(map->map_array[map->map_len - 1], "\n") == 0)
+	if (ft_strcmp(map->array[map->map_len - 1], "\n") == 0)
 		return (ERROR);
 
-	for (int i = 0; map->map_array[i]; i++)
-		printf("%s", map->map_array[i]);
+	for (int i = 0; map->array[i]; i++)
+		printf("%s", map->array[i]);
 	return (OK);
 }

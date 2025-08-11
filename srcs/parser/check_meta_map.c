@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/08/11 20:51:47 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/11 22:19:19 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	save_map_info(char *line_map_to_check, char **map_info)
 	return (ERROR);
 }
 
-void	allocate_map_size(char *line_map_to_check, t_parser_map *map, int fd)
+void	allocate_map_size(char *line_map_to_check, t_map *map, int fd)
 {
 	int	map_len;
 
@@ -44,43 +44,43 @@ void	allocate_map_size(char *line_map_to_check, t_parser_map *map, int fd)
 		free(line_map_to_check);
 		line_map_to_check = get_next_line(fd);
 	}
-	map->map_array = malloc((map_len + 2) * sizeof(char *));
-	map->map_array[map_len + 1] = NULL;
+	map->array = malloc((map_len + 2) * sizeof(char *));
+	map->array[map_len + 1] = NULL;
 }
 
 void	check_textures_path(t_parser_map *map)
 {
-	if(map->map_info_north_texture == NULL ||
-		map->map_info_east_texture == NULL ||
-		map->map_info_south_texture == NULL ||
-		map->map_info_west_texture == NULL ||
-		map->map_info_floor == NULL ||
-		map->map_info_sky == NULL)
+	if(map->info_north_texture == NULL ||
+		map->info_east_texture == NULL ||
+		map->info_south_texture == NULL ||
+		map->info_west_texture == NULL ||
+		map->info_floor == NULL ||
+		map->info_sky == NULL)
 	{	
 		write(2, "INVALID PATH\n", 14);
 		exit(0);
 	}
 }
 
-int	line_checkeitor(char *line_map_to_check, t_parser_map *map, int fd)
+int	line_checkeitor(char *line_map_to_check, t_map *map, t_parser_map *parser_map, int fd)
 {
 	if (is_empty_line(line_map_to_check) == true)
 		return (OK);
 	if (ft_strncmp(line_map_to_check, "NO ", 3) == 0)
-		return (save_map_info(line_map_to_check,&map->map_info_north_texture));
+		return (save_map_info(line_map_to_check,&parser_map->info_north_texture));
 	if (ft_strncmp(line_map_to_check, "WE ", 3) == 0)
-		return (save_map_info(line_map_to_check,&map->map_info_west_texture));
+		return (save_map_info(line_map_to_check,&parser_map->info_west_texture));
 	if (ft_strncmp(line_map_to_check, "EA ", 3) == 0)
-		return (save_map_info(line_map_to_check,&map->map_info_east_texture));
+		return (save_map_info(line_map_to_check,&parser_map->info_east_texture));
 	if (ft_strncmp(line_map_to_check, "SO ", 3) == 0)
-		return (save_map_info(line_map_to_check,&map->map_info_south_texture));
+		return (save_map_info(line_map_to_check,&parser_map->info_south_texture));
 	if (ft_strncmp(line_map_to_check, "F ", 2) == 0)
-		return (save_map_info(line_map_to_check,&map->map_info_floor));
+		return (save_map_info(line_map_to_check,&parser_map->info_floor));
 	if (ft_strncmp(line_map_to_check, "C ", 2) == 0)
-		return (save_map_info(line_map_to_check,&map->map_info_sky));
+		return (save_map_info(line_map_to_check,&parser_map->info_sky));
 	else // When we arrive here we suppose it is the start of the map array.
 	{
-		check_textures_path(map);
+		check_textures_path(parser_map);
 		if (check_first_line_map(line_map_to_check) == ERROR)
 			return (ERROR);
 		allocate_map_size(line_map_to_check, map, fd);

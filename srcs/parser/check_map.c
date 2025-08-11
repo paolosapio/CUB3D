@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/08/11 20:50:08 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/11 22:32:47 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,27 @@ void	error_exit_invalid_map(t_map *map, int error)
 t_errok is_around_space_ok(t_map *map, int x, int y)
 {
 	//arriba
-	if (y == 0 || x > (int)ft_strlen(map->map_array[y - 1]) || ft_strchr(FLOOR""WALL""PLAYER, map->map_array[y - 1][x]) == NULL)
+	if (y == 0 || x > (int)ft_strlen(map->array[y - 1]) || ft_strchr(FLOOR""WALL""PLAYER, map->array[y - 1][x]) == NULL)
 	{
 		printf("error desde arriba x = %d y = %d\n", x, y);
 		return (ERROR);
 	}
 
 	// derecha
-	if (map->map_array[y][x + 1] != '\0' && ft_strchr(FLOOR""WALL""PLAYER, map->map_array[y][x + 1]) == NULL)
+	if (map->array[y][x + 1] != '\0' && ft_strchr(FLOOR""WALL""PLAYER, map->array[y][x + 1]) == NULL)
 	{
 		printf("error desde derecha x = %d y = %d\n", x, y);
 		return (ERROR);
 	}
 
 	// abajo
-	if (y + 1 == map->map_len || x > (int)ft_strlen(map->map_array[y + 1]) || ft_strchr(FLOOR""WALL""PLAYER, map->map_array[y + 1][x]) == NULL)
+	if (y + 1 == map->map_len || x > (int)ft_strlen(map->array[y + 1]) || ft_strchr(FLOOR""WALL""PLAYER, map->array[y + 1][x]) == NULL)
 	{
 		printf("error desde abajo x = %d y = %d\n", x, y);
 		return (ERROR);
 	}
 	// izquierda
-	if (x > 0 && ft_strchr(FLOOR""WALL""PLAYER, map->map_array[y][x - 1]) == NULL)
+	if (x > 0 && ft_strchr(FLOOR""WALL""PLAYER, map->array[y][x - 1]) == NULL)
 	{
 		printf("error desde izquierda x = %d y = %d\n", x, y);
 		return (ERROR);
@@ -72,25 +72,25 @@ void	check_player(t_map *map, int x, int y)
 		error_exit_invalid_map(map, INVALID_PLAYER_POSITION);
 	map->player->pos.x = x;
 	map->player->pos.y = y;
-	if (map->map_array[y][x] == 'N')
+	if (map->array[y][x] == 'N')
 	{
 		map->player->vision_angle = 0; //! creo que sería mejor hacerlo en base al eje X Por si luego tenemos que hacer la tangente, ergo esto sería 90.
 		map->player->end.x = x;
 		map->player->end.y = y - LIMIT_FOV;
 	}
-	else if (map->map_array[y][x] == 'E')
+	else if (map->array[y][x] == 'E')
 	{
 		map->player->vision_angle = 90; //! 0
 		map->player->end.x = x + LIMIT_FOV;
 		map->player->end.y = y;
 	}
-	else if (map->map_array[y][x] == 'S')
+	else if (map->array[y][x] == 'S')
 	{
 		map->player->vision_angle = 180; //!270
 		map->player->end.x = x;
 		map->player->end.y = y + LIMIT_FOV;
 	}
-	else if (map->map_array[y][x] == 'W')
+	else if (map->array[y][x] == 'W')
 	{
 		map->player->vision_angle = 270; // !180
 		map->player->end.x = x - LIMIT_FOV;
@@ -104,20 +104,20 @@ void check_valid_map(t_map *map)
 	int	y;
 
 	y = 0;
-	if (!map->map_array)
+	if (!map->array)
 	{
 		error_exit_invalid_map(map, EMPTY_MAP);
 	}
-	while (map->map_array[y])
+	while (map->array[y])
 	{
 		x = 0;
-		while(map->map_array[y][x])
+		while(map->array[y][x])
 		{
-			if (ft_strchr(VALID_CHARS, map->map_array[y][x]) == NULL)
+			if (ft_strchr(VALID_CHARS, map->array[y][x]) == NULL)
 				error_exit_invalid_map(map, INVALID_CHAR);
-			if (ft_strchr(PLAYER, map->map_array[y][x]) != NULL)
+			if (ft_strchr(PLAYER, map->array[y][x]) != NULL)
 				check_player(map, x, y);
-			if (ft_strchr(FLOOR, map->map_array[y][x]) != NULL)
+			if (ft_strchr(FLOOR, map->array[y][x]) != NULL)
 			{
 				if (is_around_space_ok(map, x, y) == ERROR)
 					error_exit_invalid_map(map, NOT_ENCLOSED_MAP);
@@ -128,12 +128,12 @@ void check_valid_map(t_map *map)
 	}
 }
 
-void check_map(char *path_map, t_parser_map *map)
+void	check_map(char *path_map, t_parser_map *parser_map, t_map *map)
 {
 	char *line_map_to_check;
-	int  fd;
+	int	fd;
 
-	map->arg_map_fd = path_map;
+	parser_map->arg_map_fd = path_map;
 	fd = open(path_map, O_RDONLY);
 	if (fd == -1)
 	{
@@ -145,7 +145,7 @@ void check_map(char *path_map, t_parser_map *map)
 		line_map_to_check = get_next_line(fd);
 		if (line_map_to_check == NULL)
 			break ;
-		if (line_checkeitor(line_map_to_check, map, fd) == ERROR)
+		if (line_checkeitor(line_map_to_check, map, parser_map, fd) == ERROR)
 		{
 			printf("invalid line: %s\n", line_map_to_check);
 			free(line_map_to_check);
@@ -153,10 +153,10 @@ void check_map(char *path_map, t_parser_map *map)
 			close(fd);
 			exit (1);
 		}
-		map->line_that_start_map++;
+		parser_map->line_that_start_map++;
 		free(line_map_to_check);
 	}
 	check_valid_map(map);
-	if (map->parser_player->player_x == 0)
+	if (parser_map->parser_player->player_x == 0)
 		error_exit_invalid_map(map, NO_PLAYER);
 }

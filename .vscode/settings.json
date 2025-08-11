@@ -10,6 +10,7 @@
         "libft.h": "c",
         "cmath": "cpp",
         "iostream": "cpp",
-        "parser.h": "c"
+        "parser.h": "c",
+        "map.h": "c"
     }
 }

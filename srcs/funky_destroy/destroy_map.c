@@ -9,6 +9,6 @@ void	destroy_map(t_map *map)
 	free(map->map_info_floor);
 	free(map->map_info_sky);
 
-	if (map->map_array)
-		free_double_pointer(map->map_array);
+	if (map->array)
+		free_double_pointer(map->array);
 }
