@@ -11,6 +11,9 @@
         "cmath": "cpp",
         "iostream": "cpp",
         "parser.h": "c",
-        "map.h": "c"
+        "map.h": "c",
+        "player.h": "c",
+        "map": "c",
+        "system_error": "c"
     }
 }

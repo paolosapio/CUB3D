@@ -3,7 +3,7 @@ NAME = cub3D
 CC = cc
 
 CFLAGS	 =	-Wextra -Wall -Werror 
-CFLAGS	+= -I inc
+CFLAGS	+= -I INC
 CFLAGS	+= -I libft
 #CFLAGS	+= -O3 #-> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS
 #CFLAGS	+= -lglfw
@@ -15,37 +15,27 @@ CPPFLAGS = -MMD
 LIBFT = ./libft
 MLX42 = ./MLX42
 
-HEADERS = -I ./inc -I $(LIBFT) -I $(MLX42)/include
+HEADERS = -I ./INC -I $(LIBFT) -I $(MLX42)/include
 
 LIBS = $(LIBFT)/libft.a
 LIBS += $(MLX42)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-SRC_DIR = srcs/
-LIST_DIR = list_functions/
-PRINT_DIR = printers/
-FUNKY_INIT = srcs/funky_init/
-FUNKY_DESTROY = srcs/funky_destroy/
-PARSER = srcs/parser/
-DRAW_GAME = srcs/draw_game/
+SRC_DIR = SRCS/
+FUNKY_INIT = srcs/FUNKY_INIT/
+FUNKY_DESTROY = srcs/FUNKY_DESTROY/
+PARSER = srcs/PARSER/
+DRAW_GAME = srcs/DRAW_GAME
 
 
-SRCS=	$(SRC_DIR)main.c\
-		$(DRAW_GAME)create_images.c\
-		$(FUNKY_INIT)init_game_struct.c\
-		$(FUNKY_INIT)init_images.c\
-		$(FUNKY_DESTROY)destroy_map.c\
-		$(FUNKY_DESTROY)destroy_images.c\
-		$(PARSER)check_line.c\
-		$(PARSER)check_meta_map.c\
-		$(PARSER)map_encasketeitor.c\
-		$(PARSER)check_map.c\
-		$(PARSER)check_file.c\
-		$(SRC_DIR)bresenham.c
+SRCS = $(shell find SRCS -name "*.c")
+
+#hola paolo y yolanda:lo de arriba recordis
+#de poner todos los archivos que salen en la terminal con
+#find SRCS -name "*.c"
 
 
 
-	
-OBJS = $(patsubst srcs/%.c, objs/srcs/%.o, $(SRCS))
+OBJS = $(patsubst SRCS/%.c, objs/srcs/%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)
 
 all: $(NAME)
@@ -63,12 +53,14 @@ LIBFT_LIB = $(LIBFT)/libft.a
 
 $(LIBFT_LIB):
 	@make -C $(LIBFT)
+	echo **************_$(SRCS)_*****************
+
 
 $(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS)
 	echo $(OBJS)
 	$(CC) $(DEBUG) $(CFLAGS) $(OBJS) $(LIBS)  $(HEADERS) -o $(NAME) && printf "Linking: $(NAME)\n"
 
-objs/srcs/%.o: ./srcs/%.c
+objs/srcs/%.o: ./SRCS/%.c
 	mkdir -p $(dir $@)
 	$(CC) $(DEBUG) $(CPPFLAGS) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
 

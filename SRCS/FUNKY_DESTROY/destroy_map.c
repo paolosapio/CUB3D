@@ -1,0 +1,7 @@
+#include "cub3d.h"
+
+void	destroy_map(t_map *map)
+{
+	if (map->array)
+		free_double_pointer(map->array);
+}
