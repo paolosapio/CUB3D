@@ -7,30 +7,6 @@ void	clean_image(mlx_image_t		*image)
 	memset(image->pixels, 0, image->width * image->height * RGBA_SIZE);
 }
 
-void mouse_movements(double mouse_x, double mouse_y, void *params)
-{
-	t_game *game;
-	static double first_step_x = 0;
-
-	(void)mouse_y;
-	game = (t_game *)params;
-	if (mouse_x < first_step_x)
-	{
-		if(game->map.player_pointer->vision_angle == 360)
-			game->map.player_pointer->vision_angle = 0;
-		game->map.player_pointer->vision_angle++;
-		printf("girando a la ezquerda desde e el raton\n");
-
-	}
-	else if (mouse_x > first_step_x)
-	{
-		if(game->map.player_pointer->vision_angle == 0)
-			game->map.player_pointer->vision_angle = 360;
-		game->map.player_pointer->vision_angle--;
-		printf("girando a la derecha desde e el raton\n");
-	}
-	first_step_x = mouse_x;
-}
 void	paint_move_player(mlx_image_t		*map_player, t_player *player)
 {
 	clean_image(map_player);
@@ -45,6 +21,35 @@ void	paint_move_player(mlx_image_t		*map_player, t_player *player)
 		player->end.y * size_of_tile + (size_of_tile / 2) + 1);
 	// rescrivir con las nuevas coordinadas:
 	paint_tile(map_player, player->pos.x, player->pos.y, 0xFF6600FF);
+}
+
+void mouse_movements(double mouse_x, double mouse_y, void *params)
+{
+	t_game *game;
+	static double first_step_x = 0;
+
+	(void)mouse_y;
+	game = (t_game *)params;
+	mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	if (mouse_x < first_step_x)
+	{
+		if(game->map.player_pointer->vision_angle == 0)
+			game->map.player_pointer->vision_angle = 360;
+		game->map.player_pointer->vision_angle--;
+	}
+	else if (mouse_x > first_step_x)
+	{
+		if(game->map.player_pointer->vision_angle == 360)
+			game->map.player_pointer->vision_angle = 0;
+		game->map.player_pointer->vision_angle++;
+	}
+
+	game->player.end.x = game->player.pos.x + cos((game->player.vision_angle / 180.0) * 3.14) * LIMIT_FOV;
+	game->player.end.y = game->player.pos.y + sin((game->player.vision_angle / 180.0) * 3.14) * LIMIT_FOV;
+
+	first_step_x = mouse_x;
+	paint_move_player(game->images.map_player, &game->player);
 }
 
 
