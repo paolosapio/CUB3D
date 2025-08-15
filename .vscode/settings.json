@@ -14,6 +14,7 @@
         "map.h": "c",
         "player.h": "c",
         "map": "c",
-        "system_error": "c"
+        "system_error": "c",
+        "mlx42_int.h": "c"
     }
 }

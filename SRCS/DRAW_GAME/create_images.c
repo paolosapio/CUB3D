@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:09:48 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/08/11 23:00:28 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/15 21:00:49 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	paint_tile(mlx_image_t	*img_minimap, int x_map, int y_map, int32_t color)
 	int	y;
 
 	y = -1;
+	if (x_map < 0 || y_map < 0)
+		return ;
 	while (++y <= size_of_tile)
 	{
 		x = -1;

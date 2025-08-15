@@ -1,48 +1,99 @@
 
 #include "cub3d.h"
+#define RGBA_SIZE 4
 
-void movimineto_personaje(void *params)
+void	clean_image(mlx_image_t		*image)
+{
+	memset(image->pixels, 0, image->width * image->height * RGBA_SIZE);
+}
+
+void mouse_movements(double mouse_x, double mouse_y, void *params)
+{
+	t_game *game;
+	static double first_step_x = 0;
+
+	(void)mouse_y;
+	game = (t_game *)params;
+	if (mouse_x < first_step_x)
+	{
+		if(game->map.player_pointer->vision_angle == 360)
+			game->map.player_pointer->vision_angle = 0;
+		game->map.player_pointer->vision_angle++;
+		printf("girando a la ezquerda desde e el raton\n");
+
+	}
+	else if (mouse_x > first_step_x)
+	{
+		if(game->map.player_pointer->vision_angle == 0)
+			game->map.player_pointer->vision_angle = 360;
+		game->map.player_pointer->vision_angle--;
+		printf("girando a la derecha desde e el raton\n");
+	}
+	first_step_x = mouse_x;
+}
+void	paint_move_player(mlx_image_t		*map_player, t_player *player)
+{
+	clean_image(map_player);
+	bresenham_algorithm(map_player, 
+		//LA DIRECION:
+		//p1_player
+		player->pos.x * (size_of_tile) + (size_of_tile / 2),
+		player->pos.y * (size_of_tile) + (size_of_tile / 2),
+
+		//p2_player
+		player->end.x * size_of_tile + (size_of_tile / 2) + 1,
+		player->end.y * size_of_tile + (size_of_tile / 2) + 1);
+	// rescrivir con las nuevas coordinadas:
+	paint_tile(map_player, player->pos.x, player->pos.y, 0xFF6600FF);
+}
+
+
+void	player_movements(void *params)
 {
 	t_game *game;
 	game = (t_game *)params;
 
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		game->images.map_player->instances->y--;
+		game->player.pos.y--;
+		game->player.end.y--;
 	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		game->images.map_player->instances->y++;
+		game->player.pos.y++;
+		game->player.end.y++;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
-		game->images.map_player->instances->x++;
+		game->player.pos.x++;
+		game->player.end.x++;
 	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
-		game->images.map_player->instances->x--;
+		game->player.pos.x--;
+		game->player.end.x--;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
 		if(game->map.player_pointer->vision_angle == 360)
 			game->map.player_pointer->vision_angle = 0;
 		game->map.player_pointer->vision_angle++;
-		printf("ANGLE VISION TO LEFT: %d\n", game->map.player_pointer->vision_angle);
+		game->player.end.x = game->player.pos.x + cos((game->player.vision_angle / 180.0) * 3.14) * LIMIT_FOV;
+		game->player.end.y = game->player.pos.y + sin((game->player.vision_angle / 180.0) * 3.14) * LIMIT_FOV;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 	{
+		memset(game->images.map_player->pixels, 0, game->images.map_player->width * game->images.map_player->height * 4);
 		if(game->map.player_pointer->vision_angle == 0)
 			game->map.player_pointer->vision_angle = 360;
 		game->map.player_pointer->vision_angle--;
-		printf("ANGLE VISION TO LEFT: %d\n", game->map.player_pointer->vision_angle);
+		game->player.end.x = game->player.pos.x + cos((game->player.vision_angle / 180.0) * 3.14) * 10;
+		game->player.end.y = game->player.pos.y + sin((game->player.vision_angle / 180.0) * 3.14) * 10;
 	}
-	int mouse_x = 0;
-	int mouse_y = 0;
-	mlx_get_mouse_pos(game->mlx, &mouse_x, &mouse_y);
-	printf("mouse_x %d, mouse_y %d\n", mouse_x, mouse_y);
+	paint_move_player(game->images.map_player, &game->player);
 }
 
-void	handle_hook(mlx_key_data_t keydata, void *params)
+void	special_keys(mlx_key_data_t keydata, void *params)
 {
 	t_game *game;
 	(void)keydata;
@@ -68,8 +119,9 @@ void	init_mlx_connection(t_game *game, t_parser_map *parser_map)
 {
 	init_game_struct(game, parser_map);
 	draw_game(game);
-	mlx_key_hook(game->mlx, &handle_hook, game);
-	mlx_loop_hook(game->mlx, &movimineto_personaje, game);
+	mlx_key_hook(game->mlx, &special_keys, game);
+	mlx_loop_hook(game->mlx, &player_movements, game);
+	mlx_cursor_hook(game->mlx, &mouse_movements, game);
 	mlx_loop(game->mlx);
 }
 

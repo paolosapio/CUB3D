@@ -13,7 +13,7 @@
 
 
 
-# define LIMIT_FOV 50 //!TEMPORAL
+# define LIMIT_FOV 25 //!TEMPORAL
 
 
 /*   Errors    */

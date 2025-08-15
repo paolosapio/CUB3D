@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "libft.h"
@@ -35,7 +36,7 @@
 // 	ERROR,
 // }				t_errok;
 
-#define LIMIT_FOV 50
+#define LIMIT_FOV 25
 
 /*   STRUCTURAS   */
 
@@ -71,6 +72,7 @@ mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_pinocchio_nose(mlx_t *mlx, t_map *map);
+void		paint_tile(mlx_image_t	*img_minimap, int x_map, int y_map, int32_t color);
 
 //get_next_line.c
 
@@ -96,8 +98,7 @@ t_map	init_map(void);
 void	destroy_images(mlx_t *mlx, t_images *images);
 
 //bresenham.c
-void	bresenham_algorithm(mlx_image_t *player, int x1, int y1, int x2, int y2);
-
+void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, float y2);
 
 
 #endif

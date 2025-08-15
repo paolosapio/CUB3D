@@ -1,18 +1,17 @@
 #include "cub3d.h"
 
-void	bresenham_algorithm(mlx_image_t *player, int x1, int y1, int x2, int y2)
+void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, float y2)
 {
-
-	int dy = y2 - y1;
-	int dx = x2 - x1;
+	float dy = y2 - y1;
+	float dx = x2 - x1;
 
 	//avance inclinado
-	int inc_y_i;
-	int inc_x_i;
+	float inc_y_i;
+	float inc_x_i;
 
 	//avance recto
-	int inc_y_r;
-	int inc_x_r;
+	float inc_y_r;
+	float inc_x_r;
 
 	if (dy >= 0)
 		inc_y_i = 1;
@@ -39,21 +38,21 @@ void	bresenham_algorithm(mlx_image_t *player, int x1, int y1, int x2, int y2)
 	{
 		inc_x_r = 0;
 		inc_y_r = inc_y_i;
-		int aux = dx; dx = dy; dy = aux;
+		float aux = dx; dx = dy; dy = aux;
 	}
 
-	int x = x1;
-	int y = y1;
+	float x = x1;
+	float y = y1;
 
-	int avanceR = (2 * dy);
-	int avance = (avanceR - dx);
-	int avanceI = (avance - dx);
+	float avanceR = (2 * dy);
+	float avance = (avanceR - dx);
+	float avanceI = (avance - dx);
 	int color = 0xFF0000FF;
 	//int red = 0x01010000;
 	// printf("EN BRESENHAM!!! x = %d, x2 = %d, y = %d, y2 = %d\n", x, x2, y, y2);
 	while (x != x2 && y != y2)
 	{
-		if (x < 0 || y < 0)
+		if (x < 0 || y < 0 || x >= player->width || y >= player->height)
 			break;
 		mlx_put_pixel(player, x, y, color);
 		// printf("x = %d, y = %d\n", x, y);
