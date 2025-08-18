@@ -1,11 +1,11 @@
+#ifndef T_MAP_H
+# define T_MAP_H
 
-#ifndef MAP_H
-# define MAP_H
-
-# include "player.h"
+# include "t_player.h"
 
 typedef struct	s_map
 {
+	int			size_of_tile;
 	int			longest_line;
 	int			map_len;
 	char		**array;

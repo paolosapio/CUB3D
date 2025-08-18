@@ -6,14 +6,15 @@
 #include <stdbool.h>
 #include <math.h>
 
-#include "../MLX42/include/MLX42/MLX42.h"
 #include "libft.h"
-#include "map.h"
-#include "player.h"
+#include "t_map.h"
+#include "t_player.h"
+#include "t_game.h"
 #include "../SRCS/PARSER/parser.h"
+#include "../SRCS/INIT_GAME/init_game.h"
+#include "../SRCS/INPUT_KEYS/input_keys.h"
 
-#define WIDTH 640
-#define HEIGHT 480
+
 
 /*   COLORS PRINTF  */
 
@@ -26,52 +27,8 @@
 #define WHITE "\033[1;37m"
 
 
-#define PLAYER_MAP_COLOR 0xFF6600FF //naranja
-
-#define OFF 0.1
-#define ON 0.3
-//habria que ponerlo en otra estrucutra!
-#define size_of_tile 10
-
-#define M_PI 3.14159265358979323846
-
-// typedef enum	e_error_ok
-// {
-// 	OK,
-// 	ERROR,
-// }				t_errok;
-
-#define LIMIT_FOV 10
-
-/*   STRUCTURAS   */
-
-
-typedef struct	s_images
-{
-	mlx_image_t		*sky;
-	mlx_image_t		*floor;
-	mlx_image_t		*mirilla;
-	mlx_image_t		*minimap;
-	mlx_image_t		*map_texture_N;
-	mlx_image_t		*map_texture_S;
-	mlx_image_t		*map_texture_E;
-	mlx_image_t		*map_texture_O;
-	mlx_image_t		*map_player;
-}				t_images;
-
-typedef struct	s_game
-{
-	t_images	images; 
-	t_map		map;
-	t_player	player;
-	mlx_t		*mlx;
-}				t_game;
-
-
-
 //create_images.c
 
-void		draw_game(t_game *game);
 mlx_image_t	*create_sky(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);

@@ -9,7 +9,7 @@
  
 # include <stdio.h>
 # include "libft.h"
-# include "../../INC/map.h"
+# include "../../INC/t_map.h"
 
 
 

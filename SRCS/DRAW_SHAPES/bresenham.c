@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "draw_shapes.h"
 
 void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, float y2)
 {

@@ -16,6 +16,14 @@
         "map": "c",
         "system_error": "c",
         "mlx42_int.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "t_game.h": "c",
+        "init_game.h": "c",
+        "t_player.h": "c",
+        "t_coordinate.h": "c",
+        "t_map.h": "c",
+        "input_keys.h": "c",
+        "t_images.h": "c",
+        "draw_shapes.h": "c"
     }
 }

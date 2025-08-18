@@ -4,6 +4,8 @@
 # include "t_coordinate.h"
 # include "t_player_movements.h"
 
+#define PLAYER_MAP_COLOR 0xFF6600FF //naranja
+
 typedef struct			s_player
 {
 	//t_vector	pos;
