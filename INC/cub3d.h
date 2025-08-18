@@ -28,7 +28,7 @@
 //habria que ponerlo en otra estrucutra!
 #define size_of_tile 10
 
-
+#define M_PI 3.14159265358979323846
 
 // typedef enum	e_error_ok
 // {
@@ -36,7 +36,7 @@
 // 	ERROR,
 // }				t_errok;
 
-#define LIMIT_FOV 25
+#define LIMIT_FOV 10
 
 /*   STRUCTURAS   */
 

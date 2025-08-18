@@ -52,6 +52,31 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 	paint_move_player(game->images.map_player, &game->player);
 }
 
+void	change_player_rotation(t_player *player, int new_vision_angle)
+{
+	if(new_vision_angle == 0)
+		new_vision_angle = 360;
+	else if (new_vision_angle == 360)
+		new_vision_angle = 0;
+	
+	player->vision_angle = new_vision_angle;
+
+	printf("PLAYER POSITION: x: %d, y: %d\n", player->pos.x, player->pos.y);
+	printf("ANGLE_VISION: %d - %f\n", player->vision_angle, (player->vision_angle / 180.0) * 3.14);
+	printf("pos_y = %d, pos_x = %d. cos(angle) = %f | %d, sin(angle) = %f | %d\n", player->end.y,
+		player->end.x,
+		cos((player->vision_angle / 180.0) * 3.14) * LIMIT_FOV,
+		(int)(cos((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV), 
+		sin((player->vision_angle / 180.0) * 3.14) * LIMIT_FOV,
+		(int)(sin((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV));
+
+	printf("La suma gigantérrima de x da: %d\n", player->pos.x + (int)(-cos((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV));
+	printf("La suma gigantérrima de y da: %d\n", player->pos.y + (int)(-sin((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV));
+	player->end.x = player->pos.x + (int)(-cos((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV);
+	player->end.y = player->pos.y + (int)(-sin((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV);
+	printf("-->> pos_y = %d, pos_x = %d\n", player->end.y,
+		player->end.x);
+}
 
 void	player_movements(void *params)
 {
@@ -80,20 +105,11 @@ void	player_movements(void *params)
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
-		if(game->map.player_pointer->vision_angle == 360)
-			game->map.player_pointer->vision_angle = 0;
-		game->map.player_pointer->vision_angle++;
-		game->player.end.x = game->player.pos.x + cos((game->player.vision_angle / 180.0) * 3.14) * LIMIT_FOV;
-		game->player.end.y = game->player.pos.y + sin((game->player.vision_angle / 180.0) * 3.14) * LIMIT_FOV;
+		change_player_rotation(&game->player, game->player.vision_angle + 1);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 	{
-		memset(game->images.map_player->pixels, 0, game->images.map_player->width * game->images.map_player->height * 4);
-		if(game->map.player_pointer->vision_angle == 0)
-			game->map.player_pointer->vision_angle = 360;
-		game->map.player_pointer->vision_angle--;
-		game->player.end.x = game->player.pos.x + cos((game->player.vision_angle / 180.0) * 3.14) * 10;
-		game->player.end.y = game->player.pos.y + sin((game->player.vision_angle / 180.0) * 3.14) * 10;
+		change_player_rotation(&game->player, game->player.vision_angle - 1);
 	}
 	paint_move_player(game->images.map_player, &game->player);
 }

@@ -42,5 +42,6 @@ int	str_map_encasketeitor(t_parser_map *parser_map, t_map *map, int fd)
 
 	for (int i = 0; map->array[i]; i++)
 		printf("%s", map->array[i]);
+	printf("\n");
 	return (OK);
 }
