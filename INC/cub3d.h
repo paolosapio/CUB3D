@@ -25,6 +25,11 @@
 #define ORANG "\033[1;33m"
 #define WHITE "\033[1;37m"
 
+
+#define PLAYER_MAP_COLOR 0xFF6600FF //naranja
+
+#define OFF 0.1
+#define ON 0.3
 //habria que ponerlo en otra estrucutra!
 #define size_of_tile 10
 
@@ -72,8 +77,7 @@ mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_pinocchio_nose(mlx_t *mlx, t_map *map);
-void		paint_tile(mlx_image_t	*img_minimap, int x_map, int y_map, int32_t color);
-
+void	paint_tile(mlx_image_t	*img_minimap, float x_map, float y_map, int32_t color);
 //get_next_line.c
 
 char			*get_next_line(int fd);

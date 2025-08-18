@@ -1,5 +1,15 @@
 #include "cub3d.h"
 
+void	init_game(t_game *game, t_parser_map *parser_map)
+{
+	//INIT_GAME
+	init_game_struct(game, parser_map);
+	draw_game(game);
+
+	//USER_INPUT
+
+}
+
 void init_game_struct(t_game *game, t_parser_map *parser_map)
 {
 //	t_player *player;

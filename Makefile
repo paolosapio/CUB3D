@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = cc
 
-CFLAGS	 =	-Wextra -Wall #-Werror 
+CFLAGS	 =	-Wextra -Wall -Werror 
 CFLAGS	+= -I INC
 CFLAGS	+= -I libft
 #CFLAGS	+= -O3 #-> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS

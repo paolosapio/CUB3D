@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:09:48 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/08/15 21:00:49 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:25:32 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 // 	}
 // }
 
-void	paint_tile(mlx_image_t	*img_minimap, int x_map, int y_map, int32_t color)
+void	paint_tile(mlx_image_t	*img_minimap, float x_map, float y_map, int32_t color)
 {
 	int	x;
 	int	y;
@@ -50,7 +50,7 @@ mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map)
 	mlx_image_t	*map_player;
 
 	map_player = mlx_new_image(mlx, map->longest_line * size_of_tile, map->map_len * size_of_tile);
-	paint_tile(map_player, map->player_pointer->pos.x, map->player_pointer->pos.y, 0xFF6600FF);
+	paint_tile(map_player, map->player_pointer->pos.x, map->player_pointer->pos.y, PLAYER_MAP_COLOR);
 	bresenham_algorithm(map_player, 
 	//LA DIRECION:
 		//p1_player

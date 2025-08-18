@@ -10,8 +10,8 @@ typedef struct	s_fcoor
 
 typedef struct	s_coor
 {
-	int x;
-	int y;
+	float x;
+	float y;
 }				t_coor;
 
 typedef  t_coor t_vector;
@@ -21,6 +21,5 @@ typedef struct	s_segment
 	t_coor	start;
 	t_coor	end;
 }				t_segment;
-
 
 #endif
