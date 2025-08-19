@@ -2,16 +2,18 @@
 #include "input_keys.h"
 #include "libft.h"
 
-void	move_player(t_player *player)
-{
-	player->pos.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-	player->pos.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-}
-
 void	move_line_direction(t_player *player)
 {
 	player->end.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
 	player->end.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
+}
+
+void	move_player(t_player *player)
+{		
+	player->pos.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
+	player->pos.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
+	move_line_direction(player);
+
 }
 
 void	clean_image(mlx_image_t		*image)
@@ -58,10 +60,10 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		game->images.minimap->enabled -= 1;
 		game->images.map_player->enabled -= 1;
 	}
-	// if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
-	// 	{
-
-	// 	}
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
+		{
+			game->player.key_is_released = true;
+		}
 }
 
 #define MOUSE_LIMIT_RANGE 50
@@ -78,8 +80,6 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 		mlx_set_mouse_pos(game->mlx, WIDTH - 51, HEIGHT / 2);
 	if (mouse_y <= MOUSE_LIMIT_RANGE || mouse_y >= HEIGHT - MOUSE_LIMIT_RANGE)
 		mlx_set_mouse_pos(game->mlx, mouse_x, HEIGHT / 2);
-
-	// printf("CENTER: %d-%d || MOUSEX: %f, MOUSEY: %f\n",WIDTH / 2, HEIGHT / 2, mouse_x, mouse_y);
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	if (mouse_x < first_step_x)
 	{
@@ -93,20 +93,50 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 	paint_direction_player(game->images.map_player, &game->player, game->map.size_of_tile);
 }
 
+bool is_possible_move(t_player player, t_map map)
+{
+	int	x;
+	int y;
+
+	x = player.pos.x;
+	y = player.pos.y;
+	printf("%f - %f\n", player.pos.x, player.pos.y);
+	x -= (cos((player.vision_angle / 180) * M_PI) / 10) * player.speed;
+	y -= (sin((player.vision_angle / 180) * M_PI) / 10) * player.speed;
+	printf("%d - %d\n\n", x, y);
+	if (map.array[y + 1][x + 1] == '1')
+		return (false);
+	return (true);
+
+}	
+
 void	player_movements(void *params)
 {
+	static float	tire = 1;
 	t_game *game;
 	game = (t_game *)params;
-	//game->player.vision_angle
 	game->player.speed = NORMAL;
+	if (game->player.key_is_released == true)
+	{
+		tire = tire - 0.09;
+		game->player.speed = NORMAL + tire;
+		if (is_possible_move(game->player, game->map) == true)
+			move_player(&game->player);
+		if(tire < 0)
+		{
+			game->player.key_is_released = false;
+			tire = 1;
+		}
+	}
+
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
 	{
 		game->player.speed = TURBO;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		move_player(&game->player);
-		move_line_direction(&game->player);
+		if (is_possible_move(game->player, game->map) == true)
+			move_player(&game->player);
 	}
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
