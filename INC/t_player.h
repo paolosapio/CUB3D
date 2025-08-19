@@ -13,6 +13,7 @@ typedef struct			s_player
 	t_coor				end;
 	float				vision_angle;
 	t_player_movements	movement;
+	float				speed;
 }						t_player;
 
 #endif

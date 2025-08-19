@@ -1,5 +1,11 @@
 #include "draw_shapes.h"
 
+#include <stdio.h>
+
+/**
+ * This function implements the bresenham algorithm to draw lines
+ */
+
 void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, float y2)
 {
 	//printf("ENTRAMOS A BRESENHAMªªªª\n");
@@ -16,24 +22,28 @@ void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, floa
 	float inc_y_r;
 	float inc_x_r;
 
-	if (dy >= 0)
+	// Determinar si el eje x e y aumenta o disminuye.
+	if (dy > 0)
 		inc_y_i = 1;
-	else
+	else if (dy < 0)
 	{
 		dy = -dy;
 		inc_y_i = -1;
 	}
+	else
+		inc_y_i = 0;
 
 	if (dx >= 0)
 		inc_x_i = 1;
-	else
+	else if (dx < 0)
 	{
 		dx = -dx;
 		inc_x_i = -1;
 	}
+	else
+		inc_x_i = 0;
 	//printf("avances inclinados: inc_x_i = %f, inc_y_i = %f\n", inc_x_i, inc_y_i);
 	//printf("updated: dy = %f, dx = %f\n", dy, dx);
-
 
 	if (dx >= dy)
 	{
@@ -44,6 +54,7 @@ void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, floa
 	{
 		inc_x_r = 0;
 		inc_y_r = inc_y_i;
+		//printf("SE DA ESTE CASO!!!!\n");
 		float aux = dx; dx = dy; dy = aux;
 	}
 	//printf("avances rectos: inc_x_r = %f, inc_y_r %f\n", inc_x_r, inc_y_r);
@@ -62,15 +73,15 @@ void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, floa
 	//printf("----------------------------------------\n");
 	while (x != x2 || y != y2)
 	{
+		//printf("x = %f, y = %f\n", x, y);
+		//printf("avance = %f, avanceR = %f, avanceI = %f\n", avance, avanceR, avanceR);
+		//printf("inc_x_r = %f, inc_y_r = %f, inc_x_i = %f, inc_y_i = %f\n", inc_x_r, inc_y_r, inc_x_i, inc_y_i);
 		if (x < 0 || y < 0 || x >= player->width || y >= player->height)
 		{
 			//printf("hora de salir del bucle mi pana\n");
 			break;
 		}
 		mlx_put_pixel(player, x, y, color);
-		//printf("x = %f, y = %f\n", x, y);
-		//printf("avance = %f, avanceR = %f, avanceI = %f\n", avance, avanceR, avanceR);
-		//printf("inc_x_r = %f, inc_y_r = %f, inc_x_i = %f, inc_y_i = %f\n", inc_x_r, inc_y_r, inc_x_i, inc_y_i);
 		if (avance >= 0)
 		{
 			//printf("avance >= 0\n\n");
@@ -87,6 +98,6 @@ void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, floa
 		}
 		//printf("----------------------------------------\n");
 	}
-	//printf("\n\n");
+	////printf("\n\n");
 	//exit (99);
 }

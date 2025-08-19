@@ -5,9 +5,9 @@
 # include "../DRAW_SHAPES/draw_shapes.h"
 # include <math.h>
 
-# define SLOW 0.07
-# define NORMAL 0.1
-# define TURBO 0.3
+# define SLOW 0.5
+# define NORMAL 1
+# define TURBO 2
 
 # define M_PI 3.14159265358979323846
 

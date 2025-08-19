@@ -2,6 +2,18 @@
 #include "input_keys.h"
 #include "libft.h"
 
+void	move_player(t_player *player)
+{
+	player->pos.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
+	player->pos.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
+}
+
+void	move_line_direction(t_player *player)
+{
+	player->end.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
+	player->end.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
+}
+
 void	clean_image(mlx_image_t		*image)
 {
 	ft_memset(image->pixels, 0, image->width * image->height * RGBA_SIZE);
@@ -39,13 +51,17 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	t_game *game;
 	(void)keydata;
 	game = (t_game *)params;
-	if(mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
 		mlx_close_window(game->mlx);
-	if(mlx_is_key_down(game->mlx, MLX_KEY_M) == true)
+	if (mlx_is_key_down(game->mlx, MLX_KEY_M) == true)
 	{
 		game->images.minimap->enabled -= 1;
 		game->images.map_player->enabled -= 1;
 	}
+	// if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
+	// 	{
+
+	// 	}
 }
 
 #define MOUSE_LIMIT_RANGE 50
@@ -81,32 +97,40 @@ void	player_movements(void *params)
 {
 	t_game *game;
 	game = (t_game *)params;
-	float	speed;
-
-	speed = SLOW;
+	//game->player.vision_angle
+	game->player.speed = NORMAL;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
 	{
-		speed = TURBO;
+		game->player.speed = TURBO;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		game->player.pos.y-=speed;
-		game->player.end.y-=speed;
+		move_player(&game->player);
+		move_line_direction(&game->player);
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		game->player.pos.y+=speed;
-		game->player.end.y+=speed;
+		game->player.pos.y += (sin((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
+		game->player.pos.x += (cos((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
+	
+		game->player.end.y += (sin((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
+		game->player.end.x += (cos((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
-		game->player.pos.x+=speed;
-		game->player.end.x+=speed;
+		game->player.pos.y += (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
+		game->player.pos.x += (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
+	
+		game->player.end.y += (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
+		game->player.end.x += (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
-		game->player.pos.x-=speed;
-		game->player.end.x-=speed;
+		game->player.pos.y -= (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
+		game->player.pos.x -= (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
+	
+		game->player.end.y -= (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
+		game->player.end.x -= (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
