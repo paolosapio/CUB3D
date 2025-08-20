@@ -2,12 +2,6 @@
 #ifndef T_COORDINATE_H
 # define T_COORDINATE_H
 
-typedef struct	s_fcoor
-{
-	float	x;
-	float	y;
-}				t_fcoor;
-
 typedef struct	s_coor
 {
 	float x;

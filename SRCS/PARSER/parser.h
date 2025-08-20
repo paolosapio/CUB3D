@@ -60,29 +60,36 @@ typedef enum	e_error_ok
 t_parser_map	parser(char *map_path, t_map *map);
 
 //get_map_info.c
+
 void	get_map_info(t_map map);
 
 //check_meta_map.c
+
 int		line_checkeitor(char *line_map_to_check, t_map *map, t_parser_map *parser_map, int fd);
 void	allocate_map_size(char *line_map_to_check, t_map *map, int fd);
 
 // check_map.c
+
 void	check_map(char *path_map, t_parser_map *parser_map, t_map *map);
 void	check_valid_map(t_parser_map *parser_map, t_map *map);
 
 //check_line.c
+
 t_errok	is_empty_line(char *line);
 int		is_valid_line(char **map, int current);
 t_errok	check_first_line_map(char *line_map_to_check);
 
 //check_file.c
+
 t_errok	check_file_extension(char *path_map);
 
 //destroy_parser_map.c
+
 void	destroy_parser_map(t_parser_map *parser_map);
 void	destroy_map(t_map *map);
 
 //map_encasketeitor.c
+
 int		str_map_encasketeitor(t_parser_map *parser_map, t_map *map, int fd);
 
 #endif

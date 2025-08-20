@@ -3,7 +3,7 @@
 
 # include "t_game.h"
 # include "../PARSER/parser.h"
-# include "../DRAW_SHAPES/draw_shapes.h"
+# include "../DRAW_GAME/draw_game.h"
 
 
 //Create_images.c

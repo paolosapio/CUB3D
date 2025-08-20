@@ -6,7 +6,7 @@
 /*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/08/11 22:19:19 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/08/20 14:27:57 by ymunoz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ void	check_textures_path(t_parser_map *map)
 		exit(0);
 	}
 }
-
+/*
+HOLA
+@param map mapa
+@return ubn it
+*/
 int	line_checkeitor(char *line_map_to_check, t_map *map, t_parser_map *parser_map, int fd)
 {
 	if (is_empty_line(line_map_to_check) == true)

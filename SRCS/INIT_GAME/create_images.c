@@ -5,7 +5,7 @@ mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map)
 	mlx_image_t	*map_player;
 
 	map_player = mlx_new_image(mlx, map->longest_line * map->size_of_tile, map->map_len * map->size_of_tile);
-	paint_tile(map_player, map->player_pointer->pos.x, map->player_pointer->pos.y, PLAYER_MAP_COLOR);
+	paint_player(map_player, map->player_pointer->pos.x, map->player_pointer->pos.y, PLAYER_MAP_COLOR);
 	bresenham_algorithm(map_player, 
 	//LA DIRECION:
 		//p1_player

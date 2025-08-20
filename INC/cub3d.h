@@ -6,11 +6,9 @@
 #include <stdbool.h>
 #include <math.h>
 
-#include "libft.h"
 #include "t_map.h"
 #include "t_player.h"
 #include "t_game.h"
-#include "../SRCS/PARSER/parser.h"
 #include "../SRCS/INIT_GAME/init_game.h"
 #include "../SRCS/INPUT_KEYS/input_keys.h"
 
@@ -55,7 +53,7 @@ void	init_images(mlx_t* mlx, t_map *map, t_images *images);
 t_map	init_map(void);
 
 
-//FUNKy_DESTROY
+//FUNKY_DESTROY
 void	destroy_images(mlx_t *mlx, t_images *images);
 
 //bresenham.c

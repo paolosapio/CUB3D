@@ -1,4 +1,4 @@
-#include "draw_shapes.h"
+#include "draw_game.h"
 
 #include <stdio.h>
 
@@ -101,3 +101,23 @@ void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, floa
 	////printf("\n\n");
 	//exit (99);
 }
+
+/*
+
+ENTRAMOS A BRESENHAMªªªª
+x1 = 485.000000 ->  x2 = 486.000000
+y1 = 385.000000 -> y2 = 286.000000
+
+dy = -99.000000, dx = 1.000000
+
+avances inclinados:
+inc_x_i = 1.000000, inc_y_i = -1.000000
+updated: dy = 99.000000, dx = 1.000000
+
+avances rectos:
+inc_x_r = 0.000000, inc_y_r -1.000000
+reupdated: dy = 1.000000, dx = 99.000000
+
+avanceR = 2.000000, avance -97.000000, avanceI 2.000000
+
+*/

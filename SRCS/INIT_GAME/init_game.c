@@ -16,7 +16,7 @@ void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 {
 	mlx_texture_t	*texture;
 
-	map->size_of_tile = 10;
+	map->size_of_tile = 30;
 	texture = mlx_load_png("PNG/mirilla.png");
 	images->mirilla = mlx_texture_to_image(mlx, texture);
 	images->minimap = create_minimap(mlx, map);

@@ -1,53 +1,8 @@
 
 #include "input_keys.h"
 #include "libft.h"
+#include "../MOVEMENTS/movements.h"
 
-void	move_line_direction(t_player *player)
-{
-	player->end.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-	player->end.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-}
-
-void	move_player(t_player *player)
-{		
-	player->pos.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-	player->pos.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-	move_line_direction(player);
-
-}
-
-void	clean_image(mlx_image_t		*image)
-{
-	ft_memset(image->pixels, 0, image->width * image->height * RGBA_SIZE);
-}
-
-void	paint_direction_player(mlx_image_t *map_player, t_player *player, int size_of_tile)
-{
-	clean_image(map_player);
-	bresenham_algorithm(map_player, 
-		//LA DIRECION:
-		//p1_player
-		player->pos.x * (size_of_tile) + (size_of_tile / 2),
-		player->pos.y * (size_of_tile) + (size_of_tile / 2),
-
-		//p2_player
-		player->end.x * size_of_tile + (size_of_tile / 2) + 1,
-		player->end.y * size_of_tile + (size_of_tile / 2) + 1);
-	// rescrivir con las nuevas coordinadas:
-	paint_tile(map_player, player->pos.x, player->pos.y, PLAYER_MAP_COLOR);
-}
-
-void	change_player_rotation(t_player *player, int new_vision_angle)
-{
-	if(new_vision_angle == 0)
-		new_vision_angle = 360;
-	else if (new_vision_angle == 360)
-		new_vision_angle = 0;
-	
-	player->vision_angle = new_vision_angle;
-	player->end.x = player->pos.x - cos((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV;
-	player->end.y = player->pos.y - sin((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV;
-}
 void	special_keys(mlx_key_data_t keydata, void *params)
 {
 	t_game *game;
@@ -74,13 +29,13 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 
 	(void)mouse_y;
 	game = (t_game *)params;
-	if (mouse_x > WIDTH - MOUSE_LIMIT_RANGE)
-		mlx_set_mouse_pos(game->mlx, 51, HEIGHT / 2);
-	else if (mouse_x <= MOUSE_LIMIT_RANGE)
-		mlx_set_mouse_pos(game->mlx, WIDTH - 51, HEIGHT / 2);
-	if (mouse_y <= MOUSE_LIMIT_RANGE || mouse_y >= HEIGHT - MOUSE_LIMIT_RANGE)
-		mlx_set_mouse_pos(game->mlx, mouse_x, HEIGHT / 2);
-	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	// if (mouse_x > WIDTH - MOUSE_LIMIT_RANGE)
+	// 	mlx_set_mouse_pos(game->mlx, 51, HEIGHT / 2);
+	// else if (mouse_x <= MOUSE_LIMIT_RANGE)
+	// 	mlx_set_mouse_pos(game->mlx, WIDTH - 51, HEIGHT / 2);
+	// if (mouse_y <= MOUSE_LIMIT_RANGE || mouse_y >= HEIGHT - MOUSE_LIMIT_RANGE)
+	// 	mlx_set_mouse_pos(game->mlx, mouse_x, HEIGHT / 2);
+	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	if (mouse_x < first_step_x)
 	{
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
@@ -93,90 +48,11 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 	paint_direction_player(game->images.map_player, &game->player, game->map.size_of_tile);
 }
 
-bool is_possible_move(t_player player, t_map map)
-{
-	int	x;
-	int y;
-
-	x = player.pos.x;
-	y = player.pos.y;
-	printf("%f - %f\n", player.pos.x, player.pos.y);
-	x -= (cos((player.vision_angle / 180) * M_PI) / 10) * player.speed;
-	y -= (sin((player.vision_angle / 180) * M_PI) / 10) * player.speed;
-	printf("%d - %d\n\n", x, y);
-	if (map.array[y + 1][x + 1] == '1')
-		return (false);
-	return (true);
-
-}	
-
-void	player_movements(void *params)
-{
-	static float	tire = 1;
-	t_game *game;
-	game = (t_game *)params;
-	game->player.speed = NORMAL;
-	if (game->player.key_is_released == true)
-	{
-		tire = tire - 0.09;
-		game->player.speed = NORMAL + tire;
-		if (is_possible_move(game->player, game->map) == true)
-			move_player(&game->player);
-		if(tire < 0)
-		{
-			game->player.key_is_released = false;
-			tire = 1;
-		}
-	}
-
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
-	{
-		game->player.speed = TURBO;
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-	{
-		if (is_possible_move(game->player, game->map) == true)
-			move_player(&game->player);
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-	{
-		game->player.pos.y += (sin((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
-		game->player.pos.x += (cos((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
-	
-		game->player.end.y += (sin((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
-		game->player.end.x += (cos((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-	{
-		game->player.pos.y += (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-		game->player.pos.x += (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-	
-		game->player.end.y += (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-		game->player.end.x += (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-	{
-		game->player.pos.y -= (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-		game->player.pos.x -= (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-	
-		game->player.end.y -= (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-		game->player.end.x -= (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-	{
-		change_player_rotation(&game->player, game->player.vision_angle - 1);
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-	{
-		change_player_rotation(&game->player, game->player.vision_angle + 1);
-	}
-	paint_direction_player(game->images.map_player, &game->player, game->map.size_of_tile);
-}
 
 void await_user_input(t_game *game)
 {
 	mlx_key_hook(game->mlx, &special_keys, game);
 	mlx_cursor_hook(game->mlx, &mouse_movements, game);
-	mlx_loop_hook(game->mlx, &player_movements, game);
+	mlx_loop_hook(game->mlx, &movements_player, game);
 	mlx_loop(game->mlx);
 }

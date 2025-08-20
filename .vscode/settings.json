@@ -24,6 +24,9 @@
         "t_map.h": "c",
         "input_keys.h": "c",
         "t_images.h": "c",
-        "draw_shapes.h": "c"
+        "draw_shapes.h": "c",
+        "movements.h": "c",
+        "draw_game.h": "c",
+        "collisions.h": "c"
     }
 }
