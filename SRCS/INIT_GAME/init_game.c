@@ -11,21 +11,24 @@ void	put_images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.minimap, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.map_player, 0, 0);
 }
-
+//!tenemos qeu separar rao desde el personaje para poder texturizarlo en el minimapa!
 void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 {
-	mlx_texture_t	*texture;
-
+	mlx_texture_t	*mirilla;
+	mlx_texture_t	*greco;
 	map->size_of_tile = 30;
-	texture = mlx_load_png("PNG/mirilla.png");
-	images->mirilla = mlx_texture_to_image(mlx, texture);
+	mirilla = mlx_load_png("PNG/mirilla.png");
+	greco = mlx_load_png("PNG/greco.png");
+	images->mirilla = mlx_texture_to_image(mlx, mirilla);
+	images->map_greco = create_player_minimap(mlx, greco);
 	images->minimap = create_minimap(mlx, map);
 	images->floor = create_floor(mlx, map);
 	images->sky = create_sky(mlx, map);
 	images->map_player = create_player_minimap(mlx, map);
 	images->minimap->enabled = true;
 	images->map_player->enabled = true;
-	mlx_delete_texture(texture);
+	mlx_delete_texture(mirilla);
+	mlx_delete_texture(greco);
 
 }
 
