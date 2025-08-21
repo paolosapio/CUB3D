@@ -1,34 +1,38 @@
 
 #include "movements.h"
 
+#define		COLLITIONS "1\n "
 
-void	move_line_direction(t_player *player)
+float	to_radians(float degrees)
 {
-	player->end.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-	player->end.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
+	return ((degrees / 180) * M_PI);
 }
 
-
-// void	move_player(t_player *player)
-// {		
-// 	player->pos.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-// 	player->pos.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-// 	move_line_direction(player);
-
-// }
-
-//// Spawnear el personaje en el centro de la casilla?
-
-void	move_player(t_player *player, t_map *map)
+void	move_line_direction(t_player *player, float sen, float cos)
 {
-	t_coor	new_player_pos;
+	player->end.y += sen * player->speed;
+	player->end.x += cos * player->speed;
+}
 
-	if (is_there_collision(*player, *map, &new_player_pos) == true)
+void	move_player(t_player *player, t_map *map, float sen, float cos)
+{
+	t_coor		new_player_pos;
+	t_int_coor	tile;
+
+	printf("x: %f y: %f\n", player->pos.x, player->pos.y);
+	new_player_pos.y = player->pos.y + sen;
+	new_player_pos.x = player->pos.x + cos;
+	printf("seno: %f, coseno: %f\n", sen, cos);
+	printf("x: %f y: %f\n", new_player_pos.x, new_player_pos.y);
+	tile.y = (int)new_player_pos.y;
+	tile.x = (int)new_player_pos.x;
+	if (map->array[tile.y][tile.x] == '\0' || ft_strchr(COLLITIONS, map->array[tile.y][tile.x]))
+	{
 		return ;
-	
+	}
 	player->pos.y = new_player_pos.y;
 	player->pos.x = new_player_pos.x;
-	move_line_direction(player);
+	move_line_direction(player, sen, cos);
 }
 
 void	change_player_rotation(t_player *player, int new_vision_angle)
@@ -49,18 +53,9 @@ void	movements_player(void *params)
 	t_game *game;
 	game = (t_game *)params;
 	game->player.speed = SLOW;
-	// if (game->player.key_is_released == true)
-	// {
-	// 	tire = tire - 0.09;
-	// 	game->player.speed = NORMAL + tire;
-	// 	if (antennas_north(game->player, game->map) == true)
-	// 		move_player(&game->player);
-	// 	if(tire < 0)
-	// 	{
-	// 		game->player.key_is_released = false;
-	// 		tire = 1;
-	// 	}
-	// }
+	float	seno;
+	float	coseno;
+
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
 	{
 		game->player.speed = TURBO;
@@ -68,19 +63,15 @@ void	movements_player(void *params)
 
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		 //if (antennas_north(game->player, game->map) == true)
-			move_player(&game->player, &game->map);
+		seno = sin(to_radians(game->player.vision_angle)) / 10 * game->player.speed;
+		coseno = cos(to_radians(game->player.vision_angle)) / 10 * game->player.speed;
+		move_player(&game->player, &game->map, -seno, -coseno);
 	}
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		// if (antennas_south(game->player, game->map) == true)
-		// {
-			game->player.pos.y += (sin((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
-			game->player.pos.x += (cos((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
-
-			game->player.end.y += (sin((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
-			game->player.end.x += (cos((game->player.vision_angle / 180) * M_PI) / 10) * game->player.speed;
-		// }
+		seno = sin(to_radians(game->player.vision_angle)) / 10 * game->player.speed;
+		coseno = cos(to_radians(game->player.vision_angle)) / 10 * game->player.speed;
+		move_player(&game->player, &game->map, +seno, +coseno);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{

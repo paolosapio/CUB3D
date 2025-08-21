@@ -30,8 +30,8 @@ typedef enum	e_player_movements
 
 //movements_player.c
 
-void	move_line_direction(t_player *player);
-void	move_player(t_player *player, t_map *map);
+void	move_line_direction(t_player *player, float sen, float cos);
+void	move_player(t_player *player, t_map *map, float sen, float cos);
 void	change_player_rotation(t_player *player, int new_vision_angle);
 void	movements_player(void *params);
 
