@@ -26,10 +26,9 @@ void	move_player(t_player *player, t_map *map, float sen, float cos)
 	printf("x: %f y: %f\n", new_player_pos.x, new_player_pos.y);
 	tile.y = (int)new_player_pos.y;
 	tile.x = (int)new_player_pos.x;
+
 	if (map->array[tile.y][tile.x] == '\0' || ft_strchr(COLLITIONS, map->array[tile.y][tile.x]))
-	{
 		return ;
-	}
 	player->pos.y = new_player_pos.y;
 	player->pos.x = new_player_pos.x;
 	move_line_direction(player, sen, cos);
@@ -52,7 +51,7 @@ void	movements_player(void *params)
 	// static float	tire = 1;
 	t_game *game;
 	game = (t_game *)params;
-	game->player.speed = SLOW;
+	game->player.speed = NORMAL;
 	float	seno;
 	float	coseno;
 
@@ -63,37 +62,27 @@ void	movements_player(void *params)
 
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		seno = sin(to_radians(game->player.vision_angle)) / 10 * game->player.speed;
-		coseno = cos(to_radians(game->player.vision_angle)) / 10 * game->player.speed;
+		seno = sin(to_radians(game->player.vision_angle + 0)) / game->map.size_of_tile * game->player.speed;
+		coseno = cos(to_radians(game->player.vision_angle + 0)) / game->map.size_of_tile * game->player.speed;
 		move_player(&game->player, &game->map, -seno, -coseno);
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-	{
-		seno = sin(to_radians(game->player.vision_angle)) / 10 * game->player.speed;
-		coseno = cos(to_radians(game->player.vision_angle)) / 10 * game->player.speed;
-		move_player(&game->player, &game->map, +seno, +coseno);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
-		// if (antennas_right(game->player, game->map) == true)
-		// {
-			game->player.pos.y += (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-			game->player.pos.x += (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-
-			game->player.end.y += (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-			game->player.end.x += (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-		// }
+		seno = sin(to_radians(game->player.vision_angle + 90)) / game->map.size_of_tile * game->player.speed;
+		coseno = cos(to_radians(game->player.vision_angle + 90)) / game->map.size_of_tile * game->player.speed;
+		move_player(&game->player, &game->map, -seno, -coseno);
+	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+	{
+		seno = sin(to_radians(game->player.vision_angle + 180)) / game->map.size_of_tile * game->player.speed;
+		coseno = cos(to_radians(game->player.vision_angle + 180)) / game->map.size_of_tile * game->player.speed;
+		move_player(&game->player, &game->map, -seno, -coseno);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
-		// if (antennas_left(game->player, game->map) == true)
-		// {
-			game->player.pos.y -= (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-			game->player.pos.x -= (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-
-			game->player.end.y -= (sin(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-			game->player.end.x -= (cos(((game->player.vision_angle - 90) / 180) * M_PI) / 10) * game->player.speed;
-		// }
+		seno = sin(to_radians(game->player.vision_angle + 270)) / game->map.size_of_tile * game->player.speed;
+		coseno = cos(to_radians(game->player.vision_angle + 270)) / game->map.size_of_tile * game->player.speed;
+		move_player(&game->player, &game->map, -seno, -coseno);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
