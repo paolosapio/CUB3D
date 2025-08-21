@@ -5,7 +5,7 @@ mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map)
 	mlx_image_t	*map_player;
 
 	map_player = mlx_new_image(mlx, map->longest_line * map->size_of_tile, map->map_len * map->size_of_tile);
-	paint_player(map_player, map->player_pointer->pos.x, map->player_pointer->pos.y, PLAYER_MAP_COLOR);
+	paint_player(map->size_of_tile, map_player, map->player_pointer->pos, PLAYER_MAP_COLOR);
 	bresenham_algorithm(map_player, 
 	//LA DIRECION:
 		//p1_player
@@ -24,6 +24,7 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 	int	x;
 	int	y;
 	int slider = 0;
+	t_int_coor coor;
 
 	mlx_image_t	*img_minimap;
 
@@ -35,12 +36,12 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 		x = -1;
 		while (map->array[y][++x])
 		{
+			coor.x = x;
+			coor.y = y;
 			if (map->array[y][x] == '1')
-			{
-				paint_tile(img_minimap, x, y, 0xFFFFFF99);
-			}
+				paint_tile(map->size_of_tile, img_minimap, coor, 0xFFFFFF99);
 			else if (ft_strchr("NSWE0", map->array[y][x]) != NULL)
-				paint_tile(img_minimap, x, y, 0x00000099);
+				paint_tile(map->size_of_tile, img_minimap, coor, 0x00000099);
 		}
 	}
 	return (img_minimap);

@@ -62,8 +62,8 @@ void	check_player(t_parser_map *parser_map, t_map *map, int x, int y)
 		error_exit_invalid_map(parser_map, map, TOO_MANY_PLAYERS);
 	if (is_around_space_ok(map, x, y) == ERROR)
 		error_exit_invalid_map(parser_map, map, INVALID_PLAYER_POSITION);
-	map->player_pointer->pos.x = x;
-	map->player_pointer->pos.y = y;
+	map->player_pointer->pos.x = x + CENTER_PLAYER;
+	map->player_pointer->pos.y = y + CENTER_PLAYER;
 	if (map->array[y][x] == 'N')
 	{
 		map->player_pointer->vision_angle = 90;

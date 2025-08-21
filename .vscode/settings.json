@@ -27,6 +27,8 @@
         "draw_shapes.h": "c",
         "movements.h": "c",
         "draw_game.h": "c",
-        "collisions.h": "c"
+        "collisions.h": "c",
+        "fcntl.h": "c",
+        "stat.h": "c"
     }
 }

@@ -17,33 +17,18 @@ void	move_line_direction(t_player *player)
 
 // }
 
-//? Spawnear el personaje en el centro de la casilla?
+//// Spawnear el personaje en el centro de la casilla?
 
 void	move_player(t_player *player, t_map *map)
 {
 	t_coor	new_player_pos;
 
-	(void)map;
-	new_player_pos.y = player->pos.y;
-	new_player_pos.x = player->pos.x;
-
-	printf("before -----> y = %f x = %f\n", new_player_pos.y, new_player_pos.x);
-
-	new_player_pos.y -= (sin((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-	new_player_pos.x -= (cos((player->vision_angle / 180) * M_PI) / 10) * player->speed;
-	
-	printf("after -----> y = %f x = %f\n", new_player_pos.y, new_player_pos.x);
-	if (map->array[(int)new_player_pos.y][(int)new_player_pos.x] == '1')
-	{
-		printf("activated!!!!!\n");
+	if (is_there_collision(*player, *map, &new_player_pos) == true)
 		return ;
-	}
-
+	
 	player->pos.y = new_player_pos.y;
 	player->pos.x = new_player_pos.x;
-
 	move_line_direction(player);
-
 }
 
 void	change_player_rotation(t_player *player, int new_vision_angle)
@@ -127,5 +112,5 @@ void	movements_player(void *params)
 	{
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
 	}
-	paint_direction_player(game->images.map_player, &game->player, game->map.size_of_tile);
+	draw_player_and_ray(game->images.map_player, &game->player, game->map.size_of_tile);
 }

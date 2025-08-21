@@ -20,11 +20,11 @@ void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 	texture = mlx_load_png("PNG/mirilla.png");
 	images->mirilla = mlx_texture_to_image(mlx, texture);
 	images->minimap = create_minimap(mlx, map);
-	images->minimap->enabled = false;
 	images->floor = create_floor(mlx, map);
 	images->sky = create_sky(mlx, map);
 	images->map_player = create_player_minimap(mlx, map);
-	images->map_player->enabled = false;
+	images->minimap->enabled = true;
+	images->map_player->enabled = true;
 	mlx_delete_texture(texture);
 
 }

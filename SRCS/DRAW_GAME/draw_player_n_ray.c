@@ -10,21 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "draw_game.h"
 
-void	paint_direction_player(mlx_image_t *map_player, t_player *player, int size_of_tile)
+void	draw_player_and_ray(mlx_image_t *map_player, t_player *player, int size_of_tile)
 {
 	clean_image(map_player);
 	bresenham_algorithm(map_player, 
 		//LA DIRECION:
 		//p1_player
-		player->pos.x * (size_of_tile) + (size_of_tile / 2),
-		player->pos.y * (size_of_tile) + (size_of_tile / 2),
+		player->pos.x * (size_of_tile),
+		player->pos.y * (size_of_tile),
 
 		//p2_player
-		player->end.x * size_of_tile + (size_of_tile / 2) + 1,
-		player->end.y * size_of_tile + (size_of_tile / 2) + 1);
+		player->end.x * size_of_tile + 1,
+		player->end.y * size_of_tile + 1);
 	// rescrivir con las nuevas coordinadas:
-	paint_player(map_player, player->pos.x, player->pos.y, PLAYER_MAP_COLOR);
-	
+	paint_player(size_of_tile, map_player, player->pos, PLAYER_MAP_COLOR);
 }

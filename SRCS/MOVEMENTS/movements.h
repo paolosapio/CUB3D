@@ -6,6 +6,7 @@
 # include <math.h>
 # include "t_game.h"
 # include "../DRAW_GAME/draw_game.h"
+# include "../COLLISIONS/collisions.h"
 
 # define M_PI 3.14159265358979323846
 

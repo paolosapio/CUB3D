@@ -32,7 +32,6 @@ mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_pinocchio_nose(mlx_t *mlx, t_map *map);
-void	paint_tile(mlx_image_t	*img_minimap, float x_map, float y_map, int32_t color);
 //get_next_line.c
 
 char			*get_next_line(int fd);
