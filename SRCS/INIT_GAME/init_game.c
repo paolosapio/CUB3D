@@ -10,15 +10,29 @@ void	put_images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 	mlx_image_to_window(game->mlx, game->images.minimap, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.map_ray, 0, 0);
+	mlx_resize_image(game->images.map_greco, game->map.size_of_tile, game->map.size_of_tile);
 	mlx_image_to_window(game->mlx, game->images.map_greco, game->player.pos.x,  game->player.pos.y);
 }
+
+int	size_of_tile_calculator(t_map *map, int longest_line)
+{
+
+	printf("long line:%d\n", longest_line);
+	printf("map_len:%d\n", longest_line);
+	if (map->longest_line > map->map_len)
+		return (HEIGHT / map->map_len);
+	return (WIDTH / longest_line );
+	//devuelve longest line dividio whiht
+
+}
+
 //!tenemos qeu separar rao desde el personaje para poder texturizarlo en el minimapa!
 void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 {
 	mlx_texture_t	*mirilla;
 	mlx_texture_t	*greco;
-
-	map->size_of_tile = 30;
+	
+	map->size_of_tile = size_of_tile_calculator(map, map->longest_line);
 	mirilla = mlx_load_png("PNG/mirilla.png");
 	greco = mlx_load_png("PNG/greco.png");
 

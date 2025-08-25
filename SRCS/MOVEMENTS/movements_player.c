@@ -47,17 +47,10 @@ void	move_player(t_player *player, t_map *map, float sen, float cos)
 		}
 		return ;
 	}
-	// if (map->array[tile.y][tile.x] == '\0' || ft_strchr(COLLITIONS, map->array[tile.y][tile.x]))
-	// {
-	// 	printf("\n---------------------------------------------\n");
-	// 	printf("tile.y = %d player->pos.y = %d\n", tile.y, (int)player->pos.y);
-	// 	printf("tile.x = %d player->pos.x = %d\n", tile.x, (int)player->pos.x);
-	// 	printf("angle_vision %% 90 al detectar colisión: %d\n", ((int)player->vision_angle % 90));
-	// 	printf("\n---------------------------------------------\n");
-	// 	player->pos.y = new_player_pos.y;
-	// 	move_line_direction(player, 0, sen);
-	// 	return ;
-	// }
+	if (map->array[tile.y][tile.x])
+	{
+		
+	}
 	player->pos.y = new_player_pos.y;
 	player->pos.x = new_player_pos.x;
 	move_line_direction(player, sen, cos);
@@ -120,6 +113,6 @@ void	movements_player(void *params)
 	{
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
 	}
-	draw_greco(game->images.map_greco, &game->player, game->map.size_of_tile);
-	draw_ray(game->images.map_ray, &game->player, game->map.size_of_tile);
+	refresh_draw_greco(game->images.map_greco, &game->player, game->map.size_of_tile);
+	refresh_draw_ray(game->images.map_ray, &game->player, game->map.size_of_tile);
 }

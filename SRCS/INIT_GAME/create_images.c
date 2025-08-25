@@ -60,7 +60,7 @@ mlx_image_t	*create_sky(mlx_t *mlx, t_map *map)
 	int	x;
 	int	y;
 	(void)map;
-	mlx_image_t	*img_sky = mlx_new_image(mlx, 640, 480 / 2);
+	mlx_image_t	*img_sky = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
 	
 	y = -1;
 	while (++y < HEIGHT / 2)
@@ -79,7 +79,7 @@ mlx_image_t	*create_floor(mlx_t *mlx, t_map *map)
 	int	x;
 	int	y;
 	
-	mlx_image_t	*img_floor = mlx_new_image(mlx, 640, 480 / 2);
+	mlx_image_t	*img_floor = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
 	(void)map;
 	y = -1;
 	while (++y < HEIGHT / 2)
