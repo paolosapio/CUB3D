@@ -13,7 +13,8 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_M) == true)
 	{
 		game->images.minimap->enabled -= 1;
-		game->images.map_player->enabled -= 1;
+		game->images.map_greco->enabled -= 1;
+		game->images.map_ray->enabled -= 1;
 	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
 		{
@@ -45,7 +46,7 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
 	}
 	first_step_x = mouse_x;
-	draw_player_and_ray(game->images.map_player, &game->player, game->map.size_of_tile);
+	draw_ray(game->images.map_ray, &game->player, game->map.size_of_tile);
 }
 
 

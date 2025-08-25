@@ -12,7 +12,16 @@
 
 #include "draw_game.h"
 
-void	draw_player_and_ray(mlx_image_t *map_player, t_player *player, int size_of_tile)
+void	draw_greco(mlx_image_t *map_greco, t_player *player, int size_of_tile)
+{
+	map_greco->instances->x = (player->pos.x * size_of_tile) - size_of_tile / 2;
+	map_greco->instances->y = (player->pos.y * size_of_tile) - size_of_tile / 2;
+
+	// rescrivir con las nuevas coordinadas:
+
+}
+
+void	draw_ray(mlx_image_t *map_player, t_player *player, int size_of_tile)
 {
 	clean_image(map_player);
 	bresenham_algorithm(map_player, 
@@ -25,5 +34,4 @@ void	draw_player_and_ray(mlx_image_t *map_player, t_player *player, int size_of_
 		player->end.x * size_of_tile + 1,
 		player->end.y * size_of_tile + 1);
 	// rescrivir con las nuevas coordinadas:
-	paint_player(size_of_tile, map_player, player->pos, PLAYER_MAP_COLOR);
 }

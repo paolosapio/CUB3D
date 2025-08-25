@@ -1,12 +1,20 @@
 #include "init_game.h"
 
-mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map)
-{
-	mlx_image_t	*map_player;
+// mlx_image_t	*create_greco_minimap(mlx_t *mlx, t_map *map)
+// {
+// 	mlx_image_t	*map_greco;
 
-	map_player = mlx_new_image(mlx, map->longest_line * map->size_of_tile, map->map_len * map->size_of_tile);
-	paint_player(map->size_of_tile, map_player, map->player_pointer->pos, PLAYER_MAP_COLOR);
-	bresenham_algorithm(map_player, 
+// 	map_greco = mlx_new_image(mlx, map->longest_line * map->size_of_tile, map->map_len * map->size_of_tile);
+// 	paint_player(map->size_of_tile, map_greco, map->player_pointer->pos, PLAYER_MAP_COLOR);
+// 	return (map_greco);
+// }
+
+mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map)
+{
+	mlx_image_t	*map_ray;
+
+	map_ray = mlx_new_image(mlx, map->longest_line * map->size_of_tile, map->map_len * map->size_of_tile);
+	bresenham_algorithm(map_ray, 
 	//LA DIRECION:
 		//p1_player
 		map->player_pointer->pos.x * (map->size_of_tile) + (map->size_of_tile / 2),
@@ -15,7 +23,7 @@ mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map)
 		//p2_player
 		map->player_pointer->end.x * map->size_of_tile + (map->size_of_tile / 2) + 1,
 		map->player_pointer->end.y * map->size_of_tile + (map->size_of_tile / 2) + 1);
-	return (map_player);
+	return (map_ray);
 }
 
 

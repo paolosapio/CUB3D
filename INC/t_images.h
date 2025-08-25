@@ -13,7 +13,7 @@ typedef struct	s_images
 	mlx_image_t	*map_texture_S;
 	mlx_image_t	*map_texture_E;
 	mlx_image_t	*map_texture_O;
-	mlx_image_t	*map_player;
+	mlx_image_t	*map_ray;
 	mlx_image_t	*map_greco;
 }				t_images;
 

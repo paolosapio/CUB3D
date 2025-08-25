@@ -67,26 +67,26 @@ void	check_player(t_parser_map *parser_map, t_map *map, int x, int y)
 	if (map->array[y][x] == 'N')
 	{
 		map->player_pointer->vision_angle = 90;
-		map->player_pointer->end.x = x;
-		map->player_pointer->end.y = y - LIMIT_FOV;
+		map->player_pointer->end.x = x + CENTER_PLAYER;
+		map->player_pointer->end.y = y + CENTER_PLAYER - LIMIT_FOV;
 	}
 	else if (map->array[y][x] == 'E')
 	{
 		map->player_pointer->vision_angle = 0;
-		map->player_pointer->end.x = x + LIMIT_FOV;
-		map->player_pointer->end.y = y;
+		map->player_pointer->end.x = x + CENTER_PLAYER  - LIMIT_FOV;
+		map->player_pointer->end.y = y + CENTER_PLAYER;
 	}
 	else if (map->array[y][x] == 'S')
 	{
 		map->player_pointer->vision_angle = 270;
-		map->player_pointer->end.x = x;
-		map->player_pointer->end.y = y + LIMIT_FOV;
+		map->player_pointer->end.x = x + CENTER_PLAYER;
+		map->player_pointer->end.y = y + CENTER_PLAYER + LIMIT_FOV;
 	}
 	else if (map->array[y][x] == 'W')
 	{
 		map->player_pointer->vision_angle = 180;
-		map->player_pointer->end.x = x - LIMIT_FOV;
-		map->player_pointer->end.y = y;
+		map->player_pointer->end.x = x + CENTER_PLAYER + LIMIT_FOV;
+		map->player_pointer->end.y = y + CENTER_PLAYER;
 	}
 }
 
