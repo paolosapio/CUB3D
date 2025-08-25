@@ -10,6 +10,11 @@ float	to_radians(float degrees)
 
 void	move_line_direction(t_player *player, float sen, float cos)
 {
+	if (sen == 0.0 || cos == 0.0)
+	{
+
+		return ;
+	}
 	player->end.y += sen * player->speed;
 	player->end.x += cos * player->speed;
 }
@@ -28,7 +33,16 @@ void	move_player(t_player *player, t_map *map, float sen, float cos)
 	tile.x = (int)new_player_pos.x;
 
 	if (map->array[tile.y][tile.x] == '\0' || ft_strchr(COLLITIONS, map->array[tile.y][tile.x]))
+	{
+		printf("\n---------------------------------------------\n");
+		printf("tile.y = %d player->pos.y = %d\n", tile.y, (int)player->pos.y);
+		printf("tile.x = %d player->pos.x = %d\n", tile.x, (int)player->pos.x);
+		printf("angle_vision %% 90 al detectar colisión: %d\n", ((int)player->vision_angle % 90));
+		printf("\n---------------------------------------------\n");
+		player->pos.x = new_player_pos.x;
+		move_line_direction(player, 0, cos);
 		return ;
+	}
 	player->pos.y = new_player_pos.y;
 	player->pos.x = new_player_pos.x;
 	move_line_direction(player, sen, cos);
@@ -48,7 +62,6 @@ void	change_player_rotation(t_player *player, int new_vision_angle)
 
 void	movements_player(void *params)
 {
-	// static float	tire = 1;
 	t_game *game;
 	game = (t_game *)params;
 	game->player.speed = NORMAL;
