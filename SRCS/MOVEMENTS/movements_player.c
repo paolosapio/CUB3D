@@ -1,7 +1,7 @@
 
 #include "movements.h"
 
-#define		COLLITIONS "1\n "
+#define		COLLITIONS "1"
 
 float	to_radians(float degrees)
 {
@@ -16,18 +16,95 @@ void	move_line_direction(t_player *player, float sen, float cos)
 	if (cos != 0.0)
 		player->end.x += cos * player->speed;
 }
+	
+	//!CON FISH MAP PETA PORQUE COMPRUEBA POSICIONES QUE NO PUEDE
+bool collision_antenas(float speed, t_coor new_player_pos, t_map *map)
+{
+
+	const float	half_tile = 0.5 * speed;
+	char		mask = 0;
+	t_int_coor	antena_7;
+	t_int_coor	antena_9;
+	t_int_coor	antena_1;
+	t_int_coor	antena_3;
+
+
+	antena_7.x = new_player_pos.x - half_tile;
+	antena_7.y = new_player_pos.y - half_tile;
+
+	antena_9.x = new_player_pos.x + half_tile;
+	antena_9.y = new_player_pos.y - half_tile;
+
+	antena_1.x = new_player_pos.x - half_tile;
+	antena_1.y = new_player_pos.y + half_tile;
+
+	antena_3.x = new_player_pos.x + half_tile;
+	antena_3.y = new_player_pos.y + half_tile;
+
+
+	// if (map->array[antena_9.y][antena_9.x] == '1')
+	// 	return (printf("999999999999999999999\n"), true);
+	// if (map->array[antena_1.y][antena_1.x] == '1')
+	// 	return (printf("111111111111111111111\n"), true);
+	// if (map->array[antena_3.y][antena_3.x] == '1')
+	// 	return (printf("333333333333333333333\n"), true);
+	// if (map->array[antena_7.y][antena_7.x] == '1')
+	// 	return (printf("777777777777777777777\n"), true);
+	
+	
+	if (map->array[antena_7.y][antena_7.x] == '1')
+	{
+		printf("777777777777777777777\n");
+		mask |= 0b1;
+	}
+	if (map->array[antena_9.y][antena_9.x] == '1')
+	{
+		printf("999999999999999999999\n");
+		mask |= 0b10;
+	}
+	if (map->array[antena_1.y][antena_1.x] == '1')
+	{
+		printf("111111111111111111111\n");
+		mask |= 0b100;
+	}
+	if (map->array[antena_3.y][antena_3.x] == '1')
+	{
+		printf("333333333333333333333\n");
+		mask |= 0b1000;
+	}
+	printf("%b -> mask\n", mask);
+	if (mask & 0b100 && mask & 0b10)
+	{
+		printf("CHOQUEEEEEEEEEEEEEEEE\n");
+		return (true);
+	}
+	if (mask & 0b1 && mask & 0b1000)
+	{
+		printf("CHOQUEEEEEEEEEEEEEEEE\n");
+		return (true);
+	}
+	return (false);
+}
+
 
 void	move_player(t_player *player, t_map *map, float sen, float cos)
 {
 	t_coor		new_player_pos;
 	t_int_coor	tile;
 
+
+
+
+
 	new_player_pos.y = player->pos.y + sen * player->speed;
 	new_player_pos.x = player->pos.x + cos * player->speed;
 	tile.y = (int)new_player_pos.y;
 	tile.x = (int)new_player_pos.x;
 
-	if (map->array[tile.y][tile.x] == '\0' || ft_strchr(COLLITIONS, map->array[tile.y][tile.x]))
+	if (collision_antenas(player->speed, new_player_pos, map) == true)
+		return ;
+
+	if (ft_strchr(COLLITIONS, map->array[tile.y][tile.x]))
 	{
 		printf("\n---------------------------------------------\n");
 		printf("tile.y = %d player->pos.y = %d\n", tile.y, (int)player->pos.y);
@@ -49,7 +126,7 @@ void	move_player(t_player *player, t_map *map, float sen, float cos)
 	}
 	if (map->array[tile.y][tile.x])
 	{
-		
+
 	}
 	player->pos.y = new_player_pos.y;
 	player->pos.x = new_player_pos.x;

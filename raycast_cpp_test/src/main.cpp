@@ -31,7 +31,6 @@ public:
 			vecMap[vCell.y * vMapSize.x + vCell.x] = 1;
 		
 		// Modify player's position
-		std::cout << fElapsedTime << std::endl;
 		if (GetKey(olc::Key::W).bHeld) vPlayer.y -= 25.0f * fElapsedTime; //speed constant * fElapsedTime. This makes it consistent by frame (?).
 		if (GetKey(olc::Key::A).bHeld) vPlayer.x -= 25.0f * fElapsedTime;
 		if (GetKey(olc::Key::S).bHeld) vPlayer.y += 25.0f * fElapsedTime;
@@ -108,6 +107,7 @@ public:
 			{
 				if (vecMap[vMapCheck.y * vMapSize.x + vMapCheck.x] == 1)
 				{
+					std::cout << "Y = " << vMapCheck.y << "X = " << vMapCheck.x << std::endl; 
 					//A collision has ocurred.
 		//			printf("collision has ocurred!\n");
 					wallFound = true;
