@@ -16,7 +16,7 @@ void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 {
 	mlx_texture_t	*mirilla;
 
-	map->size_of_tile = 10;
+	map->size_of_tile = 30;
 	mirilla = mlx_load_png("PNG/mirilla.png");
 	images->mirilla = mlx_texture_to_image(mlx, mirilla);
 	images->map_greco = create_player_minimap(mlx, map);
