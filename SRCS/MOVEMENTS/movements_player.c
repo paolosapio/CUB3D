@@ -11,23 +11,23 @@ float	to_radians(float degrees)
 void	move_line_direction(t_player *player, float sen, float cos)
 {
 	printf("vision_angle: [%f]\n", player->vision_angle);
+	printf("sen = %f - cos = %f\n", sen, cos);
 	if (sen != 0.0)
 		player->end.y += sen * player->speed;
 	if (cos != 0.0)
 		player->end.x += cos * player->speed;
 }
-	
-	//!CON FISH MAP PETA PORQUE COMPRUEBA POSICIONES QUE NO PUEDE
-bool collision_antenas(float speed, t_coor new_player_pos, t_map *map)
-{
 
-	const float	half_tile = 0.1 * speed;
+//!CON FISH MAP PETA PORQUE COMPRUEBA POSICIONES QUE NO PUEDE
+void collision_antenas(t_player *player, t_coor new_player_pos, t_map *map, float sen, float cos)
+{
+	const float	half_tile = 0.1 * player->speed;
 	char		mask = 0;
+
 	t_int_coor	antena_7;
 	t_int_coor	antena_9;
 	t_int_coor	antena_1;
 	t_int_coor	antena_3;
-
 
 	antena_7.x = new_player_pos.x - half_tile;
 	antena_7.y = new_player_pos.y - half_tile;
@@ -42,84 +42,65 @@ bool collision_antenas(float speed, t_coor new_player_pos, t_map *map)
 	antena_3.y = new_player_pos.y + half_tile;
 
 	if (map->array[antena_7.y][antena_7.x] == '1')
-	{
-		printf("777777777777777777777\n");
 		mask |= 0b1;
-	}
 	if (map->array[antena_9.y][antena_9.x] == '1')
-	{
-		printf("999999999999999999999\n");
 		mask |= 0b10;
-	}
 	if (map->array[antena_1.y][antena_1.x] == '1')
-	{
-		printf("111111111111111111111\n");
 		mask |= 0b100;
-	}
 	if (map->array[antena_3.y][antena_3.x] == '1')
-	{
-		printf("333333333333333333333\n");
 		mask |= 0b1000;
-	}
+
 	printf("%b -> mask\n", mask);
-	if ((mask & 0b110) == 0b110)
+
+	if (mask == 0b0000) //NO COLISIONES
 	{
-		printf("CHOQUEEEEEEEEEEEEEEEE\n");
-		return (true);
+		player->pos.y = new_player_pos.y;
+		player->pos.x = new_player_pos.x;
+		move_line_direction(player, sen, cos);
 	}
-	if ((mask & 0b1001) == 0b1001)
+	else if (mask == 0b11 || mask == 0b1100) // COLISIONES ARRIBA O ABAJO
 	{
-		printf("CHOQUEEEEEEEEEEEEEEEE\n");
-		return (true);
+		player->pos.x = new_player_pos.x;
+		move_line_direction(player, 0, cos);
 	}
-	return (false);
+	else if (mask == 0b101 || mask == 0b1010 ) // COLISIONES LATERALES
+	{
+		printf("COLISION LATERAL\n");
+		player->pos.y = new_player_pos.y;
+		move_line_direction(player, sen, 0);
+	}
+	else if ((mask & 0b110) == 0b110 || (mask & 0b1001) == 0b1001) // COLISIONES DIAGONALES
+	{
+		printf("COLISIONES DIAGONALES!!!!\n");
+		return ;
+	}
+	else // solo colisiona una esquina creo
+	{
+		printf("Solo colisiona una esquina pareciera ser\n");
+
+		player->pos.y = new_player_pos.y;
+		player->pos.x = new_player_pos.x;
+		move_line_direction(player, sen, cos);
+	}
 }
 
 
 void	move_player(t_player *player, t_map *map, float sen, float cos)
 {
+	static int i= 0;
+	printf("\n\n-------------------%d------------------\n", i++);
 	t_coor		new_player_pos;
 	t_int_coor	tile;
 
-
-
-
-
 	new_player_pos.y = player->pos.y + sen * player->speed;
 	new_player_pos.x = player->pos.x + cos * player->speed;
+	printf("new_player_pos.y = %f, player->pos.y = %f\n", new_player_pos.y, player->pos.y);
+	printf("new_player_pos.x = %f, player->pos.x = %f\n", new_player_pos.x, player->pos.x);
 	tile.y = (int)new_player_pos.y;
 	tile.x = (int)new_player_pos.x;
 
-	if (collision_antenas(player->speed, new_player_pos, map) == true)
-		return ;
+	collision_antenas(player, new_player_pos, map, sen, cos);
 
-	if (ft_strchr(COLLITIONS, map->array[tile.y][tile.x]))
-	{
-		printf("\n---------------------------------------------\n");
-		printf("tile.y = %d player->pos.y = %d\n", tile.y, (int)player->pos.y);
-		printf("tile.x = %d player->pos.x = %d\n", tile.x, (int)player->pos.x);
-		printf("angle_vision %% 90 al detectar colisión: %d\n", ((int)player->vision_angle % 90));
-		printf("\n---------------------------------------------\n");
-		
-		if (tile.y != (int)player->pos.y && (map->array[(int)player->pos.y][tile.x] && !ft_strchr(COLLITIONS, map->array[(int)player->pos.y][tile.x])))
-		{
-			player->pos.x = new_player_pos.x;
-			move_line_direction(player, 0, cos);
-		}
-		else if (tile.x != (int)player->pos.x && (map->array[tile.y][(int)player->pos.x] && !ft_strchr(COLLITIONS, map->array[tile.y][(int)player->pos.x])))
-		{
-			player->pos.y = new_player_pos.y;
-			move_line_direction(player, sen, 0);
-		}
-		return ;
-	}
-	if (map->array[tile.y][tile.x])
-	{
-
-	}
-	player->pos.y = new_player_pos.y;
-	player->pos.x = new_player_pos.x;
-	move_line_direction(player, sen, cos);
 }
 
 void	change_player_rotation(t_player *player, int new_vision_angle)
@@ -149,26 +130,26 @@ void	movements_player(void *params)
 
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		seno = sin(to_radians(game->player.vision_angle + 0)) / game->map.size_of_tile;
-		coseno = cos(to_radians(game->player.vision_angle + 0)) / game->map.size_of_tile;
+		seno = sin(to_radians(game->player.vision_angle + 0)) / (game->map.size_of_tile / 2);
+		coseno = cos(to_radians(game->player.vision_angle + 0)) / (game->map.size_of_tile / 2);
 		move_player(&game->player, &game->map, -seno, -coseno);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
-		seno = sin(to_radians(game->player.vision_angle + 90)) / game->map.size_of_tile;
-		coseno = cos(to_radians(game->player.vision_angle + 90)) / game->map.size_of_tile;
+		seno = sin(to_radians(game->player.vision_angle + 90)) / (game->map.size_of_tile / 2);
+		coseno = cos(to_radians(game->player.vision_angle + 90)) / (game->map.size_of_tile / 2);
 		move_player(&game->player, &game->map, -seno, -coseno);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		seno = sin(to_radians(game->player.vision_angle + 180)) / game->map.size_of_tile;
-		coseno = cos(to_radians(game->player.vision_angle + 180)) / game->map.size_of_tile;
+		seno = sin(to_radians(game->player.vision_angle + 180)) / (game->map.size_of_tile / 2);
+		coseno = cos(to_radians(game->player.vision_angle + 180)) / (game->map.size_of_tile / 2);
 		move_player(&game->player, &game->map, -seno, -coseno);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
-		seno = sin(to_radians(game->player.vision_angle + 270)) / game->map.size_of_tile;
-		coseno = cos(to_radians(game->player.vision_angle + 270)) / game->map.size_of_tile;
+		seno = sin(to_radians(game->player.vision_angle + 270)) / (game->map.size_of_tile / 2);
+		coseno = cos(to_radians(game->player.vision_angle + 270)) / (game->map.size_of_tile / 2);
 		move_player(&game->player, &game->map, -seno, -coseno);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
