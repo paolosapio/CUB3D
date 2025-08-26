@@ -16,6 +16,13 @@
 # define NORMAL 1
 # define TURBO 2
 
+typedef struct	s_trig_angle
+{
+	float	angle;
+	float	s1n;
+	float	c0s;
+}			t_trig_angle;
+
 typedef enum	e_player_movements
 {
 	PLAYER_STOP_RIGHT,

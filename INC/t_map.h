@@ -5,11 +5,12 @@
 
 typedef struct	s_map
 {
-	int			size_of_tile;
+	int			tile_size;
 	int			longest_line;
 	int			map_len;
 	char		**array;
 	t_player	*player_pointer;
+	t_coor		map_draw_offset;
 }				t_map;
 
 #endif
