@@ -21,7 +21,7 @@ void	move_line_direction(t_player *player, float sen, float cos)
 bool collision_antenas(float speed, t_coor new_player_pos, t_map *map)
 {
 
-	const float	half_tile = 0.5 * speed;
+	const float	half_tile = 0.1 * speed;
 	char		mask = 0;
 	t_int_coor	antena_7;
 	t_int_coor	antena_9;
@@ -41,17 +41,6 @@ bool collision_antenas(float speed, t_coor new_player_pos, t_map *map)
 	antena_3.x = new_player_pos.x + half_tile;
 	antena_3.y = new_player_pos.y + half_tile;
 
-
-	// if (map->array[antena_9.y][antena_9.x] == '1')
-	// 	return (printf("999999999999999999999\n"), true);
-	// if (map->array[antena_1.y][antena_1.x] == '1')
-	// 	return (printf("111111111111111111111\n"), true);
-	// if (map->array[antena_3.y][antena_3.x] == '1')
-	// 	return (printf("333333333333333333333\n"), true);
-	// if (map->array[antena_7.y][antena_7.x] == '1')
-	// 	return (printf("777777777777777777777\n"), true);
-	
-	
 	if (map->array[antena_7.y][antena_7.x] == '1')
 	{
 		printf("777777777777777777777\n");
@@ -73,12 +62,12 @@ bool collision_antenas(float speed, t_coor new_player_pos, t_map *map)
 		mask |= 0b1000;
 	}
 	printf("%b -> mask\n", mask);
-	if (mask & 0b100 && mask & 0b10)
+	if ((mask & 0b110) == 0b110)
 	{
 		printf("CHOQUEEEEEEEEEEEEEEEE\n");
 		return (true);
 	}
-	if (mask & 0b1 && mask & 0b1000)
+	if ((mask & 0b1001) == 0b1001)
 	{
 		printf("CHOQUEEEEEEEEEEEEEEEE\n");
 		return (true);

@@ -31,11 +31,10 @@ void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 {
 	mlx_texture_t	*mirilla;
 	mlx_texture_t	*greco;
-	
+
 	map->size_of_tile = size_of_tile_calculator(map, map->longest_line);
 	mirilla = mlx_load_png("PNG/mirilla.png");
 	greco = mlx_load_png("PNG/greco.png");
-
 	images->mirilla = mlx_texture_to_image(mlx, mirilla);
 	images->map_greco = mlx_texture_to_image(mlx, greco);
 	images->minimap = create_minimap(mlx, map);
@@ -56,5 +55,10 @@ void	init_game(t_game *game, t_parser_map *parser_map)
 	init_images(game->mlx, &game->map, &game->images);
 	destroy_parser_map(parser_map);
 	put_images_to_window(game);
+	mlx_get_monitor_size(0, &game->screen_width, &game->screen_height);
+	mlx_set_window_pos(game->mlx,
+		game->screen_width / 2 - WIDTH / 2,
+		game->screen_height / 2 - HEIGHT / 2
+	);
 }
 

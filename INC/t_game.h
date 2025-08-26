@@ -8,8 +8,11 @@
 
 /* SCREEN RESOLUTION */
 
-# define WIDTH 1600
-# define HEIGHT 900
+// # define WIDTH 1600
+// # define HEIGHT 900
+
+# define WIDTH 800
+# define HEIGHT 600
 
 typedef struct	s_game
 {
@@ -17,6 +20,8 @@ typedef struct	s_game
 	t_map		map;
 	t_player	player;
 	mlx_t		*mlx;
+	int			screen_width;
+	int			screen_height;
 }				t_game;
 
 #endif
