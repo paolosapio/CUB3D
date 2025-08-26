@@ -24,64 +24,59 @@ void collision_antenas(t_player *player, t_coor new_player_pos, t_map *map, floa
 	const float	half_tile = 0.1 * player->speed;
 	char		mask = 0;
 
-	t_int_coor	antena_7;
-	t_int_coor	antena_9;
-	t_int_coor	antena_1;
-	t_int_coor	antena_3;
+	// t_int_coor	antena_7;
+	// t_int_coor	antena_9;
+	// t_int_coor	antena_1;
+	// t_int_coor	antena_3;
 
-	antena_7.x = new_player_pos.x - half_tile;
-	antena_7.y = new_player_pos.y - half_tile;
+	// antena_7.x = new_player_pos.x - half_tile;
+	// antena_7.y = new_player_pos.y - half_tile;
 
-	antena_9.x = new_player_pos.x + half_tile;
-	antena_9.y = new_player_pos.y - half_tile;
+	// antena_9.x = new_player_pos.x + half_tile;
+	// antena_9.y = new_player_pos.y - half_tile;
 
-	antena_1.x = new_player_pos.x - half_tile;
-	antena_1.y = new_player_pos.y + half_tile;
+	// antena_1.x = new_player_pos.x - half_tile;
+	// antena_1.y = new_player_pos.y + half_tile;
 
-	antena_3.x = new_player_pos.x + half_tile;
-	antena_3.y = new_player_pos.y + half_tile;
+	// antena_3.x = new_player_pos.x + half_tile;
+	// antena_3.y = new_player_pos.y + half_tile;
 
-	if (map->array[antena_7.y][antena_7.x] == '1')
-		mask |= 0b1;
-	if (map->array[antena_9.y][antena_9.x] == '1')
-		mask |= 0b10;
-	if (map->array[antena_1.y][antena_1.x] == '1')
-		mask |= 0b100;
-	if (map->array[antena_3.y][antena_3.x] == '1')
-		mask |= 0b1000;
+	t_int_coor	antena_8;
+	t_int_coor	antena_6;
+	t_int_coor	antena_2;
+	t_int_coor	antena_4;
 
-	printf("%b -> mask\n", mask);
+	bool up_switch;
+	bool right_switch;
+	bool down_switch;
+	bool left_switch;
 
-	if (mask == 0b0000) //NO COLISIONES
-	{
-		player->pos.y = new_player_pos.y;
-		player->pos.x = new_player_pos.x;
-		move_line_direction(player, sen, cos);
-	}
-	else if (mask == 0b11 || mask == 0b1100) // COLISIONES ARRIBA O ABAJO
-	{
-		player->pos.x = new_player_pos.x;
-		move_line_direction(player, 0, cos);
-	}
-	else if (mask == 0b101 || mask == 0b1010 ) // COLISIONES LATERALES
-	{
-		printf("COLISION LATERAL\n");
-		player->pos.y = new_player_pos.y;
-		move_line_direction(player, sen, 0);
-	}
-	else if ((mask & 0b110) == 0b110 || (mask & 0b1001) == 0b1001) // COLISIONES DIAGONALES
-	{
-		printf("COLISIONES DIAGONALES!!!!\n");
-		return ;
-	}
-	else // solo colisiona una esquina creo
-	{
-		printf("Solo colisiona una esquina pareciera ser\n");
+	antena_8.x = new_player_pos.x;
+	antena_8.y = new_player_pos.y - half_tile;
 
-		player->pos.y = new_player_pos.y;
-		player->pos.x = new_player_pos.x;
-		move_line_direction(player, sen, cos);
-	}
+	antena_6.x = new_player_pos.x + half_tile;
+	antena_6.y = new_player_pos.y;
+
+	antena_2.x = new_player_pos.x;
+	antena_2.y = new_player_pos.y + half_tile;
+
+	antena_4.x = new_player_pos.x - half_tile;
+	antena_4.y = new_player_pos.y;
+
+
+	if (map->array[antena_8.y][antena_8.x] == '1')
+		up_switch = true;
+	if (map->array[antena_6.y][antena_6.x] == '1')
+		right_switch = true;
+	if (map->array[antena_2.y][antena_2.x] == '1')
+		down_switch = true;
+	if (map->array[antena_4.y][antena_4.x] == '1')
+		left_switch = true;
+	
+	if (up_switch || up_switch && left_switch || up_switch && right_switch)
+		printf("STOP!!!!!!!!\n");
+
+
 }
 
 
