@@ -9,6 +9,9 @@
 // 	return (map_greco);
 // }
 
+void	init_colors(t_colors *colors);
+
+
 mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map)
 {
 	mlx_image_t	*map_ray;
@@ -29,13 +32,14 @@ mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map)
 
 mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 {
-	int	x;
-	int	y;
-	int slider = 0;
-	t_int_coor coor_map;
-
+	int			x;
+	int			y;
+	int			slider = 0;
+	t_int_coor	coor_map;
 	mlx_image_t	*img_minimap;
+	t_colors	colors;
 
+	init_colors(&colors);
 	img_minimap = mlx_new_image(mlx, map->longest_line * map->tile_size, map->map_len * map->tile_size);
 	y = -1;
 	while (map->array[++y])
@@ -49,7 +53,7 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 			if (map->array[y][x] == '1')
 				paint_tile(map->tile_size, img_minimap, coor_map, 0xFFFFFF99);
 			else if (ft_strchr("NSWE0", map->array[y][x]) != NULL)
-				paint_tile(map->tile_size, img_minimap, coor_map, 0x00000099);
+				paint_tile(map->tile_size, img_minimap, coor_map, colors.red++ & 0Xffffffff);
 		}
 	}
 	return (img_minimap);
@@ -69,6 +73,25 @@ mlx_image_t	*create_sky(mlx_t *mlx, t_map *map)
 		while (++x < WIDTH)
 		{
 			mlx_put_pixel(img_sky, x, y, 0x6D8196FF);
+		}
+	}
+	return (img_sky);
+}
+
+mlx_image_t	*create_background_map(mlx_t *mlx, t_map *map)
+{
+	int	x;
+	int	y;
+	(void)map;
+	mlx_image_t	*img_sky = mlx_new_image(mlx, WIDTH, HEIGHT);
+	
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			mlx_put_pixel(img_sky, x, y, 0x00000099);
 		}
 	}
 	return (img_sky);

@@ -10,6 +10,7 @@
 
 mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
+mlx_image_t	*create_background_map(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_sky(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map);

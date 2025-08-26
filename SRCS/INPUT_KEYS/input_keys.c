@@ -6,7 +6,8 @@
 void	special_keys(mlx_key_data_t keydata, void *params)
 {
 	t_game *game;
-	(void)keydata;
+	
+	// (void)keydata;
 	game = (t_game *)params;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
 		mlx_close_window(game->mlx);
@@ -15,6 +16,7 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		game->images.minimap->enabled -= 1;
 		game->images.map_greco->enabled -= 1;
 		game->images.map_ray->enabled -= 1;
+		game->images.background_map->enabled -= 1;
 	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
 		{
