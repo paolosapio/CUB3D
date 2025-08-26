@@ -20,8 +20,9 @@ void	move_line_direction(t_player *player, float sen, float cos)
 	//!CON FISH MAP PETA PORQUE COMPRUEBA POSICIONES QUE NO PUEDE
 bool collision_antenas(float speed, t_coor new_player_pos, t_map *map)
 {
-
-	const float	half_tile = 0.5 * speed;
+	printf("size_of_tile: %d\n map->size_of_tile / 100:%f\n", map->size_of_tile, (1.0 / (float)map->size_of_tile));
+	const float	half_tile = 1.0 / (float)map->size_of_tile * speed;
+	printf("half_tile:%f\n", half_tile);
 	char		mask = 0;
 	t_int_coor	antena_7;
 	t_int_coor	antena_9;
