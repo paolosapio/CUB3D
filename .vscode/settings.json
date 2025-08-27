@@ -33,6 +33,7 @@
         "random": "c",
         "tools_generic.h": "c",
         "tools_graphics.h": "c",
-        "refresh_game.h": "c"
+        "refresh_game.h": "c",
+        "camera.h": "c"
     }
 }

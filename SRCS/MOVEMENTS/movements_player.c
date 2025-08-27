@@ -3,11 +3,6 @@
 
 #define		COLLITIONS "1"
 
-float	to_radians(float degrees)
-{
-	return ((degrees / 180) * M_PI);
-}
-
 void	move_line_direction(t_player *player, float sen, float cos)
 {
 	if (sen != 0.0)

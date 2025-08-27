@@ -11,3 +11,8 @@ int	tile_size_calculator(int map_height, int map_width)
 	}
 	return (HEIGHT / map_height);
 }
+
+float	to_radians(float degrees)
+{
+	return ((degrees / 180) * M_PI);
+}

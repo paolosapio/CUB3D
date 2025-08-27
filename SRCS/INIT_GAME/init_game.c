@@ -19,4 +19,3 @@ void	init_game(t_game *game, t_parser_map *parser_map)
 	destroy_parser_map(parser_map);
 	images_to_window(game);
 }
-
