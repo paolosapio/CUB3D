@@ -4,21 +4,15 @@
 # include "t_game.h"
 # include "../PARSER/parser.h"
 # include "../DRAW_GAME/draw_game.h"
-
-
-//Create_images.c
-
-mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_background_map(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_sky(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map);
+# include "../TOOLS_GENERICS/tools_generics.h"
 
 // init_game.c
 
 void	init_game(t_game *game, t_parser_map *parser_map);
 void	init_images(mlx_t* mlx, t_map *map, t_images *images);
-void	put_images_to_window(t_game *game);
+
+// init_texture.c
+void 	init_texture(mlx_t* mlx, t_images *images);
+
 
 #endif

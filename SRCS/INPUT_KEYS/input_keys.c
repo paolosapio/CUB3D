@@ -2,6 +2,7 @@
 #include "input_keys.h"
 #include "libft.h"
 #include "../MOVEMENTS/movements.h"
+#include "../REFRESH_GAME/refresh_game.h"
 
 void	special_keys(mlx_key_data_t keydata, void *params)
 {
@@ -17,6 +18,7 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		game->images.map_greco->enabled -= 1;
 		game->images.map_ray->enabled -= 1;
 		game->images.background_map->enabled -= 1;
+		game->images.map_sand->enabled -= 1;
 	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
 		{
@@ -50,7 +52,6 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 	first_step_x = mouse_x;
 	refresh_draw_ray(game->images.map_ray, &game->player, game->map.tile_size);
 }
-
 
 void await_user_input(t_game *game)
 {

@@ -1,16 +1,4 @@
-#include "init_game.h"
-
-// mlx_image_t	*create_greco_minimap(mlx_t *mlx, t_map *map)
-// {
-// 	mlx_image_t	*map_greco;
-
-// 	map_greco = mlx_new_image(mlx, map->longest_line * map->tile_size, map->map_len * map->tile_size);
-// 	paint_player(map->tile_size, map_greco, map->player_pointer->pos, PLAYER_MAP_COLOR);
-// 	return (map_greco);
-// }
-
-void	init_colors(t_colors *colors);
-
+#include "draw_game.h"
 
 mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map)
 {
@@ -29,17 +17,15 @@ mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map)
 	return (map_ray);
 }
 
-
-mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
+mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map, t_images *image)
 {
 	int			x;
 	int			y;
 	int			slider = 0;
 	t_int_coor	coor_map;
 	mlx_image_t	*img_minimap;
-	t_colors	colors;
-
-	init_colors(&colors);
+	
+	mlx_resize_image(image->map_sand, map->tile_size, map->tile_size);
 	img_minimap = mlx_new_image(mlx, map->longest_line * map->tile_size, map->map_len * map->tile_size);
 	y = -1;
 	while (map->array[++y])
@@ -51,9 +37,9 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 			coor_map.x = x;
 			coor_map.y = y;
 			if (map->array[y][x] == '1')
-				paint_tile(map->tile_size, img_minimap, coor_map, 0xFFFFFF99);
+				paint_tile(map->tile_size, img_minimap, coor_map, color(50,70,50,255));
 			else if (ft_strchr("NSWE0", map->array[y][x]) != NULL)
-				paint_tile(map->tile_size, img_minimap, coor_map, colors.red++ & 0Xffffffff);
+				mlx_image_to_window(mlx, image->map_sand, map->map_draw_offset.x + x * map->tile_size, map->map_draw_offset.y + y * map->tile_size);
 		}
 	}
 	return (img_minimap);

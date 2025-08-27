@@ -10,7 +10,7 @@ typedef struct s_color
 	unsigned char	blue;
 	unsigned char	alpha;
 
-}		t_colors;
+}				t_color;
 
 typedef struct	s_images
 {
@@ -25,6 +25,7 @@ typedef struct	s_images
 	mlx_image_t	*map_texture_O;
 	mlx_image_t	*map_ray;
 	mlx_image_t	*map_greco;
+	mlx_image_t	*map_sand;
 }				t_images;
 
 #endif

@@ -24,14 +24,6 @@
 #define ORANG "\033[1;33m"
 #define WHITE "\033[1;37m"
 
-
-//create_images.c
-
-mlx_image_t	*create_sky(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_player_minimap(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_pinocchio_nose(mlx_t *mlx, t_map *map);
 //get_next_line.c
 
 char			*get_next_line(int fd);

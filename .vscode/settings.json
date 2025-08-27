@@ -29,6 +29,10 @@
         "draw_game.h": "c",
         "collisions.h": "c",
         "fcntl.h": "c",
-        "stat.h": "c"
+        "stat.h": "c",
+        "random": "c",
+        "tools_generic.h": "c",
+        "tools_graphics.h": "c",
+        "refresh_game.h": "c"
     }
 }

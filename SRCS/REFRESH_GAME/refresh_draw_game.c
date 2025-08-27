@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_game.h"
+#include "refresh_game.h"
 
 void	refresh_draw_greco(mlx_image_t *map_greco, t_player *player, t_map *map)
 {

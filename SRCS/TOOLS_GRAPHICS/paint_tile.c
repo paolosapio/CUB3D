@@ -1,10 +1,11 @@
-#include "draw_game.h"
+#include "tools_graphics.h"
 #include <stdio.h>
 
 void	paint_tile(int tile_size, mlx_image_t *img_minimap, t_int_coor coor, int32_t color)
 {
 	int	x;
 	int	y;
+
 
 	y = -1;
 	if (coor.x < 0 || coor.y < 0)

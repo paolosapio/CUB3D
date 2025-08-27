@@ -1,0 +1,17 @@
+
+#ifndef GRAPHIC_TOOLS_H
+# define GRAPHIC_TOOLS_H
+
+# include "../../MLX42/include/MLX42/MLX42.h"
+# include "t_player.h"
+# include "t_game.h"
+#include "libft.h"
+
+# define RGBA_SIZE 4
+
+void			paint_tile(int tile_size, mlx_image_t *img_minimap, t_int_coor coor, int32_t color);
+void			bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, float y2);
+void			clean_image(mlx_image_t *image);
+unsigned int	color(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);
+
+#endif

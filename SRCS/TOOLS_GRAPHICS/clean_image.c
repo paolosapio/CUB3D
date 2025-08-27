@@ -1,5 +1,5 @@
 
-#include "draw_game.h"
+#include "tools_graphics.h"
 
 void	clean_image(mlx_image_t *image)
 {

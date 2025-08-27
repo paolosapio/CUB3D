@@ -7,6 +7,7 @@
 # include "t_game.h"
 # include "../DRAW_GAME/draw_game.h"
 # include "../COLLISIONS/collisions.h"
+# include "../REFRESH_GAME/refresh_game.h"
 
 # define M_PI 3.14159265358979323846
 
