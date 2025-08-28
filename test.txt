@@ -1,0 +1,916 @@
+ 111111111
+10000010001
+10000100001
+11000000011
+10100N00101
+11000000011
+10000100001
+10001010001
+ 111111111
+tile_size = 100
+.images->map_sand->instances->z = 3
+..images->map_sand->grecos->z = 58
+...images->map_sand->swku->z = 1
+pixel_offset_cos = 0.010000
+pixel_offset_sen = 0.000000
+l_screen_point.x 4.000000 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+0
+l_screen_point.x 4.010000 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+1
+l_screen_point.x 4.020000 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+2
+l_screen_point.x 4.030001 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+3
+l_screen_point.x 4.040001 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+4
+l_screen_point.x 4.050001 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+5
+l_screen_point.x 4.060001 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+6
+l_screen_point.x 4.070002 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+7
+l_screen_point.x 4.080002 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+8
+l_screen_point.x 4.090002 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+9
+l_screen_point.x 4.100002 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+10
+l_screen_point.x 4.110003 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+11
+l_screen_point.x 4.120003 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+12
+l_screen_point.x 4.130003 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+13
+l_screen_point.x 4.140003 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+14
+l_screen_point.x 4.150003 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+15
+l_screen_point.x 4.160004 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+16
+l_screen_point.x 4.170004 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+17
+l_screen_point.x 4.180004 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+18
+l_screen_point.x 4.190004 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+19
+l_screen_point.x 4.200005 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+20
+l_screen_point.x 4.210005 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+21
+l_screen_point.x 4.220005 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+22
+l_screen_point.x 4.230005 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+23
+l_screen_point.x 4.240005 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+24
+l_screen_point.x 4.250006 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+25
+l_screen_point.x 4.260006 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+26
+l_screen_point.x 4.270006 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+27
+l_screen_point.x 4.280006 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+28
+l_screen_point.x 4.290007 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+29
+l_screen_point.x 4.300007 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+30
+l_screen_point.x 4.310007 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+31
+l_screen_point.x 4.320007 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+32
+l_screen_point.x 4.330008 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+33
+l_screen_point.x 4.340008 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+34
+l_screen_point.x 4.350008 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+35
+l_screen_point.x 4.360008 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+36
+l_screen_point.x 4.370008 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+37
+l_screen_point.x 4.380009 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+38
+l_screen_point.x 4.390009 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+39
+l_screen_point.x 4.400009 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+40
+l_screen_point.x 4.410009 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+41
+l_screen_point.x 4.420010 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+42
+l_screen_point.x 4.430010 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+43
+l_screen_point.x 4.440010 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+44
+l_screen_point.x 4.450010 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+45
+l_screen_point.x 4.460011 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+46
+l_screen_point.x 4.470011 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+47
+l_screen_point.x 4.480011 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+48
+l_screen_point.x 4.490011 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+49
+l_screen_point.x 4.500011 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+50
+l_screen_point.x 4.510012 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+51
+l_screen_point.x 4.520012 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+52
+l_screen_point.x 4.530012 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+53
+l_screen_point.x 4.540012 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+54
+l_screen_point.x 4.550013 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+55
+l_screen_point.x 4.560013 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+56
+l_screen_point.x 4.570013 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+57
+l_screen_point.x 4.580013 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+58
+l_screen_point.x 4.590014 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+59
+l_screen_point.x 4.600014 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+60
+l_screen_point.x 4.610014 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+61
+l_screen_point.x 4.620014 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+62
+l_screen_point.x 4.630014 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+63
+l_screen_point.x 4.640015 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+64
+l_screen_point.x 4.650015 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+65
+l_screen_point.x 4.660015 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+66
+l_screen_point.x 4.670015 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+67
+l_screen_point.x 4.680016 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+68
+l_screen_point.x 4.690016 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+69
+l_screen_point.x 4.700016 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+70
+l_screen_point.x 4.710016 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+71
+l_screen_point.x 4.720016 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+72
+l_screen_point.x 4.730017 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+73
+l_screen_point.x 4.740017 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+74
+l_screen_point.x 4.750017 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+75
+l_screen_point.x 4.760017 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+76
+l_screen_point.x 4.770018 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+77
+l_screen_point.x 4.780018 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+78
+l_screen_point.x 4.790018 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+79
+l_screen_point.x 4.800018 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+80
+l_screen_point.x 4.810019 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+81
+l_screen_point.x 4.820019 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+82
+l_screen_point.x 4.830019 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+83
+l_screen_point.x 4.840019 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+84
+l_screen_point.x 4.850019 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+85
+l_screen_point.x 4.860020 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+86
+l_screen_point.x 4.870020 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+87
+l_screen_point.x 4.880020 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+88
+l_screen_point.x 4.890020 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+89
+l_screen_point.x 4.900021 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+90
+l_screen_point.x 4.910021 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+91
+l_screen_point.x 4.920021 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+92
+l_screen_point.x 4.930021 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+93
+l_screen_point.x 4.940022 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+94
+l_screen_point.x 4.950022 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+95
+l_screen_point.x 4.960022 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+96
+l_screen_point.x 4.970022 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+97
+l_screen_point.x 4.980022 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+98
+l_screen_point.x 4.990023 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+99
+l_screen_point.x 5.000023 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+100
+l_screen_point.x 5.010023 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+101
+l_screen_point.x 5.020023 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+102
+l_screen_point.x 5.030024 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+103
+l_screen_point.x 5.040024 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+104
+l_screen_point.x 5.050024 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+105
+l_screen_point.x 5.060024 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+106
+l_screen_point.x 5.070024 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+107
+l_screen_point.x 5.080025 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+108
+l_screen_point.x 5.090025 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+109
+l_screen_point.x 5.100025 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+110
+l_screen_point.x 5.110025 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+111
+l_screen_point.x 5.120026 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+112
+l_screen_point.x 5.130026 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+113
+l_screen_point.x 5.140026 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+114
+l_screen_point.x 5.150026 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+115
+l_screen_point.x 5.160027 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+116
+l_screen_point.x 5.170027 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+117
+l_screen_point.x 5.180027 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+118
+l_screen_point.x 5.190027 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+119
+l_screen_point.x 5.200027 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+120
+l_screen_point.x 5.210028 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+121
+l_screen_point.x 5.220028 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+122
+l_screen_point.x 5.230028 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+123
+l_screen_point.x 5.240028 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+124
+l_screen_point.x 5.250029 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+125
+l_screen_point.x 5.260029 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+126
+l_screen_point.x 5.270029 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+127
+l_screen_point.x 5.280029 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+128
+l_screen_point.x 5.290030 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+129
+l_screen_point.x 5.300030 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+130
+l_screen_point.x 5.310030 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+131
+l_screen_point.x 5.320030 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+132
+l_screen_point.x 5.330030 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+133
+l_screen_point.x 5.340031 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+134
+l_screen_point.x 5.350031 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+135
+l_screen_point.x 5.360031 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+136
+l_screen_point.x 5.370031 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+137
+l_screen_point.x 5.380032 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+138
+l_screen_point.x 5.390032 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+139
+l_screen_point.x 5.400032 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+140
+l_screen_point.x 5.410032 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+141
+l_screen_point.x 5.420033 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+142
+l_screen_point.x 5.430033 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+143
+l_screen_point.x 5.440033 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+144
+l_screen_point.x 5.450033 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+145
+l_screen_point.x 5.460033 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+146
+l_screen_point.x 5.470034 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+147
+l_screen_point.x 5.480034 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+148
+l_screen_point.x 5.490034 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+149
+l_screen_point.x 5.500034 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+150
+l_screen_point.x 5.510035 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+151
+l_screen_point.x 5.520035 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+152
+l_screen_point.x 5.530035 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+153
+l_screen_point.x 5.540035 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+154
+l_screen_point.x 5.550035 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+155
+l_screen_point.x 5.560036 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+156
+l_screen_point.x 5.570036 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+157
+l_screen_point.x 5.580036 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+158
+l_screen_point.x 5.590036 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+159
+l_screen_point.x 5.600037 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+160
+l_screen_point.x 5.610037 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+161
+l_screen_point.x 5.620037 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+162
+l_screen_point.x 5.630037 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+163
+l_screen_point.x 5.640038 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+164
+l_screen_point.x 5.650038 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+165
+l_screen_point.x 5.660038 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+166
+l_screen_point.x 5.670038 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+167
+l_screen_point.x 5.680038 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+168
+l_screen_point.x 5.690039 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+169
+l_screen_point.x 5.700039 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+170
+l_screen_point.x 5.710039 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+171
+l_screen_point.x 5.720039 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+172
+l_screen_point.x 5.730040 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+173
+l_screen_point.x 5.740040 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+174
+l_screen_point.x 5.750040 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+175
+l_screen_point.x 5.760040 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+176
+l_screen_point.x 5.770041 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+177
+l_screen_point.x 5.780041 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+178
+l_screen_point.x 5.790041 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+179
+l_screen_point.x 5.800041 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+180
+l_screen_point.x 5.810041 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+181
+l_screen_point.x 5.820042 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+182
+l_screen_point.x 5.830042 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+183
+l_screen_point.x 5.840042 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+184
+l_screen_point.x 5.850042 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+185
+l_screen_point.x 5.860043 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+186
+l_screen_point.x 5.870043 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+187
+l_screen_point.x 5.880043 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+188
+l_screen_point.x 5.890043 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+189
+l_screen_point.x 5.900043 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+190
+l_screen_point.x 5.910044 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+191
+l_screen_point.x 5.920044 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+192
+l_screen_point.x 5.930044 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+193
+l_screen_point.x 5.940044 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+194
+l_screen_point.x 5.950045 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+195
+l_screen_point.x 5.960045 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+196
+l_screen_point.x 5.970045 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+197
+l_screen_point.x 5.980045 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+198
+l_screen_point.x 5.990046 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+199
+l_screen_point.x 6.000046 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+200
+l_screen_point.x 6.010046 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+201
+l_screen_point.x 6.020046 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+202
+l_screen_point.x 6.030046 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+203
+l_screen_point.x 6.040047 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+204
+l_screen_point.x 6.050047 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+205
+l_screen_point.x 6.060047 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+206
+l_screen_point.x 6.070047 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+207
+l_screen_point.x 6.080048 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+208
+l_screen_point.x 6.090048 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+209
+l_screen_point.x 6.100048 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+210
+l_screen_point.x 6.110048 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+211
+l_screen_point.x 6.120049 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+212
+l_screen_point.x 6.130049 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+213
+l_screen_point.x 6.140049 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+214
+l_screen_point.x 6.150049 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+215
+l_screen_point.x 6.160049 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+216
+l_screen_point.x 6.170050 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+217
+l_screen_point.x 6.180050 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+218
+l_screen_point.x 6.190050 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+219
+l_screen_point.x 6.200050 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+220
+l_screen_point.x 6.210051 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+221
+l_screen_point.x 6.220051 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+222
+l_screen_point.x 6.230051 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+223
+l_screen_point.x 6.240051 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+224
+l_screen_point.x 6.250051 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+225
+l_screen_point.x 6.260052 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+226
+l_screen_point.x 6.270052 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+227
+l_screen_point.x 6.280052 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+228
+l_screen_point.x 6.290052 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+229
+l_screen_point.x 6.300053 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+230
+l_screen_point.x 6.310053 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+231
+l_screen_point.x 6.320053 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+232
+l_screen_point.x 6.330053 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+233
+l_screen_point.x 6.340054 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+234
+l_screen_point.x 6.350054 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+235
+l_screen_point.x 6.360054 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+236
+l_screen_point.x 6.370054 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+237
+l_screen_point.x 6.380054 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+238
+l_screen_point.x 6.390055 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+239
+l_screen_point.x 6.400055 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+240
+l_screen_point.x 6.410055 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+241
+l_screen_point.x 6.420055 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+242
+l_screen_point.x 6.430056 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+243
+l_screen_point.x 6.440056 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+244
+l_screen_point.x 6.450056 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+245
+l_screen_point.x 6.460056 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+246
+l_screen_point.x 6.470057 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+247
+l_screen_point.x 6.480057 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+248
+l_screen_point.x 6.490057 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+249
+l_screen_point.x 6.500057 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+250
+l_screen_point.x 6.510057 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+251
+l_screen_point.x 6.520058 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+252
+l_screen_point.x 6.530058 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+253
+l_screen_point.x 6.540058 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+254
+l_screen_point.x 6.550058 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+255
+l_screen_point.x 6.560059 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+256
+l_screen_point.x 6.570059 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+257
+l_screen_point.x 6.580059 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+258
+l_screen_point.x 6.590059 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+259
+l_screen_point.x 6.600060 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+260
+l_screen_point.x 6.610060 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+261
+l_screen_point.x 6.620060 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+262
+l_screen_point.x 6.630060 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+263
+l_screen_point.x 6.640060 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+264
+l_screen_point.x 6.650061 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+265
+l_screen_point.x 6.660061 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+266
+l_screen_point.x 6.670061 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+267
+l_screen_point.x 6.680061 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+268
+l_screen_point.x 6.690062 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+269
+l_screen_point.x 6.700062 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+270
+l_screen_point.x 6.710062 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+271
+l_screen_point.x 6.720062 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+272
+l_screen_point.x 6.730062 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+273
+l_screen_point.x 6.740063 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+274
+l_screen_point.x 6.750063 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+275
+l_screen_point.x 6.760063 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+276
+l_screen_point.x 6.770063 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+277
+l_screen_point.x 6.780064 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+278
+l_screen_point.x 6.790064 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+279
+l_screen_point.x 6.800064 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+280
+l_screen_point.x 6.810064 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+281
+l_screen_point.x 6.820065 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+282
+l_screen_point.x 6.830065 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+283
+l_screen_point.x 6.840065 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+284
+l_screen_point.x 6.850065 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+285
+l_screen_point.x 6.860065 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+286
+l_screen_point.x 6.870066 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+287
+l_screen_point.x 6.880066 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+288
+l_screen_point.x 6.890066 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+289
+l_screen_point.x 6.900066 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+290
+l_screen_point.x 6.910067 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+291
+l_screen_point.x 6.920067 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+292
+l_screen_point.x 6.930067 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+293
+l_screen_point.x 6.940067 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+294
+l_screen_point.x 6.950068 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+295
+l_screen_point.x 6.960068 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+296
+l_screen_point.x 6.970068 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+297
+l_screen_point.x 6.980068 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+298
+l_screen_point.x 6.990068 | 7.000000
+l_screen_point.y 3.000000 | 3.000000
+299
+r_screen_point.x:[7.000000]
