@@ -9,6 +9,5 @@ void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 	images->map_ray = create_ray_minimap(mlx, map);
 	images->minimap->enabled = true;
 	images->map_ray->enabled = true;
-	// images->map_greco->enabled = false;
-
+	images->map_greco->enabled = true;
 }

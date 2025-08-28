@@ -47,8 +47,4 @@ t_map	init_map(void);
 //FUNKY_DESTROY
 void	destroy_images(mlx_t *mlx, t_images *images);
 
-//bresenham.c
-void	bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, float y2);
-
-
 #endif

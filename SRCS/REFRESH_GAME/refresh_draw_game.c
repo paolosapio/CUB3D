@@ -16,12 +16,6 @@ void	refresh_draw_greco(mlx_image_t *map_greco, t_player *player, t_map *map)
 {
 	map_greco->instances->x = ((player->pos.x * map->tile_size) - (map->tile_size / 2)) + map->map_draw_offset.x;
 	map_greco->instances->y = ((player->pos.y * map->tile_size) - (map->tile_size / 2)) + map->map_draw_offset.y;
-
-	// map_greco->instances->x = (player->pos.x * tile_size) - tile_size / 2;
-	// map_greco->instances->y = (player->pos.y * tile_size) - tile_size / 2;
-
-	// rescrivir con las nuevas coordinadas:
-
 }
 
 void	refresh_draw_ray(mlx_image_t *map_player, t_player *player, int tile_size)

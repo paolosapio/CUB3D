@@ -1,5 +1,6 @@
 
 #include "movements.h"
+#include "../CAMERA/camera.h"
 
 #define		COLLITIONS "1"
 
@@ -51,8 +52,8 @@ void	change_player_rotation(t_player *player, int new_vision_angle)
 		new_vision_angle = 0;
 	
 	player->vision_angle = new_vision_angle;
-	player->end.x = player->pos.x - cos((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV;
-	player->end.y = player->pos.y - sin((player->vision_angle / 180.0) * M_PI) * LIMIT_FOV;
+	player->end.x = player->pos.x - cos(to_radians(player->vision_angle)) * LIMIT_FOV;
+	player->end.y = player->pos.y - sin(to_radians(player->vision_angle)) * LIMIT_FOV;
 }
 
 void angulator_move(float vision_angle, int tile_size, t_game *game)
@@ -88,4 +89,5 @@ void	movements_player(void *params)
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
 	refresh_draw_greco(game->images.map_greco, &game->player, &game->map);
 	refresh_draw_ray(game->images.map_ray, &game->player, game->map.tile_size);
+	init_camera(game, game->player.pos, game->player.vision_angle);
 }

@@ -34,6 +34,8 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 
 	(void)mouse_y;
 	game = (t_game *)params;
+
+	//* ATRAPARATON EN VENTANA
 	// if (mouse_x > WIDTH - MOUSE_LIMIT_RANGE)
 	// 	mlx_set_mouse_pos(game->mlx, 51, HEIGHT / 2);
 	// else if (mouse_x <= MOUSE_LIMIT_RANGE)

@@ -8,10 +8,9 @@
 # include "../DRAW_GAME/draw_game.h"
 # include "../COLLISIONS/collisions.h"
 # include "../REFRESH_GAME/refresh_game.h"
+# include "../TOOLS_GENERICS/tools_generics.h"
 
-# define M_PI 3.14159265358979323846
-
-# define LIMIT_FOV 10
+# define LIMIT_FOV 1.5
 
 # define SLOW 0.5
 # define NORMAL 1
