@@ -5,7 +5,7 @@
 # include "../TOOLS_GENERICS/tools_generics.h"
 
 # define SCREEN 3 //!celdas!
-# define HALF_SCREEN 1.5 //!celdas!
+# define HALF_SCREEN  SCREEN / 2//!celdas!
 # define DISTANCE_SCREEN 1.5 //!celdas!
 
 // FOV : FIELD OF VIEW (campo visual, lo que vemos en pantalla)

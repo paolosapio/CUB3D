@@ -72,9 +72,9 @@ void	movements_player(void *params)
 	t_game *game;
 
 	game = (t_game *)params;
-	game->player.speed = NORMAL;
+	game->player.speed = NORMAL * (g_size_tile * 0.04);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
-		game->player.speed = TURBO;
+		game->player.speed = TURBO * (g_size_tile * 0.04);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 		angulator_move(game->player.vision_angle + 0, g_size_tile, game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
