@@ -28,7 +28,7 @@ void	images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.background_map, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.minimap, start_to_paint.x, start_to_paint.y);
 	mlx_image_to_window(game->mlx, game->images.map_ray, start_to_paint.x, start_to_paint.y);
-	mlx_resize_image(game->images.map_greco, game->map.tile_size, game->map.tile_size);
+	mlx_resize_image(game->images.map_greco, g_size_tile, g_size_tile);
 	mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
 
 	image_print_ordereneitor(&game->images);

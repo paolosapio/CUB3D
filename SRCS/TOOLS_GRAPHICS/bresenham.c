@@ -1,34 +1,35 @@
 #include "tools_graphics.h"
-
 #include <stdio.h>
 
 /**
  * This function implements the bresenham algorithm to draw lines
  */
 
-void bresenham_algorithm(mlx_image_t *player, int x1, int y1, int x2, int y2)
+void bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t color)
 {
-	int dx = abs(x2 - x1);
-	int dy = abs(y2 - y1);
+	p1.x =(int)(p1.x * g_size_tile);
+	p1.y = (int)(p1.y * g_size_tile);
+	p2.x = (int)(p2.x * g_size_tile);
+	p2.y = (int)(p2.y * g_size_tile);
+	int dx = abs(p2.x - p1.x);
+	int dy = abs(p2.y - p1.y);
 
-	int sx = (x1 < x2) ? 1 : -1;
-	int sy = (y1 < y2) ? 1 : -1;
+	int sx = (p1.x < p2.x) ? 1 : -1;
+	int sy = (p1.y < p2.y) ? 1 : -1;
 
 	int err = dx - dy;
 	int e2;
 
-	int x = x1;
-	int y = y1;
-
-	int color = 0xFF0000FF;  // Rojo con alfa
+	int x = p1.x;
+	int y = p1.y;
 
 	while (1)
 	{
-		if (x >= 0 && y >= 0 && x < (int)player->width && y < (int)player->height)
-			mlx_put_pixel(player, x, y, color);
+		if (x >= 0 && y >= 0 && x < (int)image->width && y < (int)image->height)
+			mlx_put_pixel(image, x, y, color);
 
-		if (x == x2 && y == y2)
-			break;
+		if (x == p2.x && y == p2.y)
+			break ;
 
 		e2 = 2 * err;
 
@@ -43,14 +44,15 @@ void bresenham_algorithm(mlx_image_t *player, int x1, int y1, int x2, int y2)
 			err += dx;
 			y += sy;
 		}
+		// printf("GRRRRRRRRRRRR\n");
 	}
 }
 
 /*
 
 ENTRAMOS A BRESENHAMªªªª
-x1 = 485.000000 ->  x2 = 486.000000
-y1 = 385.000000 -> y2 = 286.000000
+p1.x = 485.000000 ->  p2.x = 486.000000
+p1y = 385.000000 -> p2.y = 286.000000
 
 dy = -99.000000, dx = 1.000000
 

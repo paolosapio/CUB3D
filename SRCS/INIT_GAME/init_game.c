@@ -1,14 +1,15 @@
 #include "init_game.h"
 
-
 // init_map_foundations nombre provvisional de una funcion que crea datos para que el mapa sea ok
+unsigned int g_size_tile;
+
 void	init_map_foundations(t_map *map) 
 {
-	map->tile_size = tile_size_calculator(map->map_len, map->longest_line);
+	g_size_tile = g_size_tile_calculator(map->map_len, map->longest_line);
 
-	map->map_draw_offset.x = (WIDTH - map->longest_line * map->tile_size) / 2;
-	map->map_draw_offset.y = (HEIGHT - map->map_len * map->tile_size) / 2;
-	printf("tile_size = %d\n", map->tile_size);
+	map->map_draw_offset.x = (WIDTH - map->longest_line * g_size_tile) / 2;
+	map->map_draw_offset.y = (HEIGHT - map->map_len * g_size_tile) / 2;
+	printf("g_size_tile = %d\n", g_size_tile);
 }
 void	init_game(t_game *game, t_parser_map *parser_map)
 {

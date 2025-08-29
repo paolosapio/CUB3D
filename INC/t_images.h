@@ -3,15 +3,6 @@
 
 typedef struct mlx_image mlx_image_t;
 
-typedef struct s_color
-{
-	unsigned char	red;
-	unsigned char	green;
-	unsigned char	blue;
-	unsigned char	alpha;
-
-}				t_color;
-
 typedef struct	s_images
 {
 	mlx_image_t	*sky;

@@ -10,9 +10,9 @@ bool	check_diagonal_collision(char mask)
 	return (false);
 }
 
-t_antenas activate_antennas(float speed, t_coor new_pos, float tile_size)
+t_antenas activate_antennas(float speed, t_coor new_pos, float g_size_tile)
 {
-	const float	half_tile = 1.0 / tile_size * speed;
+	const float	half_tile = 1.0 / g_size_tile * speed;
 	t_antenas	antenas;
 
 	antenas.up_left.x = new_pos.x - half_tile;
@@ -32,7 +32,7 @@ bool collision_antenas(float speed, t_coor new_player_pos, t_map *map)
 	unsigned char	mask;
 	t_antenas		antenas;
 
-	antenas = activate_antennas(speed, new_player_pos, map->tile_size);
+	antenas = activate_antennas(speed, new_player_pos, g_size_tile);
 	mask = 0;
 
 	//printf("%b -> mask\n", mask);

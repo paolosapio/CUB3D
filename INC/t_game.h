@@ -11,6 +11,8 @@
 # define WIDTH 1600
 # define HEIGHT 900
 
+extern unsigned int g_size_tile;
+
 typedef struct	s_game
 {
 	t_images	images;

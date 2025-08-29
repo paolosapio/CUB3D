@@ -14,21 +14,14 @@
 
 void	refresh_draw_greco(mlx_image_t *map_greco, t_player *player, t_map *map)
 {
-	map_greco->instances->x = ((player->pos.x * map->tile_size) - (map->tile_size / 2)) + map->map_draw_offset.x;
-	map_greco->instances->y = ((player->pos.y * map->tile_size) - (map->tile_size / 2)) + map->map_draw_offset.y;
+	map_greco->instances->x = ((player->pos.x * g_size_tile) - (g_size_tile / 2)) + map->map_draw_offset.x;
+	map_greco->instances->y = ((player->pos.y * g_size_tile) - (g_size_tile / 2)) + map->map_draw_offset.y;
 }
 
-void	refresh_draw_ray(mlx_image_t *map_player, t_player *player, int tile_size)
+void	refresh_draw_ray(mlx_image_t *map_player, t_player *player, int g_size_tile)
 {
+	(void)player;
+	(void)g_size_tile;
 	clean_image(map_player);
-	bresenham_algorithm(map_player, 
-		//LA DIRECION:
-		//p1_player
-		player->pos.x * (tile_size),
-		player->pos.y * (tile_size),
-
-		//p2_player
-		player->end.x * tile_size + 1,
-		player->end.y * tile_size + 1);
 	// rescrivir con las nuevas coordinadas:
 }

@@ -4,16 +4,7 @@ mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map)
 {
 	mlx_image_t	*map_ray;
 
-	map_ray = mlx_new_image(mlx, map->longest_line * map->tile_size, map->map_len * map->tile_size);
-	bresenham_algorithm(map_ray, 
-	//LA DIRECION:
-		//p1_player
-		map->player_pointer->pos.x * (map->tile_size) + (map->tile_size / 2),
-		map->player_pointer->pos.y * (map->tile_size) + (map->tile_size / 2),
-
-		//p2_player
-		map->player_pointer->end.x * map->tile_size + (map->tile_size / 2) + 1,
-		map->player_pointer->end.y * map->tile_size + (map->tile_size / 2) + 1);
+	map_ray = mlx_new_image(mlx, map->longest_line * g_size_tile, map->map_len * g_size_tile);
 	return (map_ray);
 }
 
@@ -25,8 +16,8 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map, t_images *image)
 	t_int_coor	coor_map;
 	mlx_image_t	*img_minimap;
 	
-	mlx_resize_image(image->map_sand, map->tile_size, map->tile_size);
-	img_minimap = mlx_new_image(mlx, map->longest_line * map->tile_size, map->map_len * map->tile_size);
+	mlx_resize_image(image->map_sand, g_size_tile, g_size_tile);
+	img_minimap = mlx_new_image(mlx, map->longest_line * g_size_tile, map->map_len * g_size_tile);
 	y = -1;
 	while (map->array[++y])
 	{
@@ -37,9 +28,9 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map, t_images *image)
 			coor_map.x = x;
 			coor_map.y = y;
 			if (map->array[y][x] == '1')
-				paint_tile(map->tile_size, img_minimap, coor_map, color(50,70,50,255));
+				paint_tile(g_size_tile, img_minimap, coor_map, color(50,70,50,255));
 			else if (ft_strchr("NSWE0", map->array[y][x]) != NULL)
-				mlx_image_to_window(mlx, image->map_sand, map->map_draw_offset.x + x * map->tile_size, map->map_draw_offset.y + y * map->tile_size);
+				mlx_image_to_window(mlx, image->map_sand, map->map_draw_offset.x + x * g_size_tile, map->map_draw_offset.y + y * g_size_tile);
 		}
 	}
 	return (img_minimap);

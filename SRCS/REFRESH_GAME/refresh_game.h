@@ -12,6 +12,6 @@
 # define RGBA_SIZE 4
 
 void	refresh_draw_greco(mlx_image_t *map_greco, t_player *player, t_map *map);
-void	refresh_draw_ray(mlx_image_t *map_player, t_player *player, int tile_size);
+void	refresh_draw_ray(mlx_image_t *map_player, t_player *player, int g_size_tile);
 
 #endif

@@ -9,9 +9,8 @@
 
 # define RGBA_SIZE 4
 
-void			paint_tile(int tile_size, mlx_image_t *img_minimap, t_int_coor coor, int32_t color);
-void			bresenham_algorithm(mlx_image_t *player, int x1, int y1, int x2, int y2);
-//void			bresenham_algorithm(mlx_image_t *player, float x1, float y1, float x2, float y2);
+void			paint_tile(int g_size_tile, mlx_image_t *img_minimap, t_int_coor coor, int32_t color);
+void			bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t color);
 void			clean_image(mlx_image_t *image);
 unsigned int	color(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);
 

@@ -21,6 +21,8 @@ typedef struct	s_camera
 }				t_camera;
 
 
-void init_camera(t_game *game, t_coor player_coor, float player_vision_angle);
+void	init_camera(t_game *game, t_coor player_coor, float player_vision_angle);
+void	photoneitor(t_game *game, t_coor l_screen_point, t_coor r_screen_point, float player_vision_angle);
+
 
 #endif

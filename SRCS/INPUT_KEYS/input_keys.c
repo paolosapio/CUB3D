@@ -52,7 +52,7 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
 	}
 	first_step_x = mouse_x;
-	refresh_draw_ray(game->images.map_ray, &game->player, game->map.tile_size);
+	refresh_draw_ray(game->images.map_ray, &game->player, g_size_tile);
 }
 
 void await_user_input(t_game *game)

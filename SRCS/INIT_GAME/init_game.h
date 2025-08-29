@@ -7,7 +7,6 @@
 # include "../TOOLS_GENERICS/tools_generics.h"
 
 // init_game.c
-
 void	init_game(t_game *game, t_parser_map *parser_map);
 void	init_images(mlx_t* mlx, t_map *map, t_images *images);
 

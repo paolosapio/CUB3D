@@ -7,7 +7,7 @@
 10000100001
 10001010001
  111111111
-tile_size = 100
+g_size_tile = 100
 .images->map_sand->instances->z = 3
 ..images->map_sand->grecos->z = 58
 ...images->map_sand->swku->z = 1

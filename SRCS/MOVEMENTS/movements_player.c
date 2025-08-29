@@ -56,14 +56,14 @@ void	change_player_rotation(t_player *player, int new_vision_angle)
 	player->end.y = player->pos.y - sin(to_radians(player->vision_angle)) * LIMIT_FOV;
 }
 
-void angulator_move(float vision_angle, int tile_size, t_game *game)
+void angulator_move(float vision_angle, int g_size_tile, t_game *game)
 {
 	t_trig_angle trig_angle;
 
 	trig_angle.angle = vision_angle;
 
-	trig_angle.s1n = sin(to_radians(vision_angle)) / tile_size;
-	trig_angle.c0s = cos(to_radians(vision_angle)) / tile_size;
+	trig_angle.s1n = sin(to_radians(vision_angle)) / g_size_tile;
+	trig_angle.c0s = cos(to_radians(vision_angle)) / g_size_tile;
 	move_player(&game->player, &game->map, -trig_angle.s1n, -trig_angle.c0s);
 }
 
@@ -76,18 +76,18 @@ void	movements_player(void *params)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
 		game->player.speed = TURBO;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-		angulator_move(game->player.vision_angle + 0, game->map.tile_size, game);
+		angulator_move(game->player.vision_angle + 0, g_size_tile, game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		angulator_move(game->player.vision_angle + 90, game->map.tile_size, game);
+		angulator_move(game->player.vision_angle + 90, g_size_tile, game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-		angulator_move(game->player.vision_angle + 180, game->map.tile_size, game);
+		angulator_move(game->player.vision_angle + 180, g_size_tile, game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		angulator_move(game->player.vision_angle + 270, game->map.tile_size, game);
+		angulator_move(game->player.vision_angle + 270, g_size_tile, game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
 	refresh_draw_greco(game->images.map_greco, &game->player, &game->map);
-	refresh_draw_ray(game->images.map_ray, &game->player, game->map.tile_size);
+	refresh_draw_ray(game->images.map_ray, &game->player, g_size_tile);
 	init_camera(game, game->player.pos, game->player.vision_angle);
 }

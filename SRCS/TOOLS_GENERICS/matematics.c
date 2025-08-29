@@ -1,7 +1,7 @@
 
 #include "tools_generics.h"
 
-int	tile_size_calculator(int map_height, int map_width)
+int	g_size_tile_calculator(int map_height, int map_width)
 {
 	if (map_width >= map_height)
 	{
