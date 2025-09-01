@@ -25,3 +25,4 @@ void	refresh_draw_ray(mlx_image_t *map_player, t_player *player, int g_size_tile
 	clean_image(map_player);
 	// rescrivir con las nuevas coordinadas:
 }
+

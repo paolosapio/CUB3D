@@ -11,6 +11,7 @@ void	image_print_ordereneitor(t_images *images)
 	mlx_set_instance_depth(images->background_map->instances, 1);
 	mlx_set_instance_depth(images->minimap->instances , 3);
 	mlx_set_instance_depth(images->map_sand->instances, 3);
+	mlx_set_instance_depth(images->map_rock->instances, 3);
 	// mlx_set_instance_depth(images->map_ray->instances , 9);
 	// mlx_set_instance_depth(images->map_greco->instances, 5);
 }
@@ -32,7 +33,4 @@ void	images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
 
 	image_print_ordereneitor(&game->images);
-	printf(".images->map_sand->instances->z = %d\n", game->images.map_sand->instances->z);
-	printf("..images->map_sand->grecos->z = %d\n", game->images.map_greco->instances->z);
-	printf("...images->map_sand->swku->z = %d\n", game->images.background_map->instances->z);
 }

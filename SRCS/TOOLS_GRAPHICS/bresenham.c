@@ -1,5 +1,6 @@
 #include "tools_graphics.h"
 #include <stdio.h>
+#include <math.h>
 
 /**
  * This function implements the bresenham algorithm to draw lines
@@ -11,8 +12,8 @@ void bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t colo
 	p1.y = (int)(p1.y * g_size_tile);
 	p2.x = (int)(p2.x * g_size_tile);
 	p2.y = (int)(p2.y * g_size_tile);
-	int dx = abs(p2.x - p1.x);
-	int dy = abs(p2.y - p1.y);
+	int dx = (int)fabsf(p2.x - p1.x);
+	int dy = (int)fabsf(p2.y - p1.y);
 
 	int sx = (p1.x < p2.x) ? 1 : -1;
 	int sy = (p1.y < p2.y) ? 1 : -1;

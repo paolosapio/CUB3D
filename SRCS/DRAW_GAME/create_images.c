@@ -17,6 +17,8 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map, t_images *image)
 	mlx_image_t	*img_minimap;
 	
 	mlx_resize_image(image->map_sand, g_size_tile, g_size_tile);
+	mlx_resize_image(image->map_rock, g_size_tile, g_size_tile);
+
 	img_minimap = mlx_new_image(mlx, map->longest_line * g_size_tile, map->map_len * g_size_tile);
 	y = -1;
 	while (map->array[++y])
@@ -28,7 +30,7 @@ mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map, t_images *image)
 			coor_map.x = x;
 			coor_map.y = y;
 			if (map->array[y][x] == '1')
-				paint_tile(g_size_tile, img_minimap, coor_map, color(50,70,50,255));
+				mlx_image_to_window(mlx, image->map_rock, map->map_draw_offset.x + x * g_size_tile, map->map_draw_offset.y + y * g_size_tile);
 			else if (ft_strchr("NSWE0", map->array[y][x]) != NULL)
 				mlx_image_to_window(mlx, image->map_sand, map->map_draw_offset.x + x * g_size_tile, map->map_draw_offset.y + y * g_size_tile);
 		}

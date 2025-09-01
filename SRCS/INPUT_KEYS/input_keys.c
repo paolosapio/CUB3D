@@ -19,6 +19,7 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		game->images.map_ray->enabled -= 1;
 		game->images.background_map->enabled -= 1;
 		game->images.map_sand->enabled -= 1;
+		game->images.map_rock->enabled -= 1;
 	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
 		{

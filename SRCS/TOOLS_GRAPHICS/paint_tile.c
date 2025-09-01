@@ -1,7 +1,7 @@
 #include "tools_graphics.h"
 #include <stdio.h>
 
-void	paint_tile(int g_size_tile, mlx_image_t *img_minimap, t_int_coor coor, int32_t color)
+void	paint_tile(int g_size_tile, mlx_image_t *img_minimap, t_coor coor, int32_t color)
 {
 	int	x;
 	int	y;

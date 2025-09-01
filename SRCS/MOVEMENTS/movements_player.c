@@ -21,27 +21,16 @@ void	move_player(t_player *player, t_map *map, float sen, float cos)
 	new_player_pos.x = player->pos.x + cos * player->speed;
 	tile.y = (int)new_player_pos.y;
 	tile.x = (int)new_player_pos.x;
-
-	if (collision_antenas(player->speed, new_player_pos, map) == true)
-		return ;
-
-	if (ft_strchr(COLLITIONS, map->array[tile.y][tile.x]))
+	if ((map->array[(int)player->pos.y][tile.x] && !ft_strchr(COLLITIONS, map->array[(int)player->pos.y][tile.x])))
 	{
-		if (tile.y != (int)player->pos.y && (map->array[(int)player->pos.y][tile.x] && !ft_strchr(COLLITIONS, map->array[(int)player->pos.y][tile.x])))
-		{
-			player->pos.x = new_player_pos.x;
-			move_line_direction(player, 0, cos);
-		}
-		else if (tile.x != (int)player->pos.x && (map->array[tile.y][(int)player->pos.x] && !ft_strchr(COLLITIONS, map->array[tile.y][(int)player->pos.x])))
-		{
-			player->pos.y = new_player_pos.y;
-			move_line_direction(player, sen, 0);
-		}
-		return ;
+		player->pos.x = new_player_pos.x;
+		move_line_direction(player, 0, cos);
 	}
-	player->pos.y = new_player_pos.y;
-	player->pos.x = new_player_pos.x;
-	move_line_direction(player, sen, cos);
+	if ((map->array[tile.y][(int)player->pos.x] && !ft_strchr(COLLITIONS, map->array[tile.y][(int)player->pos.x])))
+	{
+		player->pos.y = new_player_pos.y;
+		move_line_direction(player, sen, 0);
+	}
 }
 
 void	change_player_rotation(t_player *player, int new_vision_angle)

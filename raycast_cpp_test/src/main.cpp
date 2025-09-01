@@ -39,8 +39,9 @@ public:
 		//DDA ALGORITHM ----------------------------------------
 
 		//Form ray cast from player into scene.
-		olc::vf2d vRayStart = vPlayer; // Initial coordinates.
-		olc::vf2d vRayDir = (vMouseCell - vPlayer).norm(); // Ending coordinates.
+		olc::vf2d vRayStart = vPlayer; // Initial coordinates. //!start
+		olc::vf2d vRayDir = (vMouseCell - vPlayer).norm(); // Ending coordinates. 
+		std::cout << "--->" << vRayDir.x << "  " << vRayDir.y << std::endl;
 
 		//pitágoras para determinar el aumento de la hipotenusa:
 		// h = sqrt(x² + y²) -> 

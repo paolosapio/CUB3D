@@ -35,6 +35,8 @@
         "tools_graphics.h": "c",
         "refresh_game.h": "c",
         "camera.h": "c",
-        "tools_generics.h": "c"
-    }
+        "tools_generics.h": "c",
+        "ostream": "cpp"
+    },
+    "cmake.sourceDirectory": "/home/psapio/Desktop/CUB3D/MLX42"
 }

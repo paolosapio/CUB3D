@@ -13,5 +13,6 @@
 
 void	refresh_draw_greco(mlx_image_t *map_greco, t_player *player, t_map *map);
 void	refresh_draw_ray(mlx_image_t *map_player, t_player *player, int g_size_tile);
+void	raycasting(mlx_image_t *image, t_coor start, t_coor end, t_map map);
 
 #endif
