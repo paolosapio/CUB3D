@@ -8,7 +8,7 @@ CFLAGS	+= -I libft
 #CFLAGS	+= -O3 #-> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS
 #CFLAGS	+= -lglfw
 
-DEBUG	 =#	-g3 -fsanitize=address,leak
+DEBUG	 =	-g3 -fsanitize=address,leak
 
 CPPFLAGS = -MMD
 

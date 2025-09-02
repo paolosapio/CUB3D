@@ -29,7 +29,7 @@ void bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t colo
 		if (x >= 0 && y >= 0 && x < (int)image->width && y < (int)image->height)
 			mlx_put_pixel(image, x, y, color);
 
-		if (x == p2.x && y == p2.y)
+		if (x == p2.x && y == p2.y || x < 0 || y < 0 || x > (int)image->width || y > (int)image->height)
 			break ;
 
 		e2 = 2 * err;
