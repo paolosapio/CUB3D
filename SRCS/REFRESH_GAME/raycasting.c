@@ -40,7 +40,7 @@ float	smallest_ray(float n1, float n2)
 	}
 	else
 		original_n1_sign = 1;
-
+	
 	if (n2 < 0)
 	{
 		n2 *= -1;
@@ -52,6 +52,21 @@ float	smallest_ray(float n1, float n2)
 	if (n1 < n2)
 		return (n1 * original_n1_sign);
 	return (n2 * original_n2_sign);
+}
+
+#define X 0
+#define Y 1
+int	hipotenusitor_no_root(t_gradient m)
+{
+	t_hipotenuse h;
+
+	//*h = sqrt(x² + y²);
+	h.x = 1 + (m.y * m.y);
+	h.y = (m.x * m.x) + 1;
+
+	if (h.x < h.y)
+		return (X);
+	return (Y);
 }
 
 void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_gradient m, t_map map)
@@ -78,8 +93,9 @@ void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_grad
 	else
 	{
 		map_coor.x = start.x + 1;
-		ray_x_length = (start.x - (float)map_coor.x) * m.x;
+		ray_x_length = -(start.x - (float)map_coor.x) * m.x;
 	}
+
 	printf("start.y = %f, end.y = %f\n", start.y, end.y);
 	printf(">>>> end.y - start.y = %f\n", end.y - start.y);
 	if (end.y - start.y < 0)
@@ -90,8 +106,9 @@ void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_grad
 	else
 	{
 		map_coor.y = start.y + 1;
-		ray_y_length = (start.y - (float)map_coor.y) * m.y;
+		ray_y_length = -(start.y - (float)map_coor.y) * m.y;
 	}
+
 	printf("ray_x_length = %f - gradient.x: %f\n", ray_x_length, m.x);
 	printf("ray_y_length = %f - gradient.y: %f\n\n", ray_y_length, m.y);
 	if (smallest_ray(ray_y_length, ray_x_length) == ray_y_length)
@@ -104,7 +121,7 @@ void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_grad
 			color(255, 255, 255, 255)
 		);
 	}
-	else
+	
 	{
 		mlx_put_pixel(
 			image,

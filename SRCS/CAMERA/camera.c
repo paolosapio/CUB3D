@@ -44,7 +44,7 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	while (i < g_size_tile * SCREEN)
 	{
 		// bresenham_algorithm(game->images.map_ray, l_screen_point, player_coor, color(255, 0, 0, 100));
-		bresenham_algorithm(game->images.map_ray, photon_final_destination, l_screen_point, color(0, 255, 0, 100));
+		//bresenham_algorithm(game->images.map_ray, photon_final_destination, l_screen_point, color(0, 255, 0, 100));
 
 			l_screen_point.x += pixel_offset_cos;
 			l_screen_point.y += pixel_offset_sen;
