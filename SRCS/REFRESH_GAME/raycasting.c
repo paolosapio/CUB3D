@@ -17,56 +17,93 @@ t_gradient	gradienteitor(t_coor start, t_coor end)
 	return (m);
 }
 
-t_hipotenuse hipotenuseitor(t_gradient m)
-{
-	t_hipotenuse h;
+// t_hipotenuse hipotenuseitor(t_gradient m)
+// {
+// 	t_hipotenuse h;
 
-	//*h = sqrt(x² + y²);
-	h.x = sqrt(1 + (m.y * m.y));
-	h.y = sqrt((m.x * m.x) + 1);
+// 	//*h = sqrt(x² + y²);
+// 	h.x = sqrt(1 + (m.y * m.y));
+// 	h.y = sqrt((m.x * m.x) + 1);
 
-	return (h);
-}
+// 	return (h);
+// }
 
-float	smallest_ray(float n1, float n2)
-{
-	float	original_n1_sign;
-	float	original_n2_sign;
+// float	smallest_ray(float n1, float n2)
+// {
+// 	float	original_n1_sign;
+// 	float	original_n2_sign;
 
-	if (n1 < 0)
-	{
-		n1 *= -1;
-		original_n1_sign = -1;
-	}
-	else
-		original_n1_sign = 1;
+// 	if (n1 < 0)
+// 	{
+// 		n1 *= -1;
+// 		original_n1_sign = -1;
+// 	}
+// 	else
+// 		original_n1_sign = 1;
 	
-	if (n2 < 0)
-	{
-		n2 *= -1;
-		original_n2_sign = -1;
-	}
-	else
-		original_n2_sign = 1;
+// 	if (n2 < 0)
+// 	{
+// 		n2 *= -1;
+// 		original_n2_sign = -1;
+// 	}
+// 	else
+// 		original_n2_sign = 1;
 
-	if (n1 < n2)
-		return (n1 * original_n1_sign);
-	return (n2 * original_n2_sign);
+// 	if (n1 < n2)
+// 		return (n1 * original_n1_sign);
+// 	return (n2 * original_n2_sign);
+// }
+
+t_vector	y_collision(t_coor start, t_int_coor map_coor, t_gradient m, mlx_image_t *image)
+{
+	t_vector	double_side_len;
+	t_coor		collision_coor_1;
+	t_coor		collision_coor_2;
+
+	double_side_len.x = start.x - map_coor.x;
+	double_side_len.y = (start.y - map_coor.y) * m.y;
+
+	collision_coor_1.x = start.x - double_side_len.x;
+	collision_coor_1.y = start.y;
+	bresenham_algorithm(image, start, collision_coor_1, color(255, 0, 0, 255));
+	collision_coor_2.x = collision_coor_1.x;
+	collision_coor_2.y = collision_coor_1.y + (-double_side_len.y);
+	bresenham_algorithm(image, collision_coor_1, collision_coor_2, color(255, 0, 0, 255));
+	return (double_side_len);
 }
 
-#define X 0
-#define Y 1
-int	hipotenusitor_no_root(t_gradient m)
+t_vector	x_collision(t_coor start, t_int_coor map_coor, t_gradient m, mlx_image_t *image)
 {
-	t_hipotenuse h;
+	t_vector	double_side_len;
 
-	//*h = sqrt(x² + y²);
-	h.x = 1 + (m.y * m.y);
-	h.y = (m.x * m.x) + 1;
+	double_side_len.y = start.y - map_coor.y;
+	double_side_len.x = (start.x - map_coor.x) * m.x;
+	return (double_side_len);
+}
 
-	if (h.x < h.y)
-		return (X);
-	return (Y);
+
+
+t_coor	hipotenusitor_no_root(t_gradient m, t_int_coor map_coor, t_coor start, mlx_image_t *image)
+{
+	t_vector		collision_vector_x;
+	t_vector		collision_vector_y;
+	t_hipotenuse	hipo_no_root;
+
+	collision_vector_x = x_collision(start, map_coor, m, image);
+	collision_vector_y = y_collision(start, map_coor, m, image);
+
+	hipo_no_root.x = (collision_vector_x.y * collision_vector_x.y) + (collision_vector_x.x * collision_vector_x.x);
+	hipo_no_root.y = (collision_vector_y.x * collision_vector_y.x) + (collision_vector_y.y * collision_vector_y.y);
+	
+	if (hipo_no_root.x < hipo_no_root.y)
+	{
+		start.x += collision_vector_x.x; 
+		start.y += collision_vector_x.y; 
+		return (start);
+	}
+	start.x -= collision_vector_y.x; 
+	start.y -= collision_vector_y.y; 
+	return (start);
 }
 
 void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_gradient m, t_map map)
@@ -82,9 +119,7 @@ void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_grad
 	t_int_coor	map_coor;
 	map_coor.x = start.x;
 	map_coor.y = start.y;
-	
-	printf("start.x = %f, end.x = %f\n", start.x, end.x);
-	printf(">>>> end.x - start.x = %f\n", end.x - start.x);
+
 	if (end.x - start.x < 0)
 	{
 		map_coor.x = start.x;
@@ -96,8 +131,6 @@ void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_grad
 		ray_x_length = -(start.x - (float)map_coor.x) * m.x;
 	}
 
-	printf("start.y = %f, end.y = %f\n", start.y, end.y);
-	printf(">>>> end.y - start.y = %f\n", end.y - start.y);
 	if (end.y - start.y < 0)
 	{
 		map_coor.y = start.y;
@@ -109,40 +142,28 @@ void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_grad
 		ray_y_length = -(start.y - (float)map_coor.y) * m.y;
 	}
 
-	printf("ray_x_length = %f - gradient.x: %f\n", ray_x_length, m.x);
-	printf("ray_y_length = %f - gradient.y: %f\n\n", ray_y_length, m.y);
-	if (smallest_ray(ray_y_length, ray_x_length) == ray_y_length)
-	{
-		printf("entré aquí\n\n");
-		mlx_put_pixel(
-			image,
-			(start.x + ray_y_length) * g_size_tile,
-			map_coor.y * g_size_tile,
-			color(255, 255, 255, 255)
-		);
-	}
+	raycast_start_point = hipotenusitor_no_root(m, map_coor, start, image);
+
+	// if (smallest_ray(ray_y_length, ray_x_length) == ray_y_length)
+	// {
+	// 	printf("entré aquí\n\n");
+	// 	mlx_put_pixel(
+	// 		image,
+	// 		(start.x + ray_y_length) * g_size_tile,
+	// 		map_coor.y * g_size_tile,
+	// 		color(255, 255, 255, 255)
+	// 	);
+	// }
 	
-	{
-		mlx_put_pixel(
-			image,
-			map_coor.x * g_size_tile,
-			(start.y + ray_x_length) * g_size_tile,
-			color(255, 255, 255, 255)
-		);
-	}
-
-
-
+	mlx_put_pixel(
+		image, raycast_start_point.x * g_size_tile, raycast_start_point.y * g_size_tile, color(255, 255, 255, 255));
 }
 
 void	raycasting(mlx_image_t *image, t_coor start, t_coor end, t_map map)
 {
-	(void)map;
 	t_gradient m;
-	t_hipotenuse h;
 
 	m = gradienteitor(start, end);
-	h = hipotenuseitor(m);
 	quadriculeitor_aligner(image, start, end, m, map);
 
 }
