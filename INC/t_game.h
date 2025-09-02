@@ -8,8 +8,11 @@
 
 /* SCREEN RESOLUTION */
 
-# define WIDTH 1600
+# define WIDTH 1100
 # define HEIGHT 900
+
+// # define WIDTH 1600
+// # define HEIGHT 900
 
 extern unsigned int g_size_tile;
 

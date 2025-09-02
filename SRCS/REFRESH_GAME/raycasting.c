@@ -18,11 +18,37 @@ t_hipotenuse hipotenuseitor(t_gradient m)
 {
 	t_hipotenuse h;
 
-	//h = sqrt(x² + y²);
+	//*h = sqrt(x² + y²);
 	h.x = sqrt(1 + (m.y * m.y));
 	h.y = sqrt((m.x * m.x) + 1);
 
 	return (h);
+}
+
+float	biggest_ray(float n1, float n2)
+{
+	float	original_n1_sign;
+	float	original_n2_sign;
+
+	if (n1 < 0)
+	{
+		n1 *= -1;
+		original_n1_sign = -1;
+	}
+	else
+		original_n1_sign = 1;
+
+	if (n2 < 0)
+	{
+		n2 *= -1;
+		original_n2_sign = -1;
+	}
+	else
+		original_n2_sign = 1;
+
+	if (n1 > n2)
+		return (n1 * original_n1_sign);
+	return (n2 * original_n2_sign);
 }
 
 void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_gradient m, t_map map)
@@ -42,27 +68,44 @@ void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_grad
 	if (end.x - start.x < 0)
 	{
 		map_coor.x = start.x;
-		ray_x_length = (start.x - (float)map_coor.x) * m.x;
+		ray_x_length = ((float)map_coor.x - start.x) * m.x;
 	}
 	else
 	{
 		map_coor.x = start.x + 1;
-		ray_x_length = ((float)map_coor.x - start.x) * m.x;
+		ray_x_length = (start.x - (float)map_coor.x) * m.x;
 	}
 	if (end.y - start.y < 0)
 	{
 		map_coor.y = start.y;
-		ray_y_length = (start.y - (float)map_coor.y) * m.y;
+		ray_y_length = ((float)map_coor.y - start.y) * m.y;
 	}
 	else
 	{
 		map_coor.y = start.y + 1;
-		ray_y_length = ((float)map_coor.y - start.y) * m.y;
+		ray_y_length = (start.y - (float)map_coor.y) * m.y;
 	}
-	// if (ray_x_length < ray_y_length)
-	// {
-	// 	mlx_put_pixel(image, map_coor.x * g_size_tile, );
-	// }
+	printf("ray_x_length = %f - gradient.x: %f\n", ray_x_length, m.x);
+	printf("ray_y_length = %f - gradient.y: %f\n\n", ray_y_length, m.y);
+	if (biggest_ray(ray_y_length, ray_x_length) == ray_x_length)
+	{
+		printf("entré aquí\n");
+		mlx_put_pixel(
+			image,
+			(start.x + ray_y_length) * g_size_tile,
+			map_coor.y * g_size_tile,
+			color(255, 255, 255, 255)
+		);
+	}
+	else
+	{
+		mlx_put_pixel(
+			image,
+			map_coor.x * g_size_tile,
+			(start.y + ray_x_length) * g_size_tile,
+			color(255, 255, 255, 255)
+		);
+	}
 
 
 

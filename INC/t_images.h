@@ -18,6 +18,7 @@ typedef struct	s_images
 	mlx_image_t	*map_greco;
 	mlx_image_t	*map_sand;
 	mlx_image_t	*map_rock;
+	mlx_image_t	*cuadricula;
 }				t_images;
 
 #endif
