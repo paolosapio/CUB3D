@@ -14,6 +14,7 @@ typedef struct	s_segment
 {
 	t_coor	start;
 	t_coor	end;
+	float	size;
 }				t_segment;
 
 typedef struct	s_int_coor

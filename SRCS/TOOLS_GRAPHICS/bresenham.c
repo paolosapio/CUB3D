@@ -8,10 +8,11 @@
 
 void bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t color)
 {
-
-	if (p2.x < 0)
+	// printf("p1.x = %f p1.y = %f\n", p1.x, p1.y);
+	// printf("p2.x = %f p2.y = %f\n", p2.x, p2.y);
+	if (p2.x < 0 || p2.x == INFINITY)
 		p2.x = 0;
-	if (p2.y < 0)
+	if (p2.y < 0 || p2.y == INFINITY)
 		p2.y = 0;
 	p1.x =(int)(p1.x * g_size_tile);
 	p1.y = (int)(p1.y * g_size_tile);

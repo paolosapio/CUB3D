@@ -1,127 +1,61 @@
 #include "refresh_game.h"
 #include <math.h>
 
-typedef t_coor t_gradient; // (m) || pendiente
-typedef t_coor t_hipotenuse;
+/* // !informacion que tenemos!
+		posicion del jugador
+		angulo de direcion
+		punto final forzado que nos permite tener la perndiente
 
-t_gradient	gradienteitor(t_coor start, t_coor end)
+	  !informacion a buscar::
+	en el eje Y: 
+	  	lado adiacente _ (se calcula punto de partida - punto de partida casteado en int)
+	  	lado opposite | (se calcula con la pen diente m = )
+
+	en el eje X:
+	  	lado en eje x |
+	  	lado en eje y (pendiente m) _
+
+*/
+
+
+
+//🏆
+float	hipotenuseitor_no_root(t_segment adiacente,t_segment opposite)
 {
-	t_gradient m;
+	float	hipo_size;
 
-	m.x = (end.y - start.y) / (end.x - start.x);
-	m.y = (end.x - start.x) / (end.y - start.y);
-
-	// printf("\nGRADIENTES: m.x = %f. m.y = %f\n", m.x, m.y);
-	// printf(". start.x %f - start.y %f\n", start.x, start.y);
-	// printf("... end.x %f -   end.y %f\n\n", end.x, end.y);
-	return (m);
+	hipo_size = adiacente.size * adiacente.size + opposite.size * opposite.size;
+	return (hipo_size);
 }
 
-// t_hipotenuse hipotenuseitor(t_gradient m)
-// {
-// 	t_hipotenuse h;
+void	raycasting(mlx_image_t *image, t_player player, t_map map, t_coor end)
+{
 
-// 	//*h = sqrt(x² + y²);
-// 	h.x = sqrt(1 + (m.y * m.y));
-// 	h.y = sqrt((m.x * m.x) + 1);
 
-// 	return (h);
-// }
+	t_triangle	triangle_y;
+	t_triangle	triangle_x;
 
-// float	smallest_ray(float n1, float n2)
-// {
-// 	float	original_n1_sign;
-// 	float	original_n2_sign;
-
-// 	if (n1 < 0)
-// 	{
-// 		n1 *= -1;
-// 		original_n1_sign = -1;
-// 	}
-// 	else
-// 		original_n1_sign = 1;
+	(void)map;
+	triangle_y = collision_triangulator_y(player.pos, end);
+	triangle_y.hypotenuse.start = triangle_y.adjacent.start;
+	triangle_y.hypotenuse.end = triangle_y.opposite.end;
 	
-// 	if (n2 < 0)
-// 	{
-// 		n2 *= -1;
-// 		original_n2_sign = -1;
-// 	}
-// 	else
-// 		original_n2_sign = 1;
+	triangle_x = collision_triangulator_x(player.pos, end);
+	triangle_x.hypotenuse.start = triangle_x.adjacent.start;
+	triangle_x.hypotenuse.end = triangle_x.opposite.end;
+	// if (hipo_y < hipo_x)
+	// {
 
-// 	if (n1 < n2)
-// 		return (n1 * original_n1_sign);
-// 	return (n2 * original_n2_sign);
-// }
-
-
-// t_vector	y_collision(t_coor start, t_int_coor map_coor, t_gradient m, mlx_image_t *image, float ray_length)
-// {
-
-// }
-
-// t_vector	x_collision(t_coor start, t_int_coor map_coor, t_gradient m, mlx_image_t *image)
-// {
+	// }
+	// if (hipo_y >= hipo_x)
+	// {
+		
+	// }
+	bresenham_algorithm(image, triangle_y.adjacent.start, triangle_y.adjacent.end, color(150, 0, 0, 255));
+	bresenham_algorithm(image, triangle_y.opposite.start, triangle_y.opposite.end, color(255, 0, 0, 255));
+	bresenham_algorithm(image, triangle_x.adjacent.start, triangle_x.adjacent.end, color(0, 0, 150, 255));
+	bresenham_algorithm(image, triangle_x.opposite.start, triangle_x.opposite.end, color(0, 0, 255, 255));
 	
-// }
-
-// t_coor	hipotenusitor_no_root(t_gradient m, t_int_coor map_coor, t_coor start, t_vector ray_length, mlx_image_t *image)
-// {
-	
-// }
-
-typedef	struct	s_collision
-{
-	float	x_vector;
-	float	y_vector; //gradient
-	float	hipotenuse;
-	t_coor	collision_coor;
-}				t_collision;
-
-void	bresenham_prekit(mlx_image_t *image, float coor1_x, float coor1_y, float coor2_x, float coor2_y, uint32_t color)
-{
-	t_coor coor1;
-	t_coor coor2;
-
-	coor1.x = coor1_x;
-	coor1.y = coor1_y;
-	coor2.x = coor2_x;
-	coor2.y = coor2_y;
-	bresenham_algorithm(image, coor1, coor2, color);
-}
-
-void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_gradient m, t_map map)
-{
-	t_collision y_collision;
-	t_collision x_collision;
-
-	if (end.x - start.x < 0)
-		y_collision.x_vector = (int)start.x - start.x;
-	else
-		y_collision.x_vector = (int)(start.x + 1) - (start.x);
-	if (end.y - start.y < 0)
-		x_collision.y_vector = (int)start.y - start.y;
-	else
-		x_collision.y_vector = (int)(start.y + 1) - (start.y);
-
-	y_collision.y_vector = y_collision.x_vector * m.x;
-	x_collision.x_vector = x_collision.y_vector * m.y;
-
-	//y_collision.x_vector:
-	bresenham_prekit(image, start.x, start.y, start.x + y_collision.x_vector, start.y, color(255, 0, 0, 255));
-	//x_collision.y_vector:
-	bresenham_prekit(image, start.x, start.y, start.x, start.y + x_collision.y_vector, color(0, 0, 255, 255));
-	//y_collision.y_vector:
-	bresenham_prekit(image, start.x + y_collision.x_vector, start.y, start.x + y_collision.x_vector, start.y + y_collision.y_vector, color(255, 0, 0, 255));
-	//x_collision.x_vector:
-	bresenham_prekit(image, start.x, start.y + x_collision.y_vector, start.x + x_collision.x_vector,start.y + x_collision.y_vector, color(0, 0, 255, 255));
-}
-
-void	raycasting(mlx_image_t *image, t_coor start, t_coor end, t_map map)
-{
-	t_gradient m;
-
-	m = gradienteitor(start, end);
-	quadriculeitor_aligner(image, start, end, m, map);
-
+	bresenham_algorithm(image, triangle_x.hypotenuse.start, triangle_x.hypotenuse.end, color(150, 150, 150, 255));
+	bresenham_algorithm(image, triangle_y.hypotenuse.start, triangle_y.hypotenuse.end, color(0, 0, 0, 255));
 }
