@@ -55,22 +55,20 @@ t_gradient	gradienteitor(t_coor start, t_coor end)
 // }
 
 
-t_vector	y_collision(t_coor start, t_int_coor map_coor, t_gradient m, mlx_image_t *image, float ray_length)
-{
+// t_vector	y_collision(t_coor start, t_int_coor map_coor, t_gradient m, mlx_image_t *image, float ray_length)
+// {
 
-}
+// }
 
-t_vector	x_collision(t_coor start, t_int_coor map_coor, t_gradient m, mlx_image_t *image)
-{
+// t_vector	x_collision(t_coor start, t_int_coor map_coor, t_gradient m, mlx_image_t *image)
+// {
 	
-}
+// }
 
-
-
-t_coor	hipotenusitor_no_root(t_gradient m, t_int_coor map_coor, t_coor start, t_vector ray_length, mlx_image_t *image)
-{
+// t_coor	hipotenusitor_no_root(t_gradient m, t_int_coor map_coor, t_coor start, t_vector ray_length, mlx_image_t *image)
+// {
 	
-}
+// }
 
 typedef	struct	s_collision
 {
@@ -80,7 +78,7 @@ typedef	struct	s_collision
 	t_coor	collision_coor;
 }				t_collision;
 
-void	bresenham_prekit(mlx_image_t *image, float coor1_x, float coor1_y, float coor2_x, float coor2_y)
+void	bresenham_prekit(mlx_image_t *image, float coor1_x, float coor1_y, float coor2_x, float coor2_y, uint32_t color)
 {
 	t_coor coor1;
 	t_coor coor2;
@@ -89,34 +87,34 @@ void	bresenham_prekit(mlx_image_t *image, float coor1_x, float coor1_y, float co
 	coor1.y = coor1_y;
 	coor2.x = coor2_x;
 	coor2.y = coor2_y;
-	bresenham_algorithm(image, coor1, coor2, color(255, 0, 0, 255));
+	bresenham_algorithm(image, coor1, coor2, color);
 }
+
 void	quadriculeitor_aligner(mlx_image_t *image, t_coor start, t_coor end, t_gradient m, t_map map)
 {
 	t_collision y_collision;
 	t_collision x_collision;
 
 	if (end.x - start.x < 0)
-	{
 		y_collision.x_vector = (int)start.x - start.x;
-	}
 	else
-	{
 		y_collision.x_vector = (int)(start.x + 1) - (start.x);
-	}
-
-	bresenham_prekit(image, start.x, start.y, start.x + y_collision.x_vector, start.y);
-
 	if (end.y - start.y < 0)
-	{
 		x_collision.y_vector = (int)start.y - start.y;
-	}
 	else
-	{
 		x_collision.y_vector = (int)(start.y + 1) - (start.y);
-	}
-	bresenham_prekit(image, start.x, start.y, start.x, start.y + x_collision.y_vector);
 
+	y_collision.y_vector = y_collision.x_vector * m.x;
+	x_collision.x_vector = x_collision.y_vector * m.y;
+
+	//y_collision.x_vector:
+	bresenham_prekit(image, start.x, start.y, start.x + y_collision.x_vector, start.y, color(255, 0, 0, 255));
+	//x_collision.y_vector:
+	bresenham_prekit(image, start.x, start.y, start.x, start.y + x_collision.y_vector, color(0, 0, 255, 255));
+	//y_collision.y_vector:
+	bresenham_prekit(image, start.x + y_collision.x_vector, start.y, start.x + y_collision.x_vector, start.y + y_collision.y_vector, color(255, 0, 0, 255));
+	//x_collision.x_vector:
+	bresenham_prekit(image, start.x, start.y + x_collision.y_vector, start.x + x_collision.x_vector,start.y + x_collision.y_vector, color(0, 0, 255, 255));
 }
 
 void	raycasting(mlx_image_t *image, t_coor start, t_coor end, t_map map)

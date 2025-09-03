@@ -10,7 +10,7 @@ mlx_image_t	*create_cuadricula(mlx_t *mlx)
 		{
 			if (y % g_size_tile  == 0 || x % g_size_tile  == 0)
 			{
-				mlx_put_pixel(image, y, x, color(0,0,0,150));
+				mlx_put_pixel(image, y, x, color(0,0,0,70));
 			}
 		}
 	}

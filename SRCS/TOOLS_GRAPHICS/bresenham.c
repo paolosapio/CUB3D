@@ -8,6 +8,11 @@
 
 void bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t color)
 {
+
+	if (p2.x < 0)
+		p2.x = 0;
+	if (p2.y < 0)
+		p2.y = 0;
 	p1.x =(int)(p1.x * g_size_tile);
 	p1.y = (int)(p1.y * g_size_tile);
 	p2.x = (int)(p2.x * g_size_tile);
@@ -28,8 +33,7 @@ void bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t colo
 	{
 		if (x >= 0 && y >= 0 && x < (int)image->width && y < (int)image->height)
 			mlx_put_pixel(image, x, y, color);
-
-		if (x == p2.x && y == p2.y || x < 0 || y < 0 || x > (int)image->width || y > (int)image->height)
+		if ((x == p2.x && y == p2.y) || x < 0 || y < 0 || x > (int)image->width || y > (int)image->height)
 			break ;
 
 		e2 = 2 * err;
@@ -45,7 +49,6 @@ void bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t colo
 			err += dx;
 			y += sy;
 		}
-		// printf("GRRRRRRRRRRRR\n");
 	}
 }
 
