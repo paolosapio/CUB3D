@@ -17,8 +17,6 @@
 
 */
 
-
-
 //🏆
 float	hipotenuseitor_no_root(t_segment adiacente,t_segment opposite)
 {
@@ -28,14 +26,19 @@ float	hipotenuseitor_no_root(t_segment adiacente,t_segment opposite)
 	return (hipo_size);
 }
 
-void	raycasting(mlx_image_t *image, t_player player, t_map map, t_coor end)
+t_coor true_raycasting(mlx_image_t *image, t_coor start, t_map map, t_coor end)
 {
+	t_coor colision_point;
 
+	return (colision_point);
+}
 
+t_coor	raycasting(mlx_image_t *image, t_player player, t_map map, t_coor end)
+{
 	t_triangle	triangle_y;
 	t_triangle	triangle_x;
-	t_coor	 	point_of_view;
-	(void)map;
+	t_coor	 	check_point;
+
 	triangle_y = collision_triangulator_y(player.pos, end);
 	triangle_y.hypotenuse.start = triangle_y.adjacent.start;
 	triangle_y.hypotenuse.end = triangle_y.opposite.end;
@@ -47,38 +50,21 @@ void	raycasting(mlx_image_t *image, t_player player, t_map map, t_coor end)
 	//comparar las hipos, ver la mas pequena si colisiona, si hay colision medir distancias y linea en pantalla
 	if (triangle_y.hypotenuse.size < triangle_x.hypotenuse.size)
 	{
-		if (map.array[(int)triangle_y.hypotenuse.end.y][(int)triangle_y.hypotenuse.end.x] == '1')
-		{	
-			printf("veo pared\n");
-			point_of_view = triangle_y.hypotenuse.end;
-		}
-		else
-		{
-			triangle_y.hypotenuse.start = triangle_y.hypotenuse.end;
-			// triangle_y.hypotenuse.end.x = 
-			// triangle_y.hypotenuse.end.y =
-
-		}
+		check_point = triangle_y.hypotenuse.end;
+		if (map.array[(int)triangle_y.hypotenuse.end.y][(int)triangle_y.hypotenuse.end.x] == '0')
+			check_point = true_raycasting(image, check_point, map, end);
 	}
-
 	if (triangle_x.hypotenuse.size <= triangle_y.hypotenuse.size)
 	{
-		if (map.array[(int)triangle_x.hypotenuse.end.y][(int)triangle_x.hypotenuse.end.x] == '1')
-		{	
-			point_of_view = triangle_x.hypotenuse.end;
-		}
-		else
-		printf("veo via libre\n");
+		check_point = triangle_x.hypotenuse.end;
+		if (map.array[(int)triangle_x.hypotenuse.end.y][(int)triangle_x.hypotenuse.end.x] == '0')
+			check_point = true_raycasting(image, check_point, map, end);
 	}
-	printf("triangle_x.hypotenuse.size: %f\n", triangle_x.hypotenuse.size);
-	printf("triangle_y.hypotenuse.size: %f\n", triangle_y.hypotenuse.size);
-	
-
+	// printf("triangle_x.hypotenuse.size: %f\n", triangle_x.hypotenuse.size);
+	// printf("triangle_y.hypotenuse.size: %f\n", triangle_y.hypotenuse.size);
 	bresenham_algorithm(image, triangle_y.adjacent.start, triangle_y.adjacent.end, color(150, 0, 0, 255));
 	bresenham_algorithm(image, triangle_y.opposite.start, triangle_y.opposite.end, color(255, 0, 0, 255));
 	bresenham_algorithm(image, triangle_x.adjacent.start, triangle_x.adjacent.end, color(0, 0, 150, 255));
 	bresenham_algorithm(image, triangle_x.opposite.start, triangle_x.opposite.end, color(0, 0, 255, 255));
-	bresenham_algorithm(image, player.pos, point_of_view, color(0, 255, 0, 255));
-
-
+	return (check_point);
 }
