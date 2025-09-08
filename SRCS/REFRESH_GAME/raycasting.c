@@ -55,8 +55,8 @@ void	raycasting(mlx_image_t *image, t_player player, t_map map, t_coor end)
 		else
 		{
 			triangle_y.hypotenuse.start = triangle_y.hypotenuse.end;
-			triangle_y.hypotenuse.end.x = 
-			triangle_y.hypotenuse.end.y =
+			// triangle_y.hypotenuse.end.x = 
+			// triangle_y.hypotenuse.end.y =
 
 		}
 	}
