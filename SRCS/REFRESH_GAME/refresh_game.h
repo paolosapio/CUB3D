@@ -14,6 +14,8 @@ typedef struct	s_triangle
 	t_segment	adjacent;
 	t_segment	opposite;
 	float		m;
+	float		dir_x;
+	float		dir_y;
 }			t_triangle;
 
 # define RGBA_SIZE 4
@@ -28,5 +30,12 @@ float	hipotenuseitor_no_root(t_segment adiacente,t_segment opposite);
 
 t_triangle  collision_triangulator_y(t_coor start, t_coor end);
 t_triangle  collision_triangulator_x(t_coor start, t_coor end);
+
+
+t_segment	init_adjacent(t_coor start, t_coor end);
+t_segment	init_opposite(float m, t_coor start, float size_adiacente);
+t_segment	init_hypotenuse(t_segment adjacent, t_segment opposite);
+float		hipotenuseitor_no_root(t_segment adiacente,t_segment opposite);
+t_coor	triangle_morpheitor(t_triangle *triangle, int dir_x, int dir_y);
 
 #endif

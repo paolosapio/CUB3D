@@ -1,7 +1,7 @@
 #include "refresh_game.h"
 #include <math.h>
 
-static t_segment	init_opposite(float m, t_coor start, float size_adiacente)
+static t_segment	init_opposite_a(float m, t_coor start, float size_adiacente)
 {
 	t_segment opposite;
 
@@ -13,7 +13,7 @@ static t_segment	init_opposite(float m, t_coor start, float size_adiacente)
 	return (opposite);
 }
 
-static t_segment	init_adjacent(t_coor start, t_coor end)
+static t_segment	init_adjacent_a(t_coor start, t_coor end)
 {
 	t_segment adjacent;
 
@@ -42,9 +42,9 @@ t_triangle  collision_triangulator_x(t_coor start, t_coor end)
 {
 	t_triangle	sides;	
 	
-	sides.adjacent = init_adjacent(start, end);
+	sides.adjacent = init_adjacent_a(start, end);
 	sides.m = gradienteitor(start, end);
-	sides.opposite = init_opposite(sides.m, sides.adjacent.end, sides.adjacent.size);
+	sides.opposite = init_opposite_a(sides.m, sides.adjacent.end, sides.adjacent.size);
 	sides.hypotenuse.size = hipotenuseitor_no_root(sides.adjacent, sides.opposite);
 	return (sides);
 }

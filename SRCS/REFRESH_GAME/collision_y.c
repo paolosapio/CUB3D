@@ -2,7 +2,7 @@
 #include <math.h>
 
 //🏆
-static t_segment	init_opposite(float m, t_coor start, float size_adiacente)
+static t_segment	init_opposite_b(float m, t_coor start, float size_adiacente)
 {
 	t_segment opposite;
 
@@ -14,12 +14,11 @@ static t_segment	init_opposite(float m, t_coor start, float size_adiacente)
 }
 
 //🏆
-static t_segment	init_adiacente(t_coor start, t_coor end)
+static t_segment	init_adiacente_b(t_coor start, t_coor end)
 {
 	t_segment adiacente;
 
-	adiacente.start.x = start.x;
-	adiacente.start.y = start.y;
+	adiacente.start = start;
 	if(start.x - end.x < 0)
 		adiacente.end.x = ((int)start.x + 1);
 	if(start.x - end.x >= 0)
@@ -44,9 +43,9 @@ t_triangle  collision_triangulator_y(t_coor start, t_coor end)
 	t_triangle	sides;	
 	
 	// calculo colision een ejee y:
-	sides.adjacent = init_adiacente(start, end);
+	sides.adjacent = init_adiacente_b(start, end);
 	sides.m = gradienteitor(start, end);
-	sides.opposite = init_opposite(sides.m, sides.adjacent.end, sides.adjacent.size);
+	sides.opposite = init_opposite_b(sides.m, sides.adjacent.end, sides.adjacent.size);
 	
 	sides.hypotenuse.size = hipotenuseitor_no_root(sides.adjacent, sides.opposite);
 	return (sides);

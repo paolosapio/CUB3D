@@ -1,37 +1,70 @@
 #include "refresh_game.h"
 #include <math.h>
 
-/* // !informacion que tenemos!
-		posicion del jugador
-		angulo de direcion
-		punto final forzado que nos permite tener la perndiente
 
-	  !informacion a buscar::
-	en el eje Y: 
-	  	lado adiacente _ (se calcula punto de partida - punto de partida casteado en int)
-	  	lado opposite | (se calcula con la pen diente m = )
 
-	en el eje X:
-	  	lado en eje x |
-	  	lado en eje y (pendiente m) _
 
-*/
 
-//🏆
-float	hipotenuseitor_no_root(t_segment adiacente,t_segment opposite)
+
+
+
+
+
+
+t_coor true_raycasting(mlx_image_t *image, t_triangle triangle_y, t_triangle triangle_x, t_coor start, char **map_array)
 {
-	float	hipo_size;
+	t_coor	colision;
+	t_coor		aux_coor;
+	int			dir_x;
+	int			dir_y;
+	int			col_deg;
 
-	hipo_size = adiacente.size * adiacente.size + opposite.size * opposite.size;
-	return (hipo_size);
+	col_deg = 255;
+	if (triangle_y.adjacent.size < 0)
+		dir_x = -1;
+	else
+		dir_x = 1;
+
+	if (triangle_y.opposite.size < 0)
+		dir_y = -1;
+	else
+		dir_y = 1;
+
+	colision = start;
+
+	while (map_array[(int)colision.y][(int)colision.x] && map_array[(int)colision.y][(int)colision.x] == '0')
+	{
+		printf("dir_x = %f, triangle_y.m = %f\n", dir_x, triangle_y.m);
+		if (triangle_y.hypotenuse.size < triangle_x.hypotenuse.size)
+		{
+			triangle_morpheitor(&triangle_y, dir_x, dir_y);
+			bresenham_algorithm(image, triangle_y.hypotenuse.start, triangle_y.hypotenuse.end, color(255, 0, 0, 255));
+			printf("aaaaaaaaaaa\n");
+		}
+		else
+		{
+			triangle_morpheitor(&triangle_x, dir_x, dir_y);
+			bresenham_algorithm(image, triangle_y.hypotenuse.start, triangle_y.hypotenuse.end, color(255, 0, 255, 255));
+			printf("bbbbbbbbbbbb\n");
+		}
+		if (triangle_y.hypotenuse.size < triangle_x.hypotenuse.size)
+			colision = triangle_y.hypotenuse.end;
+		else
+			colision = triangle_x.hypotenuse.end;
+	}
+	bresenham_algorithm(image, start, colision, color(0, 255, 255, 255));
+
+	return (colision);
 }
 
-t_coor true_raycasting(mlx_image_t *image, t_coor start, t_map map, t_coor end)
-{
-	t_coor colision_point;
 
-	return (colision_point);
-}
+
+
+
+
+
+
+
 
 t_coor	raycasting(mlx_image_t *image, t_player player, t_map map, t_coor end)
 {
@@ -49,19 +82,11 @@ t_coor	raycasting(mlx_image_t *image, t_player player, t_map map, t_coor end)
 
 	//comparar las hipos, ver la mas pequena si colisiona, si hay colision medir distancias y linea en pantalla
 	if (triangle_y.hypotenuse.size < triangle_x.hypotenuse.size)
-	{
 		check_point = triangle_y.hypotenuse.end;
-		if (map.array[(int)triangle_y.hypotenuse.end.y][(int)triangle_y.hypotenuse.end.x] == '0')
-			check_point = true_raycasting(image, check_point, map, end);
-	}
 	if (triangle_x.hypotenuse.size <= triangle_y.hypotenuse.size)
-	{
 		check_point = triangle_x.hypotenuse.end;
-		if (map.array[(int)triangle_x.hypotenuse.end.y][(int)triangle_x.hypotenuse.end.x] == '0')
-			check_point = true_raycasting(image, check_point, map, end);
-	}
-	// printf("triangle_x.hypotenuse.size: %f\n", triangle_x.hypotenuse.size);
-	// printf("triangle_y.hypotenuse.size: %f\n", triangle_y.hypotenuse.size);
+	check_point = true_raycasting(image, triangle_y, triangle_x, check_point, map.array);
+
 	bresenham_algorithm(image, triangle_y.adjacent.start, triangle_y.adjacent.end, color(150, 0, 0, 255));
 	bresenham_algorithm(image, triangle_y.opposite.start, triangle_y.opposite.end, color(255, 0, 0, 255));
 	bresenham_algorithm(image, triangle_x.adjacent.start, triangle_x.adjacent.end, color(0, 0, 150, 255));
