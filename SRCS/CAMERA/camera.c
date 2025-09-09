@@ -41,7 +41,6 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	photon_final_destination.x = l_screen_point.x - cos(to_radians(player_vision_angle)) * 7;
 	photon_final_destination.y = l_screen_point.y - sin(to_radians(player_vision_angle)) * 7;
 	
-	collision_point = raycasting(game->images.map_ray, game->player, game->map, l_screen_point);
 	// bresenham_algorithm(game->images.map_ray, player_coor, collision_point, color(0, 255, 0, 255));
 
 	i = 0;
@@ -49,7 +48,7 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	{
 		// bresenham_algorithm(game->images.map_ray, l_screen_point, player_coor, color(255, 0, 0, 100));
 		//bresenham_algorithm(game->images.map_ray, photon_final_destination, l_screen_point, color(0, 255, 0, 100));
-
+			raycasting(game->images.map_ray, game->player.pos, l_screen_point, game->map);
 			l_screen_point.x += pixel_offset_cos;
 			l_screen_point.y += pixel_offset_sen;
 			photon_final_destination.x += pixel_offset_cos;

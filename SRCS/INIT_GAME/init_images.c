@@ -29,7 +29,7 @@ void	init_images(mlx_t* mlx, t_map *map, t_images *images)
 	mlx_image_to_window(mlx, images->cuadricula, map->map_draw_offset.x, map->map_draw_offset.y);
 	images->minimap->enabled = true;
 	images->map_ray->enabled = true;
-	images->map_greco->enabled = false;
+	images->map_greco->enabled = true;
 	//images->map_rock->enabled = false;
 	images->map_sand->enabled = true;
 }

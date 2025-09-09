@@ -59,7 +59,7 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 void await_user_input(t_game *game)
 {
 	mlx_key_hook(game->mlx, &special_keys, game);
-	mlx_cursor_hook(game->mlx, &mouse_movements, game);
+	//mlx_cursor_hook(game->mlx, &mouse_movements, game);
 	mlx_loop_hook(game->mlx, &movements_player, game);
 	mlx_loop(game->mlx);
 }

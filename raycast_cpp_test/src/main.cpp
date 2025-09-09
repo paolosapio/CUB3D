@@ -49,8 +49,9 @@ public:
 
 		olc::vf2d vRayUnitStepSize = { 
 			sqrt(1 + (vRayDir.y / vRayDir.x) * (vRayDir.y / vRayDir.x)),
-			 sqrt(1 + (vRayDir.x / vRayDir.y) * (vRayDir.x / vRayDir.y)) };
+			 sqrt(1 + (vRayDir.x / vRayDir.y) * (vRayDir.x / vRayDir.y))};
 
+		std::cout << "vRayUnitStepSize.x" << vRayUnitStepSize.x << "\n "<< vRayUnitStepSize.y << "\n\n";
 
 		olc::vi2d vMapCheck = {(int)vRayStart.x, (int)vRayStart.y}; //to keep track of which cell the character is in.
 		olc::vf2d vRayLength1D; // to acumulate the length of the ray on both axis.

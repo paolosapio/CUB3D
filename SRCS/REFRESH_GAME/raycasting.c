@@ -1,95 +1,98 @@
 #include "refresh_game.h"
 #include <math.h>
 
+typedef t_coor t_hypo2_len;
+typedef t_coor t_ray_len;
 
-
-
-
-
-
-
-
-
-
-t_coor true_raycasting(mlx_image_t *image, t_triangle triangle_y, t_triangle triangle_x, t_coor start, char **map_array)
+t_coor raycasting(mlx_image_t *image, t_coor start_pos, t_coor end_pos, t_map map)
 {
-	t_coor	colision;
-	t_coor		aux_coor;
+	// bresenham_algorithm(image, start_pos, end_pos, color(0, 255, 0, 255));
+
+	t_hypo2_len	hypo_uninary;
+	t_int_coor	map_coor;
+	t_hypo2_len	hypo_supreme;
 	int			dir_x;
 	int			dir_y;
-	int			col_deg;
+	t_ray_len	sides;
 
-	col_deg = 255;
-	if (triangle_y.adjacent.size < 0)
-		dir_x = -1;
-	else
-		dir_x = 1;
+	sides.x = end_pos.x - start_pos.x;
+	sides.y = end_pos.y - start_pos.y;
+    
 
-	if (triangle_y.opposite.size < 0)
-		dir_y = -1;
-	else
-		dir_y = 1;
+	printf("sides.x: %f\n", sides.x);	
+	printf("sides.y: %f\n", sides.y);
+	//sqrt(x² + y²)
+	// hypo_uninary.x = sqrt(1 + (sides.y / sides.x) * (sides.y / sides.x));
+	// hypo_uninary.y = sqrt(1 + (sides.x / sides.y) * (sides.x / sides.y));
 
-	colision = start;
+    // float deltaDistX = sqrtf(1.0f + (rayDir.y * rayDir.y) / (rayDir.x * rayDir.x));
+    // float deltaDistY = sqrtf(1.0f + (rayDir.x * rayDir.x) / (rayDir.y * rayDir.y));
 
-	while (map_array[(int)colision.y][(int)colision.x] && map_array[(int)colision.y][(int)colision.x] == '0')
+	hypo_uninary.x = (float)sqrt(1 + (sides.y / sides.x) * (sides.y / sides.x));
+	hypo_uninary.y = (float)sqrt(1 + (sides.x / sides.y) * (sides.x / sides.y));
+
+	map_coor.x = (int)start_pos.x;
+	map_coor.y = (int)start_pos.y;
+	if (sides.x < 0)
 	{
-		printf("dir_x = %f, triangle_y.m = %f\n", dir_x, triangle_y.m);
-		if (triangle_y.hypotenuse.size < triangle_x.hypotenuse.size)
-		{
-			triangle_morpheitor(&triangle_y, dir_x, dir_y);
-			bresenham_algorithm(image, triangle_y.hypotenuse.start, triangle_y.hypotenuse.end, color(255, 0, 0, 255));
-			printf("aaaaaaaaaaa\n");
-		}
-		else
-		{
-			triangle_morpheitor(&triangle_x, dir_x, dir_y);
-			bresenham_algorithm(image, triangle_y.hypotenuse.start, triangle_y.hypotenuse.end, color(255, 0, 255, 255));
-			printf("bbbbbbbbbbbb\n");
-		}
-		if (triangle_y.hypotenuse.size < triangle_x.hypotenuse.size)
-			colision = triangle_y.hypotenuse.end;
-		else
-			colision = triangle_x.hypotenuse.end;
+        dir_x = -1;
+		hypo_supreme.x = (start_pos.x - (float)map_coor.x) * hypo_uninary.x;
 	}
-	bresenham_algorithm(image, start, colision, color(0, 255, 255, 255));
+	else
+	{
+        dir_x = 1;
+		hypo_supreme.x = ((float)(map_coor.x + 1) - start_pos.x) * hypo_uninary.x;
+	}
+    
+	if (sides.y < 0)
+	{
+        dir_y = -1;
+		hypo_supreme.y = (start_pos.y - (float)map_coor.y) * hypo_uninary.y;
+	}
+	else
+	{
+        dir_y = 1;
+		hypo_supreme.y = ((float)(map_coor.y + 1) - start_pos.y) * hypo_uninary.y;
+	}
+    printf("first intersection: %f %f\n", hypo_supreme.x, hypo_supreme.y);
+    
+	float	collision_ray_length;
 
-	return (colision);
-}
+	while (map.array[map_coor.y][map_coor.x] != '1')
+	{
 
+		if (hypo_supreme.x < hypo_supreme.y)
+		{
+            map_coor.x += dir_x;
+			collision_ray_length = hypo_supreme.x;
+			hypo_supreme.x += hypo_uninary.x;
+		}
+		else
+		{
+            map_coor.y += dir_y;
+			collision_ray_length = hypo_supreme.y;
+			hypo_supreme.y += hypo_uninary.y;
+		}
+	}
+    float new_x = collision_ray_length / hypo_uninary.x;
+    float new_y = collision_ray_length / hypo_uninary.y;
+    printf("new_x = %f\n", new_x);
+    printf("new_y = %f\n", new_y);
 
-
-
-
-
-
-
-
-
-t_coor	raycasting(mlx_image_t *image, t_player player, t_map map, t_coor end)
-{
-	t_triangle	triangle_y;
-	t_triangle	triangle_x;
-	t_coor	 	check_point;
-
-	triangle_y = collision_triangulator_y(player.pos, end);
-	triangle_y.hypotenuse.start = triangle_y.adjacent.start;
-	triangle_y.hypotenuse.end = triangle_y.opposite.end;
+	end_pos.x = start_pos.x + dir_x * new_x;
+    printf("collision_ray_length: %f\n", collision_ray_length);
+	end_pos.y = start_pos.y + dir_y * new_y;
+	printf("start_pos.x = %f\n", start_pos.x);
+	printf("start_pos.y = %f\n", start_pos.y);
+	printf("dir_x * collision_ray_length = %f\n", dir_x * collision_ray_length);
+	printf("dir_y * collision_ray_length = %f\n\n", dir_y * collision_ray_length);
+	printf("END_POS.X = %f\n", end_pos.x);
+	printf("END_POS.y = %f\n", end_pos.y);
+    
+	bresenham_algorithm(image, start_pos, end_pos, color(255, 0, 0, 255));
 	
-	triangle_x = collision_triangulator_x(player.pos, end);
-	triangle_x.hypotenuse.start = triangle_x.adjacent.start;
-	triangle_x.hypotenuse.end = triangle_x.opposite.end;
-
-	//comparar las hipos, ver la mas pequena si colisiona, si hay colision medir distancias y linea en pantalla
-	if (triangle_y.hypotenuse.size < triangle_x.hypotenuse.size)
-		check_point = triangle_y.hypotenuse.end;
-	if (triangle_x.hypotenuse.size <= triangle_y.hypotenuse.size)
-		check_point = triangle_x.hypotenuse.end;
-	check_point = true_raycasting(image, triangle_y, triangle_x, check_point, map.array);
-
-	bresenham_algorithm(image, triangle_y.adjacent.start, triangle_y.adjacent.end, color(150, 0, 0, 255));
-	bresenham_algorithm(image, triangle_y.opposite.start, triangle_y.opposite.end, color(255, 0, 0, 255));
-	bresenham_algorithm(image, triangle_x.adjacent.start, triangle_x.adjacent.end, color(0, 0, 150, 255));
-	bresenham_algorithm(image, triangle_x.opposite.start, triangle_x.opposite.end, color(0, 0, 255, 255));
-	return (check_point);
+	//con pitagora hacemos el calculo de las hipotenusas
+    
+    
+    mlx_put_pixel(image, start_pos.x, start_pos.y, color(0, 0, 0, 255));
 }

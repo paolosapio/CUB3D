@@ -12,8 +12,6 @@ void 	init_texture(mlx_t* mlx, t_images *images)
 	map_sand = mlx_load_png("PNG/map_sand.png");
 	map_rock = mlx_load_png("PNG/map_rock.png");
 
-	
-
 	images->mirilla = mlx_texture_to_image(mlx, mirilla);
 	images->map_greco = mlx_texture_to_image(mlx, greco);
 	images->map_sand = mlx_texture_to_image(mlx, map_sand);

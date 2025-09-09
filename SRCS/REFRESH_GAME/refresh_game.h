@@ -22,7 +22,7 @@ typedef struct	s_triangle
 
 void	refresh_draw_greco(mlx_image_t *map_greco, t_player *player, t_map *map);
 void	refresh_draw_ray(mlx_image_t *map_player, t_player *player, int g_size_tile);
-t_coor	raycasting(mlx_image_t *image, t_player player, t_map map, t_coor end);
+t_coor	raycasting(mlx_image_t *image, t_coor start_pos, t_coor end_pos, t_map map);
 
 
 float	hipotenuseitor_no_root(t_segment adiacente,t_segment opposite);
