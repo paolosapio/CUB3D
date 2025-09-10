@@ -37,7 +37,8 @@
         "camera.h": "c",
         "tools_generics.h": "c",
         "ostream": "cpp",
-        "chrono": "c"
+        "chrono": "c",
+        "render.h": "c"
     },
     "cmake.sourceDirectory": "/home/psapio/Desktop/CUB3D/MLX42"
 }

@@ -1,11 +1,49 @@
-#include "refresh_game.h"
+#include "render.h"
 #include <math.h>
 
 typedef t_coor t_hypo2_len;
 typedef t_coor t_ray_len;
 
-t_coor raycasting(mlx_image_t *image, t_coor start_pos, t_coor end_pos, t_map map)
+void print_center_line(mlx_image_t *image, float ray_len, int x_axis)
 {
+	float middle_screen;
+	float half_ray;
+	int i = 0;
+
+	half_ray = ray_len / 2;
+	middle_screen = HEIGHT / 2;
+
+	if (middle_screen - half_ray >= 0)
+	{
+		while(i <= half_ray)
+		{
+			mlx_put_pixel(image, x_axis, middle_screen - i, color(255, 0, 0, 255));
+			mlx_put_pixel(image, x_axis, middle_screen + i, color(255, 0, 0, 255));
+			i++;
+		}
+	}
+	else
+	{
+		while(i <= HEIGHT)
+		{
+			mlx_put_pixel(image, x_axis, i, color(255, 0, 0, 255));
+			i++;
+		}
+	}
+}
+
+void	to_3d(mlx_image_t *image, float ray_len, int x_axis)
+{
+	// cuqndo es asi pinta en pantallla una linea 100% alta == 0002
+	float	vertical_line;
+
+	vertical_line = HEIGHT / ray_len;
+	print_center_line(image, vertical_line, x_axis);
+}
+
+t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map)
+{
+	t_ray		ray;
 	t_hypo2_len	hypo_uninary;
 	t_int_coor	map_coor;
 	t_hypo2_len	hypo_supreme;
@@ -18,7 +56,6 @@ t_coor raycasting(mlx_image_t *image, t_coor start_pos, t_coor end_pos, t_map ma
 
 	hypo_uninary.x = (float)sqrt(1 + (sides.y / sides.x) * (sides.y / sides.x));
 	hypo_uninary.y = (float)sqrt(1 + (sides.x / sides.y) * (sides.x / sides.y));
-
 	map_coor.x = (int)start_pos.x;
 	map_coor.y = (int)start_pos.y;
 	if (sides.x < 0)
@@ -42,28 +79,26 @@ t_coor raycasting(mlx_image_t *image, t_coor start_pos, t_coor end_pos, t_map ma
         dir_y = 1;
 		hypo_supreme.y = ((float)(map_coor.y + 1) - start_pos.y) * hypo_uninary.y;
 	}
-    
-	float	collision_ray_length;
-
 	while (map.array[map_coor.y][map_coor.x] != '1')
 	{
 
 		if (hypo_supreme.x < hypo_supreme.y)
 		{
             map_coor.x += dir_x;
-			collision_ray_length = hypo_supreme.x;
+			ray.colision_len = hypo_supreme.x;
 			hypo_supreme.x += hypo_uninary.x;
 		}
 		else
 		{
             map_coor.y += dir_y;
-			collision_ray_length = hypo_supreme.y;
+			ray.colision_len = hypo_supreme.y;
 			hypo_supreme.y += hypo_uninary.y;
 		}
 	}
-    float new_x = collision_ray_length / hypo_uninary.x;
-    float new_y = collision_ray_length / hypo_uninary.y;
+    float new_x = ray.colision_len / hypo_uninary.x;
+    float new_y = ray.colision_len / hypo_uninary.y;
 	end_pos.x = start_pos.x + dir_x * new_x;
 	end_pos.y = start_pos.y + dir_y * new_y;
-	bresenham_algorithm(image, start_pos, end_pos, color(255, 0, 0, 255));
+	ray.colision_point = end_pos;
+	return (ray);
 }

@@ -94,3 +94,11 @@ mlx_image_t	*create_floor(mlx_t *mlx, t_map *map)
 	}
 	return (img_floor);
 }
+
+mlx_image_t	*create_tridy(mlx_t *mlx)
+{
+	mlx_image_t *tridy;
+
+	tridy = mlx_new_image(mlx, WIDTH, HEIGHT);
+	return (tridy);
+}

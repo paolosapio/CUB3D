@@ -33,10 +33,8 @@ int	main(int argc, char **argv)
 // todo 2025.07.24
 // todo 2025.08.28
 
-/*	tareas pequeas:
-		que se vean los rayos en el minimapa tipo embudo
-*/
 /*	tareas grandes:
-		ray casting
+		ray casting:
+			colisiones
 		toda la parte grafica
  */

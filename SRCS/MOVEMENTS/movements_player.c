@@ -1,6 +1,6 @@
 
 #include "movements.h"
-#include "../CAMERA/camera.h"
+#include "../RENDER/render.h"
 
 #define		COLLITIONS "1"
 
@@ -76,7 +76,8 @@ void	movements_player(void *params)
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
-	refresh_draw_greco(game->images.map_greco, &game->player, &game->map);
-	refresh_draw_ray(game->images.map_ray, &game->player, g_size_tile);
+
+	clean_game_images(&game->images);
 	init_camera(game, game->player.pos, game->player.vision_angle);
+	refresh_draw_greco(game->images.map_greco, &game->player, &game->map);
 }
