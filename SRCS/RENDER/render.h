@@ -1,6 +1,8 @@
 #ifndef CAMERA_H
 # define CAMERA_H
 
+
+# include <math.h>
 # include <stdio.h>
 # include "t_coordinate.h"
 # include "../TOOLS_GENERICS/tools_generics.h"
@@ -30,6 +32,9 @@ typedef struct	s_ray
 
 void	init_camera(t_game *game, t_coor player_coor, float player_vision_angle);
 t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map);
-void	to_3d(mlx_image_t *image, float ray_len, int x_axis);
 
+void	to_3d(mlx_image_t *image, t_ray ray, int x_axis, t_player player);
+
+int		check_side_pixel(t_ray ray, t_player player);
+void	print_center_line(mlx_image_t *image, float ray_len, int x_axis, int color);
 #endif

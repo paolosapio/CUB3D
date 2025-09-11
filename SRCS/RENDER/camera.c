@@ -5,6 +5,7 @@
 #include "../TOOLS_GRAPHICS/tools_graphics.h"
 
 
+
 float	pixeleitor(void)
 {
 	float pixel_size;
@@ -12,7 +13,6 @@ float	pixeleitor(void)
 	pixel_size = 1.0 / g_size_tile;
 	return (pixel_size);
 }
-
 
 void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 {
@@ -43,7 +43,7 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 		l_screen_point.x += pixel_offset_cos;
 		l_screen_point.y += pixel_offset_sen;
 		ray_to_screen++;
-		to_3d(game->images.tridy, ray.colision_len, ray_to_screen);
+		to_3d(game->images.tridy, ray, ray_to_screen, game->player);
 	}
 	bresenham_algorithm(game->images.map_ray, player_coor, game->player.end, color(255, 255, 255, 255));
 }

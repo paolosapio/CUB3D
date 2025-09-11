@@ -4,7 +4,7 @@
 typedef t_coor t_hypo2_len;
 typedef t_coor t_ray_len;
 
-void print_center_line(mlx_image_t *image, float ray_len, int x_axis)
+void print_center_line(mlx_image_t *image, float ray_len, int x_axis, int color)
 {
 	float middle_screen;
 	float half_ray;
@@ -17,8 +17,8 @@ void print_center_line(mlx_image_t *image, float ray_len, int x_axis)
 	{
 		while(i <= half_ray)
 		{
-			mlx_put_pixel(image, x_axis, middle_screen - i, color(0, 50, 250, 255));
-			mlx_put_pixel(image, x_axis, middle_screen + i, color(0, 50, 250, 255));
+			mlx_put_pixel(image, x_axis, middle_screen - i, color);
+			mlx_put_pixel(image, x_axis, middle_screen + i, color);
 			i++;
 		}
 	}
@@ -26,19 +26,20 @@ void print_center_line(mlx_image_t *image, float ray_len, int x_axis)
 	{
 		while(i <= HEIGHT)
 		{
-			mlx_put_pixel(image, x_axis, i, color(0, 50, 250, 255));
+			mlx_put_pixel(image, x_axis, i, color);
 			i++;
 		}
 	}
 }
 
-void	to_3d(mlx_image_t *image, float ray_len, int x_axis)
+void	to_3d(mlx_image_t *image, t_ray ray, int x_axis, t_player player)
 {
-	// cuqndo es asi pinta en pantallla una linea 100% alta == 0002
 	float	vertical_line;
+	int color;
 
-	vertical_line = HEIGHT / ray_len;
-	print_center_line(image, vertical_line, x_axis);
+	vertical_line = HEIGHT / ray.colision_len;
+	color = check_side_pixel(ray, player);
+	print_center_line(image, vertical_line, x_axis, color);
 }
 
 t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map)
@@ -100,5 +101,6 @@ t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map)
 	end_pos.x = start_pos.x + dir_x * new_x;
 	end_pos.y = start_pos.y + dir_y * new_y;
 	ray.colision_point = end_pos;
+	// si es <= casilla player es W si es > de casilla player es E
 	return (ray);
 }
