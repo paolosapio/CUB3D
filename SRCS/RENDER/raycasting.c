@@ -17,8 +17,8 @@ void print_center_line(mlx_image_t *image, float ray_len, int x_axis)
 	{
 		while(i <= half_ray)
 		{
-			mlx_put_pixel(image, x_axis, middle_screen - i, color(255, 0, 0, 255));
-			mlx_put_pixel(image, x_axis, middle_screen + i, color(255, 0, 0, 255));
+			mlx_put_pixel(image, x_axis, middle_screen - i, color(0, 50, 250, 255));
+			mlx_put_pixel(image, x_axis, middle_screen + i, color(0, 50, 250, 255));
 			i++;
 		}
 	}
@@ -26,7 +26,7 @@ void print_center_line(mlx_image_t *image, float ray_len, int x_axis)
 	{
 		while(i <= HEIGHT)
 		{
-			mlx_put_pixel(image, x_axis, i, color(255, 0, 0, 255));
+			mlx_put_pixel(image, x_axis, i, color(0, 50, 250, 255));
 			i++;
 		}
 	}

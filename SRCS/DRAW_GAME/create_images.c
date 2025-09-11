@@ -1,5 +1,6 @@
 #include "draw_game.h"
 
+//TODO: Crear una única función para las imáenes en que solo creamos una imagen base
 mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map)
 {
 	mlx_image_t	*map_ray;
@@ -8,33 +9,11 @@ mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map)
 	return (map_ray);
 }
 
-mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map, t_images *image)
+mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map)
 {
-	int			x;
-	int			y;
-	int			slider = 0;
-	// t_int_coor	coor_map;
 	mlx_image_t	*img_minimap;
-	
-	mlx_resize_image(image->map_sand, g_size_tile, g_size_tile);
-	mlx_resize_image(image->map_rock, g_size_tile, g_size_tile);
 
 	img_minimap = mlx_new_image(mlx, map->longest_line * g_size_tile, map->map_len * g_size_tile);
-	y = -1;
-	while (map->array[++y])
-	{
-		slider++;
-		x = -1;
-		while (map->array[y][++x])
-		{
-			// coor_map.x = x;
-			// coor_map.y = y;
-			if (map->array[y][x] == '1')
-				mlx_image_to_window(mlx, image->map_rock, map->map_draw_offset.x + x * g_size_tile, map->map_draw_offset.y + y * g_size_tile);
-			else if (ft_strchr("NSWE0", map->array[y][x]) != NULL)
-				mlx_image_to_window(mlx, image->map_sand, map->map_draw_offset.x + x * g_size_tile, map->map_draw_offset.y + y * g_size_tile);
-		}
-	}
 	return (img_minimap);
 }
 

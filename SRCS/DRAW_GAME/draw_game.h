@@ -10,7 +10,7 @@
 
 void		images_to_window(t_game *game);
 mlx_image_t	*create_ray_minimap(mlx_t *mlx, t_map *map);
-mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map, t_images *image);
+mlx_image_t	*create_minimap(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_sky(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_background_map(mlx_t *mlx, t_map *map);
 mlx_image_t	*create_floor(mlx_t *mlx, t_map *map);

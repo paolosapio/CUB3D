@@ -11,6 +11,7 @@ void	init_map_foundations(t_map *map)
 	map->map_draw_offset.y = (HEIGHT - map->map_len * g_size_tile) / 2;
 	printf("g_size_tile = %d\n", g_size_tile);
 }
+
 void	init_game(t_game *game, t_parser_map *parser_map)
 {
 	init_map_foundations(&game->map);
