@@ -28,7 +28,6 @@ void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 			}
 		}
 	}
-
 	mlx_image_to_window(mlx, images->minimap, map->map_draw_offset.x, map->map_draw_offset.y);
 	mlx_image_to_window(mlx, images->map_ray, map->map_draw_offset.x, map->map_draw_offset.y);
 }
@@ -41,11 +40,8 @@ void	images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 	mlx_image_to_window(game->mlx, game->images.background_map, 0, 0);
 	minimap_images_to_window(game->mlx, &game->map, &game->images);
-
 	mlx_resize_image(game->images.map_greco, g_size_tile, g_size_tile);
 	mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
 
 	//image_print_ordereneitor(&game->images);
-
-
 }

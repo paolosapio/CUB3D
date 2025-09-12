@@ -16,7 +16,7 @@ void	init_game(t_game *game, t_parser_map *parser_map)
 {
 	init_map_foundations(&game->map);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", false);
-	init_texture(game->mlx, &game->images);
+	init_texture(game->mlx, &game->images, parser_map);
 	init_images(game->mlx, &game->map, &game->images);
 	destroy_parser_map(parser_map);
 	images_to_window(game);

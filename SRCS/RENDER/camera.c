@@ -23,6 +23,7 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	t_ray		ray;
 	int			ray_to_screen;
 	const float	ray_to_screen_aux = (float)(SCREEN * g_size_tile) / WIDTH;
+	//!mlx_texture_t	wall;
 
 	middle_screen_point.x = player_coor.x - cos(to_radians(player_vision_angle)) * DISTANCE_SCREEN;
 	middle_screen_point.y = player_coor.y - sin(to_radians(player_vision_angle)) * DISTANCE_SCREEN;
@@ -43,7 +44,8 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 		l_screen_point.x += pixel_offset_cos;
 		l_screen_point.y += pixel_offset_sen;
 		ray_to_screen++;
-		to_3d(game->images.tridy, ray, ray_to_screen, game->player);
+		//!wall =  check_side_texture(ray, player);
+		to_3d(game->images.tridy, ray, ray_to_screen, game->player, game->images.wall_alga);
 	}
 	bresenham_algorithm(game->images.map_ray, player_coor, game->player.end, color(255, 255, 255, 255));
 }

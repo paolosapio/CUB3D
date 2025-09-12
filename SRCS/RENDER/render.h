@@ -28,13 +28,14 @@ typedef struct	s_ray
 {
 	t_coor	colision_point;
 	float	colision_len;
+	float	vertical_line;
 }				t_ray;
 
 void	init_camera(t_game *game, t_coor player_coor, float player_vision_angle);
 t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map);
 
-void	to_3d(mlx_image_t *image, t_ray ray, int x_axis, t_player player);
+void	to_3d(mlx_image_t *image, t_ray ray, int x_step, t_player player, mlx_texture_t *texture);
 
 int		check_side_pixel(t_ray ray, t_player player);
-void	print_center_line(mlx_image_t *image, float ray_len, int x_axis, int color);
+void	print_centered_line(mlx_image_t *screen, t_ray ray, int x_step, mlx_texture_t *wall);
 #endif
