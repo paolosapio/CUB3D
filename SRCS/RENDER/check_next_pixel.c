@@ -7,6 +7,19 @@
 // 	image.
 // }
 
+t_coor f()
+{
+	float a = 4;
+	float b = 4;
+	return ((t_coor){.x = a, .y = b});
+}
+
+typedef struct s_o_3d
+{
+	mlx_texture_t *texture;
+	
+	/* data */
+} t_o_3d;
 
 
 //esta funcon se va a convertir en check side texture que devuelve mlx_texture_t

@@ -30,72 +30,79 @@ typedef t_coor t_ray_len;
 	}
 } */
 
-
-#define SCREEN_LIMIT_Y 0 
-int	color_texture_extractor(float x_decimal, float y_not_yet_decimal, mlx_texture_t *wall)
+unsigned int color_picker(t_coor pixel_texture_porcent, mlx_texture_t *texture)
 {
-	int		x_pixels_pos;
-	int		y_pixels_pos;
-	uint8_t	image_pixel_goal;
+unsigned int	x_in_texture;
+unsigned int	y_in_texture;
+unsigned char	*pixel_pos;
+unsigned int	color_pixel;
 
-	int		colorK;
+x_in_texture = texture->width * pixel_texture_porcent.x;	//140
+y_in_texture = pixel_texture_porcent.y;	//199
 
-	x_pixels_pos = wall->width * x_decimal; //80px de 200px
-	y_pixels_pos = wall->height * y_not_yet_decimal; //de momento primer pixel y
-
-	image_pixel_goal = wall->pixels[((y_pixels_pos * wall->width) + x_pixels_pos) * wall->bytes_per_pixel];
-
-	printf("asdasdasdad\n");
-	printf("%d - %d - %d - %d\n", wall->pixels[image_pixel_goal], wall->pixels[image_pixel_goal + 1], wall->pixels[image_pixel_goal + 2], wall->pixels[image_pixel_goal + 3]);
-	colorK = color(wall->pixels[image_pixel_goal], wall->pixels[image_pixel_goal + 1], wall->pixels[image_pixel_goal + 2], wall->pixels[image_pixel_goal + 3]);
-	printf("colorK = %x\n", colorK);
-	return (colorK);
+					//percentual donde me encountro el color;
+// printf("(y_in_texture: %d\n", y_in_texture);
+// printf("(x_in_texture: %d\n", x_in_texture);
+// printf("(y_in_texture * texture->width) + x_in_texture: %d\n", (y_in_texture * texture->width) + x_in_texture);
+pixel_pos = &texture->pixels[((y_in_texture * texture->width) + x_in_texture) * texture->bytes_per_pixel]; // el pixel es 111440
+// printf("red   %d\n  ", *(pixel_pos + 0));
+// printf("green %d\n  ", *(pixel_pos + 1));
+// printf("blue  %d\n  ", *(pixel_pos + 2));
+// printf("alfa  %d\n\n", *(pixel_pos + 3));
+color_pixel = color(*(pixel_pos), *(pixel_pos + 1), *(pixel_pos + 2), *(pixel_pos + 3));
+return (color_pixel);
 }
 
-void print_centered_line(mlx_image_t *screen, t_ray ray, int x_step, mlx_texture_t *wall)
+#define SCREEN_LIMIT_Y 0
+
+// TODO tenemos que calcular qual es el pixel de la 
+// TODO textura y su posiocion en la pantalla y porsupuesto
+// TODO pintarlo, y seguir hasta el siguente de la miama columna
+
+float	y_star_pos(t_ray ray)
 {
-	float middle_screen;
-	float half_ray;
-	int y_pos = 0;
-	float	point_x_temp;
-	int	texture_color;
+	float	y_start_to_paint;
 
-	point_x_temp = ray.colision_point.x - (int)ray.colision_point.x;
-	half_ray = ray.vertical_line / 2;
-	middle_screen = HEIGHT / 2;
+	y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
+	return (y_start_to_paint);
+}
 
-
+void	to_3d(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
+{
+	float			x_pos_texture;
+	float			y_pos_texture = 0.0;
+	float			pixel_little_jump;
+	unsigned int	color_pixel;
+	float			y_start_to_paint;
 	
-	if (middle_screen - half_ray >= SCREEN_LIMIT_Y)
-	{
-		while(y_pos)
-		{
+	ray.vertical_line = HEIGHT / ray.colision_len;	//!! float longitud de la linea!! lo que se tiene qeu pintar con pixeles de la textura!!
+	x_pos_texture = ray.colision_point.x - (int)ray.colision_point.x;
+	y_start_to_paint = y_star_pos(ray);
+	pixel_little_jump = texture->height / ray.vertical_line;
+	// printf("pixel_little_jump: %f\n", pixel_little_jump);
+	// printf("y_pos_texture: %f\n", y_pos_texture);
 
-			texture_color = color_texture_extractor(point_x_temp, (float)y_pos, wall);
-			mlx_put_pixel(screen, x_step, middle_screen - y_pos, texture_color);
-			mlx_put_pixel(screen, x_step, middle_screen + y_pos, texture_color);
-			y_pos++;
-		}
-	}
-	else
+	//printf("ray.vertical_line: %f\n", ray.vertical_line);
+
+	while (y_pos_texture < texture->width) //TODO REVISAR ESTO Y APAÑARLO MEJOR
 	{
-		while(y_pos <= HEIGHT)
-		{
-			mlx_put_pixel(screen, x_step, y_pos, color(0,0,0,255));
-			y_pos++;
-		}
+		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture);
+		if (y_start_to_paint >= 0 && y_start_to_paint <= HEIGHT)
+			mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
+		y_start_to_paint++;
+		y_pos_texture += pixel_little_jump;
 	}
 }
 
 
-void	to_3d(mlx_image_t *image, t_ray ray, int x_step, t_player player, mlx_texture_t *texture)
-{
-	//int color;
-	(void)player;
-	ray.vertical_line = HEIGHT / ray.colision_len;
-	// color = check_side_pixel(ray, player);
-	print_centered_line(image, ray, x_step, texture);
-}
+
+
+
+
+
+
+
+
 
 t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map)
 {
@@ -156,6 +163,7 @@ t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map)
 	end_pos.x = start_pos.x + dir_x * new_x;
 	end_pos.y = start_pos.y + dir_y * new_y;
 	ray.colision_point = end_pos;
+
 	// si es <= casilla player es W si es > de casilla player es E
 	return (ray);
 }

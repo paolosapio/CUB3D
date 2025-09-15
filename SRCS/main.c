@@ -7,6 +7,7 @@ void	sayonara_baby(t_game *game)
 	destroy_map(&game->map);
 	destroy_images(game->mlx, &game->images);
 	mlx_terminate(game->mlx);
+
 }
 
 

@@ -27,6 +27,5 @@ void 	init_texture(mlx_t* mlx, t_images *images, t_parser_map *parser_map)
 	mlx_delete_texture(greco);
 	mlx_delete_texture(map_sand);
 	mlx_delete_texture(map_rock);
-
 	images->wall_alga = wall_alga;
 }
