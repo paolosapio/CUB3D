@@ -8,8 +8,8 @@
 
 /* SCREEN RESOLUTION */
 
-# define WIDTH 2000
-# define HEIGHT 1500
+# define WIDTH 1500
+# define HEIGHT 1000
 
 // # define WIDTH 2000
 // # define HEIGHT 2000
