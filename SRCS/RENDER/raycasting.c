@@ -70,33 +70,48 @@ float	y_start_pos(t_ray ray)
 void	to_3d(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
 {
 	float			x_pos_texture;
-	float			y_pos_texture = 0.0;
+	float			y_pos_texture;
 	float			pixel_little_jump;
 	unsigned int	color_pixel;
 	float			y_start_to_paint;
-	
+	float			end_screen;
+
 	ray.vertical_line = HEIGHT / ray.colision_len;	//!! float longitud de la linea!! lo que se tiene qeu pintar con pixeles de la textura!!
 	x_pos_texture = ray.colision_point.x - (int)ray.colision_point.x;
-	y_start_to_paint = y_start_pos(ray);
+	//y_start_to_paint = y_start_pos(ray);
 	pixel_little_jump = texture->height / ray.vertical_line;
 	// printf("pixel_little_jump: %f\n", pixel_little_jump);
 	// printf("y_pos_texture: %f\n", y_pos_texture);
 
-	//printf("ray.vertical_line: %f\n", ray.vertical_line);
+	if (ray.vertical_line > HEIGHT)
+	{
+		//printf("asdasdasdasdda: %f\n", ((ray.vertical_line - HEIGHT) / 2));
+		y_pos_texture = texture->width * ((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line;
+		end_screen = texture->height - y_pos_texture;
+		y_start_to_paint = 0;
+	}
+	else
+	{
+		y_pos_texture = 0.0;
+		end_screen = texture->height;
+		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
+	}
+	// printf("ray.vertical_line: %f\n", ray.vertical_line);
+	// printf("ññññññññññññññññññy_pos_texture: %f\n", y_pos_texture);
 	
 	//TODO REVISAR ESTO Y APAÑARLO MEJOR
-	while (y_pos_texture < texture->height) 
+	while (y_pos_texture < end_screen) 
 	{
 		// if (texture->height > HEIGHT)>>
-		if (y_start_to_paint >= 0 && y_start_to_paint <= HEIGHT)
-		{
-				color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture);
-				mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
-		}
-		// else
-		// 	printf("caca\n");
-			y_start_to_paint++;
-			y_pos_texture += pixel_little_jump;
+		// printf("y_pos_texture: %f\n", y_pos_texture);
+
+		// printf("y_pos_texture: %f\n", y_pos_texture);
+		// printf("end_screen: %f\n", end_screen);
+		// printf("y_start_to_paint: %f\n", y_start_to_paint);
+		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture);
+		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
+		y_start_to_paint++;
+		y_pos_texture += pixel_little_jump;
 	}
 }
 
