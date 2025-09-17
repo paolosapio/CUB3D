@@ -5,6 +5,8 @@
 # include "../PARSER/parser.h"
 # include "../DRAW_GAME/draw_game.h"
 # include "../TOOLS_GENERICS/tools_generics.h"
+# include "../RENDER/render.h"
+
 
 // init_game.c
 void	init_game(t_game *game, t_parser_map *parser_map);
