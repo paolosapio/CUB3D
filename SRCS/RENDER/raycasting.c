@@ -88,6 +88,7 @@ void	to_3d(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
 		//printf("asdasdasdasdda: %f\n", ((ray.vertical_line - HEIGHT) / 2));
 		y_pos_texture = texture->width * ((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line;
 		end_screen = texture->height - y_pos_texture;
+		printf("----> end_screen: %f\n", end_screen);
 		y_start_to_paint = 0;
 	}
 	else

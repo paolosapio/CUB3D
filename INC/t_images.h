@@ -22,7 +22,7 @@ typedef struct	s_images
 	mlx_texture_t	*map_texture_N;
 	mlx_texture_t	*map_texture_S;
 	mlx_texture_t	*map_texture_E;
-	mlx_texture_t	*map_texture_O;
+	mlx_texture_t	*map_texture_W;
 }				t_images;
 
 #endif

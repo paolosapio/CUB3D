@@ -1,4 +1,4 @@
-SO ./path_to_the_south_texture
+SO ./PNG/wall_alga_S.png
                               
                           
 
@@ -27,9 +27,9 @@ SO ./path_to_the_south_texture
 
 
 
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-NO         ./PNG/wall_alga.png
+WE ./PNG/wall_alga_W.png
+EA ./PNG/wall_alga_E.png
+NO ./PNG/wall_alga_N.png
 
 
 F             220,100,0

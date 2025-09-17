@@ -23,7 +23,7 @@ int	save_map_info(char *line_map_to_check, char **map_info)
 	if ((ft_arraylen((const char **)splitted) == 2 && splitted[1][0] != '\n')||
 		(ft_arraylen((const char **)splitted) == 3 && splitted[2][0] == '\n'))
 	{
-		*map_info = ft_strdup(splitted[1]);
+		*map_info = ft_strtrim(splitted[1], "\n");
 		free_double_pointer(splitted);
 		return (OK);
 	}

@@ -66,8 +66,11 @@ void	movements_player(void *params)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
 		angulator_move(game->player.vision_angle + 0, g_size_tile, game);
-		clean_game_images(&game->images);
-		init_camera(game, game->player.pos, game->player.vision_angle);
+		if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT) == false && mlx_is_key_down(game->mlx, MLX_KEY_RIGHT) == false)
+		{
+			clean_game_images(&game->images);
+			init_camera(game, game->player.pos, game->player.vision_angle);
+		}
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{

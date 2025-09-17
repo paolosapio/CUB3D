@@ -68,7 +68,7 @@ mlx_image_t	*create_floor(mlx_t *mlx, t_map *map)
 		x = -1;
 		while (++x < WIDTH)
 		{
-			mlx_put_pixel(img_floor, x, y, 0x968C6E);
+			mlx_put_pixel(img_floor, x, y, color(75, 95, 120, 255));
 		}
 	}
 	return (img_floor);
