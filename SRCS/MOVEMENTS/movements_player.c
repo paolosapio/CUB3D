@@ -60,10 +60,8 @@ void	movements_player(void *params)
 	t_game *game;
 
 	game = (t_game *)params;
-	game->player.speed = NORMAL * (g_size_tile * 0.04);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
-		game->player.speed = TURBO * (g_size_tile * 0.04);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+
+	if (game->player.movements == PLAYER_W)
 	{
 		angulator_move(game->player.vision_angle + 0, g_size_tile, game);
 		if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT) == false && mlx_is_key_down(game->mlx, MLX_KEY_RIGHT) == false)
@@ -72,31 +70,31 @@ void	movements_player(void *params)
 			init_camera(game, game->player.pos, game->player.vision_angle);
 		}
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+	if (game->player.movements == PLAYER_D)
 	{
 		angulator_move(game->player.vision_angle + 90, g_size_tile, game);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+	if (game->player.movements == PLAYER_S)
 	{
 		angulator_move(game->player.vision_angle + 180, g_size_tile, game);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+	if (game->player.movements == PLAYER_A)
 	{
 		angulator_move(game->player.vision_angle + 270, g_size_tile, game);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+	if (game->player.movements == PLAYER_LEFT)
 	{
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+	if (game->player.movements == PLAYER_RIGHT)
 	{
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
 		clean_game_images(&game->images);

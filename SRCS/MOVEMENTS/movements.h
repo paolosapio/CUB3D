@@ -25,14 +25,18 @@ typedef struct	s_trig_angle
 
 typedef enum	e_player_movements
 {
-	PLAYER_STOP_RIGHT,
+	PLAYER_W,
+	PLAYER_S,
+	PLAYER_A,
+	PLAYER_D,
 	PLAYER_LEFT,
 	PLAYER_RIGHT,
-	PLAYER_UP,
-	PLAYER_DOWN,
-	PLAYER_STOP_LEFT,
-	PLAYER_STOP_UP,
-	PLAYER_STOP_DOWN,
+	//PLAYER_STOP_W,
+	//PLAYER_STOP_S,
+	//PLAYER_STOP_A,
+	//PLAYER_STOP_D,
+	//PLAYER_STOP_LEFT,
+	//PLAYER_STOP_RIGHT,
 }				t_player_movements;
 
 //movements_player.c

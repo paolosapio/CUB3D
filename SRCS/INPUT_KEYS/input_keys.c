@@ -8,7 +8,6 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 {
 	t_game *game;
 	
-	// (void)keydata;
 	game = (t_game *)params;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
 		mlx_close_window(game->mlx);
@@ -21,6 +20,38 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		game->images.map_sand->enabled -= 1;
 		game->images.map_rock->enabled -= 1;
 	}
+	game->player.speed = NORMAL * (g_size_tile * 0.04);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
+		game->player.speed = TURBO * (g_size_tile * 0.04);
+
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+	{
+		game->player.movements = PLAYER_W;
+	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+	{
+		game->player.movements = PLAYER_A;
+
+	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+	{
+		game->player.movements = PLAYER_S;
+
+	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+	{
+		game->player.movements = PLAYER_D;
+	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+	{
+		game->player.movements = PLAYER_LEFT;
+	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+	{
+		game->player.movements = PLAYER_RIGHT;
+	}
+	
+	
 }
 
 #define MOUSE_LIMIT_RANGE 50
