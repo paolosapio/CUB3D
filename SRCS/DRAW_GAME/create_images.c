@@ -23,15 +23,19 @@ mlx_image_t	*create_sky(mlx_t *mlx, t_map *map)
 	int	y;
 	(void)map;
 	mlx_image_t	*img_sky = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
-	
+	float	sky_color = 255;
+	const float	degraded_jump = 255.0 / (HEIGHT / 2);
+	printf("degraded_jump: %f\n", degraded_jump);
 	y = -1;
 	while (++y < HEIGHT / 2)
 	{
 		x = -1;
 		while (++x < WIDTH)
 		{
-			mlx_put_pixel(img_sky, x, y, 0x6D8196FF);
+			mlx_put_pixel(img_sky, x, y, color(20, 50,  sky_color + (int)degraded_jump, 255));
+			printf("degraded_jump: %f\n", degraded_jump);
 		}
+		sky_color-= degraded_jump;
 	}
 	return (img_sky);
 }
