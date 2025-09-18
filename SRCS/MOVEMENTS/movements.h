@@ -9,6 +9,7 @@
 # include "../COLLISIONS/collisions.h"
 # include "../REFRESH_GAME/refresh_game.h"
 # include "../TOOLS_GENERICS/tools_generics.h"
+# include "t_player_movements.h"
 
 # define LIMIT_FOV 1.5
 
@@ -23,21 +24,6 @@ typedef struct	s_trig_angle
 	float	c0s;
 }			t_trig_angle;
 
-typedef enum	e_player_movements
-{
-	PLAYER_W,
-	PLAYER_S,
-	PLAYER_A,
-	PLAYER_D,
-	PLAYER_LEFT,
-	PLAYER_RIGHT,
-	//PLAYER_STOP_W,
-	//PLAYER_STOP_S,
-	//PLAYER_STOP_A,
-	//PLAYER_STOP_D,
-	//PLAYER_STOP_LEFT,
-	//PLAYER_STOP_RIGHT,
-}				t_player_movements;
 
 //movements_player.c
 

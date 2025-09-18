@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include "../SRCS/MOVEMENTS/movements.h"
 # include "t_coordinate.h"
 # include <stdbool.h>
+# include "t_player_movements.h"
 
 #define PLAYER_MAP_COLOR 0xFF6600FF //naranja
 #define CENTER_PLAYER 0.5 //FACTOR DE DESPLAZAMIENTO DE LA CASILLA EN EL CENTRO EDL JUGADOR PARA QUE NO SEA LA EZQUINA ARRIBA A LA EZQUERDA
