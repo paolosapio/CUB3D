@@ -15,12 +15,6 @@ typedef struct			s_player
 	t_coor				end;
 	float				vision_angle;
 	float				speed;
-//	bool				key_w_is_released;
-//	bool				key_a_is_released;
-//	bool				key_s_is_released;
-//	bool				key_d_is_released;
-//	bool				key_left_is_released;
-//	bool				key_right_is_released;
 	t_player_movements	movements;
 	
 }						t_player;

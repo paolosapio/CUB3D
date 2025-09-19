@@ -103,5 +103,6 @@ t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map)
 	ray.colision_point = end_pos;
 
 	// si es <= casilla player es W si es > de casilla player es E
+	
 	return (ray);
 }

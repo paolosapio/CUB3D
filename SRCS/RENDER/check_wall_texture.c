@@ -43,24 +43,33 @@ void	to_3d(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
 	unsigned int	color_pixel;
 	float			y_start_to_paint;
 	float			end_screen;
-
 	ray.vertical_line = HEIGHT / ray.colision_len;
+	// if (ray.vertical_line > 100000)
+	// 	ray.vertical_line = 100000;
+	// printf("ray.colision_len: %f10\n", ray.colision_len);
+	// printf("ray.vertical_line: %f10\n", ray.vertical_line);
 	x_pos_texture = ray.colision_point.x - (int)ray.colision_point.x;
 	pixel_little_jump = texture->height / ray.vertical_line;
 	if (ray.vertical_line > HEIGHT)
 	{
-		y_pos_texture = texture->width * ((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line;
+		y_pos_texture = texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line);
+		// printf("y_pos_texture: %f\n", y_pos_texture);
+		//if (y_pos_texture > texture->height)
+		y_start_to_paint = 0.0;
 		end_screen = texture->height - y_pos_texture;
-		y_start_to_paint = 0;
 	}
 	else
 	{
 		y_pos_texture = 0.0;
-		end_screen = texture->height;
 		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
+		end_screen = texture->height;
 	}
 	while (y_pos_texture < end_screen) 
 	{
+		if (y_start_to_paint > HEIGHT)
+			break ;
+		//printf("")
+		
 		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture);
 		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
 		y_start_to_paint++;

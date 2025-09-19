@@ -42,9 +42,9 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 		}
 		l_screen_point.x += pixel_offset_cos;
 		l_screen_point.y += pixel_offset_sen;
-		x_pos_in_screen++;
 		// todo>>>>> wall =  check_side_texture(ray, player);
 		to_3d(game->images.tridy, ray, x_pos_in_screen, game->images.map_texture_W);
+		x_pos_in_screen++;
 	}
 	bresenham_algorithm(game->images.map_ray, player_coor, game->player.end, color(255, 255, 255, 255));
 }

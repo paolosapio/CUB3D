@@ -12,15 +12,18 @@ void	move_line_direction(t_player *player, float sen, float cos)
 		player->end.x += cos * player->speed;
 }
 
+#define DISTANCE_COLLISION 1
+
 void	move_player(t_player *player, t_map *map, float sen, float cos)
 {
-	t_coor		new_player_pos;
-	t_int_coor	tile;
+	t_coor			new_player_pos;
+	t_int_coor		tile;
+	const t_coor	stop_collision = {.y = (sen * DISTANCE_COLLISION), .x = (cos * DISTANCE_COLLISION)};
 
-	new_player_pos.y = player->pos.y + sen * player->speed;
-	new_player_pos.x = player->pos.x + cos * player->speed;
-	tile.y = (int)new_player_pos.y;
-	tile.x = (int)new_player_pos.x;
+	new_player_pos.y = (player->pos.y + sen * player->speed);
+	new_player_pos.x = (player->pos.x + cos * player->speed);
+	tile.y = (int)(new_player_pos.y + stop_collision.y);
+	tile.x = (int)(new_player_pos.x + stop_collision.x);
 	if ((map->array[(int)player->pos.y][tile.x] && !ft_strchr(COLLITIONS, map->array[(int)player->pos.y][tile.x])))
 	{
 		player->pos.x = new_player_pos.x;
@@ -52,6 +55,7 @@ void angulator_move(float vision_angle, int g_size_tile, t_game *game)
 	trig_angle.angle = vision_angle;
 	trig_angle.s1n = sin(to_radians(vision_angle)) / g_size_tile;
 	trig_angle.c0s = cos(to_radians(vision_angle)) / g_size_tile;
+	printf("trig_angle.s1n: %f\n", trig_angle.s1n);
 	move_player(&game->player, &game->map, -trig_angle.s1n, -trig_angle.c0s);
 }
 
@@ -61,7 +65,7 @@ void	movements_player(void *params)
 
 	game = (t_game *)params;
 
-	if (game->player.movements == PLAYER_W)
+	if (game->player.movements.key_w_is_down == true)
 	{
 		angulator_move(game->player.vision_angle + 0, g_size_tile, game);
 		if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT) == false && mlx_is_key_down(game->mlx, MLX_KEY_RIGHT) == false)
@@ -70,31 +74,31 @@ void	movements_player(void *params)
 			init_camera(game, game->player.pos, game->player.vision_angle);
 		}
 	}
-	if (game->player.movements == PLAYER_D)
+	if (game->player.movements.key_d_is_down == true)
 	{
 		angulator_move(game->player.vision_angle + 90, g_size_tile, game);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	if (game->player.movements == PLAYER_S)
+	if (game->player.movements.key_s_is_down == true)
 	{
 		angulator_move(game->player.vision_angle + 180, g_size_tile, game);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	if (game->player.movements == PLAYER_A)
+	if (game->player.movements.key_a_is_down == true)
 	{
 		angulator_move(game->player.vision_angle + 270, g_size_tile, game);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	if (game->player.movements == PLAYER_LEFT)
+	if (game->player.movements.key_left_is_down == true)
 	{
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	if (game->player.movements == PLAYER_RIGHT)
+	if (game->player.movements.key_right_is_down == true)
 	{
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
 		clean_game_images(&game->images);

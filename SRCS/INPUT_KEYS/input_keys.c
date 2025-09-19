@@ -23,35 +23,43 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	game->player.speed = NORMAL * (g_size_tile * 0.04);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
 		game->player.speed = TURBO * (g_size_tile * 0.04);
+	if (keydata.key == MLX_KEY_W)
+	{
+		game->player.movements.key_w_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+			game->player.movements.key_w_is_down = false;
+	}
+	if (keydata.key == MLX_KEY_A)
+	{
+		game->player.movements.key_a_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+			game->player.movements.key_a_is_down = false;
+	}
+	if (keydata.key == MLX_KEY_S)
+	{
+		game->player.movements.key_s_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+			game->player.movements.key_s_is_down = false;
+	}
+	if (keydata.key == MLX_KEY_D)
+	{
+		game->player.movements.key_d_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+			game->player.movements.key_d_is_down = false;
+	}
+	if (keydata.key == MLX_KEY_LEFT)
+	{
+		game->player.movements.key_left_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+			game->player.movements.key_left_is_down = false;
+	}
+	if (keydata.key == MLX_KEY_RIGHT)
+	{
+		game->player.movements.key_right_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+			game->player.movements.key_right_is_down = false;
+	}
 
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-	{
-		game->player.movements = PLAYER_W;
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-	{
-		game->player.movements = PLAYER_A;
-
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-	{
-		game->player.movements = PLAYER_S;
-
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-	{
-		game->player.movements = PLAYER_D;
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-	{
-		game->player.movements = PLAYER_LEFT;
-	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-	{
-		game->player.movements = PLAYER_RIGHT;
-	}
-	
-	
 }
 
 #define MOUSE_LIMIT_RANGE 50

@@ -6,7 +6,6 @@
 # include <math.h>
 # include "t_game.h"
 # include "../DRAW_GAME/draw_game.h"
-# include "../COLLISIONS/collisions.h"
 # include "../REFRESH_GAME/refresh_game.h"
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "t_player_movements.h"

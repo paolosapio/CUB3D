@@ -1,7 +1,7 @@
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-NO         ./path_to_the_0orth_texture 
+SO ./PNG/wall_alga_S.png
+WE ./PNG/wall_alga_W.png
+EA ./PNG/wall_alga_E.png
+NO ./PNG/wall_alga_N.png
 F             220,100,0
 C 225,30,0
 
