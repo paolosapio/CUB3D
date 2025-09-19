@@ -55,7 +55,6 @@ void angulator_move(float vision_angle, int g_size_tile, t_game *game)
 	trig_angle.angle = vision_angle;
 	trig_angle.s1n = sin(to_radians(vision_angle)) / g_size_tile;
 	trig_angle.c0s = cos(to_radians(vision_angle)) / g_size_tile;
-	printf("trig_angle.s1n: %f\n", trig_angle.s1n);
 	move_player(&game->player, &game->map, -trig_angle.s1n, -trig_angle.c0s);
 }
 

@@ -33,6 +33,7 @@ typedef struct	s_ray
 
 void	init_camera(t_game *game, t_coor player_coor, float player_vision_angle);
 t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map);
+void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_index);
 
 void	to_3d(mlx_image_t *image, t_ray ray, int x_step, mlx_texture_t *texture);
 
