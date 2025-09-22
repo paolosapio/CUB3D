@@ -265,7 +265,7 @@ void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_
 	{
 		if (player.pos.x < ray.colision_point.x) //* Este
 			to_3d_east(images->tridy, ray, ray_index, images->map_texture_E);
-		else									//* Oeste
+		else //* Este
 			to_3d_west(images->tridy, ray, ray_index, images->map_texture_W);
 	}
 
