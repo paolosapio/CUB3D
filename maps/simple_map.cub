@@ -1,17 +1,10 @@
-SO ./PNG/wall_alga_S.png
-WE ./PNG/wall_alga_W.png
-EA ./PNG/wall_alga_E.png
-NO ./PNG/wall_alga_N.png
-
+NO ./PNG/check_side_N.png
+SO ./PNG/check_side_S.png
+EA ./PNG/check_side_E.png
+WE ./PNG/check_side_W.png
 
 F 220,100,0
 C 225,30,0
-
-
-
-
-
-
 
  111111111
 10000010001

@@ -1,5 +1,18 @@
 #include "draw_game.h"
 
+void	transparentator(int value_of_trasparence, mlx_image_t *image)
+{
+	int i;
+
+	i = 3;
+	while (i < image->width * image->height * 4)
+	{
+		printf("caca");
+		image->pixels[i] = value_of_trasparence;
+ 		i += 4;
+	}
+		
+}
 void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 {
 	int			x;
@@ -8,6 +21,9 @@ void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 
 	mlx_resize_image(images->map_sand, g_size_tile, g_size_tile);
 	mlx_resize_image(images->map_rock, g_size_tile, g_size_tile);
+
+	transparentator(200, images->map_sand);
+	transparentator(200, images->map_rock);
 
 	y = -1;
 	while (map->array[++y])

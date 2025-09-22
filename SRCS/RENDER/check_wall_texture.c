@@ -49,8 +49,6 @@ unsigned int color_picker(t_coor pixel_texture_porcent, mlx_texture_t *texture, 
 	pixel_pos = &texture->pixels[((y_in_texture) + x_in_texture) * texture->bytes_per_pixel];
 
 	texture_darkener = ray_len * 5;
-	if ((*(pixel_pos) - *(pixel_pos) == 0))
-		*(pixel_pos) = 0;
 	color_pixel = color(*(pixel_pos), *(pixel_pos + 1), *(pixel_pos + 2), *(pixel_pos + 3));
 	return (color_pixel);
 }
