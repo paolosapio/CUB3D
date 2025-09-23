@@ -1,16 +1,6 @@
 
 #include "cub3d.h"
 
-void	sayonara_baby(t_game *game)
-{
-	printf("\n\nSAYONARA BABYYYY 🐠🐡🌊\n");
-	destroy_map(&game->map);
-	destroy_images(game->mlx, &game->images);
-	mlx_terminate(game->mlx);
-
-}
-
-
 int	main(int argc, char **argv)
 {
 	t_parser_map parser_map;
@@ -28,7 +18,7 @@ int	main(int argc, char **argv)
 	parser_map = parser(argv[1], &game.map);
 	init_game(&game, &parser_map);
 	await_user_input(&game);
-	sayonara_baby(&game);
+	sayonara_baby(game.mlx, &game.images, &game.map);
 }
 
 // todo 2025.07.24

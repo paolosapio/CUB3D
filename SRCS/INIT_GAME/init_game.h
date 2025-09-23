@@ -6,6 +6,7 @@
 # include "../DRAW_GAME/draw_game.h"
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "../RENDER/render.h"
+# include "../FUNKY_DESTROY/funky_destroy.h"
 
 
 // init_game.c

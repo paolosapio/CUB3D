@@ -37,7 +37,9 @@
         "tools_generics.h": "c",
         "ostream": "cpp",
         "chrono": "c",
-        "render.h": "c"
+        "render.h": "c",
+        "funky_destroy.h": "c",
+        "t_player_movements.h": "c"
     },
     "cmake.sourceDirectory": "/home/psapio/Desktop/CUB3D/MLX42"
 }

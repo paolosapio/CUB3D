@@ -2,7 +2,7 @@
 #include "input_keys.h"
 #include "libft.h"
 #include "../MOVEMENTS/movements.h"
-#include "../REFRESH_GAME/refresh_game.h"
+#include "../RENDER/render.h"
 
 void	special_keys(mlx_key_data_t keydata, void *params)
 {
@@ -70,31 +70,22 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 
 	(void)mouse_y;
 	game = (t_game *)params;
-
-	//* ATRAPARATON EN VENTANA
-	// if (mouse_x > WIDTH - MOUSE_LIMIT_RANGE)
-	// 	mlx_set_mouse_pos(game->mlx, 51, HEIGHT / 2);
-	// else if (mouse_x <= MOUSE_LIMIT_RANGE)
-	// 	mlx_set_mouse_pos(game->mlx, WIDTH - 51, HEIGHT / 2);
-	// if (mouse_y <= MOUSE_LIMIT_RANGE || mouse_y >= HEIGHT - MOUSE_LIMIT_RANGE)
-	// 	mlx_set_mouse_pos(game->mlx, mouse_x, HEIGHT / 2);
+		// mlx_set_mouse_pos(game->mlx, mouse_x, HEIGHT / 2);
 	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	if (mouse_x < first_step_x)
-	{
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
-	}
 	else if (mouse_x > first_step_x)
-	{
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
-	}
+	clean_game_images(&game->images);
+	init_camera(game, game->player.pos, game->player.vision_angle);
 	first_step_x = mouse_x;
-	//refresh_draw_ray(game->images.map_ray, &game->player, g_size_tile);
+
 }
 
 void await_user_input(t_game *game)
 {
 	mlx_key_hook(game->mlx, &special_keys, game);
-	//mlx_cursor_hook(game->mlx, &mouse_movements, game);
+	mlx_cursor_hook(game->mlx, &mouse_movements, game);
 	mlx_loop_hook(game->mlx, &movements_player, game);
 	mlx_loop(game->mlx);
 }

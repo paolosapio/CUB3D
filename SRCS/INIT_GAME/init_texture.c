@@ -1,44 +1,52 @@
 #include "init_game.h"
 
-void	wall_eitor(t_images *images, t_parser_map *parser_map)
+
+mlx_texture_t	*load_n_check_texture(mlx_t* mlx, t_images *images, char *texture_path)
 {
-	mlx_texture_t	*wall_alga_N;
-	mlx_texture_t	*wall_alga_S;
-	mlx_texture_t	*wall_alga_E;
-	mlx_texture_t	*wall_alga_W;
-	
-	wall_alga_N = mlx_load_png(parser_map->info_north_texture);
-	wall_alga_S = mlx_load_png(parser_map->info_south_texture);
-	wall_alga_E = mlx_load_png(parser_map->info_east_texture);
-	wall_alga_W = mlx_load_png(parser_map->info_west_texture);
-	images->map_texture_N = wall_alga_N;
-	images->map_texture_S = wall_alga_S;
-	images->map_texture_E = wall_alga_E;
-	images->map_texture_W = wall_alga_W;
+	mlx_texture_t	*texture;
+
+	texture = mlx_load_png(texture_path);
+	if (!texture)
+	{
+		write(2, "ERROR:NOT VALID TEXTURE: ", 25);
+		ft_putendl_fd(texture_path, 2);
+		sayonara_baby(mlx, images, NULL);
+		exit(1);
+	}
+	return (texture);
 }
+
+mlx_image_t	*load_n_check_image(mlx_t* mlx, t_images *images, char *texture_path)
+{
+	mlx_texture_t	*texture;
+	mlx_image_t		*image;
+	
+	texture = mlx_load_png(texture_path);
+	if (!texture)
+	{
+		write(2, "ERROR:NOT VALID TEXTURE: ", 25);
+		ft_putendl_fd(texture_path, 2);
+		sayonara_baby(mlx, images, NULL);
+		exit(1);
+	}
+	image = mlx_texture_to_image(mlx, texture);
+	mlx_delete_texture(texture);
+	// TODO: mlx_set_icon(mlx, greco);
+	return (image);
+}
+
+
 
 void 	init_texture(mlx_t* mlx, t_images *images, t_parser_map *parser_map)
 {
-	mlx_texture_t	*mirilla;
-	mlx_texture_t	*greco;
-	mlx_texture_t	*map_sand;
-	mlx_texture_t	*map_rock;
+	images->mirilla = load_n_check_image(mlx, images, "PNG/mirila.png");
+	images->map_greco = load_n_check_image(mlx, images, "PNG/greco.png");
+	images->map_sand = load_n_check_image(mlx, images, "PNG/map_sand.png");
+	images->map_rock = load_n_check_image(mlx, images, "PNG/map_rock.png");
 
-	mirilla = mlx_load_png("PNG/mirilla.png");
-	greco = mlx_load_png("PNG/greco.png");
-	map_sand = mlx_load_png("PNG/map_sand.png");
-	map_rock = mlx_load_png("PNG/map_rock.png");
-	mlx_set_icon(mlx, greco);
-	//!TODO: Comprobar que las texturas se hayan cargado bien!!!!
-
-	images->mirilla = mlx_texture_to_image(mlx, mirilla);
-	images->map_greco = mlx_texture_to_image(mlx, greco);
-	images->map_sand = mlx_texture_to_image(mlx, map_sand);
-	images->map_rock = mlx_texture_to_image(mlx, map_rock);
-	wall_eitor(images, parser_map);
-	
-	mlx_delete_texture(mirilla);
-	mlx_delete_texture(greco);
-	mlx_delete_texture(map_sand);
-	mlx_delete_texture(map_rock);
+	images->map_texture_N = load_n_check_texture(mlx, images, parser_map->info_north_texture);
+	images->map_texture_S = load_n_check_texture(mlx, images, parser_map->info_south_texture);
+	images->map_texture_E = load_n_check_texture(mlx, images, parser_map->info_east_texture);
+	images->map_texture_W = load_n_check_texture(mlx, images, parser_map->info_west_texture);
 }
+

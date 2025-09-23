@@ -1,7 +1,7 @@
-#include "cub3d.h"
+#include "funky_destroy.h"
 
 void	destroy_map(t_map *map)
 {
-	if (map->array)
+	if (map && map->array)
 		free_double_pointer(map->array);
 }

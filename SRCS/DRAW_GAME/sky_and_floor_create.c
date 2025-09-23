@@ -4,10 +4,9 @@ mlx_image_t	*create_half_screen_rectangle(mlx_t *mlx, int color)
 {
 	int	x;
 	int	y;
-
-
-	mlx_image_t	*half_rectangle = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
-
+	mlx_image_t	*half_rectangle;
+	 
+	half_rectangle = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
 	y = -1;
 	while (++y < HEIGHT / 2)
 	{
