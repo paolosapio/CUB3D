@@ -4170,7 +4170,7 @@ Minimal PNG color model means the color type and bit depth that gives smallest a
 e.g. gray if only grayscale pixels, palette if less than 256 colors, color key if only single transparent color, ...
 This is used if auto_convert is enabled (it is by default).
 */
-static unsigned auto_choose_color(LodePNGColorMode* mode_out,
+static unsigned auto_choose_ft_color(LodePNGColorMode* mode_out,
                                   const LodePNGColorMode* mode_in,
                                   const LodePNGColorStats* stats) {
   unsigned error = 0;
@@ -6335,7 +6335,7 @@ unsigned lodepng_encode(unsigned char** out, size_t* outsize,
       if(state->error) goto cleanup;
     }
 #endif /* LODEPNG_COMPILE_ANCILLARY_CHUNKS */
-    state->error = auto_choose_color(&auto_color, &state->info_raw, &stats);
+    state->error = auto_choose_ft_color(&auto_color, &state->info_raw, &stats);
     if(state->error) goto cleanup;
 #ifdef LODEPNG_COMPILE_ANCILLARY_CHUNKS
     if(info_png->sbit_defined) {

@@ -15,9 +15,12 @@ void	init_map_foundations(t_map *map)
 void	init_game(t_game *game, t_parser_map *parser_map)
 {
 	init_map_foundations(&game->map);
+	mlx_set_setting(MLX_FULLSCREEN, true);
+	mlx_set_setting(MLX_HEADLESS, true);
+	
 	game->mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", false);
 	init_texture(game->mlx, &game->images, parser_map);
-	init_images(game->mlx, &game->map, &game->images);
+	init_images(game->mlx, &game->map, &game->images, parser_map);
 	destroy_parser_map(parser_map);
 	images_to_window(game);
 

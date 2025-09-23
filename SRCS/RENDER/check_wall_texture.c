@@ -29,27 +29,22 @@ typedef enum e_texture_dir
 	WEST
 }			t_texture_dir;
 
-unsigned int color_picker(t_coor pixel_texture_porcent, mlx_texture_t *texture, float ray_len)
+unsigned int color_picker(t_coor pixel_texture_porcent, mlx_texture_t *texture, float darkener)
 {
 	unsigned int	x_in_texture;
 	unsigned int	y_in_texture;
 	unsigned char	*pixel_pos;
 	unsigned int	color_pixel;
-	unsigned int	texture_darkener;
-	// if (direction == NORTH || direction == SOUTH)
-	// {
-		x_in_texture = texture->width * pixel_texture_porcent.x;
-		y_in_texture = (int)pixel_texture_porcent.y * texture->width;
-	// }
-	// else
-	// {
-	// 	x_in_texture = pixel_texture_porcent.x;
-	// 	y_in_texture = texture->width * pixel_texture_porcent.y;
-	// }
+	float			green;
+
+	green = darkener * 1.5;
+	if (green > 1)
+		green = 1;
+	x_in_texture = texture->width * pixel_texture_porcent.x;
+	y_in_texture = (int)pixel_texture_porcent.y * texture->width;
 	pixel_pos = &texture->pixels[((y_in_texture) + x_in_texture) * texture->bytes_per_pixel];
 
-	texture_darkener = ray_len * 5;
-	color_pixel = color(*(pixel_pos), *(pixel_pos + 1), *(pixel_pos + 2), *(pixel_pos + 3));
+	color_pixel = ft_color(*(pixel_pos) * darkener, *(pixel_pos + 1) * green, *(pixel_pos + 2) * darkener, *(pixel_pos + 3));
 	return (color_pixel);
 }
 
@@ -133,7 +128,7 @@ void	to_3d_north(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *te
 	{
 		if (y_start_to_paint > HEIGHT)
 			break ;
-		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.colision_len);
+		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.darkener_percent);
 		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
 		y_start_to_paint++;
 		y_pos_texture += pixel_little_jump;
@@ -169,7 +164,7 @@ void	to_3d_south(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *te
 	{
 		if (y_start_to_paint > HEIGHT)
 			break ;
-		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.colision_len);
+		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.darkener_percent);
 		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
 		y_start_to_paint++;
 		y_pos_texture += pixel_little_jump;
@@ -204,7 +199,7 @@ void	to_3d_east(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *tex
 	{
 		if (y_start_to_paint > HEIGHT)
 			break ;
-		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.colision_len);
+		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.darkener_percent);
 		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
 		y_start_to_paint++;
 		y_pos_texture += pixel_little_jump;
@@ -239,7 +234,7 @@ void	to_3d_west(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *tex
 	{
 		if (y_start_to_paint > HEIGHT)
 			break ;
-		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.colision_len);
+		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.darkener_percent);
 		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
 		y_start_to_paint++;
 		y_pos_texture += pixel_little_jump;
@@ -258,6 +253,10 @@ void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_
 	// if (ray.colision_point.x >=  (x_rounded - MARGIN_BASE) && ray.colision_point.x <= (x_rounded + MARGIN_BASE) &&
 	// 	ray.colision_point.y >= (y_rounded - MARGIN_BASE) && ray.colision_point.y <= (y_rounded + MARGIN_BASE))
 	// 	return (last_color);
+
+	ray.darkener_percent = 4 / ray.colision_len;
+	if (ray.darkener_percent > 1)
+		ray.darkener_percent = 1;
 
 	if (ray.colision_point.x >=  (x_rounded - MARGIN_BASE) && ray.colision_point.x <= (x_rounded + MARGIN_BASE))
 	{

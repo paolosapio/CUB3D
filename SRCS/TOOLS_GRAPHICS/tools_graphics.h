@@ -12,6 +12,6 @@
 void			paint_tile(int g_size_tile, mlx_image_t *img_minimap, t_coor coor, int32_t color);
 void			bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t color);
 void			clean_image(mlx_image_t *image);
-unsigned int	color(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);
+unsigned int	ft_color(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);
 
 #endif

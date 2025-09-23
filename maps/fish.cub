@@ -3,8 +3,8 @@ SO ./PNG/wall_alga_S.png
 WE ./PNG/wall_alga_W.png
 EA ./PNG/wall_alga_E.png
 NO ./PNG/wall_alga_N.png
-F             220,100,0
-C 225,30,0
+F             0,-5,255
+C 225,30,0 
 
 
 

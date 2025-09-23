@@ -2,16 +2,15 @@
 
 void	transparentator(int value_of_trasparence, mlx_image_t *image)
 {
-	int i;
+	unsigned int i;
 
 	i = 3;
 	while (i < image->width * image->height * 4)
 	{
-		printf("caca");
-		image->pixels[i] = value_of_trasparence;
+		if (image->pixels[i] > value_of_trasparence)
+			image->pixels[i] = value_of_trasparence;
  		i += 4;
 	}
-		
 }
 void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 {
@@ -21,9 +20,9 @@ void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 
 	mlx_resize_image(images->map_sand, g_size_tile, g_size_tile);
 	mlx_resize_image(images->map_rock, g_size_tile, g_size_tile);
-
 	transparentator(200, images->map_sand);
 	transparentator(200, images->map_rock);
+	transparentator(100, images->mirilla);
 
 	y = -1;
 	while (map->array[++y])
@@ -52,6 +51,8 @@ void	images_to_window(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->images.sky, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.floor, 0, HEIGHT / 2);
+	mlx_image_to_window(game->mlx, game->images.gradient_bgr, 0, 0);
+
 	mlx_image_to_window(game->mlx, game->images.tridy, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 	mlx_image_to_window(game->mlx, game->images.background_map, 0, 0);

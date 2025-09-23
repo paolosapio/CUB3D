@@ -45,7 +45,7 @@
 // 			image,
 // 			(start.x + ray_y_length) * g_size_tile,
 // 			map_coor.y * g_size_tile,
-// 			color(255, 255, 255, 255)
+// 			ft_color(255, 255, 255, 255)
 // 		);
 // 	}
 // 	else
@@ -54,7 +54,7 @@
 // 			image,
 // 			map_coor.x * g_size_tile,
 // 			(start.y + ray_x_length) * g_size_tile,
-// 			color(255, 255, 255, 255)
+// 			ft_color(255, 255, 255, 255)
 // 		);
 // 	}
 

@@ -10,7 +10,7 @@
 
 // init_game.c
 void	init_game(t_game *game, t_parser_map *parser_map);
-void	init_images(mlx_t* mlx, t_map *map, t_images *images);
+void	init_images(mlx_t* mlx, t_map *map, t_images *images, t_parser_map *parser_map);
 
 // init_texture.c
 void 	init_texture(mlx_t* mlx, t_images *images, t_parser_map *parser_map);

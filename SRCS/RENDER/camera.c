@@ -36,10 +36,7 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	{
 		ray = raycasting(game->player.pos, l_screen_point, game->map);
 		if (x_pos_in_screen % 5 == 0)
-		{
-			bresenham_algorithm(game->images.map_ray, player_coor, ray.colision_point, color(0, 0, 255, 100));
-			bresenham_algorithm(game->images.map_ray, l_screen_point, player_coor, color(0, 0, 0, 0));
-		}
+			bresenham_algorithm(game->images.map_ray, player_coor, ray.colision_point, ft_color(0, 0, 255, 100));
 		l_screen_point.x += pixel_offset_cos;
 		l_screen_point.y += pixel_offset_sen;
 		// todo>>>>> wall =  check_side_texture(ray, player);
@@ -47,5 +44,5 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 		check_wall_texture(ray, game->player, &game->images, x_pos_in_screen);
 		x_pos_in_screen++;
 	}
-	bresenham_algorithm(game->images.map_ray, player_coor, game->player.end, color(255, 255, 255, 255));
+	bresenham_algorithm(game->images.map_ray, player_coor, game->player.end, ft_color(255, 255, 255, 255));
 }

@@ -39,8 +39,8 @@ char			*gnl_strdup(char *s1, int n);
 
 
 //FUNKY INIT
-void init_game_struct(t_game *game, t_parser_map *parser_map);
-void	init_images(mlx_t* mlx, t_map *map, t_images *images);
+void	init_game_struct(t_game *game, t_parser_map *parser_map);
+void	init_images(mlx_t* mlx, t_map *map, t_images *images, t_parser_map *parser_map);
 t_map	init_map(void);
 
 

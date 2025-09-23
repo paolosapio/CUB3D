@@ -20,7 +20,7 @@ typedef t_coor t_ray_len;
 		i++;
 	}
 	i = middle_screen - half_ray;
-	if (i > 0 && _color == (int)color(0, 0, 0, 255))
+	if (i > 0 && _color == (int)ft_color(0, 0, 0, 255))
 	{	
 		while(i <= middle_screen + half_ray)
 		{

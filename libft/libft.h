@@ -62,6 +62,9 @@ int		ft_nstrchr(const char *s, int c);
 char	*ft_ltoa(long n);
 long	ft_atol(const char *nptr);
 size_t	ft_arraylen(const char **s);
+bool	ft_isdigit_str(char *str);
+
+
 
 // GET_NEXT_LINE
 # ifndef BUFFER_SIZE

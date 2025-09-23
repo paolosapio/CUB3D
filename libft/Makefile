@@ -42,7 +42,8 @@ SRCS	= \
 		ft_nstrchr.c\
 		ft_atol.c\
 		ft_ltoa.c\
-		ft_arraylen.c
+		ft_arraylen.c\
+		ft_isdigit_str.c
 
 		
 OBJS	=	$(SRCS:.c=.o)

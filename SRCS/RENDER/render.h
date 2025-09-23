@@ -29,6 +29,7 @@ typedef struct	s_ray
 	t_coor	colision_point;
 	float	colision_len;
 	float	vertical_line;
+	float	darkener_percent;
 }				t_ray;
 
 void	init_camera(t_game *game, t_coor player_coor, float player_vision_angle);

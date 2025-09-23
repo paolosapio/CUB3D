@@ -3,7 +3,7 @@ WE ./PNG/wall_alga_W.png
 EA ./PNG/wall_alga_E.png
 NO ./PNG/wall_alga_N.png
 
-F 100,100,50
+F 220,100,0
 C 150,190,180
 
  111111111

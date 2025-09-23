@@ -8,6 +8,7 @@ typedef struct	s_images
 {
 	mlx_image_t		*sky;
 	mlx_image_t		*floor;
+	mlx_image_t		*gradient_bgr;
 	mlx_image_t		*mirilla;
 	mlx_image_t		*minimap;
 	mlx_image_t		*background_map;

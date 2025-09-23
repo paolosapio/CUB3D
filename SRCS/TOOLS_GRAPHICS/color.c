@@ -1,6 +1,6 @@
 // #include "tools_graphics.h"
 
-unsigned int	color(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)
+unsigned int	ft_color(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)
 {
 	unsigned int final_color;
 	
