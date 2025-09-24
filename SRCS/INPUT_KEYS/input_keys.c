@@ -63,19 +63,23 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 }
 
 #define SENSIBILITY 20
+
 void mouse_movements(double mouse_x, double mouse_y, void *params)
 {
 	t_game *game;
-	static double first_step_x = 0;
+	static double first_step_x = WIDTH / 2;
 	(void)mouse_y;
 	game = (t_game *)params;
 	if (mouse_x < first_step_x)
 	{
 		change_player_rotation(&game->player, game->player.vision_angle - ((first_step_x - mouse_x) / SENSIBILITY));
+		printf("caca\n");
 	}
 	else if (mouse_x > first_step_x)
 	{
 		change_player_rotation(&game->player, game->player.vision_angle + ((mouse_x - first_step_x + 1) / SENSIBILITY) + 1);
+		printf("coco: %f\n", mouse_x);
+
 	}
 	else
 		return ;

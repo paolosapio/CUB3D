@@ -31,7 +31,7 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	l_screen_point.x = (middle_screen_point.x - cos(to_radians(player_vision_angle - 90)) * HALF_SCREEN);
 	l_screen_point.y = (middle_screen_point.y - sin(to_radians(player_vision_angle - 90)) * HALF_SCREEN);	
 	x_pos_in_screen = x_pos_in_screen_aux;
-
+	printf("player angle%f\n", game->player.vision_angle);
 	while (x_pos_in_screen < WIDTH)
 	{
 		ray = raycasting(game->player.pos, l_screen_point, game->map);
