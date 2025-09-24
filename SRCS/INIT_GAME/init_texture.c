@@ -39,7 +39,10 @@ mlx_image_t	*load_n_check_image(mlx_t* mlx, t_images *images, char *texture_path
 
 void 	init_texture(mlx_t* mlx, t_images *images, t_parser_map *parser_map)
 {
-	images->mirilla = load_n_check_image(mlx, images, "PNG/mirila.png");
+	images->mirilla = load_n_check_image(mlx, images, "PNG/mirilla.png");
+	images->greco_texture = load_n_check_texture(mlx, images, "PNG/greco.png");
+	mlx_set_icon(mlx, images->greco_texture);
+	mlx_delete_texture(images->greco_texture);
 	images->map_greco = load_n_check_image(mlx, images, "PNG/greco.png");
 	images->map_sand = load_n_check_image(mlx, images, "PNG/map_sand.png");
 	images->map_rock = load_n_check_image(mlx, images, "PNG/map_rock.png");

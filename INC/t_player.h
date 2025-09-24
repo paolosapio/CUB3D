@@ -16,6 +16,8 @@ typedef struct			s_player
 	float				vision_angle;
 	float				speed;
 	t_player_movements	movements;
+	int					view;
+
 	
 }						t_player;
 

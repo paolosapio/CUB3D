@@ -62,24 +62,27 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 
 }
 
-#define MOUSE_LIMIT_RANGE 50
+#define SENSIBILITY 20
 void mouse_movements(double mouse_x, double mouse_y, void *params)
 {
 	t_game *game;
 	static double first_step_x = 0;
-
 	(void)mouse_y;
 	game = (t_game *)params;
-		// mlx_set_mouse_pos(game->mlx, mouse_x, HEIGHT / 2);
-	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	if (mouse_x < first_step_x)
-		change_player_rotation(&game->player, game->player.vision_angle - 1);
+	{
+		change_player_rotation(&game->player, game->player.vision_angle - ((first_step_x - mouse_x) / SENSIBILITY));
+	}
 	else if (mouse_x > first_step_x)
-		change_player_rotation(&game->player, game->player.vision_angle + 1);
+	{
+		change_player_rotation(&game->player, game->player.vision_angle + ((mouse_x - first_step_x + 1) / SENSIBILITY) + 1);
+	}
+	else
+		return ;
 	clean_game_images(&game->images);
 	init_camera(game, game->player.pos, game->player.vision_angle);
 	first_step_x = mouse_x;
-
+	// first_step_y = mouse_y;
 }
 
 void await_user_input(t_game *game)

@@ -99,10 +99,10 @@ unsigned int color_picker(t_coor pixel_texture_porcent, mlx_texture_t *texture, 
 // 	}
 // }
 
-void	to_3d_north(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
+void	to_3d_north(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture, t_player player)
 {
-	float			x_pos_texture; //cacular el percentual de la linea en el eje x
-	float			y_pos_texture; //cacular el percentual de la linea en el eje y
+	float			x_pos_texture;
+	float			y_pos_texture;
 	float			pixel_little_jump;
 	unsigned int	color_pixel;
 	float			y_start_to_paint;
@@ -114,14 +114,18 @@ void	to_3d_north(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *te
 
 	if (ray.vertical_line > HEIGHT)
 	{
-		y_pos_texture = texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line);
+		y_pos_texture = (texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line)) + player.view;
+		if (y_pos_texture < 0)
+			y_pos_texture = 0;
 		y_start_to_paint = 0.0;
 		end_screen = texture->height - y_pos_texture;
 	}
 	else
 	{
 		y_pos_texture = 0.0;
-		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
+		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2) + player.view;
+		if (y_start_to_paint < 0)
+			y_start_to_paint = 0;
 		end_screen = texture->height;
 	}
 	while (y_pos_texture < end_screen) 
@@ -271,6 +275,6 @@ void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_
 		if (player.pos.y < ray.colision_point.y) //*Sur
 			to_3d_south(images->tridy, ray, ray_index, images->map_texture_S);
 		else									//*Norte
-			to_3d_north(images->tridy, ray, ray_index, images->map_texture_N);
+			to_3d_north(images->tridy, ray, ray_index, images->map_texture_N, player);
 	}
 }

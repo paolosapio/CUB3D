@@ -39,7 +39,8 @@
         "chrono": "c",
         "render.h": "c",
         "funky_destroy.h": "c",
-        "t_player_movements.h": "c"
+        "t_player_movements.h": "c",
+        "sstream": "c"
     },
     "cmake.sourceDirectory": "/home/psapio/Desktop/CUB3D/MLX42"
 }

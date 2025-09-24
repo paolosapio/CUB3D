@@ -20,8 +20,8 @@ void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 
 	mlx_resize_image(images->map_sand, g_size_tile, g_size_tile);
 	mlx_resize_image(images->map_rock, g_size_tile, g_size_tile);
-	transparentator(200, images->map_sand);
-	transparentator(200, images->map_rock);
+	transparentator(127, images->map_sand);
+	transparentator(127, images->map_rock);
 	transparentator(100, images->mirilla);
 
 	y = -1;

@@ -24,6 +24,8 @@ typedef struct	s_images
 	mlx_texture_t	*map_texture_S;
 	mlx_texture_t	*map_texture_E;
 	mlx_texture_t	*map_texture_W;
+
+	mlx_texture_t	*greco_texture;
 }				t_images;
 
 #endif
