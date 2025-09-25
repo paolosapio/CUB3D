@@ -22,6 +22,7 @@ int	line_len_meter(int size_line, int old_bigger_line)
 int	str_map_encasketeitor(t_parser_map *parser_map, t_map *map, int fd)
 {
 	char	*line;
+	char	*aux_line;
 	int		map_line_index;
 
 	map_line_index = 0;
@@ -32,16 +33,14 @@ int	str_map_encasketeitor(t_parser_map *parser_map, t_map *map, int fd)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		map->longest_line = line_len_meter(ft_strlen(line), map->longest_line);
+		aux_line = ft_strtrim(line, "\n");
+		map->longest_line = line_len_meter(ft_strlen(aux_line), map->longest_line);
+		free(aux_line);
 		map->array[map_line_index] = line;
 		map_line_index++;
 	}
 	map->map_len = map_line_index;
 	if (ft_strcmp(map->array[map->map_len - 1], "\n") == 0)
 		return (ERROR);
-
-	for (int i = 0; map->array[i]; i++)
-		printf("%s", map->array[i]);
-	printf("\n");
 	return (OK);
 }

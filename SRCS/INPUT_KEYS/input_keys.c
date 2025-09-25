@@ -124,11 +124,17 @@ void	mouse_buttons(mouse_key_t button, action_t action, modifier_key_t mods, voi
 		game->images.kelas_sx->enabled = true;
 }
 
+void waves_maker(mlx_image_t	*waves)
+{
+	waves->pixels[2]++;
+}
+
 void await_user_input(t_game *game)
 {
 	mlx_mouse_hook(game->mlx, &mouse_buttons, game);
 	mlx_key_hook(game->mlx, &special_keys, game);
 	mlx_cursor_hook(game->mlx, &mouse_movements, game);
 	mlx_loop_hook(game->mlx, &movements_player, game);
+	mlx_loop_hook(game->mlx, &waves_maker, game);
 	mlx_loop(game->mlx);
 }
