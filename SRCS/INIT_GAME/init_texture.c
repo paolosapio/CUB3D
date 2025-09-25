@@ -47,6 +47,12 @@ void 	init_texture(mlx_t* mlx, t_images *images, t_parser_map *parser_map)
 	images->map_sand = load_n_check_image(mlx, images, "PNG/map_sand.png");
 	images->map_rock = load_n_check_image(mlx, images, "PNG/map_rock.png");
 
+	images->kelas_open = load_n_check_image(mlx, images, "PNG/kelas_open.png");
+	images->kelas_closed = load_n_check_image(mlx, images, "PNG/kelas_closed.png");
+	images->kelas_sx = load_n_check_image(mlx, images, "PNG/kelas_sx.png");
+	images->kelas_dx = load_n_check_image(mlx, images, "PNG/kelas_dx.png");
+
+
 	images->map_texture_N = load_n_check_texture(mlx, images, parser_map->info_north_texture);
 	images->map_texture_S = load_n_check_texture(mlx, images, parser_map->info_south_texture);
 	images->map_texture_E = load_n_check_texture(mlx, images, parser_map->info_east_texture);

@@ -19,11 +19,17 @@ typedef struct	s_images
 	mlx_image_t		*cuadricula;
 	mlx_image_t		*tridy;
 
+	mlx_image_t	*kelas_open;
+	mlx_image_t	*kelas_closed;
+	mlx_image_t	*kelas_sx;
+	mlx_image_t	*kelas_dx;
+
 	mlx_texture_t	*wall_alga;
 	mlx_texture_t	*map_texture_N;
 	mlx_texture_t	*map_texture_S;
 	mlx_texture_t	*map_texture_E;
 	mlx_texture_t	*map_texture_W;
+
 
 	mlx_texture_t	*greco_texture;
 }				t_images;

@@ -71,16 +71,9 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 	(void)mouse_y;
 	game = (t_game *)params;
 	if (mouse_x < first_step_x)
-	{
 		change_player_rotation(&game->player, game->player.vision_angle - ((first_step_x - mouse_x) / SENSITIVITY));
-		printf("caca\n");
-	}
 	else if (mouse_x > first_step_x)
-	{
 		change_player_rotation(&game->player, game->player.vision_angle + ((mouse_x - first_step_x) / SENSITIVITY)  + 1);
-		printf("coco: %f\n", mouse_x);
-
-	}
 	else
 		return ;
 	clean_game_images(&game->images);
@@ -88,8 +81,30 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 	first_step_x = mouse_x;
 }
 
+	// MLX_RELEASE = 0,
+	// MLX_PRESS	= 1,
+	// MLX_MOUSE_BUTTON_LEFT	= 0,
+	// MLX_MOUSE_BUTTON_RIGHT	= 1,
+void	mouse_buttons(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
+{
+	t_game *game;
+	game = (t_game *)param;
+	printf("BUTTON %d %d\n", button, action);
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+	{
+		mlx_image_to_window(game->mlx, game->images.kelas_sx, 0, 0);
+	}
+
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
+	{
+		mlx_delete_image(game->mlx, game->images.kelas_sx);
+	}
+}
+
 void await_user_input(t_game *game)
 {
+	mlx_image_to_window(game->mlx, game->images.kelas_open, 0, 0);
+	mlx_mouse_hook(game->mlx, &mouse_buttons, game);
 	mlx_key_hook(game->mlx, &special_keys, game);
 	mlx_cursor_hook(game->mlx, &mouse_movements, game);
 	mlx_loop_hook(game->mlx, &movements_player, game);
