@@ -24,13 +24,15 @@ typedef struct	s_images
 	mlx_image_t	*kelas_sx;
 	mlx_image_t	*kelas_dx;
 	mlx_image_t	*frame;
-	mlx_image_t	*waves;
+	// mlx_image_t	*waves;
 
 	mlx_texture_t	*wall_alga;
 	mlx_texture_t	*map_texture_N;
 	mlx_texture_t	*map_texture_S;
 	mlx_texture_t	*map_texture_E;
 	mlx_texture_t	*map_texture_W;
+
+	mlx_texture_t	*waves[2];
 
 
 	mlx_texture_t	*greco_texture;

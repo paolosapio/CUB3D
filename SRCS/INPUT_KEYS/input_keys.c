@@ -124,10 +124,25 @@ void	mouse_buttons(mouse_key_t button, action_t action, modifier_key_t mods, voi
 		game->images.kelas_sx->enabled = true;
 }
 
-void waves_maker(mlx_image_t	*waves)
-{
-	waves->pixels[2]++;
-}
+
+// void	wave_eitor(mlx_image_t *image1, mlx_image_t *image2)
+// {
+
+// }
+
+// #define FRAME_RATE 1
+// void waves_maker(void *param)
+// {
+// 	t_game		*game;
+// 	game = (t_game *)param;
+
+// 	static int	i;
+// 	if (i % FRAME_RATE == 0)
+// 	{
+// 		wave_eitor(game->images.waves[0], game->images.waves[1]);
+// 	}
+// 	++i;
+// }
 
 void await_user_input(t_game *game)
 {
@@ -135,6 +150,6 @@ void await_user_input(t_game *game)
 	mlx_key_hook(game->mlx, &special_keys, game);
 	mlx_cursor_hook(game->mlx, &mouse_movements, game);
 	mlx_loop_hook(game->mlx, &movements_player, game);
-	mlx_loop_hook(game->mlx, &waves_maker, game);
+	// mlx_loop_hook(game->mlx, &waves_maker, game);
 	mlx_loop(game->mlx);
 }
