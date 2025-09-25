@@ -103,5 +103,19 @@ void	movements_player(void *params)
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
+	if (game->player.movements.key_up_is_down == true) //UP
+	{
+		game->player.neck_movement += 0.2;
+		printf("up --> %f\n", game->player.neck_movement);
+		clean_game_images(&game->images);
+		init_camera(game, game->player.pos, game->player.vision_angle);
+	}
+	if (game->player.movements.key_down_is_down == true) //DOWN
+	{
+		game->player.neck_movement -= 0.2;
+		printf("down --> %f\n", game->player.neck_movement);
+		clean_game_images(&game->images);
+		init_camera(game, game->player.pos, game->player.vision_angle);
+	}
 	refresh_draw_greco(game->images.map_greco, &game->player, &game->map);
 }

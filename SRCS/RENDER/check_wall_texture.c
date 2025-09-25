@@ -128,6 +128,9 @@ void	to_3d_north(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *te
 			y_start_to_paint = 0;
 		end_screen = texture->height;
 	}
+	y_pos_texture -= player.neck_movement;
+	if (y_pos_texture <= 0)
+		y_pos_texture = 0;
 	while (y_pos_texture < end_screen) 
 	{
 		if (y_start_to_paint > HEIGHT)
@@ -139,7 +142,7 @@ void	to_3d_north(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *te
 	}
 }
 
-void	to_3d_south(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
+void	to_3d_south(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture, t_player player)
 {
 	float			x_pos_texture;
 	float			y_pos_texture;
@@ -164,6 +167,9 @@ void	to_3d_south(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *te
 		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
 		end_screen = texture->height;
 	}
+	y_pos_texture -= player.neck_movement;
+	if (y_pos_texture <= 0)
+		y_pos_texture = 0;
 	while (y_pos_texture < end_screen) 
 	{
 		if (y_start_to_paint > HEIGHT)
@@ -175,7 +181,7 @@ void	to_3d_south(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *te
 	}
 }
 
-void	to_3d_east(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
+void	to_3d_east(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture, t_player player)
 {
 	float			x_pos_texture;
 	float			y_pos_texture;
@@ -199,6 +205,9 @@ void	to_3d_east(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *tex
 		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
 		end_screen = texture->height;
 	}
+	y_pos_texture -= player.neck_movement;
+	if (y_pos_texture <= 0)
+		y_pos_texture = 0;
 	while (y_pos_texture < end_screen) 
 	{
 		if (y_start_to_paint > HEIGHT)
@@ -210,7 +219,7 @@ void	to_3d_east(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *tex
 	}
 }
 
-void	to_3d_west(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
+void	to_3d_west(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture, t_player player)
 {
 	float			x_pos_texture;
 	float			y_pos_texture;
@@ -235,6 +244,9 @@ void	to_3d_west(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *tex
 		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
 		end_screen = texture->height;
 	}
+	y_pos_texture -= player.neck_movement;
+	if (y_pos_texture <= 0)
+		y_pos_texture = 0;
 	while (y_pos_texture < end_screen) 
 	{
 		if (y_start_to_paint > HEIGHT)
@@ -266,15 +278,15 @@ void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_
 	if (ray.colision_point.x >=  (x_rounded - MARGIN_BASE) && ray.colision_point.x <= (x_rounded + MARGIN_BASE))
 	{
 		if (player.pos.x < ray.colision_point.x) //* Este
-			to_3d_east(images->tridy, ray, ray_index, images->map_texture_E);
+			to_3d_east(images->tridy, ray, ray_index, images->map_texture_E, player);
 		else //* Este
-			to_3d_west(images->tridy, ray, ray_index, images->map_texture_W);
+			to_3d_west(images->tridy, ray, ray_index, images->map_texture_W, player);
 	}
 
 	if (ray.colision_point.y >=  (y_rounded - MARGIN_BASE) && ray.colision_point.y <= (y_rounded + MARGIN_BASE))
 	{
 		if (player.pos.y < ray.colision_point.y) //*Sur
-			to_3d_south(images->tridy, ray, ray_index, images->map_texture_S);
+			to_3d_south(images->tridy, ray, ray_index, images->map_texture_S, player);
 		else									//*Norte
 			to_3d_north(images->tridy, ray, ray_index, images->map_texture_N, player);
 	}

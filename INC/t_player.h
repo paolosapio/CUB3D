@@ -14,6 +14,7 @@ typedef struct			s_player
 	t_coor				pos;
 	t_coor				end;
 	float				vision_angle;
+	float				neck_movement;
 	float				speed;
 	t_player_movements	movements;
 	int					view;

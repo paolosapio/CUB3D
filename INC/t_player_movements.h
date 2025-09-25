@@ -10,6 +10,8 @@ typedef struct	s_player_movements
 	bool	key_d_is_down;
 	bool	key_left_is_down;
 	bool	key_right_is_down;
+	bool	key_up_is_down;
+	bool	key_down_is_down;
 
 	bool	key_mouse_left_down;
 	bool	key_mouse_right_down;

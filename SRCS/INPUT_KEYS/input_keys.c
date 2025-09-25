@@ -59,7 +59,21 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		if (keydata.action == MLX_RELEASE)
 			game->player.movements.key_right_is_down = false;
 	}
-
+	// UP AND DOWN
+	if (keydata.key == MLX_KEY_UP)
+	{
+		game->player.movements.key_up_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+			game->player.movements.key_up_is_down = false;
+		printf("MLX_KEY_UP is pressed\n");
+	}
+	if (keydata.key == MLX_KEY_DOWN)
+	{
+		game->player.movements.key_down_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+			game->player.movements.key_down_is_down = false;
+		printf("MLX_KEY_DOWN is pressed\n");
+	}
 }
 
 #define SENSITIVITY 10
@@ -124,10 +138,10 @@ void	mouse_buttons(mouse_key_t button, action_t action, modifier_key_t mods, voi
 		game->images.kelas_sx->enabled = true;
 }
 
-void waves_maker(mlx_image_t	*waves)
-{
-	waves->pixels[2]++;
-}
+// void waves_maker(mlx_image_t	*waves)
+// {
+// 	waves->pixels[2]++;
+// }
 
 void await_user_input(t_game *game)
 {
@@ -135,6 +149,6 @@ void await_user_input(t_game *game)
 	mlx_key_hook(game->mlx, &special_keys, game);
 	mlx_cursor_hook(game->mlx, &mouse_movements, game);
 	mlx_loop_hook(game->mlx, &movements_player, game);
-	mlx_loop_hook(game->mlx, &waves_maker, game);
+	// mlx_loop_hook(game->mlx, &waves_maker, game);
 	mlx_loop(game->mlx);
 }
