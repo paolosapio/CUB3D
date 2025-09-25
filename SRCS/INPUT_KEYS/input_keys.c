@@ -90,20 +90,42 @@ void	mouse_buttons(mouse_key_t button, action_t action, modifier_key_t mods, voi
 	t_game *game;
 	game = (t_game *)param;
 	printf("BUTTON %d %d\n", button, action);
+	game->images.kelas_open->enabled = false;
+	game->images.kelas_dx->enabled = false;
+	game->images.kelas_sx->enabled = false;
+	game->images.kelas_closed->enabled = false;
+
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+		game->player.movements.key_mouse_left_down = true;
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
+		game->player.movements.key_mouse_left_down = false;
+	if (button == MLX_MOUSE_BUTTON_RIGHT && action == MLX_PRESS)
+		game->player.movements.key_mouse_right_down = true;
+	if (button == MLX_MOUSE_BUTTON_RIGHT && action == MLX_RELEASE)
+		game->player.movements.key_mouse_right_down = false;
+	if (button == MLX_MOUSE_BUTTON_MIDDLE && action == MLX_PRESS)
 	{
-		mlx_image_to_window(game->mlx, game->images.kelas_sx, 0, 0);
+		game->player.movements.key_mouse_right_down = true;
+		game->player.movements.key_mouse_left_down = true;
+	}
+	if (button == MLX_MOUSE_BUTTON_MIDDLE && action == MLX_RELEASE)
+	{
+		game->player.movements.key_mouse_right_down = false;
+		game->player.movements.key_mouse_left_down = false;
 	}
 
-	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
-	{
-		mlx_delete_image(game->mlx, game->images.kelas_sx);
-	}
+	if (game->player.movements.key_mouse_right_down == true && game->player.movements.key_mouse_left_down == true)
+		game->images.kelas_closed->enabled = true;
+	else if (game->player.movements.key_mouse_right_down == false && game->player.movements.key_mouse_left_down == false)
+		game->images.kelas_open->enabled = true;
+	else if (game->player.movements.key_mouse_right_down == true)
+		game->images.kelas_dx->enabled = true;
+	else if (game->player.movements.key_mouse_left_down == true)
+		game->images.kelas_sx->enabled = true;
 }
 
 void await_user_input(t_game *game)
 {
-	mlx_image_to_window(game->mlx, game->images.kelas_open, 0, 0);
 	mlx_mouse_hook(game->mlx, &mouse_buttons, game);
 	mlx_key_hook(game->mlx, &special_keys, game);
 	mlx_cursor_hook(game->mlx, &mouse_movements, game);
