@@ -218,10 +218,11 @@ void	to_3d_west(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *tex
 	unsigned int	color_pixel;
 	float			y_start_to_paint;
 	float			end_screen;
-	ray.vertical_line = HEIGHT / ray.colision_len;
 
+	ray.vertical_line = HEIGHT / ray.colision_len;
 	x_pos_texture = ((int)(ray.colision_point.y + 1) - ray.colision_point.y) - 0.001;
 	pixel_little_jump = texture->height / ray.vertical_line;
+
 	if (ray.vertical_line > HEIGHT)
 	{
 		y_pos_texture = texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line);

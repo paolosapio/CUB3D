@@ -23,7 +23,7 @@ mlx_image_t	*create_half_screen_rectangle(mlx_t *mlx, int color)
 mlx_image_t	*create_gradient_bgr(mlx_t *mlx)
 {
 	mlx_image_t	*gradient_bgr;
-	const float	little_jump = (float)(HEIGHT / 2) / 255;
+	const float	little_jump = 255.0 / (HEIGHT / 2.0);
 	float		gradient_color;
 	int			x;
 	int			y;

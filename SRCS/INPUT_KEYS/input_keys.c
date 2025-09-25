@@ -62,7 +62,7 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 
 }
 
-#define SENSIBILITY 20
+#define SENSITIVITY 10
 
 void mouse_movements(double mouse_x, double mouse_y, void *params)
 {
@@ -72,12 +72,12 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 	game = (t_game *)params;
 	if (mouse_x < first_step_x)
 	{
-		change_player_rotation(&game->player, game->player.vision_angle - ((first_step_x - mouse_x) / SENSIBILITY));
+		change_player_rotation(&game->player, game->player.vision_angle - ((first_step_x - mouse_x) / SENSITIVITY));
 		printf("caca\n");
 	}
 	else if (mouse_x > first_step_x)
 	{
-		change_player_rotation(&game->player, game->player.vision_angle + ((mouse_x - first_step_x + 1) / SENSIBILITY) + 1);
+		change_player_rotation(&game->player, game->player.vision_angle + ((mouse_x - first_step_x) / SENSITIVITY)  + 1);
 		printf("coco: %f\n", mouse_x);
 
 	}
@@ -86,7 +86,6 @@ void mouse_movements(double mouse_x, double mouse_y, void *params)
 	clean_game_images(&game->images);
 	init_camera(game, game->player.pos, game->player.vision_angle);
 	first_step_x = mouse_x;
-	// first_step_y = mouse_y;
 }
 
 void await_user_input(t_game *game)
