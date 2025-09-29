@@ -1,12 +1,11 @@
 #include "init_game.h"
 
 // init_map_foundations nombre provvisional de una funcion que crea datos para que el mapa sea ok
-unsigned int g_size_tile;
+unsigned int	g_size_tile;
 
-void	init_map_foundations(t_map *map) 
+void	init_map_foundations(t_map *map)
 {
 	g_size_tile = g_size_tile_calculator(map->map_len, map->longest_line);
-
 	map->map_draw_offset.x = (WIDTH - map->longest_line * g_size_tile) / 2.0;
 	map->map_draw_offset.y = (HEIGHT - map->map_len * g_size_tile) / 2.0;
 }
@@ -14,7 +13,7 @@ void	init_game(t_game *game, t_parser_map *parser_map)
 {
 	init_map_foundations(&game->map);
 	mlx_set_setting(MLX_FULLSCREEN, true);
-	mlx_set_setting(MLX_DECORATED, false);
+	// mlx_set_setting(MLX_DECORATED, false);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", false);
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
 	init_texture(game->mlx, &game->images, parser_map);

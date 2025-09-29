@@ -3,10 +3,10 @@
 # define DRAW_GAME_H
 
 # include "../../MLX42/include/MLX42/MLX42.h"
-#include "../TOOLS_GRAPHICS/tools_graphics.h"
-# include "t_player.h"
+# include "../TOOLS_GRAPHICS/tools_graphics.h"
+# include "libft.h"
 # include "t_game.h"
-#include "libft.h"
+# include "t_player.h"
 
 # define SKY 1
 # define SAND 0

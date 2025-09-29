@@ -26,9 +26,9 @@ t_errok	is_empty_line(char *line)
 	return (true);
 }
 
-t_errok check_first_line_map(char *line_map_to_check)
+t_errok	check_first_line_map(char *line_map_to_check)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line_map_to_check[i] != '\0' && line_map_to_check[i] != '\n')

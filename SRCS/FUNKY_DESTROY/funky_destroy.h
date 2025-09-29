@@ -9,9 +9,6 @@
 
 void	destroy_map(t_map *map);
 void	destroy_images(mlx_t *mlx, t_images *images);
-void	sayonara_baby(mlx_t* mlx, t_images *images, t_map *map);
-
-
-
+void	sayonara_baby(mlx_t *mlx, t_images *images, t_map *map);
 
 #endif

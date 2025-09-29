@@ -12,11 +12,11 @@
 
 #include "parser.h"
 
-t_errok check_file_extension(char *path_map)
+t_errok	check_file_extension(char *path_map)
 {
 	char	*last_slash;
 	char	*last_dot;
-	
+
 	if (ft_strcmp(path_map, ".cub") == 0)
 		return (ERROR);
 	last_slash = ft_strrchr(path_map, '/');

@@ -2,6 +2,7 @@
 # define T_GAME_H
 
 # include "t_player.h"
+# include <sys/time.h>
 # include "../SRCS/FUNKY_DESTROY/funky_destroy.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
@@ -17,10 +18,11 @@ extern unsigned int g_size_tile;
 
 typedef struct	s_game
 {
-	t_images	images;
-	t_map		map;
-	t_player	player;
-	mlx_t		*mlx;
+	t_images		images;
+	t_map			map;
+	t_player		player;
+	mlx_t			*mlx;
+	struct timeval	init_time;
 }				t_game;
 
 #endif

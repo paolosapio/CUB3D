@@ -31,27 +31,28 @@ void	error_exit_invalid_map(t_parser_map *parser_map, t_map *map, int error)
 		write(2, "The map is empty\n", 17);
 	else
 		write(2, "Undefined error\n", 16);
-	exit (1);
+	exit(1);
 }
 
-t_errok is_around_space_ok(t_map *map, int x, int y)
+t_errok	is_around_space_ok(t_map *map, int x, int y)
 {
-	if (y == 0 || x > (int)ft_strlen(map->array[y - 1]) ||
-		ft_strchr(FLOOR""WALL""PLAYER, map->array[y - 1][x]) == NULL)
+	if (y == 0 || x > (int)ft_strlen(map->array[y - 1])
+		|| ft_strchr(FLOOR "" WALL "" PLAYER, map->array[y - 1][x]) == NULL)
 	{
 		return (ERROR);
 	}
-	if (map->array[y][x + 1] != '\0' &&
-		ft_strchr(FLOOR""WALL""PLAYER, map->array[y][x + 1]) == NULL)
+	if (map->array[y][x + 1] != '\0' && ft_strchr(FLOOR "" WALL "" PLAYER,
+			map->array[y][x + 1]) == NULL)
 	{
 		return (ERROR);
 	}
-	if (y + 1 == map->map_len || x > (int)ft_strlen(map->array[y + 1]) ||
-		ft_strchr(FLOOR""WALL""PLAYER, map->array[y + 1][x]) == NULL)
+	if (y + 1 == map->map_len || x > (int)ft_strlen(map->array[y + 1])
+		|| ft_strchr(FLOOR "" WALL "" PLAYER, map->array[y + 1][x]) == NULL)
 	{
 		return (ERROR);
 	}
-	if (x > 0 && ft_strchr(FLOOR""WALL""PLAYER, map->array[y][x - 1]) == NULL)
+	if (x > 0 && ft_strchr(FLOOR "" WALL "" PLAYER, map->array[y][x
+			- 1]) == NULL)
 		return (ERROR);
 	return (OK);
 }
@@ -73,7 +74,7 @@ void	check_player(t_parser_map *parser_map, t_map *map, int x, int y)
 	else if (map->array[y][x] == 'E')
 	{
 		map->player_pointer->vision_angle = 0;
-		map->player_pointer->end.x = x + CENTER_PLAYER  - LIMIT_FOV;
+		map->player_pointer->end.x = x + CENTER_PLAYER - LIMIT_FOV;
 		map->player_pointer->end.y = y + CENTER_PLAYER;
 	}
 	else if (map->array[y][x] == 'S')
@@ -90,7 +91,7 @@ void	check_player(t_parser_map *parser_map, t_map *map, int x, int y)
 	}
 }
 
-void check_valid_map(t_parser_map *parser_map, t_map *map)
+void	check_valid_map(t_parser_map *parser_map, t_map *map)
 {
 	int	x;
 	int	y;
@@ -103,7 +104,7 @@ void check_valid_map(t_parser_map *parser_map, t_map *map)
 	while (map->array[y])
 	{
 		x = 0;
-		while(map->array[y][x])
+		while (map->array[y][x])
 		{
 			if (ft_strchr(VALID_CHARS, map->array[y][x]) == NULL)
 				error_exit_invalid_map(parser_map, map, INVALID_CHAR);
@@ -122,8 +123,8 @@ void check_valid_map(t_parser_map *parser_map, t_map *map)
 
 void	check_map(char *path_map, t_parser_map *parser_map, t_map *map)
 {
-	char *line_map_to_check;
-	int	fd;
+	char	*line_map_to_check;
+	int		fd;
 
 	parser_map->arg_map_fd = path_map;
 	fd = open(path_map, O_RDONLY);
@@ -144,7 +145,7 @@ void	check_map(char *path_map, t_parser_map *parser_map, t_map *map)
 			destroy_parser_map(parser_map);
 			destroy_map(map);
 			close(fd);
-			exit (1);
+			exit(1);
 		}
 		parser_map->line_that_start_map++;
 		free(line_map_to_check);
