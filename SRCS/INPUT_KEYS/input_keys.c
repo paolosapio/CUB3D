@@ -24,14 +24,14 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	{
 		game->images.start_cover[0]->enabled = false;
 		game->images.start_cover[1]->enabled = true;
-		game->player.speed = NORMAL * (g_size_tile * 0.04);
+		game->player.speed = NORMAL * (game->tile_size * 0.04);
 	}
 
 	if (keydata.key == MLX_KEY_LEFT_SHIFT)
 	{
-		game->player.speed = TURBO * (g_size_tile * 0.04);
+		game->player.speed = TURBO * (game->tile_size * 0.04);
 		if (keydata.action == MLX_RELEASE)
-			game->player.speed = NORMAL * (g_size_tile * 0.04);
+			game->player.speed = NORMAL * (game->tile_size * 0.04);
 	}
 	if (keydata.key == MLX_KEY_W)
 	{
@@ -81,11 +81,18 @@ void	mouse_movements(double mouse_x, double mouse_y, void *params)
 	(void)mouse_y;
 	game = (t_game *)params;
 	if (mouse_x < first_step_x)
-		change_player_rotation(&game->player, game->player.vision_angle
-			- ((first_step_x - mouse_x) / SENSITIVITY));
+	{
+		carousel(game->images.fauna, CAROUSEL_LEFT_MOVEMENT + ((first_step_x - mouse_x) / SENSITIVITY));
+		carousel_reverse(game->images.ambient, CAROUSEL_LEFT_MOVEMENT);
+		change_player_rotation(&game->player, game->player.vision_angle - ((first_step_x - mouse_x) / SENSITIVITY));
+	}
 	else if (mouse_x > first_step_x)
-		change_player_rotation(&game->player, game->player.vision_angle
-			+ ((mouse_x - first_step_x) / SENSITIVITY) + 1);
+	{
+		carousel(game->images.fauna, CAROUSEL_RIGHT_MOVEMENT - ((mouse_x - first_step_x) / SENSITIVITY) + 1);
+		carousel_reverse(game->images.ambient, CAROUSEL_RIGHT_MOVEMENT);
+
+		change_player_rotation(&game->player, game->player.vision_angle + ((mouse_x - first_step_x) / SENSITIVITY) + 1);
+	}
 	else
 		return ;
 	clean_game_images(&game->images);

@@ -7,7 +7,7 @@ t_parser_map	parser(char *map_path, t_map *map)
 
 	if (check_file_extension(map_path) == ERROR)
 	{
-		printf("ERROR FILE NAME\n");
+		write(2, "ERROR FILE NAME\n", 16);
 		exit(1);
 	}
 	check_map(map_path, &parser_map, map);

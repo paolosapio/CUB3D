@@ -6,35 +6,35 @@
  * This function implements the bresenham algorithm to draw lines
  */
 
-void bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t color)
+void	bresenham_algorithm(mlx_image_t *image, t_segment s, uint32_t color, int tile_size)
 {
-	// printf("p1.x = %f p1.y = %f\n", p1.x, p1.y);
+	// printf("s.start.x = %f s.start.y = %f\n", p1.x, s.start.y);
 	// printf("p2.x = %f p2.y = %f\n", p2.x, p2.y);
-	if (p2.x < 0 || p2.x == INFINITY)
-		p2.x = 0;
-	if (p2.y < 0 || p2.y == INFINITY)
-		p2.y = 0;
-	p1.x =(int)(p1.x * g_size_tile);
-	p1.y = (int)(p1.y * g_size_tile);
-	p2.x = (int)(p2.x * g_size_tile);
-	p2.y = (int)(p2.y * g_size_tile);
-	int dx = (int)fabsf(p2.x - p1.x);
-	int dy = (int)fabsf(p2.y - p1.y);
+	if (s.end.x < 0 || s.end.x == INFINITY)
+		s.end.x = 0;
+	if (s.end.y < 0 || s.end.y == INFINITY)
+		s.end.y = 0;
+	s.start.x =(int)(s.start.x * tile_size);
+	s.start.y = (int)(s.start.y * tile_size);
+	s.end.x = (int)(s.end.x * tile_size);
+	s.end.y = (int)(s.end.y * tile_size);
+	int dx = (int)fabsf(s.end.x - s.start.x);
+	int dy = (int)fabsf(s.end.y - s.start.y);
 
-	int sx = (p1.x < p2.x) ? 1 : -1;
-	int sy = (p1.y < p2.y) ? 1 : -1;
+	int sx = (s.start.x < s.end.x) ? 1 : -1;
+	int sy = (s.start.y < s.end.y) ? 1 : -1;
 
 	int err = dx - dy;
 	int e2;
 
-	int x = p1.x;
-	int y = p1.y;
+	int x = s.start.x;
+	int y = s.start.y;
 
 	while (1)
 	{
 		if (x >= 0 && y >= 0 && x < (int)image->width && y < (int)image->height)
 			mlx_put_pixel(image, x, y, color);
-		if ((x == p2.x && y == p2.y) || x < 0 || y < 0 || x > (int)image->width || y > (int)image->height)
+		if ((x == s.end.x && y == s.end.y) || x < 0 || y < 0 || x > (int)image->width || y > (int)image->height)
 			break ;
 
 		e2 = 2 * err;
@@ -56,8 +56,8 @@ void bresenham_algorithm(mlx_image_t *image, t_coor p1, t_coor p2, uint32_t colo
 /*
 
 ENTRAMOS A BRESENHAMªªªª
-p1.x = 485.000000 ->  p2.x = 486.000000
-p1y = 385.000000 -> p2.y = 286.000000
+s.start.x = 485.000000 ->  s.end.x = 486.000000
+p1y = 385.000000 -> s.end.y = 286.000000
 
 dy = -99.000000, dx = 1.000000
 

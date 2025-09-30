@@ -32,20 +32,19 @@ int	extract_color_from_str(char *color_str)
 	return (color);
 }
 
-void	init_images(mlx_t *mlx, t_map *map, t_images *images,
-		t_parser_map *parser_map)
+void	init_images(mlx_t *mlx, t_map *map, t_images *images, t_parser_map *parser_map)
 {
 	int	color;
 
-	images->minimap = create_minimap(mlx, map);
+	images->minimap = create_empty_img(mlx, map->longest_line * map->tile_size , map->map_len * map->tile_size);
 	images->background_map = create_background_map(mlx, map);
 	images->gradient_bgr = create_gradient_bgr(mlx);
 	color = extract_color_from_str(parser_map->info_sky);
 	images->sky = create_half_screen_rectangle(mlx, color);
 	color = extract_color_from_str(parser_map->info_floor);
 	images->floor = create_half_screen_rectangle(mlx, color);
-	images->tridy = create_tridy(mlx);
-	images->map_ray = create_ray_minimap(mlx, map);
+	images->tridy = create_empty_img(mlx, WIDTH, HEIGHT);
+	images->map_ray = create_empty_img(mlx, map->longest_line * map->tile_size , map->map_len * map->tile_size);
 	images->minimap->enabled = false;
 	images->map_ray->enabled = false;
 	images->map_greco->enabled = false;

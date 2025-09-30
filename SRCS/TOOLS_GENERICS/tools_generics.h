@@ -6,7 +6,7 @@
 
 
 
-int	g_size_tile_calculator(int map_height, int map_width);
+int		tile_size_calculator(int map_height, int map_width);
 float	to_radians(float degrees);
 
 #endif

@@ -19,8 +19,8 @@ void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 	int	slider;
 
 	slider = 0;
-	mlx_resize_image(images->map_sand, g_size_tile, g_size_tile);
-	mlx_resize_image(images->map_rock, g_size_tile, g_size_tile);
+	mlx_resize_image(images->map_sand, map->tile_size, map->tile_size);
+	mlx_resize_image(images->map_rock, map->tile_size, map->tile_size);
 	transparentator(127, images->map_sand);
 	transparentator(127, images->map_rock);
 	transparentator(100, images->mirilla);
@@ -36,18 +36,17 @@ void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 			if (map->array[y][x] == '1')
 			{
 				mlx_image_to_window(mlx, images->map_rock,
-					map->map_draw_offset.x + x * g_size_tile,
-					map->map_draw_offset.y + y * g_size_tile);
+					map->map_draw_offset.x + x * map->tile_size,
+					map->map_draw_offset.y + y * map->tile_size);
 			}
 			else if (ft_strchr("NSWE0", map->array[y][x]) != NULL)
 			{
 				mlx_image_to_window(mlx, images->map_sand,
-					map->map_draw_offset.x + x * g_size_tile,
-					map->map_draw_offset.y + y * g_size_tile);
+					map->map_draw_offset.x + x * map->tile_size,
+					map->map_draw_offset.y + y * map->tile_size);
 			}
 		}
 	}
-	printf("---> %f\n", map->map_draw_offset.x);
 	mlx_image_to_window(mlx, images->minimap, map->map_draw_offset.x,
 		map->map_draw_offset.y);
 	mlx_image_to_window(mlx, images->map_ray, map->map_draw_offset.x,
@@ -73,7 +72,6 @@ void	images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.fauna[1], 0, 0);
 	mlx_image_to_window(game->mlx, game->images.ambient, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.gradient_bgr, 0, 0);
-
 	mlx_image_to_window(game->mlx, game->images.tridy, 0, 0);
 	while (++i < 20)
 	{
@@ -85,11 +83,10 @@ void	images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.kelas_sx, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_dx, 0, 0);
 	hide_images(&game->images);
-	mlx_image_to_window(game->mlx, game->images.mirilla, WIDTH / 2 - 10, HEIGHT
-		/ 2 - 10);
+	mlx_image_to_window(game->mlx, game->images.mirilla, WIDTH / 2 - 10, HEIGHT / 2 - 10);
 	mlx_image_to_window(game->mlx, game->images.background_map, 0, 0);
 	minimap_images_to_window(game->mlx, &game->map, &game->images);
-	mlx_resize_image(game->images.map_greco, g_size_tile, g_size_tile);
+	mlx_resize_image(game->images.map_greco, game->tile_size, game->tile_size);
 	mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
 	// mlx_image_to_window(game->mlx, game->images.waves, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.frame, 0, 0);

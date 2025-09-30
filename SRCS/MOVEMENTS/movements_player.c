@@ -52,13 +52,13 @@ void	change_player_rotation(t_player *player, int new_vision_angle)
 		* LIMIT_FOV;
 }
 
-void	angulator_move(float vision_angle, int g_size_tile, t_game *game)
+void	angulator_move(float vision_angle, int tile_size, t_game *game)
 {
 	t_trig_angle	trig_angle;
 
 	trig_angle.angle = vision_angle;
-	trig_angle.s1n = sin(to_radians(vision_angle)) / g_size_tile;
-	trig_angle.c0s = cos(to_radians(vision_angle)) / g_size_tile;
+	trig_angle.s1n = sin(to_radians(vision_angle)) / tile_size;
+	trig_angle.c0s = cos(to_radians(vision_angle)) / tile_size;
 	move_player(&game->player, &game->map, -trig_angle.s1n, -trig_angle.c0s);
 }
 
@@ -73,7 +73,7 @@ void	movements_player(void *params)
 	game = (t_game *)params;
 	if (game->player.movements.key_w_is_down == true)
 	{
-		angulator_move(game->player.vision_angle + 0, g_size_tile, game);
+		angulator_move(game->player.vision_angle + 0, game->tile_size, game);
 		if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT) == false
 			&& mlx_is_key_down(game->mlx, MLX_KEY_RIGHT) == false)
 		{
@@ -83,19 +83,19 @@ void	movements_player(void *params)
 	}
 	if (game->player.movements.key_d_is_down == true)
 	{
-		angulator_move(game->player.vision_angle + 90, g_size_tile, game);
+		angulator_move(game->player.vision_angle + 90, game->tile_size, game);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
 	if (game->player.movements.key_s_is_down == true)
 	{
-		angulator_move(game->player.vision_angle + 180, g_size_tile, game);
+		angulator_move(game->player.vision_angle + 180, game->tile_size, game);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
 	if (game->player.movements.key_a_is_down == true)
 	{
-		angulator_move(game->player.vision_angle + 270, g_size_tile, game);
+		angulator_move(game->player.vision_angle + 270, game->tile_size, game);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}

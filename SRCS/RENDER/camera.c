@@ -6,13 +6,13 @@
 
 
 
-float	pixeleitor(void)
-{
-	float pixel_size;
+// float	pixeleitor(void)
+// {
+// 	float pixel_size;
 
-	pixel_size = 1.0 / g_size_tile;
-	return (pixel_size);
-}
+// 	pixel_size = 1.0 / g_size_tile;
+// 	return (pixel_size);
+// }
 
 void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 {
@@ -22,7 +22,7 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	float		pixel_offset_sen;
 	t_ray		ray;
 	int			x_pos_in_screen;
-	const float	x_pos_in_screen_aux = (float)(SCREEN * g_size_tile) / WIDTH;
+	const float	x_pos_in_screen_aux = (float)(SCREEN * game->tile_size) / WIDTH;
 	float		r;
 	//!mlx_texture_t	wall;
 	middle_screen_point.x = player_coor.x - cos(to_radians(player_vision_angle)) * DISTANCE_SCREEN;
@@ -37,7 +37,7 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	{
 		ray = raycasting(game->player.pos, l_screen_point, game->map);
 		if (x_pos_in_screen % 5 == 0)
-			bresenham_algorithm(game->images.map_ray, player_coor, ray.colision_point, ft_color(0, 0, 255, 100));
+			bresenham_algorithm(game->images.map_ray, (t_segment){player_coor, ray.colision_point, 0}, ft_color(0, 0, 255, 100), game->tile_size);
 		l_screen_point.x += pixel_offset_cos;
 		l_screen_point.y += pixel_offset_sen;
 		r = sqrtf((l_screen_point.x - player_coor.x) * (l_screen_point.x - player_coor.x) + (l_screen_point.y - player_coor.y) * (l_screen_point.y - player_coor.y));
@@ -45,5 +45,5 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 		check_wall_texture(ray, game->player, &game->images, x_pos_in_screen);
 		x_pos_in_screen++;
 	}
-	bresenham_algorithm(game->images.map_ray, player_coor, game->player.end, ft_color(255, 255, 255, 255));
+	bresenham_algorithm(game->images.map_ray, (t_segment){player_coor, game->player.end, 0}, ft_color(255, 255, 255, 255), game->tile_size);
 }

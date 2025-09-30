@@ -14,15 +14,14 @@
 # define WIDTH 640
 # define HEIGHT 480
 
-extern unsigned int g_size_tile;
-
 typedef struct	s_game
 {
 	t_images		images;
 	t_map			map;
 	t_player		player;
 	mlx_t			*mlx;
-	struct timeval	init_time;
+	//struct timeval	init_time;
+	int				tile_size;
 }				t_game;
 
 #endif

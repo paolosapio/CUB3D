@@ -11,6 +11,7 @@ typedef struct	s_map
 	char		**array;
 	t_player	*player_pointer;
 	t_coor		map_draw_offset;
+	int			tile_size;
 }				t_map;
 
 #endif
