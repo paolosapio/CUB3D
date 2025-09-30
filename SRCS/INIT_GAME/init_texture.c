@@ -70,8 +70,7 @@ void	init_texture(mlx_t *mlx, t_images *images, t_parser_map *parser_map)
 	images->map_sand = load_n_check_image(mlx, images, "PNG/map_sand.png");
 	images->map_rock = load_n_check_image(mlx, images, "PNG/map_rock.png");
 	images->kelas_open = load_n_check_image(mlx, images, "PNG/kelas_open.png");
-	images->kelas_closed = load_n_check_image(mlx, images,
-			"PNG/kelas_closed.png");
+	images->kelas_closed = load_n_check_image(mlx, images, "PNG/kelas_closed.png");
 	images->kelas_sx = load_n_check_image(mlx, images, "PNG/kelas_sx.png");
 	images->kelas_dx = load_n_check_image(mlx, images, "PNG/kelas_dx.png");
 	images->frame = load_n_check_image(mlx, images, "PNG/frame.png");
@@ -82,5 +81,7 @@ void	init_texture(mlx_t *mlx, t_images *images, t_parser_map *parser_map)
 	init_bubbles(mlx, images->bubble_array, images);
 	images->start_cover[0] = load_n_check_image(mlx, images, "PNG/start/start0.png");
 	images->start_cover[1] = load_n_check_image(mlx, images, "PNG/start/start1.png");
-	images->fauna = load_n_check_image(mlx, images, "PNG/fauna.png");
+	images->fauna[0] = load_n_check_image(mlx, images, "PNG/fauna0.png");
+	images->fauna[1] = load_n_check_image(mlx, images, "PNG/fauna1.png");
+	images->ambient = load_n_check_image(mlx, images, "PNG/ambient.png");
 }

@@ -69,7 +69,9 @@ void	images_to_window(t_game *game)
 	i = -1;
 	mlx_image_to_window(game->mlx, game->images.sky, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.floor, 0, HEIGHT / 2);
-	mlx_image_to_window(game->mlx, game->images.fauna, 0, 0);
+	mlx_image_to_window(game->mlx, game->images.fauna[0], 0, 0);
+	mlx_image_to_window(game->mlx, game->images.fauna[1], 0, 0);
+	mlx_image_to_window(game->mlx, game->images.ambient, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.gradient_bgr, 0, 0);
 
 	mlx_image_to_window(game->mlx, game->images.tridy, 0, 0);

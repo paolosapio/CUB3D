@@ -5,6 +5,7 @@
 
 # include "../DRAW_GAME/draw_game.h"
 # include "t_game.h"
+# include "../ANIMATIONS/animations.h"
 
 void	await_user_input(t_game *game);
 

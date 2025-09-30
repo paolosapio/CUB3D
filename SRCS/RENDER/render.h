@@ -8,9 +8,9 @@
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "../TOOLS_GRAPHICS/tools_graphics.h"
 
-# define SCREEN 1.30 //!celdas!
+# define SCREEN 1.2 //!celdas!
 # define HALF_SCREEN  SCREEN / 2//!celdas!
-# define DISTANCE_SCREEN 0.2 //!celdas!
+# define DISTANCE_SCREEN 0.5 //!celdas!
 
 // FOV : FIELD OF VIEW (campo visual, lo que vemos en pantalla)
 	// distancia de la pantalla del jugador y tamaño de la pantalla varian la vision

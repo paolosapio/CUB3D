@@ -101,12 +101,17 @@ void	movements_player(void *params)
 	}
 	if (game->player.movements.key_left_is_down == true)
 	{
+
+		carousel(game->images.fauna, CAROUSEL_LEFT_MOVEMENT);
+		carousel_reverse(game->images.ambient, CAROUSEL_LEFT_MOVEMENT);
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
 	if (game->player.movements.key_right_is_down == true)
 	{
+		carousel(game->images.fauna, CAROUSEL_RIGHT_MOVEMENT);
+		carousel_reverse(game->images.ambient, CAROUSEL_RIGHT_MOVEMENT);
 		change_player_rotation(&game->player, game->player.vision_angle + 1);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);

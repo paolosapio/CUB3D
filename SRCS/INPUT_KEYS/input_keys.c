@@ -1,7 +1,7 @@
 
+#include "input_keys.h"
 #include "../MOVEMENTS/movements.h"
 #include "../RENDER/render.h"
-#include "input_keys.h"
 #include "libft.h"
 
 void	special_keys(mlx_key_data_t keydata, void *params)
@@ -20,16 +20,19 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		game->images.map_sand->enabled -= 1;
 		game->images.map_rock->enabled -= 1;
 	}
-	game->player.speed = NORMAL * (g_size_tile * 0.04);
-
 	if (keydata.key == MLX_KEY_ENTER)
 	{
 		game->images.start_cover[0]->enabled = false;
 		game->images.start_cover[1]->enabled = true;
+		game->player.speed = NORMAL * (g_size_tile * 0.04);
 	}
 
 	if (keydata.key == MLX_KEY_LEFT_SHIFT)
+	{
 		game->player.speed = TURBO * (g_size_tile * 0.04);
+		if (keydata.action == MLX_RELEASE)
+			game->player.speed = NORMAL * (g_size_tile * 0.04);
+	}
 	if (keydata.key == MLX_KEY_W)
 	{
 		game->player.movements.key_w_is_down = true;
@@ -175,7 +178,7 @@ void	animations(void *params)
 {
 	t_game		*game;
 	static bool	animation_switch = false;
-	static float		little_jump = 0.0;
+
 
 	game = (t_game*)params;
 	struct timeval current_time;
@@ -188,20 +191,23 @@ void	animations(void *params)
 		game->images.start_cover[1]->enabled = !game->images.start_cover[1]->enabled;
 	if (game->images.start_cover[0]->enabled == false && game->images.start_cover[1]->instances->y < HEIGHT)
 	{
-		game->images.start_cover[1]->instances->y += 2;
-		game->images.start_cover[1]->instances->x += 2;
-		mlx_resize_image(game->images.start_cover[1], game->images.start_cover[1]->width - 4, game->images.start_cover[1]->height - 4);
-		if (game->images.start_cover[1]->height == 4)
+		game->images.start_cover[1]->instances->y += 1;
+		game->images.start_cover[1]->instances->x += 1;
+		if (mlx_resize_image(game->images.start_cover[1], game->images.start_cover[1]->width - 2, game->images.start_cover[1]->height - 2) == false)
 			game->images.start_cover[1]->enabled = false;
 	}
-	if (game->images.fauna->instances->x == -(int)game->images.fauna->width)
+	if (current_time.tv_sec % 2 == 0)
 	{
-		game->images.fauna->instances->x = WIDTH;
+		game->images.fauna[0]->enabled = true;
+		game->images.fauna[1]->enabled = false;
 	}
-	printf("game->images.fauna->instances->x %d\n", game->images.fauna->instances->x);
-	printf("-(int)game->images.fauna->width %d\n\n\n", -(int)game->images.fauna->width);
-	game->images.fauna->instances->x = little_jump;
-	little_jump -= 0.3;
+	else
+	{
+		game->images.fauna[0]->enabled = false;
+		game->images.fauna[1]->enabled = true;
+	}
+	carousel(game->images.fauna, CAROUSEL_NORMAL_MOVEMENT);
+	carousel_reverse(game->images.ambient, -CAROUSEL_NORMAL_MOVEMENT);
 }
 
 void	await_user_input(t_game *game)

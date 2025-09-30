@@ -20,7 +20,8 @@ typedef struct	s_images
 	mlx_image_t		*tridy;
 	mlx_image_t		*bubble_array[20];
 	mlx_image_t		*start_cover[2];
-	mlx_image_t		*fauna;
+	mlx_image_t		*fauna[2];
+	mlx_image_t		*ambient;
 
 
 	mlx_image_t	*kelas_open;

@@ -8,6 +8,8 @@
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "t_game.h"
 # include "t_player_movements.h"
+# include "../ANIMATIONS/animations.h"
+
 # include <math.h>
 
 # define LIMIT_FOV 1.5
