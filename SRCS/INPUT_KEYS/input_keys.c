@@ -33,6 +33,43 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		if (keydata.action == MLX_RELEASE)
 			game->player.speed = NORMAL * (game->tile_size * 0.04);
 	}
+
+
+	if (keydata.key == MLX_KEY_Q)
+	{
+		game->images.kelas_sx->enabled = true;
+		game->images.kelas_open->enabled = false;
+		if (keydata.action == MLX_RELEASE)
+		{
+			game->images.kelas_sx->enabled = false;
+			game->images.kelas_open->enabled = true;
+		}
+	}
+	if (keydata.key == MLX_KEY_E)
+	{
+		game->images.kelas_dx->enabled = true;
+		game->images.kelas_open->enabled = false;
+		if (keydata.action == MLX_RELEASE)
+		{
+			game->images.kelas_dx->enabled = false;
+			game->images.kelas_open->enabled = true;
+		}
+	}
+	if ((keydata.key == MLX_KEY_E) && (keydata.key == MLX_KEY_Q))
+	{
+		game->images.kelas_dx->enabled = false;
+		game->images.kelas_sx->enabled = false;
+		game->images.kelas_closed->enabled = true;
+		game->images.kelas_open->enabled = false;
+	}
+	else
+	{
+		game->images.kelas_closed->enabled = false;
+		game->images.kelas_open->enabled = true;
+	
+	}
+
+	
 	if (keydata.key == MLX_KEY_W)
 	{
 		game->player.movements.key_w_is_down = true;

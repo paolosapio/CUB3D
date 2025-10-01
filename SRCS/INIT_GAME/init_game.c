@@ -12,7 +12,7 @@ void	init_map_foundations(t_map *map, t_game *game)
 void	init_game(t_game *game, t_parser_map *parser_map)
 {
 	init_map_foundations(&game->map, game);
-	mlx_set_setting(MLX_FULLSCREEN, true);
+	//mlx_set_setting(MLX_FULLSCREEN, true);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", false);
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED); //?Poner en un boton opcional
 	init_texture(game->mlx, &game->images, parser_map);
