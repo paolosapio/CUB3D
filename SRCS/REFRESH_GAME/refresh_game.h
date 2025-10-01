@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   refresh_game.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 22:21:18 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 22:21:36 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef REFRESH_GAME_H
 # define REFRESH_GAME_H
@@ -21,7 +32,8 @@
 
 # define RGBA_SIZE 4
 
-void	refresh_draw_greco(mlx_image_t *map_greco, t_player *player, t_map *map);
+void	refresh_draw_greco(mlx_image_t *map_greco, t_player *player,
+			t_map *map);
 void	clean_game_images(t_images *images);
 
 #endif

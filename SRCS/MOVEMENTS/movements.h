@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movements.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 21:43:18 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 21:56:12 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MOVEMENTS_H
 # define MOVEMENTS_H
@@ -26,15 +36,14 @@ typedef struct s_trig_angle
 }			t_trig_angle;
 
 // movements_player.c
-
 void		move_line_direction(t_player *player, float sen, float cos);
 void		move_player(t_player *player, t_map *map, float sen, float cos);
 void		change_player_rotation(t_player *player, int new_vision_angle);
 void		movements_player(void *params);
-
 bool		antennas_north(t_player player, t_map map);
 bool		antennas_south(t_player player, t_map map);
 bool		antennas_left(t_player player, t_map map);
 bool		antennas_right(t_player player, t_map map);
+void		movement_wasd(t_game	*game);
 
 #endif

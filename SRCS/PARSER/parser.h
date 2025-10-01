@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 22:04:17 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 22:18:17 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
@@ -28,10 +39,10 @@ typedef struct s_parser_map
 {
 	int		line_that_start_map;  // parseo
 	char*	arg_map_fd;         // parseo
-	char*	info_north_texture; // parseo + imagen
-	char*	info_east_texture;  // parseo + imagen
-	char*	info_south_texture; // parseo + imagen
-	char*	info_west_texture;  // parseo + imagen
+	char*	path_n; // parseo + imagen
+	char*	path_e;  // parseo + imagen
+	char*	path_s; // parseo + imagen
+	char*	path_w;  // parseo + imagen
 	char*	info_floor;         // parseo + imagen
 	char*	info_sky;           // parseo + imagen
 }				t_parser_map;
@@ -42,10 +53,10 @@ typedef struct s_parser_map
 {
 	int		line_that_start_map;
 	char	*arg_map_fd;
-	char	*info_north_texture;
-	char	*info_east_texture;
-	char	*info_south_texture;
-	char	*info_west_texture;
+	char	*path_n;
+	char	*path_e;
+	char	*path_s;
+	char	*path_w;
 	char	*info_floor;
 	char	*info_sky;
 }				t_parser_map;
@@ -74,7 +85,7 @@ void			get_map_info(t_map map);
 
 // check_meta_map.c
 
-int				line_checkeitor(char *line_map_to_check, t_map *map,
+int				check_line(char *line_map_to_check, t_map *map,
 					t_parser_map *parser_map, int fd);
 void			allocate_map_size(char *line_map_to_check, t_map *map, int fd);
 
@@ -102,5 +113,8 @@ void			destroy_map(t_map *map);
 
 int				str_map_encasketeitor(t_parser_map *parser_map, t_map *map,
 					int fd);
+// check_map.c
+void			error_exit_invalid_map(t_parser_map *parser_map, t_map *map,
+					int error);
 
 #endif

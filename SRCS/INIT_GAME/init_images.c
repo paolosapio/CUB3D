@@ -1,5 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_images.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 20:00:11 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 20:13:18 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "init_game.h"
 #define N_COLORS 3
+
+void	error_color_exit(char **rgba_strings)
+{
+	write(2, "Invalid color received\n", 23);
+	free_double_pointer(rgba_strings);
+	exit(EXIT_FAILURE);
+}
 
 int	extract_color_from_str(char *color_str)
 {
@@ -11,20 +30,14 @@ int	extract_color_from_str(char *color_str)
 	i = 0;
 	rgba_strings = ft_split(color_str, ',');
 	if (ft_arraylen((const char **)rgba_strings) != N_COLORS)
-	{
-		write(2, "Invalid color received\n", 23);
-		free_double_pointer(rgba_strings);
-		exit(1);
-	}
+		error_color_exit(rgba_strings);
 	while (rgba_strings[i] != NULL)
 	{
 		if (ft_isdigit_str(rgba_strings[i]) == false)
-		{
-			write(2, "Invalid color received\n", 23);
-			free_double_pointer(rgba_strings);
-			exit(1);
-		}
+			error_color_exit(rgba_strings);
 		rgba_array[i] = ft_atoi(rgba_strings[i]);
+		if ((rgba_array[i] > 255) || (rgba_array[i] < 0))
+			error_color_exit(rgba_strings);
 		i++;
 	}
 	color = ft_color(rgba_array[0], rgba_array[1], rgba_array[2], 255);
@@ -32,23 +45,25 @@ int	extract_color_from_str(char *color_str)
 	return (color);
 }
 
-void	init_images(mlx_t *mlx, t_map *map, t_images *images, t_parser_map *parser_map)
+void	init_images(mlx_t *mlx, t_map *map, t_images *imgs, t_parser_map *p_map)
 {
 	int	color;
 
-	images->minimap = create_empty_img(mlx, map->longest_line * map->tile_size , map->map_len * map->tile_size);
-	images->background_map = create_background_map(mlx, map);
-	images->gradient_bgr = create_gradient_bgr(mlx);
-	color = extract_color_from_str(parser_map->info_sky);
-	images->sky = create_half_screen_rectangle(mlx, color);
-	color = extract_color_from_str(parser_map->info_floor);
-	images->floor = create_half_screen_rectangle(mlx, color);
-	images->tridy = create_empty_img(mlx, WIDTH, HEIGHT);
-	images->map_ray = create_empty_img(mlx, map->longest_line * map->tile_size , map->map_len * map->tile_size);
-	images->minimap->enabled = false;
-	images->map_ray->enabled = false;
-	images->map_greco->enabled = false;
-	images->map_rock->enabled = false;
-	images->map_sand->enabled = false;
-	images->background_map->enabled = false;
+	imgs->minimap = create_empty_img(mlx, map->longest_line * map->tile_size,
+			map->map_len * map->tile_size);
+	imgs->background_map = create_background_map(mlx, map);
+	imgs->gradient_bgr = create_gradient_bgr(mlx);
+	color = extract_color_from_str(p_map->info_sky);
+	imgs->sky = create_half_screen_rectangle(mlx, color);
+	color = extract_color_from_str(p_map->info_floor);
+	imgs->floor = create_half_screen_rectangle(mlx, color);
+	imgs->tridy = create_empty_img(mlx, WIDTH, HEIGHT);
+	imgs->map_ray = create_empty_img(mlx, map->longest_line * map->tile_size,
+			map->map_len * map->tile_size);
+	imgs->minimap->enabled = false;
+	imgs->map_ray->enabled = false;
+	imgs->map_greco->enabled = false;
+	imgs->map_rock->enabled = false;
+	imgs->map_sand->enabled = false;
+	imgs->background_map->enabled = false;
 }

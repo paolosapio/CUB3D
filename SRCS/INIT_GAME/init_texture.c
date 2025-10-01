@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_texture.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 20:13:37 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 20:25:51 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "init_game.h"
 
 mlx_texture_t	*load_n_check_texture(mlx_t *mlx, t_images *images,
@@ -16,7 +28,7 @@ mlx_texture_t	*load_n_check_texture(mlx_t *mlx, t_images *images,
 	return (texture);
 }
 
-mlx_image_t	*load_n_check_image(mlx_t *mlx, t_images *images, char *texture_path)
+mlx_image_t	*load_n_check_image(mlx_t *mlx, t_images *imgs, char *texture_path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -26,15 +38,13 @@ mlx_image_t	*load_n_check_image(mlx_t *mlx, t_images *images, char *texture_path
 	{
 		write(2, "ERROR:NOT VALID TEXTURE: ", 25);
 		ft_putendl_fd(texture_path, 2);
-		sayonara_baby(mlx, images, NULL);
+		sayonara_baby(mlx, imgs, NULL);
 		exit(1);
 	}
 	image = mlx_texture_to_image(mlx, texture);
 	mlx_delete_texture(texture);
-	// TODO: mlx_set_icon(mlx, greco);
 	return (image);
 }
-
 
 void	init_bubbles(mlx_t *mlx, mlx_image_t **bubble_array, t_images *images)
 {
@@ -60,28 +70,29 @@ void	init_bubbles(mlx_t *mlx, mlx_image_t **bubble_array, t_images *images)
 	bubble_array[19] = load_n_check_image(mlx, images, "PNG/bubble/b19.png");
 }
 
-void	init_texture(mlx_t *mlx, t_images *images, t_parser_map *parser_map)
+void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 {
-	images->mirilla = load_n_check_image(mlx, images, "PNG/mirilla.png");
-	images->greco_texture = load_n_check_texture(mlx, images, "PNG/greco.png");
-	mlx_set_icon(mlx, images->greco_texture);
-	mlx_delete_texture(images->greco_texture);
-	images->map_greco = load_n_check_image(mlx, images, "PNG/greco.png");
-	images->map_sand = load_n_check_image(mlx, images, "PNG/map_sand.png");
-	images->map_rock = load_n_check_image(mlx, images, "PNG/map_rock.png");
-	images->kelas_open = load_n_check_image(mlx, images, "PNG/kelas_open.png");
-	images->kelas_closed = load_n_check_image(mlx, images, "PNG/kelas_closed.png");
-	images->kelas_sx = load_n_check_image(mlx, images, "PNG/kelas_sx.png");
-	images->kelas_dx = load_n_check_image(mlx, images, "PNG/kelas_dx.png");
-	images->frame = load_n_check_image(mlx, images, "PNG/frame.png");
-	images->map_texture_N = load_n_check_texture(mlx, images, parser_map->info_north_texture);
-	images->map_texture_S = load_n_check_texture(mlx, images, parser_map->info_south_texture);
-	images->map_texture_E = load_n_check_texture(mlx, images, parser_map->info_east_texture);
-	images->map_texture_W = load_n_check_texture(mlx, images, parser_map->info_west_texture);
-	init_bubbles(mlx, images->bubble_array, images);
-	images->start_cover[0] = load_n_check_image(mlx, images, "PNG/start/start0.png");
-	images->start_cover[1] = load_n_check_image(mlx, images, "PNG/start/start1.png");
-	images->fauna[0] = load_n_check_image(mlx, images, "PNG/fauna0.png");
-	images->fauna[1] = load_n_check_image(mlx, images, "PNG/fauna1.png");
-	images->ambient = load_n_check_image(mlx, images, "PNG/ambient.png");
+	printf("parser_map->path_n: %s\n", parser_map->path_n);
+	imgs->mirilla = load_n_check_image(mlx, imgs, "PNG/mirilla.png");
+	imgs->greco_texture = load_n_check_texture(mlx, imgs, "PNG/greco.png");
+	mlx_set_icon(mlx, imgs->greco_texture);
+	mlx_delete_texture(imgs->greco_texture);
+	imgs->map_greco = load_n_check_image(mlx, imgs, "PNG/greco.png");
+	imgs->map_sand = load_n_check_image(mlx, imgs, "PNG/map_sand.png");
+	imgs->map_rock = load_n_check_image(mlx, imgs, "PNG/map_rock.png");
+	imgs->kelas_open = load_n_check_image(mlx, imgs, "PNG/kelas_open.png");
+	imgs->kelas_closed = load_n_check_image(mlx, imgs, "PNG/kelas_closed.png");
+	imgs->kelas_sx = load_n_check_image(mlx, imgs, "PNG/kelas_sx.png");
+	imgs->kelas_dx = load_n_check_image(mlx, imgs, "PNG/kelas_dx.png");
+	imgs->frame = load_n_check_image(mlx, imgs, "PNG/frame.png");
+	imgs->map_texture_N = load_n_check_texture(mlx, imgs, parser_map->path_n);
+	imgs->map_texture_S = load_n_check_texture(mlx, imgs, parser_map->path_s);
+	imgs->map_texture_E = load_n_check_texture(mlx, imgs, parser_map->path_e);
+	imgs->map_texture_W = load_n_check_texture(mlx, imgs, parser_map->path_w);
+	init_bubbles(mlx, imgs->bubble_array, imgs);
+	imgs->start_cover[0] = load_n_check_image(mlx, imgs, "PNG/start/0.png");
+	imgs->start_cover[1] = load_n_check_image(mlx, imgs, "PNG/start/1.png");
+	imgs->fauna[0] = load_n_check_image(mlx, imgs, "PNG/fauna0.png");
+	imgs->fauna[1] = load_n_check_image(mlx, imgs, "PNG/fauna1.png");
+	imgs->ambient = load_n_check_image(mlx, imgs, "PNG/ambient.png");
 }

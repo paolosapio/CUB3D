@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_parser_map.c                               :+:      :+:    :+:   */
+/*   drow_bouble.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 22:02:18 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 22:02:20 by psapio           ###   ########.fr       */
+/*   Created: 2025/10/01 17:57:14 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 18:54:21 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "draw_game.h"
 
-void	destroy_parser_map(t_parser_map *parser_map)
+void	bouble_to_windws(t_game *game)
 {
-	free(parser_map->path_n);
-	free(parser_map->path_e);
-	free(parser_map->path_s);
-	free(parser_map->path_w);
-	free(parser_map->info_floor);
-	free(parser_map->info_sky);
+	int	i;
+
+	i = -1;
+	while (++i < 20)
+	{
+		mlx_image_to_window(game->mlx, game->images.bubble_array[i], 0, 0);
+		game->images.bubble_array[i]->enabled = false;
+	}
 }

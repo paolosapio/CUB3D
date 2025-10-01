@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sky_and_floor_create.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 18:51:46 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 19:40:53 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "draw_game.h"
 
 mlx_image_t	*create_half_screen_rectangle(mlx_t *mlx, int color)
@@ -19,21 +31,30 @@ mlx_image_t	*create_half_screen_rectangle(mlx_t *mlx, int color)
 	return (half_rectangle);
 }
 
+void	condition_little_jump(int y, float *gradient_color)
+{
+	const float	little_jump = 255.0 / (HEIGHT / 2.0);
+
+	if (y < HEIGHT / 2)
+		*gradient_color += little_jump;
+	else
+		*gradient_color -= little_jump;
+}
+
 mlx_image_t	*create_gradient_bgr(mlx_t *mlx)
 {
 	mlx_image_t	*gradient_bgr;
-	const float	little_jump = 255.0 / (HEIGHT / 2.0);
 	float		gradient_color;
 	int			x;
 	int			y;
 
 	gradient_bgr = mlx_new_image(mlx, WIDTH, HEIGHT);
-	y = 0;
+	y = -1;
 	gradient_color = 0;
-	while (y < HEIGHT)
+	while (++y < HEIGHT)
 	{
-		x = 0;
-		while (x < WIDTH)
+		x = -1;
+		while (++x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
 				mlx_put_pixel(gradient_bgr, x, y, ft_color(0, 50, 40,
@@ -41,13 +62,8 @@ mlx_image_t	*create_gradient_bgr(mlx_t *mlx)
 			else
 				mlx_put_pixel(gradient_bgr, x, y, ft_color(0, 0, 0,
 						gradient_color));
-			++x;
 		}
-		++y;
-		if (y < HEIGHT / 2)
-			gradient_color += little_jump;
-		else
-			gradient_color -= little_jump;
+		condition_little_jump(y, &gradient_color);
 	}
 	return (gradient_bgr);
 }

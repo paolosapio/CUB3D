@@ -1,20 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 22:23:38 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 22:24:53 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "render.h"
 #include <math.h>
 #include "t_game.h"
 #include "../REFRESH_GAME/refresh_game.h"
 #include "../TOOLS_GRAPHICS/tools_graphics.h"
 
-
-
-// float	pixeleitor(void)
-// {
-// 	float pixel_size;
-
-// 	pixel_size = 1.0 / g_size_tile;
-// 	return (pixel_size);
-// }
-
-void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
+void	init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 {
 	t_coor		middle_screen_point;
 	t_coor		l_screen_point;
@@ -24,7 +26,7 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	int			x_pos_in_screen;
 	const float	x_pos_in_screen_aux = (float)(SCREEN * game->tile_size) / WIDTH;
 	float		r;
-	//!mlx_texture_t	wall;
+
 	middle_screen_point.x = player_coor.x - cos(to_radians(player_vision_angle)) * DISTANCE_SCREEN;
 	middle_screen_point.y = player_coor.y - sin(to_radians(player_vision_angle)) * DISTANCE_SCREEN;
 	pixel_offset_cos = cos(to_radians(player_vision_angle - 90)) / WIDTH * SCREEN;
@@ -32,7 +34,6 @@ void init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
 	l_screen_point.x = (middle_screen_point.x - cos(to_radians(player_vision_angle - 90)) * HALF_SCREEN);
 	l_screen_point.y = (middle_screen_point.y - sin(to_radians(player_vision_angle - 90)) * HALF_SCREEN);
 	x_pos_in_screen = x_pos_in_screen_aux;
-
 	while (x_pos_in_screen < WIDTH)
 	{
 		ray = raycasting(game->player.pos, l_screen_point, game->map);

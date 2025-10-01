@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:19:54 by psapio            #+#    #+#             */
-/*   Updated: 2025/09/30 21:23:43 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/01 20:08:48 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,5 @@ int	main(int argc, char **argv)
 	await_user_input(&game);
 	sayonara_baby(game.mlx, &game.images, &game.map);
 }
+
+//! ARREGLLADOOOOOO:  LOS COLRES DEL MAPA IVAN EN OVERFLOW! ARREGLADOOOOO

@@ -3,122 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/08/18 11:47:08 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/01 22:17:11 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	error_exit_invalid_map(t_parser_map *parser_map, t_map *map, int error)
+int	fd_open_or_exit(char *path_map)
 {
-	destroy_parser_map(parser_map);
-	destroy_map(map);
-	write(2, "ERROR: ", 7);
-	if (error == INVALID_CHAR)
-		write(2, "Found an invalid char inside the map\n", 37);
-	else if (error == NOT_ENCLOSED_MAP)
-		write(2, "The map is not fully enclosed\n", 30);
-	else if (error == TOO_MANY_PLAYERS)
-		write(2, "More than one player initial position\n", 38);
-	else if (error == INVALID_PLAYER_POSITION)
-		write(2, "The player initial position is invalid\n", 39);
-	else if (error == NO_PLAYER)
-		write(2, "No player initial position\n", 27);
-	else if (error == EMPTY_MAP)
-		write(2, "The map is empty\n", 17);
-	else
-		write(2, "Undefined error\n", 16);
-	exit(1);
-}
+	int	fd;
 
-t_errok	is_around_space_ok(t_map *map, int x, int y)
-{
-	if (y == 0 || x > (int)ft_strlen(map->array[y - 1])
-		|| ft_strchr(FLOOR "" WALL "" PLAYER, map->array[y - 1][x]) == NULL)
+	fd = open(path_map, O_RDONLY);
+	if (fd == -1)
 	{
-		return (ERROR);
+		perror(path_map);
+		exit(EXIT_FAILURE);
 	}
-	if (map->array[y][x + 1] != '\0' && ft_strchr(FLOOR "" WALL "" PLAYER,
-			map->array[y][x + 1]) == NULL)
-	{
-		return (ERROR);
-	}
-	if (y + 1 == map->map_len || x > (int)ft_strlen(map->array[y + 1])
-		|| ft_strchr(FLOOR "" WALL "" PLAYER, map->array[y + 1][x]) == NULL)
-	{
-		return (ERROR);
-	}
-	if (x > 0 && ft_strchr(FLOOR "" WALL "" PLAYER, map->array[y][x
-			- 1]) == NULL)
-		return (ERROR);
-	return (OK);
-}
-
-void	check_player(t_parser_map *parser_map, t_map *map, int x, int y)
-{
-	if (map->player_pointer->pos.x != 0)
-		error_exit_invalid_map(parser_map, map, TOO_MANY_PLAYERS);
-	if (is_around_space_ok(map, x, y) == ERROR)
-		error_exit_invalid_map(parser_map, map, INVALID_PLAYER_POSITION);
-	map->player_pointer->pos.x = x + CENTER_PLAYER;
-	map->player_pointer->pos.y = y + CENTER_PLAYER;
-	if (map->array[y][x] == 'N')
-	{
-		map->player_pointer->vision_angle = 90;
-		map->player_pointer->end.x = x + CENTER_PLAYER;
-		map->player_pointer->end.y = y + CENTER_PLAYER - LIMIT_FOV;
-	}
-	else if (map->array[y][x] == 'E')
-	{
-		map->player_pointer->vision_angle = 0;
-		map->player_pointer->end.x = x + CENTER_PLAYER - LIMIT_FOV;
-		map->player_pointer->end.y = y + CENTER_PLAYER;
-	}
-	else if (map->array[y][x] == 'S')
-	{
-		map->player_pointer->vision_angle = 270;
-		map->player_pointer->end.x = x + CENTER_PLAYER;
-		map->player_pointer->end.y = y + CENTER_PLAYER + LIMIT_FOV;
-	}
-	else if (map->array[y][x] == 'W')
-	{
-		map->player_pointer->vision_angle = 180;
-		map->player_pointer->end.x = x + CENTER_PLAYER + LIMIT_FOV;
-		map->player_pointer->end.y = y + CENTER_PLAYER;
-	}
-}
-
-void	check_valid_map(t_parser_map *parser_map, t_map *map)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	if (!map->array)
-	{
-		error_exit_invalid_map(parser_map, map, EMPTY_MAP);
-	}
-	while (map->array[y])
-	{
-		x = 0;
-		while (map->array[y][x])
-		{
-			if (ft_strchr(VALID_CHARS, map->array[y][x]) == NULL)
-				error_exit_invalid_map(parser_map, map, INVALID_CHAR);
-			if (ft_strchr(PLAYER, map->array[y][x]) != NULL)
-				check_player(parser_map, map, x, y);
-			if (ft_strchr(FLOOR, map->array[y][x]) != NULL)
-			{
-				if (is_around_space_ok(map, x, y) == ERROR)
-					error_exit_invalid_map(parser_map, map, NOT_ENCLOSED_MAP);
-			}
-			x++;
-		}
-		y++;
-	}
+	return (fd);
 }
 
 void	check_map(char *path_map, t_parser_map *parser_map, t_map *map)
@@ -127,18 +31,13 @@ void	check_map(char *path_map, t_parser_map *parser_map, t_map *map)
 	int		fd;
 
 	parser_map->arg_map_fd = path_map;
-	fd = open(path_map, O_RDONLY);
-	if (fd == -1)
-	{
-		perror(path_map);
-		exit(EXIT_FAILURE);
-	}
+	fd = fd_open_or_exit(path_map);
 	while (1)
 	{
 		line_map_to_check = get_next_line(fd);
 		if (line_map_to_check == NULL)
 			break ;
-		if (line_checkeitor(line_map_to_check, map, parser_map, fd) == ERROR)
+		if (check_line(line_map_to_check, map, parser_map, fd) == ERROR)
 		{
 			printf("invalid line: %s\n", line_map_to_check);
 			free(line_map_to_check);

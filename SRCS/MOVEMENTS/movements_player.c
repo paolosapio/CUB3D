@@ -1,8 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movements_player.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 21:42:51 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 21:55:26 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../RENDER/render.h"
 #include "movements.h"
-
-#define COLLITIONS "1"
 
 void	move_line_direction(t_player *player, float sen, float cos)
 {
@@ -12,6 +21,7 @@ void	move_line_direction(t_player *player, float sen, float cos)
 		player->end.x += cos * player->speed;
 }
 
+#define COLLITIONS "1"
 #define DISTANCE_COLLISION 1
 
 void	move_player(t_player *player, t_map *map, float sen, float cos)
@@ -19,20 +29,20 @@ void	move_player(t_player *player, t_map *map, float sen, float cos)
 	t_coor			new_player_pos;
 	t_int_coor		tile;
 	const t_coor	stop_collision = {.y = (sen * DISTANCE_COLLISION), .x = (cos
-				* DISTANCE_COLLISION)};
+			* DISTANCE_COLLISION)};
 
 	new_player_pos.y = (player->pos.y + sen * player->speed);
 	new_player_pos.x = (player->pos.x + cos * player->speed);
 	tile.y = (int)(new_player_pos.y + stop_collision.y);
 	tile.x = (int)(new_player_pos.x + stop_collision.x);
 	if ((map->array[(int)player->pos.y][tile.x] && !ft_strchr(COLLITIONS,
-				map->array[(int)player->pos.y][tile.x])))
+			map->array[(int)player->pos.y][tile.x])))
 	{
 		player->pos.x = new_player_pos.x;
 		move_line_direction(player, 0, cos);
 	}
 	if ((map->array[tile.y][(int)player->pos.x] && !ft_strchr(COLLITIONS,
-				map->array[tile.y][(int)player->pos.x])))
+			map->array[tile.y][(int)player->pos.x])))
 	{
 		player->pos.y = new_player_pos.y;
 		move_line_direction(player, sen, 0);
@@ -52,56 +62,14 @@ void	change_player_rotation(t_player *player, int new_vision_angle)
 		* LIMIT_FOV;
 }
 
-void	angulator_move(float vision_angle, int tile_size, t_game *game)
-{
-	t_trig_angle	trig_angle;
-
-	trig_angle.angle = vision_angle;
-	trig_angle.s1n = sin(to_radians(vision_angle)) / tile_size;
-	trig_angle.c0s = cos(to_radians(vision_angle)) / tile_size;
-	move_player(&game->player, &game->map, -trig_angle.s1n, -trig_angle.c0s);
-}
-
-
-
-
-
 void	movements_player(void *params)
 {
 	t_game	*game;
 
 	game = (t_game *)params;
-	if (game->player.movements.key_w_is_down == true)
-	{
-		angulator_move(game->player.vision_angle + 0, game->tile_size, game);
-		if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT) == false
-			&& mlx_is_key_down(game->mlx, MLX_KEY_RIGHT) == false)
-		{
-			clean_game_images(&game->images);
-			init_camera(game, game->player.pos, game->player.vision_angle);
-		}
-	}
-	if (game->player.movements.key_d_is_down == true)
-	{
-		angulator_move(game->player.vision_angle + 90, game->tile_size, game);
-		clean_game_images(&game->images);
-		init_camera(game, game->player.pos, game->player.vision_angle);
-	}
-	if (game->player.movements.key_s_is_down == true)
-	{
-		angulator_move(game->player.vision_angle + 180, game->tile_size, game);
-		clean_game_images(&game->images);
-		init_camera(game, game->player.pos, game->player.vision_angle);
-	}
-	if (game->player.movements.key_a_is_down == true)
-	{
-		angulator_move(game->player.vision_angle + 270, game->tile_size, game);
-		clean_game_images(&game->images);
-		init_camera(game, game->player.pos, game->player.vision_angle);
-	}
+	movement_wasd(game);
 	if (game->player.movements.key_left_is_down == true)
 	{
-
 		carousel(game->images.fauna, CAROUSEL_LEFT_MOVEMENT);
 		carousel_reverse(game->images.ambient, CAROUSEL_LEFT_MOVEMENT);
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
@@ -117,5 +85,4 @@ void	movements_player(void *params)
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
 	refresh_draw_greco(game->images.map_greco, &game->player, &game->map);
-
 }

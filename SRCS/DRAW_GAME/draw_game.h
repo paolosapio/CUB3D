@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_game.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 17:56:33 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 18:50:09 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef DRAW_GAME_H
 # define DRAW_GAME_H
@@ -17,5 +28,6 @@ mlx_image_t	*create_background_map(mlx_t *mlx, t_map *map);
 void		images_to_window(t_game *game);
 mlx_image_t	*create_empty_img(mlx_t *mlx, int width, int height);
 mlx_image_t	*create_gradient_bgr(mlx_t *mlx);
+void		bouble_to_windws(t_game *game);
 
 #endif

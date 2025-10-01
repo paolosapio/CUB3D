@@ -1,6 +1,17 @@
-#ifndef CAMERA_H
-# define CAMERA_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 22:30:01 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 22:33:08 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef RENDER_H
+# define RENDER_H
 
 # include <math.h>
 # include <stdio.h>
@@ -8,23 +19,32 @@
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "../TOOLS_GRAPHICS/tools_graphics.h"
 
+// # define HALF_SCREEN  SCREEN / 2 //!celdas!
+
 # define SCREEN 1.2 //!celdas!
-# define HALF_SCREEN  SCREEN / 2//!celdas!
+# define HALF_SCREEN  0.6 //!celdas!
 # define DISTANCE_SCREEN 0.5 //!celdas!
 
 // FOV : FIELD OF VIEW (campo visual, lo que vemos en pantalla)
-	// distancia de la pantalla del jugador y tamaño de la pantalla varian la vision
+// distancia de la pantalla del jugador y tamaño de la pantalla varian la vis
 
+typedef enum e_texture_dir
+{
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
+}			t_texture_dir;
 
 // definir la pantalla
-typedef struct	s_camera
+typedef struct s_camera
 {
 	// unsigned int	screen;
 	// unsigned int	distance_of_player;
 	float			angle_of_view;
 }				t_camera;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	t_coor	colision_point;
 	float	colision_len;
@@ -32,12 +52,17 @@ typedef struct	s_ray
 	float	darkener_percent;
 }				t_ray;
 
-void	init_camera(t_game *game, t_coor player_coor, float player_vision_angle);
+void	init_camera(t_game *game, t_coor player_coor,
+			float player_vision_angle);
 t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map);
-void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_index);
+void	check_wall_texture(t_ray ray, t_player player, t_images *images,
+			float ray_index);
 
-void	to_3d(mlx_image_t *image, t_ray ray, int x_step, mlx_texture_t *texture);
+void	to_3d(mlx_image_t *image, t_ray ray, int x_step,
+			mlx_texture_t *texture);
 
 int		check_side_pixel(t_ray ray, t_player player);
-void	print_centered_line(mlx_image_t *screen, t_ray ray, int x_step, mlx_texture_t *wall);
+void	print_centered_line(mlx_image_t *screen, t_ray ray,
+			int x_step, mlx_texture_t *wall);
+
 #endif

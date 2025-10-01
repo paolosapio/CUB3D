@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_encasketeitor.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 22:03:30 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/01 22:03:31 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 void	reopen_map(char *map_path, int fd)
@@ -12,7 +24,7 @@ void	skip_lines(t_parser_map *map, int fd)
 		free(get_next_line(fd));
 }
 
-int	line_len_meter(int size_line, int old_bigger_line)
+int	line_len(int size_line, int old_bigger_line)
 {
 	if (size_line > old_bigger_line)
 		return (size_line);
@@ -34,7 +46,7 @@ int	str_map_encasketeitor(t_parser_map *parser_map, t_map *map, int fd)
 		if (line == NULL)
 			break ;
 		aux_line = ft_strtrim(line, "\n");
-		map->longest_line = line_len_meter(ft_strlen(aux_line), map->longest_line);
+		map->longest_line = line_len(ft_strlen(aux_line), map->longest_line);
 		free(aux_line);
 		map->array[map_line_index] = line;
 		map_line_index++;

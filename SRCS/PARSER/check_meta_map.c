@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   check_meta_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/08/20 14:27:57 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:02:01 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-
 int	save_map_info(char *line_map_to_check, char **map_info)
 {
-	char **splitted;
+	char	**splitted;
 
 	if (*map_info)
 		return (ERROR);
 	splitted = ft_split(line_map_to_check, ' ');
-	if ((ft_arraylen((const char **)splitted) == 2 && splitted[1][0] != '\n')||
+	if ((ft_arraylen((const char **)splitted) == 2 && splitted[1][0] != '\n') ||
 		(ft_arraylen((const char **)splitted) == 3 && splitted[2][0] == '\n'))
 	{
 		*map_info = ft_strtrim(splitted[1], "\n");
@@ -36,7 +35,6 @@ void	allocate_map_size(char *line_map_to_check, t_map *map, int fd)
 	int	map_len;
 
 	map_len = 0;
-
 	line_map_to_check = get_next_line(fd);
 	while (line_map_to_check)
 	{
@@ -50,45 +48,45 @@ void	allocate_map_size(char *line_map_to_check, t_map *map, int fd)
 
 void	check_textures_path(t_parser_map *map)
 {
-	if(map->info_north_texture == NULL ||
-		map->info_east_texture == NULL ||
-		map->info_south_texture == NULL ||
-		map->info_west_texture == NULL ||
-		map->info_floor == NULL ||
-		map->info_sky == NULL)
-	{	
+	if (map->path_n == NULL
+		|| map->path_e == NULL
+		|| map->path_s == NULL
+		|| map->path_w == NULL
+		|| map->info_floor == NULL
+		|| map->info_sky == NULL)
+	{
 		write(2, "INVALID PATH\n", 14);
 		exit(0);
 	}
 }
+
 /*
 HOLA
 @param map mapa
 @return ubn it
 */
-int	line_checkeitor(char *line_map_to_check, t_map *map, t_parser_map *parser_map, int fd)
+int	check_line(char *line_map_to_check, t_map *map, t_parser_map *p_map, int fd)
 {
 	if (is_empty_line(line_map_to_check) == true)
 		return (OK);
 	if (ft_strncmp(line_map_to_check, "NO ", 3) == 0)
-		return (save_map_info(line_map_to_check,&parser_map->info_north_texture));
+		return (save_map_info(line_map_to_check, &p_map->path_n));
 	if (ft_strncmp(line_map_to_check, "WE ", 3) == 0)
-		return (save_map_info(line_map_to_check,&parser_map->info_west_texture));
+		return (save_map_info(line_map_to_check, &p_map->path_w));
 	if (ft_strncmp(line_map_to_check, "EA ", 3) == 0)
-		return (save_map_info(line_map_to_check,&parser_map->info_east_texture));
+		return (save_map_info(line_map_to_check, &p_map->path_e));
 	if (ft_strncmp(line_map_to_check, "SO ", 3) == 0)
-		return (save_map_info(line_map_to_check,&parser_map->info_south_texture));
+		return (save_map_info(line_map_to_check, &p_map->path_s));
 	if (ft_strncmp(line_map_to_check, "F ", 2) == 0)
-		return (save_map_info(line_map_to_check,&parser_map->info_floor));
+		return (save_map_info(line_map_to_check, &p_map->info_floor));
 	if (ft_strncmp(line_map_to_check, "C ", 2) == 0)
-		return (save_map_info(line_map_to_check,&parser_map->info_sky));
-	else // When we arrive here we suppose it is the start of the map array.
+		return (save_map_info(line_map_to_check, &p_map->info_sky));
+	else
 	{
-		check_textures_path(parser_map);
+		check_textures_path(p_map);
 		if (check_first_line_map(line_map_to_check) == ERROR)
 			return (ERROR);
 		allocate_map_size(line_map_to_check, map, fd);
-		return (str_map_encasketeitor(parser_map, map, fd));
+		return (str_map_encasketeitor(p_map, map, fd));
 	}
 }
-
