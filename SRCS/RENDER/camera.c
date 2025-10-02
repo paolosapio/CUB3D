@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:23:38 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 22:24:53 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 13:03:05 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,49 @@
 #include "../REFRESH_GAME/refresh_game.h"
 #include "../TOOLS_GRAPHICS/tools_graphics.h"
 
-void	init_camera(t_game *game, t_coor player_coor, float player_vision_angle)
-{
-	t_coor		middle_screen_point;
-	t_coor		l_screen_point;
-	float		pixel_offset_cos;
-	float		pixel_offset_sen;
-	t_ray		ray;
-	int			x_pos_in_screen;
-	const float	x_pos_in_screen_aux = (float)(SCREEN * game->tile_size) / WIDTH;
-	float		r;
+// player_v_angle : player_vision_angle
 
-	middle_screen_point.x = player_coor.x - cos(to_radians(player_vision_angle)) * DISTANCE_SCREEN;
-	middle_screen_point.y = player_coor.y - sin(to_radians(player_vision_angle)) * DISTANCE_SCREEN;
-	pixel_offset_cos = cos(to_radians(player_vision_angle - 90)) / WIDTH * SCREEN;
-	pixel_offset_sen = sin(to_radians(player_vision_angle - 90)) / WIDTH * SCREEN;
-	l_screen_point.x = (middle_screen_point.x - cos(to_radians(player_vision_angle - 90)) * HALF_SCREEN);
-	l_screen_point.y = (middle_screen_point.y - sin(to_radians(player_vision_angle - 90)) * HALF_SCREEN);
-	x_pos_in_screen = x_pos_in_screen_aux;
-	while (x_pos_in_screen < WIDTH)
+void	init_struct_camera(t_camera *c, t_coor player_coor,
+		float x_pos_in_screen_aux, float player_v_angle)
+{
+	c->middle_screen_point.x = player_coor.x
+		- cos(to_radians(player_v_angle)) * DISTANCE_SCREEN;
+	c->middle_screen_point.y = player_coor.y
+		- sin(to_radians(player_v_angle)) * DISTANCE_SCREEN;
+	c->pixel_offset_cos = cos(to_radians(player_v_angle - 90)) / WIDTH * SCREEN;
+	c->pixel_offset_sen = sin(to_radians(player_v_angle - 90)) / WIDTH * SCREEN;
+	c->l_screen_point.x = (c->middle_screen_point.x
+			- cos(to_radians(player_v_angle - 90)) * HALF_SCREEN);
+	c->l_screen_point.y = (c->middle_screen_point.y
+			- sin(to_radians(player_v_angle - 90)) * HALF_SCREEN);
+	c->x_pos_in_screen = x_pos_in_screen_aux;
+}
+
+void	init_camera(t_game *game, t_coor player_coor, float player_v_angle)
+{
+	const float	x_pos_in_screen_aux = (float)(SCREEN * game->tile_size) / WIDTH;
+	t_camera	c;
+
+	init_struct_camera(&c, player_coor, x_pos_in_screen_aux, player_v_angle);
+	while (c.x_pos_in_screen < WIDTH)
 	{
-		ray = raycasting(game->player.pos, l_screen_point, game->map);
-		if (x_pos_in_screen % 5 == 0)
-			bresenham_algorithm(game->images.map_ray, (t_segment){player_coor, ray.colision_point, 0}, ft_color(0, 0, 255, 100), game->tile_size);
-		l_screen_point.x += pixel_offset_cos;
-		l_screen_point.y += pixel_offset_sen;
-		r = sqrtf((l_screen_point.x - player_coor.x) * (l_screen_point.x - player_coor.x) + (l_screen_point.y - player_coor.y) * (l_screen_point.y - player_coor.y));
-		ray.colision_len /= r;
-		check_wall_texture(ray, game->player, &game->images, x_pos_in_screen);
-		x_pos_in_screen++;
+		c.ray = raycasting(game->player.pos, c.l_screen_point, game->map);
+		if (c.x_pos_in_screen % 5 == 0)
+			bresenham_algorithm(game->images.map_ray,
+				(t_segment){player_coor, c.ray.colision_point, 0},
+				ft_color(0, 0, 255, 100), game->tile_size);
+		c.l_screen_point.x += c.pixel_offset_cos;
+		c.l_screen_point.y += c.pixel_offset_sen;
+		c.r = sqrtf((c.l_screen_point.x - player_coor.x)
+				* (c.l_screen_point.x - player_coor.x)
+				+ (c.l_screen_point.y - player_coor.y)
+				* (c.l_screen_point.y - player_coor.y));
+		c.ray.colision_len /= c.r;
+		check_wall_texture(c.ray, game->player,
+			&game->images, c.x_pos_in_screen);
+		c.x_pos_in_screen++;
 	}
-	bresenham_algorithm(game->images.map_ray, (t_segment){player_coor, game->player.end, 0}, ft_color(255, 255, 255, 255), game->tile_size);
+	bresenham_algorithm(game->images.map_ray,
+		(t_segment){player_coor, game->player.end, 0},
+		ft_color(255, 255, 255, 255), game->tile_size);
 }

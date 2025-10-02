@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:13:37 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 20:25:51 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:39:45 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 	imgs->map_texture_E = load_n_check_texture(mlx, imgs, parser_map->path_e);
 	imgs->map_texture_W = load_n_check_texture(mlx, imgs, parser_map->path_w);
 	init_bubbles(mlx, imgs->bubble_array, imgs);
-	imgs->start_cover[0] = load_n_check_image(mlx, imgs, "PNG/start/0.png");
-	imgs->start_cover[1] = load_n_check_image(mlx, imgs, "PNG/start/1.png");
+	imgs->start[0] = load_n_check_image(mlx, imgs, "PNG/start/0.png");
+	imgs->start[1] = load_n_check_image(mlx, imgs, "PNG/start/1.png");
 	imgs->fauna[0] = load_n_check_image(mlx, imgs, "PNG/fauna0.png");
 	imgs->fauna[1] = load_n_check_image(mlx, imgs, "PNG/fauna1.png");
 	imgs->ambient = load_n_check_image(mlx, imgs, "PNG/ambient.png");

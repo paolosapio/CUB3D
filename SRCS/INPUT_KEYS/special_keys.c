@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:57:29 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 22:28:10 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:39:45 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,30 @@
 #include "../RENDER/render.h"
 #include "libft.h"
 
-//! PARA QUE LAS KELAS SE MUEVAN COn TECLadO TAMBIEN
-void	keys_kelas(mlx_key_data_t keydata, t_game *game)
-{
-	if (keydata.key == MLX_KEY_Q)
-	{
-		game->images.kelas_sx->enabled = true;
-		game->images.kelas_open->enabled = false;
-		if (keydata.action == MLX_RELEASE)
-		{
-			game->images.kelas_sx->enabled = false;
-			game->images.kelas_open->enabled = true;
-		}
-	}
-	if (keydata.key == MLX_KEY_E)
-	{
-		game->images.kelas_dx->enabled = true;
-		game->images.kelas_open->enabled = false;
-		if (keydata.action == MLX_RELEASE)
-		{
-			game->images.kelas_dx->enabled = false;
-			game->images.kelas_open->enabled = true;
-		}
-	}
-	// if ((keydata.key == MLX_KEY_E) && (keydata.key == MLX_KEY_Q))
-	// {
-	// 	game->images.kelas_dx->enabled = false;
-	// 	game->images.kelas_sx->enabled = false;
-	// 	game->images.kelas_closed->enabled = true;
-	// 	game->images.kelas_open->enabled = false;
-	// }
-	// else
-	// {
-	// 	game->images.kelas_closed->enabled = false;
-	// 	game->images.kelas_open->enabled = true;
-	// }
-}
+// //! PARA QUE LAS KELAS SE MUEVAN COn TECLadO TAMBIEN
+// void	keys_kelas(mlx_key_data_t keydata, t_game *game)
+// {
+// 	if (keydata.key == MLX_KEY_Q)
+// 	{
+// 		game->images.kelas_sx->enabled = true;
+// 		game->images.kelas_open->enabled = false;
+// 		if (keydata.action == MLX_RELEASE)
+// 		{
+// 			game->images.kelas_sx->enabled = false;
+// 			game->images.kelas_open->enabled = true;
+// 		}
+// 	}
+// 	if (keydata.key == MLX_KEY_E)
+// 	{
+// 		game->images.kelas_dx->enabled = true;
+// 		game->images.kelas_open->enabled = false;
+// 		if (keydata.action == MLX_RELEASE)
+// 		{
+// 			game->images.kelas_dx->enabled = false;
+// 			game->images.kelas_open->enabled = true;
+// 		}
+// 	}
+// }
 
 void	keys_wasd(mlx_key_data_t keydata, t_game *game)
 {
@@ -98,11 +86,10 @@ void	keys_arrows(mlx_key_data_t keydata, t_game *game)
 
 void	keys_enter_shift(mlx_key_data_t keydata, t_game *game)
 {
-	
 	if (keydata.key == MLX_KEY_ENTER)
 	{
-		game->images.start_cover[0]->enabled = false;
-		game->images.start_cover[1]->enabled = true;
+		game->images.start[0]->enabled = false;
+		game->images.start[1]->enabled = true;
 		game->player.speed = NORMAL * (game->tile_size * 0.04);
 	}
 	if (keydata.key == MLX_KEY_LEFT_SHIFT)
@@ -120,7 +107,7 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	game = (t_game *)params;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
 		mlx_close_window(game->mlx);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_M) == true)
+	if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) == true)
 	{
 		game->images.minimap->enabled -= 1;
 		game->images.map_greco->enabled -= 1;
@@ -129,8 +116,9 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		game->images.map_sand->enabled -= 1;
 		game->images.map_rock->enabled -= 1;
 	}
-	keys_kelas(keydata, game);
 	keys_wasd(keydata, game);
 	keys_arrows(keydata, game);
 	keys_enter_shift(keydata, game);
 }
+
+// keys_kelas(keydata, game);

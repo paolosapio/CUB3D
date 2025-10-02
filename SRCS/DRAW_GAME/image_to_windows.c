@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:57:14 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 19:55:09 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:39:45 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ void	images_to_window(t_game *game)
 	mlx_resize_image(game->images.map_greco, game->tile_size, game->tile_size);
 	mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.frame, 0, 0);
-	mlx_image_to_window(game->mlx, game->images.start_cover[0], 0, 0);
-	mlx_image_to_window(game->mlx, game->images.start_cover[1], 0, 0);
+	mlx_image_to_window(game->mlx, game->images.start[0], 0, 0);
+	mlx_image_to_window(game->mlx, game->images.start[1], 0, 0);
 }

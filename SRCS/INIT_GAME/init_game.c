@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:43:49 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 22:52:03 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:45:32 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ void	init_map_foundations(t_map *map, t_game *game)
 void	init_game(t_game *game, t_parser_map *parser_map)
 {
 	init_map_foundations(&game->map, game);
-	//mlx_set_setting(MLX_FULLSCREEN, true);
+	// mlx_set_setting(MLX_FULLSCREEN, true);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", false);
-	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED); //?Poner en un boton opcional
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
 	init_texture(game->mlx, &game->images, parser_map);
 	init_images(game->mlx, &game->map, &game->images, parser_map);
 	destroy_parser_map(parser_map);
 	images_to_window(game);
 	init_camera(game, game->player.pos, game->player.vision_angle);
 }
+
+// 29 - mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED); 
+//?Poner en un boton opcional

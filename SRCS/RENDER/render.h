@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:30:01 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 22:33:08 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 12:45:23 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ typedef enum e_texture_dir
 	WEST
 }			t_texture_dir;
 
-// definir la pantalla
-typedef struct s_camera
-{
-	// unsigned int	screen;
-	// unsigned int	distance_of_player;
-	float			angle_of_view;
-}				t_camera;
-
 typedef struct s_ray
 {
 	t_coor	colision_point;
@@ -51,6 +43,17 @@ typedef struct s_ray
 	float	vertical_line;
 	float	darkener_percent;
 }				t_ray;
+
+typedef struct s_camera
+{
+	t_coor		middle_screen_point;
+	t_coor		l_screen_point;
+	float		pixel_offset_cos;
+	float		pixel_offset_sen;
+	t_ray		ray;
+	int			x_pos_in_screen;
+	float		r;
+}		t_camera;
 
 void	init_camera(t_game *game, t_coor player_coor,
 			float player_vision_angle);

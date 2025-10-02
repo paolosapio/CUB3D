@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:31:06 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 20:56:34 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 14:51:10 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,9 @@ void	mouse_movements(double mouse_x, double mouse_y, void *params)
 // MLX_PRESS	= 1,
 // MLX_MOUSE_BUTTON_LEFT	= 0,
 // MLX_MOUSE_BUTTON_RIGHT	= 1,
-void	mouse_buttons(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
-{
-	t_game	*game;
 
-	(void)mods;
-	game = (t_game *)param;
-	game->images.kelas_open->enabled = false;
-	game->images.kelas_dx->enabled = false;
-	game->images.kelas_sx->enabled = false;
-	game->images.kelas_closed->enabled = false;
+void	mouse_action(mouse_key_t button, action_t action, t_game *game)
+{
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
 		game->player.movements.key_mouse_left_down = true;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
@@ -78,6 +71,20 @@ void	mouse_buttons(mouse_key_t button, action_t action, modifier_key_t mods, voi
 		game->player.movements.key_mouse_right_down = false;
 		game->player.movements.key_mouse_left_down = false;
 	}
+}
+
+void	mouse_buttons(mouse_key_t button,
+		action_t action, modifier_key_t mods, void *param)
+{
+	t_game	*game;
+
+	(void)mods;
+	game = (t_game *)param;
+	game->images.kelas_open->enabled = false;
+	game->images.kelas_dx->enabled = false;
+	game->images.kelas_sx->enabled = false;
+	game->images.kelas_closed->enabled = false;
+	mouse_action(button, action, game);
 	if (game->player.movements.key_mouse_right_down == true
 		&& game->player.movements.key_mouse_left_down == true)
 		game->images.kelas_closed->enabled = true;
@@ -90,7 +97,8 @@ void	mouse_buttons(mouse_key_t button, action_t action, modifier_key_t mods, voi
 		game->images.kelas_sx->enabled = true;
 }
 
-void	draw_bubble(mlx_t *mlx, mlx_image_t **bubble_array, bool *animation_switch)
+void	draw_bubble(mlx_t *mlx, mlx_image_t **bubble_array,
+		bool *animation_switch)
 {
 	static int	bubble_frame = 0;
 
@@ -104,9 +112,9 @@ void	draw_bubble(mlx_t *mlx, mlx_image_t **bubble_array, bool *animation_switch)
 		*animation_switch = false;
 	}
 }
+
 void	switch_fauna(int tv_sec, t_images *images)
 {
-	
 	if (tv_sec % 2 == 0)
 	{
 		images->fauna[0]->enabled = true;
@@ -118,7 +126,6 @@ void	switch_fauna(int tv_sec, t_images *images)
 		images->fauna[1]->enabled = true;
 	}
 }
-
 
 void	animations(void *params)
 {
@@ -132,14 +139,17 @@ void	animations(void *params)
 		animation_switch = true;
 	if (animation_switch == true)
 		draw_bubble(game->mlx, game->images.bubble_array, &animation_switch);
-	if (current_time.tv_usec % 5 == 0 && game->images.start_cover[0]->enabled == true)
-		game->images.start_cover[1]->enabled = !game->images.start_cover[1]->enabled;
-	if (game->images.start_cover[0]->enabled == false && game->images.start_cover[1]->instances->y < HEIGHT)
+	if (current_time.tv_usec % 5 == 0 && game->images.start[0]->enabled == true)
+		game->images.start[1]->enabled = !game->images.start[1]->enabled;
+	if (game->images.start[0]->enabled == false
+		&& game->images.start[1]->instances->y < HEIGHT)
 	{
-		game->images.start_cover[1]->instances->y += 1;
-		game->images.start_cover[1]->instances->x += 1;
-		if (mlx_resize_image(game->images.start_cover[1], game->images.start_cover[1]->width - 2, game->images.start_cover[1]->height - 2) == false)
-			game->images.start_cover[1]->enabled = false;
+		game->images.start[1]->instances->y += 1;
+		game->images.start[1]->instances->x += 1;
+		if (mlx_resize_image(game->images.start[1],
+				game->images.start[1]->width - 2,
+				game->images.start[1]->height - 2) == false)
+			game->images.start[1]->enabled = false;
 	}
 	switch_fauna(current_time.tv_sec, &game->images);
 	carousel(game->images.fauna, CAROUSEL_NORMAL_MOVEMENT);

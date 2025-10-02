@@ -12,6 +12,11 @@
 #include "../SRCS/INIT_GAME/init_game.h"
 #include "../SRCS/INPUT_KEYS/input_keys.h"
 
+/* DEFINES DE ft_putendl_fd */
+
+#define USAGE "\033[1;31mERROR: Invalid arguments\
+\033[0m → Usage: ./cub3D maps/map.cub\n\
+\033[0;35mYou can find different maps inside the map folder\033[0m"
 
 
 /*   COLORS PRINTF  */
