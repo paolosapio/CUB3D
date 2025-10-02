@@ -3,42 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   special_keys.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:57:29 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 14:39:45 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:42:25 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input_keys.h"
-#include "../MOVEMENTS/movements.h"
 #include "../RENDER/render.h"
 #include "libft.h"
 
-// //! PARA QUE LAS KELAS SE MUEVAN COn TECLadO TAMBIEN
-// void	keys_kelas(mlx_key_data_t keydata, t_game *game)
-// {
-// 	if (keydata.key == MLX_KEY_Q)
-// 	{
-// 		game->images.kelas_sx->enabled = true;
-// 		game->images.kelas_open->enabled = false;
-// 		if (keydata.action == MLX_RELEASE)
-// 		{
-// 			game->images.kelas_sx->enabled = false;
-// 			game->images.kelas_open->enabled = true;
-// 		}
-// 	}
-// 	if (keydata.key == MLX_KEY_E)
-// 	{
-// 		game->images.kelas_dx->enabled = true;
-// 		game->images.kelas_open->enabled = false;
-// 		if (keydata.action == MLX_RELEASE)
-// 		{
-// 			game->images.kelas_dx->enabled = false;
-// 			game->images.kelas_open->enabled = true;
-// 		}
-// 	}
-// }
+void	keys_kelas(mlx_key_data_t keydata, t_game *game)
+{
+	if (keydata.key == MLX_KEY_Q)
+	{
+		game->player.movements.key_q_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+			game->player.movements.key_q_is_down = false;
+	}
+	if (keydata.key == MLX_KEY_E)
+	{
+		game->player.movements.key_e_is_down = true;
+		if (keydata.action == MLX_RELEASE)
+		game->player.movements.key_e_is_down = false;
+	}
+	kelas_movement(game);
+}
 
 void	keys_wasd(mlx_key_data_t keydata, t_game *game)
 {
@@ -96,10 +87,10 @@ void	keys_enter_shift(mlx_key_data_t keydata, t_game *game)
 	{
 		game->player.speed = TURBO * (game->tile_size * 0.04);
 		if (keydata.action == MLX_RELEASE)
-		game->player.speed = NORMAL * (game->tile_size * 0.04);
+			game->player.speed = NORMAL * (game->tile_size * 0.04);
 	}
 }
-	
+
 void	special_keys(mlx_key_data_t keydata, void *params)
 {
 	t_game	*game;
@@ -119,6 +110,5 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	keys_wasd(keydata, game);
 	keys_arrows(keydata, game);
 	keys_enter_shift(keydata, game);
+	keys_kelas(keydata, game);
 }
-
-// keys_kelas(keydata, game);

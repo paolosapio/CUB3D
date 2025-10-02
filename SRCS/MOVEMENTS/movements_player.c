@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements_player.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:42:51 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 21:55:26 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 15:29:05 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	change_player_rotation(t_player *player, int new_vision_angle)
 	player->end.y = player->pos.y - sin(to_radians(player->vision_angle))
 		* LIMIT_FOV;
 }
+
 
 void	movements_player(void *params)
 {
