@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:25:21 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 15:18:21 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/02 20:01:55 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	to_3d_south(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *te
 	float			y_start_to_paint;
 	float			end_screen;
 
-	ray.vertical_line = HEIGHT / ray.colision_len;
+	
 	x_pos_texture = ((int)(ray.colision_point.x + 1) - ray.colision_point.x) - 0.001;
 	pixel_little_jump = texture->height / ray.vertical_line;
 	if (ray.vertical_line > HEIGHT)
@@ -110,7 +110,22 @@ void	to_3d_south(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *te
 	}
 }
 
-void	to_3d_east(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
+float	get_x_pos_texture(t_texture_dir dir, t_coor colision_point)
+{
+	float	x;
+
+	if (dir == SOUTH)
+		x = ((int)(colision_point.x + 1) - colision_point.x) - 0.001;//???
+	else if (dir == WEST)
+		x = ((int)(colision_point.y + 1) - colision_point.y) - 0.001;
+	else if (dir == EAST)
+		x = colision_point.y - (int)colision_point.y;
+	else if (dir == NORTH)
+		x = colision_point.x - (int)colision_point.x;
+	return (x);
+}
+
+void	to_3d_east(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture, t_texture_dir dir)
 {
 	float			x_pos_texture;
 	float			y_pos_texture;
@@ -181,7 +196,43 @@ void	to_3d_west(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *tex
 }
 
 
-//esta funcon se va a convertir en check side texture que devuelve mlx_texture_t
+void	draw_texture_line(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture, t_texture_dir dir)
+{
+	t_coor	texture_coor;
+	float	pixel_little_jump;
+	float	screen_coor_y;
+	float	end_screen_coor;
+	float	color_pixel;
+
+	texture_coor.x = get_x_pos_texture(dir, ray.colision_point);
+	pixel_little_jump = texture->height / ray.vertical_line;
+	if (ray.vertical_line > HEIGHT)
+	{
+		texture_coor.y = texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line);
+		screen_coor_y = 0.0;
+		if (dir == NORTH || dir == SOUTH)
+			end_screen_coor = texture->height - texture_coor.y;
+		else if (dir == WEST || dir == EAST)
+			end_screen_coor = texture->height - texture_coor.x;
+	}
+	else
+	{
+		texture_coor.y = 0.0;
+		screen_coor_y = (HEIGHT / 2) - (ray.vertical_line / 2);
+		end_screen_coor = texture->height;
+	}
+	while (screen_coor_y < end_screen_coor)
+	{
+		if (screen_coor_y > HEIGHT)
+			break ;
+		color_pixel = color_picker(texture_coor, texture, ray.darkener_percent);
+		mlx_put_pixel(image, ray_index, screen_coor_y, color_pixel);
+		screen_coor_y++;
+		texture_coor.y += pixel_little_jump;
+	}
+	
+}
+
 void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_index)
 {
 	float			x_rounded;
@@ -204,7 +255,7 @@ void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_
 			img_texture[1] = images->map_texture_E;
 			to_3d_east(images->tridy, ray, ray_index, images->map_texture_E);
 		}
-		else //* Este
+		else //* Oeste
 			to_3d_west(images->tridy, ray, ray_index, images->map_texture_W);
 	}
 	if (ray.colision_point.y >= (y_rounded - MARGIN_BASE) && ray.colision_point.y <= (y_rounded + MARGIN_BASE))
