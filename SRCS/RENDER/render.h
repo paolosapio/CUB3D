@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:30:01 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 12:45:23 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 17:18:20 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 // FOV : FIELD OF VIEW (campo visual, lo que vemos en pantalla)
 // distancia de la pantalla del jugador y tamaño de la pantalla varian la vis
 
+typedef t_coor t_hypo2_len;
+typedef t_coor t_ray_len;
+typedef t_int_coor t_dir;
+
 typedef enum e_texture_dir
 {
 	NORTH,
@@ -36,12 +40,21 @@ typedef enum e_texture_dir
 	WEST
 }			t_texture_dir;
 
+/**
+ * dir: The direction on the y and x axys. Either 1 or -1.
+ * hypo_unitary: How much does the hypothenuse increase when you move one unit
+ * 				 in each axys.
+ */
 typedef struct s_ray
 {
 	t_coor	colision_point;
 	float	colision_len;
 	float	vertical_line;
 	float	darkener_percent;
+
+	t_dir		dir;
+	t_ray_len	hypo_unitary;
+	t_ray_len	hypo_supreme;
 }				t_ray;
 
 typedef struct s_camera
@@ -52,7 +65,7 @@ typedef struct s_camera
 	float		pixel_offset_sen;
 	t_ray		ray;
 	int			x_pos_in_screen;
-	float		r;
+	float		r; //???
 }		t_camera;
 
 void	init_camera(t_game *game, t_coor player_coor,

@@ -22,12 +22,15 @@ typedef struct	s_images
 	mlx_image_t		*start[2];
 	mlx_image_t		*fauna[2];
 	mlx_image_t		*ambient;
+	mlx_image_t		*info;
+
 
 
 	mlx_image_t	*kelas_open;
 	mlx_image_t	*kelas_closed;
 	mlx_image_t	*kelas_sx;
 	mlx_image_t	*kelas_dx;
+	mlx_image_t	*kelas_up[2];
 	mlx_image_t	*frame;
 	// mlx_image_t	*waves;
 

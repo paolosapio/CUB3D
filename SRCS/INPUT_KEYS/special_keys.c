@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_keys.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:57:29 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 15:42:25 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/02 18:43:09 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 
 void	keys_kelas(mlx_key_data_t keydata, t_game *game)
 {
+	if (game->images.info->enabled == true
+		|| mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT) == true)
+		return ;
 	if (keydata.key == MLX_KEY_Q)
 	{
 		game->player.movements.key_q_is_down = true;
@@ -26,7 +29,7 @@ void	keys_kelas(mlx_key_data_t keydata, t_game *game)
 	{
 		game->player.movements.key_e_is_down = true;
 		if (keydata.action == MLX_RELEASE)
-		game->player.movements.key_e_is_down = false;
+			game->player.movements.key_e_is_down = false;
 	}
 	kelas_movement(game);
 }
@@ -87,7 +90,18 @@ void	keys_enter_shift(mlx_key_data_t keydata, t_game *game)
 	{
 		game->player.speed = TURBO * (game->tile_size * 0.04);
 		if (keydata.action == MLX_RELEASE)
+		{
 			game->player.speed = NORMAL * (game->tile_size * 0.04);
+			game->images.kelas_up[0]->enabled = false;
+			game->images.kelas_up[1]->enabled = false;
+		}
+		else
+		{
+			game->images.kelas_open->enabled = false;
+			game->images.kelas_closed->enabled = false;
+			game->images.kelas_dx->enabled = false;
+			game->images.kelas_sx->enabled = false;
+		}
 	}
 }
 
@@ -96,6 +110,11 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	t_game	*game;
 
 	game = (t_game *)params;
+	if (keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS)
+	{
+		game->images.info->enabled -= 1;
+		game->images.kelas_open->enabled = false;
+	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
 		mlx_close_window(game->mlx);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) == true)

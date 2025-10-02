@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:43:18 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 21:56:12 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 17:56:31 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "t_game.h"
 # include "t_player_movements.h"
 # include "../ANIMATIONS/animations.h"
+# include "../RENDER/render.h"
 
 # include <math.h>
 
@@ -27,6 +28,9 @@
 # define SLOW 0.5
 # define NORMAL 1
 # define TURBO 2
+
+# define COLLITIONS "1"
+# define DISTANCE_COLLISION 1
 
 typedef struct s_trig_angle
 {
@@ -40,10 +44,6 @@ void		move_line_direction(t_player *player, float sen, float cos);
 void		move_player(t_player *player, t_map *map, float sen, float cos);
 void		change_player_rotation(t_player *player, int new_vision_angle);
 void		movements_player(void *params);
-bool		antennas_north(t_player player, t_map map);
-bool		antennas_south(t_player player, t_map map);
-bool		antennas_left(t_player player, t_map map);
-bool		antennas_right(t_player player, t_map map);
 void		movement_wasd(t_game	*game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:13:37 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 14:39:45 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 18:44:49 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,18 @@ void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 	imgs->kelas_closed = load_n_check_image(mlx, imgs, "PNG/kelas_closed.png");
 	imgs->kelas_sx = load_n_check_image(mlx, imgs, "PNG/kelas_sx.png");
 	imgs->kelas_dx = load_n_check_image(mlx, imgs, "PNG/kelas_dx.png");
+	imgs->kelas_up[0] = load_n_check_image(mlx, imgs, "PNG/kelas_up0.png");
+	imgs->kelas_up[1] = load_n_check_image(mlx, imgs, "PNG/kelas_up1.png");
 	imgs->frame = load_n_check_image(mlx, imgs, "PNG/frame.png");
-	imgs->map_texture_N = load_n_check_texture(mlx, imgs, parser_map->path_n);
-	imgs->map_texture_S = load_n_check_texture(mlx, imgs, parser_map->path_s);
-	imgs->map_texture_E = load_n_check_texture(mlx, imgs, parser_map->path_e);
-	imgs->map_texture_W = load_n_check_texture(mlx, imgs, parser_map->path_w);
+	imgs->map_texture_N = load_n_check_texture(mlx, imgs, parser_map->path_s);
+	imgs->map_texture_S = load_n_check_texture(mlx, imgs, parser_map->path_n);
+	imgs->map_texture_E = load_n_check_texture(mlx, imgs, parser_map->path_w);
+	imgs->map_texture_W = load_n_check_texture(mlx, imgs, parser_map->path_e);
 	init_bubbles(mlx, imgs->bubble_array, imgs);
 	imgs->start[0] = load_n_check_image(mlx, imgs, "PNG/start/0.png");
 	imgs->start[1] = load_n_check_image(mlx, imgs, "PNG/start/1.png");
 	imgs->fauna[0] = load_n_check_image(mlx, imgs, "PNG/fauna0.png");
 	imgs->fauna[1] = load_n_check_image(mlx, imgs, "PNG/fauna1.png");
 	imgs->ambient = load_n_check_image(mlx, imgs, "PNG/ambient.png");
+	imgs->info = load_n_check_image(mlx, imgs, "PNG/info.png");
 }

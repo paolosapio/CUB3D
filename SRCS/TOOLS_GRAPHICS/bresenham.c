@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 11:33:22 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 12:07:08 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 16:30:00 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,3 @@ void	bresenham_algorithm(mlx_image_t *image, t_segment s,
 		}
 	}
 }
-
-/*
-ENTRAMOS A BRESENHAMªªªª
-s.start.x = 485.000000 ->  s.end.x = 486.000000
-p1y = 385.000000 -> s.end.y = 286.000000
-
-dy = -99.000000, dx = 1.000000
-
-avances inclinados:
-inc_x_i = 1.000000, inc_y_i = -1.000000
-updated: dy = 99.000000, dx = 1.000000
-
-avances rectos:
-inc_x_r = 0.000000, inc_y_r -1.000000
-reupdated: dy = 1.000000, dx = 99.000000
-
-avanceR = 2.000000, avance -97.000000, avanceI 2.000000
-*/

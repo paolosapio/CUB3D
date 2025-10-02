@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:57:14 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 14:39:45 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/02 18:39:20 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void	hide_images(t_images *image)
 	image->kelas_closed->enabled = false;
 	image->kelas_sx->enabled = false;
 	image->kelas_dx->enabled = false;
+	image->kelas_up[0]->enabled = false;
+	image->kelas_up[1]->enabled = false;
+	image->info->enabled = false;
 }
 
 void	images_to_window(t_game *game)
@@ -92,14 +95,17 @@ void	images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.kelas_closed, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_sx, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_dx, 0, 0);
-	hide_images(&game->images);
+	mlx_image_to_window(game->mlx, game->images.kelas_up[0], 0, 0);
+	mlx_image_to_window(game->mlx, game->images.kelas_up[1], 0, 0);
 	mlx_image_to_window(game->mlx, game->images.mirilla,
 		WIDTH / 2 - 10, HEIGHT / 2 - 10);
 	mlx_image_to_window(game->mlx, game->images.background_map, 0, 0);
 	minimap_images_to_window(game->mlx, &game->map, &game->images);
 	mlx_resize_image(game->images.map_greco, game->tile_size, game->tile_size);
 	mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
+	mlx_image_to_window(game->mlx, game->images.info, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.frame, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.start[0], 0, 0);
 	mlx_image_to_window(game->mlx, game->images.start[1], 0, 0);
+	hide_images(&game->images);
 }

@@ -24,6 +24,20 @@ void	animations(void *params)
 				game->images.start[1]->height - 2) == false)
 			game->images.start[1]->enabled = false;
 	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
+	{
+		if (current_time.tv_sec % 2 == 0)
+		{
+			game->images.kelas_up[0]->enabled = true;
+			game->images.kelas_up[1]->enabled = false;
+		}
+		else
+		{
+			game->images.kelas_up[0]->enabled = false;
+			game->images.kelas_up[1]->enabled = true;
+		}
+	}
+	
 	switch_fauna(current_time.tv_sec, &game->images);
 	carousel(game->images.fauna, CAROUSEL_NORMAL_MOVEMENT);
 	carousel_reverse(game->images.ambient, -CAROUSEL_NORMAL_MOVEMENT);

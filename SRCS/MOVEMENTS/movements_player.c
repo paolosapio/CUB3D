@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   movements_player.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:42:51 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 15:29:05 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/02 17:11:28 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../RENDER/render.h"
 #include "movements.h"
 
 void	move_line_direction(t_player *player, float sen, float cos)
@@ -20,9 +19,6 @@ void	move_line_direction(t_player *player, float sen, float cos)
 	if (cos != 0.0)
 		player->end.x += cos * player->speed;
 }
-
-#define COLLITIONS "1"
-#define DISTANCE_COLLISION 1
 
 void	move_player(t_player *player, t_map *map, float sen, float cos)
 {
@@ -61,7 +57,6 @@ void	change_player_rotation(t_player *player, int new_vision_angle)
 	player->end.y = player->pos.y - sin(to_radians(player->vision_angle))
 		* LIMIT_FOV;
 }
-
 
 void	movements_player(void *params)
 {
