@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:52:49 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 15:12:22 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/03 01:37:38 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,25 @@ void	carousel_reverse(mlx_image_t *image, const float movement);
 
 //fauna.c
 
-void	switch_fauna(int tv_sec, t_images *images);
+void	switch_fauna(unsigned long current_time,  mlx_image_t **fauna);
+
 
 //bubbles.c
 
-void	draw_bubble(mlx_t *mlx, mlx_image_t **bubble_array,
-		bool *animation_switch);
+void	bubble_loop(unsigned long current_time, mlx_image_t **bubble_array);
+
 
 //animations_hook.c
 
 void	animations(void *params);
+
+//start_screen_loop.c
+
+void	start_screen_loop(unsigned long current_time, mlx_image_t **img);
+void	resize_start_screen(mlx_image_t *start_img);
+
+//kelas_loop.c
+
+void	shift_kelas_loop(unsigned long current_time, mlx_image_t **kelas_up);
 
 #endif

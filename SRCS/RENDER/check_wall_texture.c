@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:25:21 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 20:01:55 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/03 00:29:20 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,84 +36,16 @@ unsigned int	color_picker(t_coor pixel_texture_porcent,
 	return (color_pixel);
 }
 
-void	to_3d_north(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture, t_player player)
-{
-	float			x_pos_texture;
-	float			y_pos_texture;
-	float			pixel_little_jump;
-	unsigned int	color_pixel;
-	float			y_start_to_paint;
-	float			end_screen;
 
-	ray.vertical_line = HEIGHT / ray.colision_len;
-	x_pos_texture = ray.colision_point.x - (int)ray.colision_point.x;
-	pixel_little_jump = texture->height / ray.vertical_line;
-	if (ray.vertical_line > HEIGHT)
-	{
-		y_pos_texture = (texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line)) + player.view;
-		if (y_pos_texture < 0)
-			y_pos_texture = 0;
-		y_start_to_paint = 0.0;
-		end_screen = texture->height - y_pos_texture;
-	}
-	else
-	{
-		y_pos_texture = 0.0;
-		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2) + player.view;
-		if (y_start_to_paint < 0)
-			y_start_to_paint = 0;
-		end_screen = texture->height;
-	}
-	while (y_pos_texture < end_screen) 
-	{
-		if (y_start_to_paint > HEIGHT)
-			break ;
-		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.darkener_percent);
-		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
-		y_start_to_paint++;
-		y_pos_texture += pixel_little_jump;
-	}
-}
-
-void	to_3d_south(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
-{
-	float			x_pos_texture;
-	float			y_pos_texture;
-	float			pixel_little_jump;
-	unsigned int	color_pixel;
-	float			y_start_to_paint;
-	float			end_screen;
-
-	
-	x_pos_texture = ((int)(ray.colision_point.x + 1) - ray.colision_point.x) - 0.001;
-	pixel_little_jump = texture->height / ray.vertical_line;
-	if (ray.vertical_line > HEIGHT)
-	{
-		y_pos_texture = texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line);
-		y_start_to_paint = 0.0;
-		end_screen = texture->height - y_pos_texture;
-	}
-	else
-	{
-		y_pos_texture = 0.0;
-		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
-		end_screen = texture->height;
-	}
-	while (y_pos_texture < end_screen) 
-	{
-		if (y_start_to_paint > HEIGHT)
-			break ;
-		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.darkener_percent);
-		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
-		y_start_to_paint++;
-		y_pos_texture += pixel_little_jump;
-	}
-}
-
+/**
+ * @brief This function calculates the x position of the texture we are facing
+ * based on which direction we are looking at and the colision_point.
+ */
 float	get_x_pos_texture(t_texture_dir dir, t_coor colision_point)
 {
 	float	x;
 
+	x = 0;
 	if (dir == SOUTH)
 		x = ((int)(colision_point.x + 1) - colision_point.x) - 0.001;//???
 	else if (dir == WEST)
@@ -125,121 +57,71 @@ float	get_x_pos_texture(t_texture_dir dir, t_coor colision_point)
 	return (x);
 }
 
-void	to_3d_east(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture, t_texture_dir dir)
-{
-	float			x_pos_texture;
-	float			y_pos_texture;
-	float			pixel_little_jump;
-	unsigned int	color_pixel;
-	float			y_start_to_paint;
-	float			end_screen;
 
-	ray.vertical_line = HEIGHT / ray.colision_len;
-	x_pos_texture = ray.colision_point.y - (int)ray.colision_point.y;
-	pixel_little_jump = texture->height / ray.vertical_line;
-	if (ray.vertical_line > HEIGHT)
+typedef struct	s_texture_line
+{
+	t_texture_dir	dir;
+	t_coor			texture_coor;
+	t_coor			screen_coor;
+	mlx_texture_t	*texture;
+	float			screen_wall_height;
+}				t_texture_line;
+
+/**
+ * @brief This function will init the values neede for draw_texture_line()
+ * based on wether the whole texture fits inside the screen, or if the character
+ * is so close to the wall only a part of it fits on screen.
+ * 
+ * @param wall_height The walls height in pixels.
+ * @param t A struct containing much needed information in a norminette friendly
+ * format.
+ */
+void	init_texture_drawer_values(float wall_height, t_texture_line *t)
+{
+	if (wall_height > HEIGHT)
 	{
-		y_pos_texture = texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line);
-		y_start_to_paint = 0.0;
-		end_screen = texture->height - x_pos_texture;
+		t->texture_coor.y = t->texture->height * 
+			((int)((wall_height - HEIGHT) / 2) / wall_height);
+		t->screen_coor.y = 0.0;
+		if (t->dir == NORTH || t->dir == SOUTH)
+			t->screen_wall_height = t->texture->height - t->texture_coor.y;
+		else if (t->dir == WEST || t->dir == EAST)
+			t->screen_wall_height = t->texture->height - t->texture_coor.x;
 	}
 	else
 	{
-		y_pos_texture = 0.0;
-		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
-		end_screen = texture->height;
-	}
-	while (y_pos_texture < end_screen) 
-	{
-		if (y_start_to_paint > HEIGHT)
-			break ;
-		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.darkener_percent);
-		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
-		y_start_to_paint++;
-		y_pos_texture += pixel_little_jump;
+		t->texture_coor.y = 0.0;
+		t->screen_coor.y = (HEIGHT / 2) - (wall_height / 2);
+		t->screen_wall_height = t->texture->height;
 	}
 }
 
-void	to_3d_west(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture)
+void	draw_texture_line(mlx_image_t *img, t_ray ray, t_texture_line t)
 {
-	float			x_pos_texture;
-	float			y_pos_texture;
-	float			pixel_little_jump;
-	unsigned int	color_pixel;
-	float			y_start_to_paint;
-	float			end_screen;
+	float		pixel_little_jump;
+	uint32_t	color_pixel;
 
-	ray.vertical_line = HEIGHT / ray.colision_len;
-	x_pos_texture = ((int)(ray.colision_point.y + 1) - ray.colision_point.y) - 0.001;
-	pixel_little_jump = texture->height / ray.vertical_line;
-	if (ray.vertical_line > HEIGHT)
+	t.texture_coor.x = get_x_pos_texture(t.dir, ray.colision_point);
+	pixel_little_jump = t.texture->height / ray.vertical_line;
+	init_texture_drawer_values(ray.vertical_line, &t);
+	while (t.texture_coor.y < t.screen_wall_height)
 	{
-		y_pos_texture = texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line);
-		y_start_to_paint = 0.0;
-		end_screen = texture->height - x_pos_texture;
-	}
-	else
-	{
-		y_pos_texture = 0.0;
-		y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
-		end_screen = texture->height;
-	}
-	while (y_pos_texture < end_screen) 
-	{
-		if (y_start_to_paint > HEIGHT)
+		if (t.screen_coor.y > HEIGHT)
 			break ;
-		color_pixel = color_picker((t_coor){x_pos_texture, y_pos_texture}, texture, ray.darkener_percent);
-		mlx_put_pixel(image, ray_index, y_start_to_paint, color_pixel);
-		y_start_to_paint++;
-		y_pos_texture += pixel_little_jump;
+		color_pixel = color_picker(t.texture_coor, t.texture, ray.darkener_percent);
+		mlx_put_pixel(img, t.screen_coor.x, t.screen_coor.y, color_pixel);
+		t.screen_coor.y++;
+		t.texture_coor.y += pixel_little_jump;
 	}
-}
-
-
-void	draw_texture_line(mlx_image_t *image, t_ray ray, int ray_index, mlx_texture_t *texture, t_texture_dir dir)
-{
-	t_coor	texture_coor;
-	float	pixel_little_jump;
-	float	screen_coor_y;
-	float	end_screen_coor;
-	float	color_pixel;
-
-	texture_coor.x = get_x_pos_texture(dir, ray.colision_point);
-	pixel_little_jump = texture->height / ray.vertical_line;
-	if (ray.vertical_line > HEIGHT)
-	{
-		texture_coor.y = texture->height * ((int)((ray.vertical_line - HEIGHT) / 2) / ray.vertical_line);
-		screen_coor_y = 0.0;
-		if (dir == NORTH || dir == SOUTH)
-			end_screen_coor = texture->height - texture_coor.y;
-		else if (dir == WEST || dir == EAST)
-			end_screen_coor = texture->height - texture_coor.x;
-	}
-	else
-	{
-		texture_coor.y = 0.0;
-		screen_coor_y = (HEIGHT / 2) - (ray.vertical_line / 2);
-		end_screen_coor = texture->height;
-	}
-	while (screen_coor_y < end_screen_coor)
-	{
-		if (screen_coor_y > HEIGHT)
-			break ;
-		color_pixel = color_picker(texture_coor, texture, ray.darkener_percent);
-		mlx_put_pixel(image, ray_index, screen_coor_y, color_pixel);
-		screen_coor_y++;
-		texture_coor.y += pixel_little_jump;
-	}
-	
 }
 
 void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_index)
 {
 	float			x_rounded;
 	float			y_rounded;
-	void			*img_texture[2];
+	// void			*img_texture[2];
 
-	img_texture[0] = images->tridy;
+	// img_texture[0] = images->tridy;
 	x_rounded = roundf(ray.colision_point.x);
 	y_rounded = roundf(ray.colision_point.y);
 	// if (ray.colision_point.x >=  (x_rounded - MARGIN_BASE) && ray.colision_point.x <= (x_rounded + MARGIN_BASE) &&
@@ -252,17 +134,26 @@ void	check_wall_texture(t_ray ray, t_player player, t_images *images, float ray_
 	{
 		if (player.pos.x < ray.colision_point.x) //* Este
 		{
-			img_texture[1] = images->map_texture_E;
-			to_3d_east(images->tridy, ray, ray_index, images->map_texture_E);
+			draw_texture_line(images->tridy, ray,(t_texture_line){.dir=EAST,
+				.screen_coor={.x=ray_index}, .texture=images->map_texture_E});
 		}
-		else //* Oeste
-			to_3d_west(images->tridy, ray, ray_index, images->map_texture_W);
+		else
+		{
+			draw_texture_line(images->tridy, ray,(t_texture_line){.dir=WEST,
+				.screen_coor={.x=ray_index}, .texture=images->map_texture_W});
+		}
 	}
 	if (ray.colision_point.y >= (y_rounded - MARGIN_BASE) && ray.colision_point.y <= (y_rounded + MARGIN_BASE))
 	{
-		if (player.pos.y < ray.colision_point.y) //*Sur
-			to_3d_south(images->tridy, ray, ray_index, images->map_texture_S);
-		else									//*Norte
-			to_3d_north(images->tridy, ray, ray_index, images->map_texture_N, player);
+		if (player.pos.y < ray.colision_point.y) //* SUR
+		{
+			draw_texture_line(images->tridy, ray,(t_texture_line){.dir=SOUTH,
+				.screen_coor={.x=ray_index}, .texture=images->map_texture_S});
+		}
+		else // NORTE
+		{
+			draw_texture_line(images->tridy, ray,(t_texture_line){.dir=NORTH,
+				.screen_coor={.x=ray_index}, .texture=images->map_texture_N});
+		}
 	}
 }

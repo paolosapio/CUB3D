@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:29:07 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 19:44:59 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/03 00:25:54 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,5 @@ t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map)
 		(ray.colision_len / ray.hypo_unitary.x);
 	ray.colision_point.y = start_pos.y + ray.dir.y *
 		(ray.colision_len / ray.hypo_unitary.y);
-	ray.vertical_line = HEIGHT / ray.colision_len;
 	return (ray);
 }

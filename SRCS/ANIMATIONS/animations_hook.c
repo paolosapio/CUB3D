@@ -1,44 +1,32 @@
 #include "animations.h"
 
+/**A function that returns in *milliseconds* the elapsed time since the last
+ * time the loop_hook animation 
+ */
+unsigned long	get_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL))
+		return (0);
+	return ((time.tv_sec * 1000 + time.tv_usec / 1000));
+}
+
 void	animations(void *params)
 {
-	struct timeval	current_time;
-	t_game			*game;
-	static bool		animation_switch = false;
+	unsigned long			current_time;
+	t_game					*game;
 
 	game = (t_game *)params;
-	gettimeofday(&current_time, NULL);
-	if (current_time.tv_usec % 100 == 0)
-		animation_switch = true;
-	if (animation_switch == true)
-		draw_bubble(game->mlx, game->images.bubble_array, &animation_switch);
-	if (current_time.tv_usec % 5 == 0 && game->images.start[0]->enabled == true)
-		game->images.start[1]->enabled = !game->images.start[1]->enabled;
-	if (game->images.start[0]->enabled == false
-		&& game->images.start[1]->instances->y < HEIGHT)
-	{
-		game->images.start[1]->instances->y += 1;
-		game->images.start[1]->instances->x += 1;
-		if (mlx_resize_image(game->images.start[1],
-				game->images.start[1]->width - 2,
-				game->images.start[1]->height - 2) == false)
-			game->images.start[1]->enabled = false;
-	}
+	current_time = get_time();
+	bubble_loop(current_time, game->images.bubble_array);
+	if (game->images.start[0]->enabled == true)
+		start_screen_loop(current_time, game->images.start);
+	else if (game->images.start[1]->enabled == true)
+		resize_start_screen(game->images.start[1]);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
-	{
-		if (current_time.tv_sec % 2 == 0)
-		{
-			game->images.kelas_up[0]->enabled = true;
-			game->images.kelas_up[1]->enabled = false;
-		}
-		else
-		{
-			game->images.kelas_up[0]->enabled = false;
-			game->images.kelas_up[1]->enabled = true;
-		}
-	}
-	
-	switch_fauna(current_time.tv_sec, &game->images);
+		shift_kelas_loop(current_time, game->images.kelas_up);
+	switch_fauna(current_time, game->images.fauna);
 	carousel(game->images.fauna, CAROUSEL_NORMAL_MOVEMENT);
 	carousel_reverse(game->images.ambient, -CAROUSEL_NORMAL_MOVEMENT);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:23:38 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 13:03:05 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/03 00:26:08 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	init_camera(t_game *game, t_coor player_coor, float player_v_angle)
 				+ (c.l_screen_point.y - player_coor.y)
 				* (c.l_screen_point.y - player_coor.y));
 		c.ray.colision_len /= c.r;
+		c.ray.vertical_line = HEIGHT / c.ray.colision_len;
 		check_wall_texture(c.ray, game->player,
 			&game->images, c.x_pos_in_screen);
 		c.x_pos_in_screen++;
