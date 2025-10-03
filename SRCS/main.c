@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:19:54 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 12:25:02 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/03 18:05:49 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,16 @@ int	main(int argc, char **argv)
 
 	// game.map.player_pointer = &game.player; //!REVISAR QUE ERA ESTOOOOO
 //! ARREGLLADOOOOOO:  LOS COLRES DEL MAPA IVAN EN OVERFLOW! ARREGLADOOOOO
+
+/*
+cc main.c MLX42/build/libmlx42.a -ldl -lglfw 
+
+int	leak_main(void)
+{
+	mlx_t	*mlx = NULL;
+	
+	mlx = mlx_init(500, 500, "hola", false);
+	mlx_close_window(mlx);
+	mlx_terminate(mlx);
+	return (0);
+} */

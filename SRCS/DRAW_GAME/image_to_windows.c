@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:57:14 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 18:39:20 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/03 20:55:03 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 	transparentator(127, images->map_rock);
 	transparentator(100, images->mirilla);
 	image_to_win(mlx, map, images, slider);
-	mlx_image_to_window(mlx, images->minimap, map->draw_offset.x,
-		map->draw_offset.y);
 	mlx_image_to_window(mlx, images->map_ray, map->draw_offset.x,
 		map->draw_offset.y);
 }
@@ -90,7 +88,7 @@ void	images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.ambient, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.gradient_bgr, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.tridy, 0, 0);
-	bouble_to_windws(game);
+	array_to_win(game->mlx, game->images.bubble_array, 20);
 	mlx_image_to_window(game->mlx, game->images.kelas_open, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_closed, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_sx, 0, 0);
@@ -104,8 +102,8 @@ void	images_to_window(t_game *game)
 	mlx_resize_image(game->images.map_greco, game->tile_size, game->tile_size);
 	mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.info, 0, 0);
-	mlx_image_to_window(game->mlx, game->images.frame, 0, 0);
+	hide_images(&game->images);
+	array_to_win(game->mlx, game->images.frame, 6);
 	mlx_image_to_window(game->mlx, game->images.start[0], 0, 0);
 	mlx_image_to_window(game->mlx, game->images.start[1], 0, 0);
-	hide_images(&game->images);
 }

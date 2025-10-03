@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:13:37 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 18:44:49 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/03 18:22:36 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,16 @@ void	init_bubbles(mlx_t *mlx, mlx_image_t **bubble_array, t_images *images)
 	bubble_array[19] = load_n_check_image(mlx, images, "PNG/bubble/b19.png");
 }
 
+void	init_frame_textures(mlx_t *mlx, t_images *imgs)
+{
+	imgs->frame[0] = load_n_check_image(mlx, imgs, "PNG/frame/0.png");
+	imgs->frame[1] = load_n_check_image(mlx, imgs, "PNG/frame/1.png");
+	imgs->frame[2] = load_n_check_image(mlx, imgs, "PNG/frame/2.png");
+	imgs->frame[3] = load_n_check_image(mlx, imgs, "PNG/frame/3.png");
+	imgs->frame[4] = load_n_check_image(mlx, imgs, "PNG/frame/4.png");
+	imgs->frame[5] = load_n_check_image(mlx, imgs, "PNG/frame/5.png");
+}
+
 void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 {
 	printf("parser_map->path_n: %s\n", parser_map->path_n);
@@ -86,7 +96,7 @@ void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 	imgs->kelas_dx = load_n_check_image(mlx, imgs, "PNG/kelas_dx.png");
 	imgs->kelas_up[0] = load_n_check_image(mlx, imgs, "PNG/kelas_up0.png");
 	imgs->kelas_up[1] = load_n_check_image(mlx, imgs, "PNG/kelas_up1.png");
-	imgs->frame = load_n_check_image(mlx, imgs, "PNG/frame.png");
+	init_frame_textures(mlx, imgs);
 	imgs->map_texture_N = load_n_check_texture(mlx, imgs, parser_map->path_s);
 	imgs->map_texture_S = load_n_check_texture(mlx, imgs, parser_map->path_n);
 	imgs->map_texture_E = load_n_check_texture(mlx, imgs, parser_map->path_w);

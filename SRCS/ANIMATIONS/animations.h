@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:52:49 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/03 01:37:38 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/03 18:29:56 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ void	resize_start_screen(mlx_image_t *start_img);
 //kelas_loop.c
 
 void	shift_kelas_loop(unsigned long current_time, mlx_image_t **kelas_up);
+
+//frame_loop.c
+void	frame_loop(unsigned long current_time, mlx_image_t **frame_array);
 
 #endif

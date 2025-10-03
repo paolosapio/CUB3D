@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:56:33 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 18:50:09 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/03 20:15:30 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ void		images_to_window(t_game *game);
 mlx_image_t	*create_empty_img(mlx_t *mlx, int width, int height);
 mlx_image_t	*create_gradient_bgr(mlx_t *mlx);
 void		bouble_to_windws(t_game *game);
+void		frame_to_windows(t_game *game);
+void		array_to_win(mlx_t *mlx, mlx_image_t **array_imgs, int frames_times);
 
 #endif

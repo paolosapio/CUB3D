@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:00:11 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 20:13:18 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/03 20:54:39 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	init_images(mlx_t *mlx, t_map *map, t_images *imgs, t_parser_map *p_map)
 {
 	int	color;
 
-	imgs->minimap = create_empty_img(mlx, map->longest_line * map->tile_size,
-			map->map_len * map->tile_size);
 	imgs->background_map = create_background_map(mlx, map);
 	imgs->gradient_bgr = create_gradient_bgr(mlx);
 	color = extract_color_from_str(p_map->info_sky);
@@ -60,7 +58,6 @@ void	init_images(mlx_t *mlx, t_map *map, t_images *imgs, t_parser_map *p_map)
 	imgs->tridy = create_empty_img(mlx, WIDTH, HEIGHT);
 	imgs->map_ray = create_empty_img(mlx, map->longest_line * map->tile_size,
 			map->map_len * map->tile_size);
-	imgs->minimap->enabled = false;
 	imgs->map_ray->enabled = false;
 	imgs->map_greco->enabled = false;
 	imgs->map_rock->enabled = false;

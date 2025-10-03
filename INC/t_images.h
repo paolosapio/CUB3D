@@ -10,7 +10,6 @@ typedef struct	s_images
 	mlx_image_t		*floor;
 	mlx_image_t		*gradient_bgr;
 	mlx_image_t		*mirilla;
-	mlx_image_t		*minimap;
 	mlx_image_t		*background_map;
 	mlx_image_t		*map_ray;
 	mlx_image_t		*map_greco;
@@ -23,6 +22,8 @@ typedef struct	s_images
 	mlx_image_t		*fauna[2];
 	mlx_image_t		*ambient;
 	mlx_image_t		*info;
+	mlx_image_t		*frame[6];
+
 
 
 
@@ -31,7 +32,6 @@ typedef struct	s_images
 	mlx_image_t	*kelas_sx;
 	mlx_image_t	*kelas_dx;
 	mlx_image_t	*kelas_up[2];
-	mlx_image_t	*frame;
 	// mlx_image_t	*waves;
 
 	mlx_texture_t	*wall_alga;

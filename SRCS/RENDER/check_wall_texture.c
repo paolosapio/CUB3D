@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_wall_texture.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:25:21 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/03 00:29:20 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/03 21:51:44 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	init_texture_drawer_values(float wall_height, t_texture_line *t)
 	{
 		t->texture_coor.y = t->texture->height * 
 			((int)((wall_height - HEIGHT) / 2) / wall_height);
+		// es equivalente a: t->texture_coor.y = t->texture->height * (0.5 - HEIGHT / (2 * wall_height));
 		t->screen_coor.y = 0.0;
 		if (t->dir == NORTH || t->dir == SOUTH)
 			t->screen_wall_height = t->texture->height - t->texture_coor.y;

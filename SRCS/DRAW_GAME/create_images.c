@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:53:42 by psapio            #+#    #+#             */
-/*   Updated: 2025/09/30 21:43:30 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/03 16:25:39 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ mlx_image_t	*create_empty_img(mlx_t *mlx, int width, int height)
 {
 	mlx_image_t	*map_ray;
 
-	map_ray = mlx_new_image(mlx, width, height);
+	map_ray = mlx_new_image(mlx, width + 1, height + 1);
 	return (map_ray);
 }
 

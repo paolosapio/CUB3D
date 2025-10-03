@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:57:29 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 18:43:09 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/03 21:55:21 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,13 @@ void	keys_enter_shift(mlx_key_data_t keydata, t_game *game)
 		game->images.start[1]->enabled = true;
 		game->player.speed = NORMAL * (game->tile_size * 0.04);
 	}
-	if (keydata.key == MLX_KEY_LEFT_SHIFT)
+	if (keydata.key == MLX_KEY_LEFT_SHIFT && game->images.info->enabled == false)
 	{
+		game->player.movements.key_w_is_down = true;
 		game->player.speed = TURBO * (game->tile_size * 0.04);
 		if (keydata.action == MLX_RELEASE)
 		{
+			game->player.movements.key_w_is_down = false;
 			game->player.speed = NORMAL * (game->tile_size * 0.04);
 			game->images.kelas_up[0]->enabled = false;
 			game->images.kelas_up[1]->enabled = false;
@@ -116,10 +118,21 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 		game->images.kelas_open->enabled = false;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
-		mlx_close_window(game->mlx);
+	{
+		if (game->images.info->enabled == true || game->images.map_greco->enabled == true)
+		{
+			game->images.map_greco->enabled = false;
+			game->images.map_ray->enabled = false;
+			game->images.background_map->enabled = false;
+			game->images.map_sand->enabled = false;
+			game->images.map_rock->enabled = false;
+			game->images.info->enabled = false;
+		}
+		else
+			mlx_close_window(game->mlx);
+	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) == true)
 	{
-		game->images.minimap->enabled -= 1;
 		game->images.map_greco->enabled -= 1;
 		game->images.map_ray->enabled -= 1;
 		game->images.background_map->enabled -= 1;
