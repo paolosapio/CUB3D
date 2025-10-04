@@ -12,6 +12,7 @@ typedef struct	s_images
 	mlx_image_t		*mirilla;
 	mlx_image_t		*background_map;
 	mlx_image_t		*map_ray;
+	//mlx_image_t		*array_greco[8];
 	mlx_image_t		*map_greco;
 	mlx_image_t		*map_sand;
 	mlx_image_t		*map_rock;

@@ -76,6 +76,5 @@ void	mouse_buttons(mouse_key_t button,
 		game->player.movements.key_mouse_right_down = false;
 		game->player.movements.key_mouse_left_down = false;
 	}
-	printf("button: %d\n", button);
 	kelas_movement(game);
 }

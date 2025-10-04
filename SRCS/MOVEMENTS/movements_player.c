@@ -71,6 +71,8 @@ void	movements_player(void *params)
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
+
+	
 	}
 	if (game->player.movements.key_right_is_down == true)
 	{

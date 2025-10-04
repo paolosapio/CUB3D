@@ -59,6 +59,7 @@ void	init_images(mlx_t *mlx, t_map *map, t_images *imgs, t_parser_map *p_map)
 	imgs->map_ray = create_empty_img(mlx, map->longest_line * map->tile_size,
 			map->map_len * map->tile_size);
 	imgs->map_ray->enabled = false;
+	
 	imgs->map_greco->enabled = false;
 	imgs->map_rock->enabled = false;
 	imgs->map_sand->enabled = false;

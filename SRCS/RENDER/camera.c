@@ -34,12 +34,20 @@ void	init_struct_camera(t_camera *c, t_coor player_coor,
 	c->x_pos_in_screen = x_pos_in_screen_aux;
 }
 
+
+void	cangro_map_rotation(t_game	*game, float player_v_angle)
+{
+	if (player_v_angle)
+	printf("player_v_angle%f\n", player_v_angle);
+}
+
 void	init_camera(t_game *game, t_coor player_coor, float player_v_angle)
 {
 	const float	x_pos_in_screen_aux = (float)(SCREEN * game->tile_size) / WIDTH;
 	t_camera	c;
 
 	init_struct_camera(&c, player_coor, x_pos_in_screen_aux, player_v_angle);
+	cangro_map_rotation(game, player_v_angle);
 	while (c.x_pos_in_screen < WIDTH)
 	{
 		c.ray = raycasting(game->player.pos, c.l_screen_point, game->map);

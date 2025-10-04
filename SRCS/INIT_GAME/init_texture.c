@@ -80,13 +80,25 @@ void	init_frame_textures(mlx_t *mlx, t_images *imgs)
 	imgs->frame[5] = load_n_check_image(mlx, imgs, "PNG/frame/5.png");
 }
 
+//void	init_map_greco(mlx_t *mlx, t_images *imgs)
+//{
+//	imgs->array_greco[0] = load_n_check_image(mlx, imgs, "PNG/greco/0.png");
+//	imgs->array_greco[1] = load_n_check_image(mlx, imgs, "PNG/greco/1.png");
+//	imgs->array_greco[2] = load_n_check_image(mlx, imgs, "PNG/greco/2.png");
+//	imgs->array_greco[3] = load_n_check_image(mlx, imgs, "PNG/greco/3.png");
+//	imgs->array_greco[4] = load_n_check_image(mlx, imgs, "PNG/greco/4.png");
+//	imgs->array_greco[5] = load_n_check_image(mlx, imgs, "PNG/greco/5.png");
+//	imgs->array_greco[6] = load_n_check_image(mlx, imgs, "PNG/greco/6.png");
+//	imgs->array_greco[7] = load_n_check_image(mlx, imgs, "PNG/greco/7.png");
+//}
+
 void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 {
 	imgs->mirilla = load_n_check_image(mlx, imgs, "PNG/mirilla.png");
 	imgs->greco_texture = load_n_check_texture(mlx, imgs, "PNG/greco.png");
 	mlx_set_icon(mlx, imgs->greco_texture);
 	mlx_delete_texture(imgs->greco_texture);
-	imgs->map_greco = load_n_check_image(mlx, imgs, "PNG/greco.png");
+	init_frame_textures(mlx, imgs);
 	imgs->map_sand = load_n_check_image(mlx, imgs, "PNG/map_sand.png");
 	imgs->map_rock = load_n_check_image(mlx, imgs, "PNG/map_rock.png");
 	imgs->kelas_open = load_n_check_image(mlx, imgs, "PNG/kelas_open.png");
@@ -95,7 +107,8 @@ void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 	imgs->kelas_dx = load_n_check_image(mlx, imgs, "PNG/kelas_dx.png");
 	imgs->kelas_up[0] = load_n_check_image(mlx, imgs, "PNG/kelas_up0.png");
 	imgs->kelas_up[1] = load_n_check_image(mlx, imgs, "PNG/kelas_up1.png");
-	init_frame_textures(mlx, imgs);
+	imgs->map_greco = load_n_check_image(mlx, imgs, "PNG/greco.png");
+
 	imgs->map_texture_N = load_n_check_texture(mlx, imgs, parser_map->path_s);
 	imgs->map_texture_S = load_n_check_texture(mlx, imgs, parser_map->path_n);
 	imgs->map_texture_E = load_n_check_texture(mlx, imgs, parser_map->path_w);
