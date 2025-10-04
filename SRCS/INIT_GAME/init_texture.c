@@ -82,7 +82,6 @@ void	init_frame_textures(mlx_t *mlx, t_images *imgs)
 
 void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 {
-	printf("parser_map->path_n: %s\n", parser_map->path_n);
 	imgs->mirilla = load_n_check_image(mlx, imgs, "PNG/mirilla.png");
 	imgs->greco_texture = load_n_check_texture(mlx, imgs, "PNG/greco.png");
 	mlx_set_icon(mlx, imgs->greco_texture);

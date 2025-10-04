@@ -23,16 +23,9 @@ void	frame_loop(unsigned long current_time, mlx_image_t **frame_array)
 	{
 		frame_array[frame_frame]->enabled = true;
 		if (frame_frame != 0)
-		{
 			frame_array[frame_frame - 1]->enabled = false;
-			printf("CACA\n");
-		}
 		if (frame_frame == 0)
-		{
 			frame_array[5]->enabled = false;
-			printf("CACA2\n");
-
-		}
 		frame_frame++;
 		last_frame_frame = current_time;
 		if (frame_frame == 6)
