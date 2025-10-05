@@ -82,5 +82,5 @@ void	movements_player(void *params)
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	refresh_draw_greco(game->images.map_greco, &game->player, &game->map);
+	refresh_draw_greco(game->images.greco_map[game->greco_map_dir], &game->player, &game->map);
 }

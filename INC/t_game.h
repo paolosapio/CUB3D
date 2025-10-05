@@ -16,12 +16,13 @@
 
 typedef struct	s_game
 {
-	t_images		images;
-	t_map			map;
-	t_player		player;
-	mlx_t			*mlx;
-	//struct timeval	init_time;
-	int				tile_size;
+	t_images	images;
+	t_map		map;
+	t_player	player;
+	mlx_t		*mlx;
+	int			greco_map_dir;
+	int			tile_size;
+	bool		map_is_closed;
 }				t_game;
 
 #endif

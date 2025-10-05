@@ -16,6 +16,7 @@
 # include <math.h>
 # include <stdio.h>
 # include "t_coordinate.h"
+# include "../INIT_GAME/init_game.h"
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "../TOOLS_GRAPHICS/tools_graphics.h"
 

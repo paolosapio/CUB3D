@@ -107,6 +107,8 @@ void	keys_enter_shift(mlx_key_data_t keydata, t_game *game)
 	}
 }
 
+
+
 void	special_keys(mlx_key_data_t keydata, void *params)
 {
 	t_game	*game;
@@ -133,7 +135,8 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) == true)
 	{
-		game->images.map_greco->enabled -= 1;
+		game->images.greco_map[game->greco_map_dir]->enabled -= 1;
+		game->map_is_closed -= 1;
 		game->images.map_ray->enabled -= 1;
 		game->images.background_map->enabled -= 1;
 		game->images.map_sand->enabled -= 1;

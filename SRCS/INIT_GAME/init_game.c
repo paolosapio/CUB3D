@@ -25,6 +25,8 @@ void	init_map_foundations(t_map *map, t_game *game)
 
 void	init_game(t_game *game, t_parser_map *parser_map)
 {
+	game->greco_map_dir = N_;
+	game->map_is_closed = true;
 	init_map_foundations(&game->map, game);
 	// mlx_set_setting(MLX_FULLSCREEN, true);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", false);

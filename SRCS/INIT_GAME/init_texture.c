@@ -80,17 +80,17 @@ void	init_frame_textures(mlx_t *mlx, t_images *imgs)
 	imgs->frame[5] = load_n_check_image(mlx, imgs, "PNG/frame/5.png");
 }
 
-//void	init_map_greco(mlx_t *mlx, t_images *imgs)
-//{
-//	imgs->array_greco[0] = load_n_check_image(mlx, imgs, "PNG/greco/0.png");
-//	imgs->array_greco[1] = load_n_check_image(mlx, imgs, "PNG/greco/1.png");
-//	imgs->array_greco[2] = load_n_check_image(mlx, imgs, "PNG/greco/2.png");
-//	imgs->array_greco[3] = load_n_check_image(mlx, imgs, "PNG/greco/3.png");
-//	imgs->array_greco[4] = load_n_check_image(mlx, imgs, "PNG/greco/4.png");
-//	imgs->array_greco[5] = load_n_check_image(mlx, imgs, "PNG/greco/5.png");
-//	imgs->array_greco[6] = load_n_check_image(mlx, imgs, "PNG/greco/6.png");
-//	imgs->array_greco[7] = load_n_check_image(mlx, imgs, "PNG/greco/7.png");
-//}
+void	init_map_greco(mlx_t *mlx, t_images *imgs)
+{
+	imgs->greco_map[W_] = load_n_check_image(mlx, imgs, "PNG/greco_map/W.png");
+	imgs->greco_map[NW] = load_n_check_image(mlx, imgs, "PNG/greco_map/NW.png");
+	imgs->greco_map[N_] = load_n_check_image(mlx, imgs, "PNG/greco_map/N.png");
+	imgs->greco_map[NE] = load_n_check_image(mlx, imgs, "PNG/greco_map/NE.png");
+	imgs->greco_map[E_] = load_n_check_image(mlx, imgs, "PNG/greco_map/E.png");
+	imgs->greco_map[SE] = load_n_check_image(mlx, imgs, "PNG/greco_map/SE.png");
+	imgs->greco_map[S_] = load_n_check_image(mlx, imgs, "PNG/greco_map/S.png");
+	imgs->greco_map[SW] = load_n_check_image(mlx, imgs, "PNG/greco_map/SW.png");
+}
 
 void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 {
@@ -108,7 +108,7 @@ void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 	imgs->kelas_up[0] = load_n_check_image(mlx, imgs, "PNG/kelas_up0.png");
 	imgs->kelas_up[1] = load_n_check_image(mlx, imgs, "PNG/kelas_up1.png");
 	imgs->map_greco = load_n_check_image(mlx, imgs, "PNG/greco.png");
-
+	init_map_greco(mlx, imgs);
 	imgs->map_texture_N = load_n_check_texture(mlx, imgs, parser_map->path_s);
 	imgs->map_texture_S = load_n_check_texture(mlx, imgs, parser_map->path_n);
 	imgs->map_texture_E = load_n_check_texture(mlx, imgs, parser_map->path_w);

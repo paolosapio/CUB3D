@@ -34,11 +34,34 @@ void	init_struct_camera(t_camera *c, t_coor player_coor,
 	c->x_pos_in_screen = x_pos_in_screen_aux;
 }
 
-
+#define N_FRAMES 16
+// 360 / N_FRAMES; (22.5)
 void	cangro_map_rotation(t_game	*game, float player_v_angle)
 {
-	if (player_v_angle)
-	printf("player_v_angle%f\n", player_v_angle);
+	const float	step = 360 / N_FRAMES;
+	
+	game->images.greco_map[game->greco_map_dir]->enabled = false;
+	if(game->map_is_closed == true)
+		return ;
+	if (player_v_angle >= 360.0 - step && player_v_angle <= 360)
+		game->greco_map_dir = W_;
+	if (player_v_angle >= 0.0 && player_v_angle <= 0 + step)
+		game->greco_map_dir = W_;
+	if (player_v_angle >= 45.0 - step  && player_v_angle <= 45.0 + step)
+		game->greco_map_dir = NW;
+	if (player_v_angle >= 90.0 - step && player_v_angle <= 90.0 + step)
+		game->greco_map_dir = N_;
+	if (player_v_angle >= 135.0 - step && player_v_angle <= 135.0 + step)
+		game->greco_map_dir = NE;
+	if (player_v_angle >= 180.0 - step && player_v_angle <= 180.0 + step)
+		game->greco_map_dir = E_;
+	if (player_v_angle >= 225.0 - step && player_v_angle <= 225.0 + step)
+		game->greco_map_dir = SE;
+	if (player_v_angle >= 270.0 - step && player_v_angle <= 270.0 + step)
+		game->greco_map_dir = S_;
+	if (player_v_angle >= 315.0 - step && player_v_angle <= 315.0 + step)
+		game->greco_map_dir = SW;
+	game->images.greco_map[game->greco_map_dir]->enabled = true;	
 }
 
 void	init_camera(t_game *game, t_coor player_coor, float player_v_angle)

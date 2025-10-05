@@ -79,6 +79,18 @@ void	hide_images(t_images *image)
 	image->info->enabled = false;
 }
 
+void	images_resizeitor(t_images *images, int tile_size_x, int tile_size_y, int n_images)
+{
+	int i;
+
+	i = 0;
+	while (i < n_images)
+	{
+		mlx_resize_image(images->greco_map[i], tile_size_x, tile_size_y);
+		i++;
+	}
+}
+
 void	images_to_window(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->images.sky, 0, 0);
@@ -99,8 +111,13 @@ void	images_to_window(t_game *game)
 		WIDTH / 2 - 10, HEIGHT / 2 - 10);
 	mlx_image_to_window(game->mlx, game->images.background_map, 0, 0);
 	minimap_images_to_window(game->mlx, &game->map, &game->images);
-	mlx_resize_image(game->images.map_greco, game->tile_size, game->tile_size);
-	mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
+	
+	// mlx_resize_image(game->images.map_greco, game->tile_size, game->tile_size);
+	// mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
+
+	images_resizeitor(&game->images, game->tile_size, game->tile_size, 8);
+	array_to_win(game->mlx, game->images.greco_map, 8);
+
 	mlx_image_to_window(game->mlx, game->images.info, 0, 0);
 	hide_images(&game->images);
 	array_to_win(game->mlx, game->images.frame, 6);

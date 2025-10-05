@@ -20,6 +20,18 @@
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "t_game.h"
 
+typedef enum e_greco_map_dir
+{
+	W_,
+	NW,
+	N_,
+	NE,
+	E_,
+	SE,
+	S_,
+	SW,
+}		t_greco_map_dir;
+
 // init_game.c
 void	init_game(t_game *game, t_parser_map *parser_map);
 void	init_images(mlx_t *mlx, t_map *map, t_images *images,
