@@ -123,7 +123,7 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	{
 		if (game->images.info->enabled == true || game->images.map_greco->enabled == true)
 		{
-			game->images.map_greco->enabled = false;
+			game->images.greco_map[game->greco_map_dir]->enabled = false;
 			game->images.map_ray->enabled = false;
 			game->images.background_map->enabled = false;
 			game->images.map_sand->enabled = false;

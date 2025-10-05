@@ -31,8 +31,7 @@ int	main(int argc, char **argv)
 }
 
 	// game.map.player_pointer = &game.player; //!REVISAR QUE ERA ESTOOOOO
-//! ARREGLLADOOOOOO:  LOS COLRES DEL MAPA IVAN EN OVERFLOW! ARREGLADOOOOO
-
+//! POR ARREGLAR: cuando le das a f y luego a tab y luego a esc sale cangro en el juego
 /*
 cc main.c MLX42/build/libmlx42.a -ldl -lglfw 
 
