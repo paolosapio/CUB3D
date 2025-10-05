@@ -124,6 +124,7 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	game = (t_game *)params;
 	if (keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS)
 	{
+		minimap_closer(game);
 		game->images.info->enabled -= 1;
 		game->images.kelas_open->enabled = false;
 	}
@@ -139,7 +140,7 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) == true)
 	{
-		// if ()
+		game->images.info->enabled = false;
 		game->images.greco_map[game->greco_map_dir]->enabled -= 1;
 		game->map_is_closed -= 1;
 		game->images.map_ray->enabled -= 1;
