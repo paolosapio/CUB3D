@@ -23,6 +23,7 @@ typedef struct	s_images
 	mlx_image_t		*fauna[2];
 	mlx_image_t		*ambient;
 	mlx_image_t		*info;
+	mlx_image_t		*waves[2];
 	mlx_image_t		*frame[6];
 
 
@@ -33,16 +34,12 @@ typedef struct	s_images
 	mlx_image_t	*kelas_sx;
 	mlx_image_t	*kelas_dx;
 	mlx_image_t	*kelas_up[2];
-	// mlx_image_t	*waves;
 
 	mlx_texture_t	*wall_alga;
 	mlx_texture_t	*map_texture_N;
 	mlx_texture_t	*map_texture_S;
 	mlx_texture_t	*map_texture_E;
 	mlx_texture_t	*map_texture_W;
-
-	mlx_texture_t	*waves[2];
-
 
 	mlx_texture_t	*greco_texture;
 }				t_images;

@@ -23,6 +23,8 @@
 
 void	carousel(mlx_image_t **image, const float movement);
 void	carousel_reverse(mlx_image_t *image, const float movement);
+void	sun_in_waves(mlx_image_t **image, const float movement);
+
 
 //fauna.c
 

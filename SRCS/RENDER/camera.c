@@ -42,10 +42,7 @@ void	cangro_map_rotation(t_game	*game, float player_v_angle)
 	
 	game->images.greco_map[game->greco_map_dir]->enabled = false;
 	if(game->images.background_map->enabled == false)
-	{
-		printf("no minimap show\n");
 		return ;
-	}
 	if (player_v_angle >= 360.0 - step && player_v_angle <= 360)
 		game->greco_map_dir = W_;
 	if (player_v_angle >= 0.0 && player_v_angle <= 0 + step)

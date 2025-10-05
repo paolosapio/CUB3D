@@ -30,4 +30,7 @@ void	animations(void *params)
 	switch_fauna(current_time, game->images.fauna);
 	carousel(game->images.fauna, CAROUSEL_NORMAL_MOVEMENT);
 	carousel_reverse(game->images.ambient, -CAROUSEL_NORMAL_MOVEMENT);
+
+	sun_in_waves(game->images.waves, CAROUSEL_NORMAL_MOVEMENT);
+
 }

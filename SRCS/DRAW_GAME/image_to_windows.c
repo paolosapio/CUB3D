@@ -120,6 +120,10 @@ void	images_to_window(t_game *game)
 
 	mlx_image_to_window(game->mlx, game->images.info, 0, 0);
 	hide_images(&game->images);
+
+	mlx_image_to_window(game->mlx, game->images.waves[0], -400, 0);
+	mlx_image_to_window(game->mlx, game->images.waves[1], -800, 0);
+
 	array_to_win(game->mlx, game->images.frame, 6);
 	mlx_image_to_window(game->mlx, game->images.start[0], 0, 0);
 	mlx_image_to_window(game->mlx, game->images.start[1], 0, 0);

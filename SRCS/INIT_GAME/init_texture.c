@@ -114,6 +114,9 @@ void	init_texture(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 	imgs->map_texture_E = load_n_check_texture(mlx, imgs, parser_map->path_w);
 	imgs->map_texture_W = load_n_check_texture(mlx, imgs, parser_map->path_e);
 	init_bubbles(mlx, imgs->bubble_array, imgs);
+	imgs->waves[0] = load_n_check_image(mlx, imgs, "PNG/waves/0.png");
+	imgs->waves[1] = load_n_check_image(mlx, imgs, "PNG/waves/1.png");
+
 	imgs->start[0] = load_n_check_image(mlx, imgs, "PNG/start/0.png");
 	imgs->start[1] = load_n_check_image(mlx, imgs, "PNG/start/1.png");
 	imgs->fauna[0] = load_n_check_image(mlx, imgs, "PNG/fauna0.png");
