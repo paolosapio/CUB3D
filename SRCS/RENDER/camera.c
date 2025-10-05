@@ -41,8 +41,11 @@ void	cangro_map_rotation(t_game	*game, float player_v_angle)
 	const float	step = 360 / N_FRAMES;
 	
 	game->images.greco_map[game->greco_map_dir]->enabled = false;
-	if(game->map_is_closed == true)
+	if(game->images.background_map->enabled == false)
+	{
+		printf("no minimap show\n");
 		return ;
+	}
 	if (player_v_angle >= 360.0 - step && player_v_angle <= 360)
 		game->greco_map_dir = W_;
 	if (player_v_angle >= 0.0 && player_v_angle <= 0 + step)
@@ -90,7 +93,7 @@ void	init_camera(t_game *game, t_coor player_coor, float player_v_angle)
 			&game->images, c.x_pos_in_screen);
 		c.x_pos_in_screen++;
 	}
-	bresenham_algorithm(game->images.map_ray,
-		(t_segment){player_coor, game->player.end, 0},
-		ft_color(255, 255, 255, 255), game->tile_size);
+	// bresenham_algorithm(game->images.map_ray,
+	// 	(t_segment){player_coor, game->player.end, 0},
+	// 	ft_color(255, 255, 255, 255), game->tile_size);
 }

@@ -28,9 +28,9 @@ void	init_game(t_game *game, t_parser_map *parser_map)
 	game->greco_map_dir = N_;
 	game->map_is_closed = true;
 	init_map_foundations(&game->map, game);
-	// mlx_set_setting(MLX_FULLSCREEN, true);
+//	mlx_set_setting(MLX_FULLSCREEN, true);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", false);
-	//mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+//	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
 	init_texture(game->mlx, &game->images, parser_map);
 	init_images(game->mlx, &game->map, &game->images, parser_map);
 	destroy_parser_map(parser_map);

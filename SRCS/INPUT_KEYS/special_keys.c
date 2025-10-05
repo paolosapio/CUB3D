@@ -107,7 +107,15 @@ void	keys_enter_shift(mlx_key_data_t keydata, t_game *game)
 	}
 }
 
-
+void minimap_closer(t_game	*game)
+{
+			game->images.greco_map[game->greco_map_dir]->enabled = false;
+			game->images.map_ray->enabled = false;
+			game->images.background_map->enabled = false;
+			game->images.map_sand->enabled = false;
+			game->images.map_rock->enabled = false;
+			game->images.info->enabled = false;
+}
 
 void	special_keys(mlx_key_data_t keydata, void *params)
 {
@@ -121,20 +129,17 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
 	{
-		if (game->images.info->enabled == true || game->images.map_greco->enabled == true)
+		if (game->images.info->enabled == true
+				|| game->images.background_map->enabled == true)
 		{
-			game->images.greco_map[game->greco_map_dir]->enabled = false;
-			game->images.map_ray->enabled = false;
-			game->images.background_map->enabled = false;
-			game->images.map_sand->enabled = false;
-			game->images.map_rock->enabled = false;
-			game->images.info->enabled = false;
+			minimap_closer(game);
 		}
 		else
 			mlx_close_window(game->mlx);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) == true)
 	{
+		// if ()
 		game->images.greco_map[game->greco_map_dir]->enabled -= 1;
 		game->map_is_closed -= 1;
 		game->images.map_ray->enabled -= 1;

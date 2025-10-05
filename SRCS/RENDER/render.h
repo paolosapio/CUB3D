@@ -69,6 +69,9 @@ typedef struct s_camera
 	float		r; //???
 }		t_camera;
 
+
+void	minimap_closer(t_game	*game);
+
 void	init_camera(t_game *game, t_coor player_coor,
 			float player_vision_angle);
 t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map);
