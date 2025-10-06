@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_keys.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:29:30 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 15:31:13 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/06 15:54:34 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	special_keys(mlx_key_data_t keydata, void *params);
 //mouse_input.c
 
 void	mouse_movements(double mouse_x, double mouse_y, void *params);
-void	mouse_action(mouse_key_t button, action_t action, t_game *game);
 void	mouse_buttons(mouse_key_t button,
 			action_t action, modifier_key_t mods, void *param);
 
 //kelas_movement.c
 
 void	kelas_movement(t_game *game);
+void	keys_kelas(mlx_key_data_t keydata, t_game *game);
 
 #endif

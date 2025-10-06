@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:30:01 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 17:18:20 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:09:11 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_camera
 }		t_camera;
 
 
-void	minimap_closer(t_game	*game);
+void	minimap_closer(t_game *game, bool info_img_state);
 
 void	init_camera(t_game *game, t_coor player_coor,
 			float player_vision_angle);

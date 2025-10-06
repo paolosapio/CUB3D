@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:42:51 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 17:11:28 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:22:28 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	move_player(t_player *player, t_map *map, float sen, float cos)
 
 void	change_player_rotation(t_player *player, int new_vision_angle)
 {
-	if (new_vision_angle == 0)
+	if (new_vision_angle <= 0)
 		new_vision_angle = 360;
-	else if (new_vision_angle == 360)
+	else if (new_vision_angle >= 360)
 		new_vision_angle = 0;
 	player->vision_angle = new_vision_angle;
 	player->end.x = player->pos.x - cos(to_radians(player->vision_angle))
@@ -71,8 +71,6 @@ void	movements_player(void *params)
 		change_player_rotation(&game->player, game->player.vision_angle - 1);
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
-
-	
 	}
 	if (game->player.movements.key_right_is_down == true)
 	{
@@ -82,5 +80,6 @@ void	movements_player(void *params)
 		clean_game_images(&game->images);
 		init_camera(game, game->player.pos, game->player.vision_angle);
 	}
-	refresh_draw_greco(game->images.greco_map[game->greco_map_dir], &game->player, &game->map);
+	refresh_draw_greco(game->images.greco_map[game->player.greco_map_dir],
+		&game->player, &game->map);
 }

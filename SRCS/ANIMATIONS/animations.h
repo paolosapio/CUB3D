@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:52:49 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/03 18:29:56 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/06 15:32:59 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ void	carousel(mlx_image_t **image, const float movement);
 void	carousel_reverse(mlx_image_t *image, const float movement);
 void	sun_in_waves(mlx_image_t **image, const float movement);
 
-
 //fauna.c
 
-void	switch_fauna(unsigned long current_time,  mlx_image_t **fauna);
-
+void	switch_fauna(unsigned long current_time, mlx_image_t **fauna);
 
 //bubbles.c
 
 void	bubble_loop(unsigned long current_time, mlx_image_t **bubble_array);
-
 
 //animations_hook.c
 

@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/10/01 22:16:45 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:23:19 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ t_errok	is_around_space_ok(t_map *map, int x, int y)
 	return (OK);
 }
 
-void	collisions_movements(t_map *map, int x, int y, int vision_angle)
+void	collisions_movements(t_map *map, t_coor pos, int vision_angle,
+			t_greco_dir dir)
 {
 	map->player_pointer->vision_angle = vision_angle;
-	map->player_pointer->end.x = x + CENTER_PLAYER;
-	map->player_pointer->end.y = y + CENTER_PLAYER - LIMIT_FOV;
+	map->player_pointer->greco_map_dir = dir;
+	map->player_pointer->end.x = pos.x + CENTER_PLAYER;
+	map->player_pointer->end.y = pos.y + CENTER_PLAYER - LIMIT_FOV;
 }
 
 void	check_player(t_parser_map *parser_map, t_map *map, int x, int y)
@@ -73,13 +75,13 @@ void	check_player(t_parser_map *parser_map, t_map *map, int x, int y)
 	map->player_pointer->pos.x = x + CENTER_PLAYER;
 	map->player_pointer->pos.y = y + CENTER_PLAYER;
 	if (map->array[y][x] == 'N')
-		collisions_movements(map, x, y, 90);
+		collisions_movements(map, (t_coor){x, y}, 90, N_);
 	else if (map->array[y][x] == 'E')
-		collisions_movements(map, x, y, 0);
+		collisions_movements(map, (t_coor){x, y}, 0, E_);
 	else if (map->array[y][x] == 'S')
-		collisions_movements(map, x, y, 270);
+		collisions_movements(map, (t_coor){x, y}, 270, S_);
 	else if (map->array[y][x] == 'W')
-		collisions_movements(map, x, y, 180);
+		collisions_movements(map, (t_coor){x, y}, 180, W_);
 }
 
 void	check_valid_map(t_parser_map *parser_map, t_map *map)

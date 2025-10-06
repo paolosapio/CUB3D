@@ -6,92 +6,13 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:57:14 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/03 20:55:03 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:19:49 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw_game.h"
 
-void	transparentator(int value_of_trasparence, mlx_image_t *image)
-{
-	unsigned int	i;
-
-	i = 3;
-	while (i < image->width * image->height * 4)
-	{
-		if (image->pixels[i] > value_of_trasparence)
-			image->pixels[i] = value_of_trasparence;
-		i += 4;
-	}
-}
-
-void	image_to_win(mlx_t *mlx, t_map *map, t_images *images, int slider)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (map->array[++y])
-	{
-		slider++;
-		x = -1;
-		while (map->array[y][++x])
-		{
-			if (map->array[y][x] == '1')
-			{
-				mlx_image_to_window(mlx, images->map_rock,
-					map->draw_offset.x + x * map->tile_size,
-					map->draw_offset.y + y * map->tile_size);
-			}
-			else if (ft_strchr("NSWE0", map->array[y][x]) != NULL)
-			{
-				mlx_image_to_window(mlx, images->map_sand,
-					map->draw_offset.x + x * map->tile_size,
-					map->draw_offset.y + y * map->tile_size);
-			}
-		}
-	}
-}
-
-void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
-{
-	int	slider;
-
-	slider = 0;
-	mlx_resize_image(images->map_sand, map->tile_size, map->tile_size);
-	mlx_resize_image(images->map_rock, map->tile_size, map->tile_size);
-	transparentator(127, images->map_sand);
-	transparentator(127, images->map_rock);
-	transparentator(100, images->mirilla);
-	image_to_win(mlx, map, images, slider);
-	mlx_image_to_window(mlx, images->map_ray, map->draw_offset.x,
-		map->draw_offset.y);
-}
-
-void	hide_images(t_images *image)
-{
-	image->kelas_open->enabled = true;
-	image->kelas_closed->enabled = false;
-	image->kelas_sx->enabled = false;
-	image->kelas_dx->enabled = false;
-	image->kelas_up[0]->enabled = false;
-	image->kelas_up[1]->enabled = false;
-	image->info->enabled = false;
-}
-
-void	images_resizeitor(t_images *images, int tile_size_x, int tile_size_y, int n_images)
-{
-	int i;
-
-	i = 0;
-	while (i < n_images)
-	{
-		mlx_resize_image(images->greco_map[i], tile_size_x, tile_size_y);
-		i++;
-	}
-}
-
-void	images_to_window(t_game *game)
+void	tridy_images_to_window(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->images.sky, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.floor, 0, HEIGHT / 2);
@@ -100,30 +21,31 @@ void	images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.ambient, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.gradient_bgr, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.tridy, 0, 0);
-	array_to_win(game->mlx, game->images.bubble_array, 20);
+}
+
+void	kelas_images_to_window(t_game *game)
+{
 	mlx_image_to_window(game->mlx, game->images.kelas_open, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_closed, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_sx, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_dx, 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_up[0], 0, 0);
 	mlx_image_to_window(game->mlx, game->images.kelas_up[1], 0, 0);
+}
+
+void	images_to_window(t_game *game)
+{
+	tridy_images_to_window(game);
+	array_to_win(game->mlx, game->images.bubble_array, 20);
+	kelas_images_to_window(game);
 	mlx_image_to_window(game->mlx, game->images.mirilla,
 		WIDTH / 2 - 10, HEIGHT / 2 - 10);
-	mlx_image_to_window(game->mlx, game->images.background_map, 0, 0);
-	minimap_images_to_window(game->mlx, &game->map, &game->images);
-	
-	// mlx_resize_image(game->images.map_greco, game->tile_size, game->tile_size);
-	// mlx_image_to_window(game->mlx, game->images.map_greco, 0, 0);
-
-	images_resizeitor(&game->images, game->tile_size, game->tile_size, 8);
-	array_to_win(game->mlx, game->images.greco_map, 8);
-
-	mlx_image_to_window(game->mlx, game->images.info, 0, 0);
-	hide_images(&game->images);
-
 	mlx_image_to_window(game->mlx, game->images.waves[0], -400, 0);
 	mlx_image_to_window(game->mlx, game->images.waves[1], -800, 0);
-
+	minimap_images_to_window(game->mlx, &game->map, &game->images);
+	array_to_win(game->mlx, game->images.greco_map, 8);
+	mlx_image_to_window(game->mlx, game->images.info, 0, 0);
+	hide_images(&game->images);
 	array_to_win(game->mlx, game->images.frame, 6);
 	mlx_image_to_window(game->mlx, game->images.start[0], 0, 0);
 	mlx_image_to_window(game->mlx, game->images.start[1], 0, 0);

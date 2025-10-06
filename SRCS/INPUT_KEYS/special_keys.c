@@ -6,33 +6,13 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:57:29 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/03 21:55:21 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:21:45 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input_keys.h"
 #include "../RENDER/render.h"
 #include "libft.h"
-
-void	keys_kelas(mlx_key_data_t keydata, t_game *game)
-{
-	if (game->images.info->enabled == true
-		|| mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT) == true)
-		return ;
-	if (keydata.key == MLX_KEY_Q)
-	{
-		game->player.movements.key_q_is_down = true;
-		if (keydata.action == MLX_RELEASE)
-			game->player.movements.key_q_is_down = false;
-	}
-	if (keydata.key == MLX_KEY_E)
-	{
-		game->player.movements.key_e_is_down = true;
-		if (keydata.action == MLX_RELEASE)
-			game->player.movements.key_e_is_down = false;
-	}
-	kelas_movement(game);
-}
 
 void	keys_wasd(mlx_key_data_t keydata, t_game *game)
 {
@@ -78,43 +58,33 @@ void	keys_arrows(mlx_key_data_t keydata, t_game *game)
 	}
 }
 
-void	keys_enter_shift(mlx_key_data_t keydata, t_game *game)
+void	keys_enter_shift(mlx_key_data_t keydata, t_game *g)
 {
 	if (keydata.key == MLX_KEY_ENTER)
 	{
-		game->images.start[0]->enabled = false;
-		game->images.start[1]->enabled = true;
-		game->player.speed = NORMAL * (game->tile_size * 0.04);
+		g->images.start[0]->enabled = false;
+		g->images.start[1]->enabled = true;
+		g->player.speed = NORMAL * (g->tile_size * 0.04);
 	}
-	if (keydata.key == MLX_KEY_LEFT_SHIFT && game->images.info->enabled == false)
+	if (keydata.key == MLX_KEY_LEFT_SHIFT && g->images.info->enabled == false)
 	{
-		game->player.movements.key_w_is_down = true;
-		game->player.speed = TURBO * (game->tile_size * 0.04);
+		g->player.movements.key_w_is_down = true;
+		g->player.speed = TURBO * (g->tile_size * 0.04);
 		if (keydata.action == MLX_RELEASE)
 		{
-			game->player.movements.key_w_is_down = false;
-			game->player.speed = NORMAL * (game->tile_size * 0.04);
-			game->images.kelas_up[0]->enabled = false;
-			game->images.kelas_up[1]->enabled = false;
+			g->player.movements.key_w_is_down = false;
+			g->player.speed = NORMAL * (g->tile_size * 0.04);
+			g->images.kelas_up[0]->enabled = false;
+			g->images.kelas_up[1]->enabled = false;
 		}
 		else
 		{
-			game->images.kelas_open->enabled = false;
-			game->images.kelas_closed->enabled = false;
-			game->images.kelas_dx->enabled = false;
-			game->images.kelas_sx->enabled = false;
+			g->images.kelas_open->enabled = false;
+			g->images.kelas_closed->enabled = false;
+			g->images.kelas_dx->enabled = false;
+			g->images.kelas_sx->enabled = false;
 		}
 	}
-}
-
-void minimap_closer(t_game	*game)
-{
-			game->images.greco_map[game->greco_map_dir]->enabled = false;
-			game->images.map_ray->enabled = false;
-			game->images.background_map->enabled = false;
-			game->images.map_sand->enabled = false;
-			game->images.map_rock->enabled = false;
-			game->images.info->enabled = false;
 }
 
 void	special_keys(mlx_key_data_t keydata, void *params)
@@ -124,30 +94,21 @@ void	special_keys(mlx_key_data_t keydata, void *params)
 	game = (t_game *)params;
 	if (keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS)
 	{
-		minimap_closer(game);
-		game->images.info->enabled -= 1;
+		minimap_closer(game, game->images.info->enabled - 1);
 		game->images.kelas_open->enabled = false;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) == true)
 	{
 		if (game->images.info->enabled == true
-				|| game->images.background_map->enabled == true)
+			|| game->images.background_map->enabled == true)
 		{
-			minimap_closer(game);
+			minimap_closer(game, false);
 		}
 		else
 			mlx_close_window(game->mlx);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_TAB) == true)
-	{
-		game->images.info->enabled = false;
-		game->images.greco_map[game->greco_map_dir]->enabled -= 1;
-		game->map_is_closed -= 1;
-		game->images.map_ray->enabled -= 1;
-		game->images.background_map->enabled -= 1;
-		game->images.map_sand->enabled -= 1;
-		game->images.map_rock->enabled -= 1;
-	}
+		tab_mapeitor(game);
 	keys_wasd(keydata, game);
 	keys_arrows(keydata, game);
 	keys_enter_shift(keydata, game);

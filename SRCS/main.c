@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:19:54 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/03 18:05:49 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/06 15:13:16 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,17 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	parser_map = parser(argv[1], &game.map);
+	if (game.map.map_len > 240)
+	{
+		printf("\n\nSAYONARA BABYYYY 🐠🐡🌊\n");
+		destroy_map(&game.map);
+		exit(1);
+	}
 	init_game(&game, &parser_map);
 	await_user_input(&game);
 	sayonara_baby(game.mlx, &game.images, &game.map);
 }
 
-	// game.map.player_pointer = &game.player; //!REVISAR QUE ERA ESTOOOOO
-//! POR ARREGLAR: cuando le das a f y luego a tab y luego a esc sale cangro en el juego
 /*
 cc main.c MLX42/build/libmlx42.a -ldl -lglfw 
 
@@ -43,4 +47,7 @@ int	leak_main(void)
 	mlx_close_window(mlx);
 	mlx_terminate(mlx);
 	return (0);
-} */
+	} */
+
+// mas mapas
+// https://github.com/angiebm4/42-cub3d/tree/main/tests/maps

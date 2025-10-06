@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_images.c                                      :+:      :+:    :+:   */
+/*   load_non_png_images.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:00:11 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/03 20:54:39 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/06 16:15:19 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	extract_color_from_str(char *color_str)
 	return (color);
 }
 
-void	init_images(mlx_t *mlx, t_map *map, t_images *imgs, t_parser_map *p_map)
+void	load_non_png_images(mlx_t *mlx, t_map *map, t_images *imgs,
+			t_parser_map *p_map)
 {
 	int	color;
 
@@ -58,10 +59,4 @@ void	init_images(mlx_t *mlx, t_map *map, t_images *imgs, t_parser_map *p_map)
 	imgs->tridy = create_empty_img(mlx, WIDTH, HEIGHT);
 	imgs->map_ray = create_empty_img(mlx, map->longest_line * map->tile_size,
 			map->map_len * map->tile_size);
-	imgs->map_ray->enabled = false;
-	
-	imgs->map_greco->enabled = false;
-	imgs->map_rock->enabled = false;
-	imgs->map_sand->enabled = false;
-	imgs->background_map->enabled = false;
 }
