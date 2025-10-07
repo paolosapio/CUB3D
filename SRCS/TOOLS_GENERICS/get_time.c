@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/02 15:16:33 by anfi              #+#    #+#             */
-/*   Updated: 2025/10/07 22:01:41 by anfi             ###   ########.fr       */
+/*   Created: 2025/10/07 23:13:39 by anfi              #+#    #+#             */
+/*   Updated: 2025/10/07 23:13:41 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input_keys.h"
+#include "tools_generics.h"
 
-void	await_user_input(t_game *game)
+/**A function that returns in *milliseconds* the elapsed time since the last
+ * time the loop_hook animation 
+ */
+unsigned long	get_time(void)
 {
-	mlx_cursor_hook(game->mlx, &mouse_movements, game);
-	mlx_loop_hook(game->mlx, &movements_player, game);
-	mlx_mouse_hook(game->mlx, &mouse_buttons, game);
-	mlx_key_hook(game->mlx, &special_keys, game);
-	mlx_loop_hook(game->mlx, &animations, game);
-	mlx_loop(game->mlx);
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL))
+		return (0);
+	return ((time.tv_sec * 1000 + time.tv_usec / 1000));
 }

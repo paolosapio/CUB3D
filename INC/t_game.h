@@ -8,12 +8,18 @@
 
 /* SCREEN RESOLUTION */
 
-// # define WIDTH 1500
-// # define HEIGHT 1000
-
 # define WIDTH 640
 # define HEIGHT 480
 
+/**
+ * @param images t_images
+ * @param map t_map
+ * @param player t_player
+ * @param mlx mlx_t: A pointer to an mlx connection started with mlx_init().
+ * @param tile_size int: The size on pixels of each tile on the minimap
+ * based on the map size.
+ * @param map_is_closed bool: Wether the user opened or closed the map.
+*/
 typedef struct	s_game
 {
 	t_images	images;
@@ -22,6 +28,7 @@ typedef struct	s_game
 	mlx_t		*mlx;
 	int			tile_size;
 	bool		map_is_closed;
+	bool		new_frame;
 }				t_game;
 
 #endif

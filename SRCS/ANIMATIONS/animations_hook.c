@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   animations_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:33:06 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 15:33:25 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/07 23:18:15 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "animations.h"
-
-/**A function that returns in *milliseconds* the elapsed time since the last
- * time the loop_hook animation 
- */
-unsigned long	get_time(void)
-{
-	struct timeval	time;
-
-	if (gettimeofday(&time, NULL))
-		return (0);
-	return ((time.tv_sec * 1000 + time.tv_usec / 1000));
-}
 
 void	animations(void *params)
 {

@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:43:49 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/07 13:44:20 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/07 22:38:54 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	init_game(t_game *game, t_parser_map *parser_map)
 {
 	game->map_is_closed = true;
 	init_map_foundations(&game->map, game);
-	// mlx_set_setting(MLX_FULLSCREEN, true);
+	//mlx_set_setting(MLX_FULLSCREEN, true);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "ALGO-ALGA", false);
-	//mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
 	load_non_png_images(game->mlx, &game->map, &game->images, parser_map);
 	load_textures(game->mlx, &game->images, parser_map);
 	load_images(game->mlx, &game->images);

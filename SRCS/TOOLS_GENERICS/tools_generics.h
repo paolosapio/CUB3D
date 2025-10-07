@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_generics.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:18:24 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 12:18:53 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/07 23:13:51 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,7 @@
 
 int		tile_size_calculator(int map_height, int map_width);
 float	to_radians(float degrees);
+
+unsigned long	get_time(void);
 
 #endif

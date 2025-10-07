@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:52:49 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 15:32:59 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/07 23:17:27 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ANIMATIONS_H
 
 # include "t_game.h"
+# include "../TOOLS_GENERICS/tools_generics.h"
 
 # define CAROUSEL_NORMAL_MOVEMENT -0.4
 # define CAROUSEL_LEFT_MOVEMENT 7.0
