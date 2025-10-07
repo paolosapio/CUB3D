@@ -6,68 +6,62 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:29:07 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/03 00:25:54 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/07 21:46:54 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-float	y_start_pos(t_ray ray)
-{
-	float	y_start_to_paint;
-
-	y_start_to_paint = (HEIGHT / 2) - (ray.vertical_line / 2);
-	return (y_start_to_paint);
-}
-
-void	set_dir(t_ray_len sides, t_ray *ray, t_coor start_pos, t_int_coor map)
+/**
+ * @brief This function makes the steps needed before entering the raycasting
+ * loop.
+ *
+ * Inits the ray direction in each axys and based on that, calculates the
+ * distance of the ray in each axys until it's first collision, the manual part
+ * of the raycasting.
+ *
+ * @param sides the length of the sides that conform the hypotenuse until the
+ * camera plane. Either positive or negative, such as the axys direction.
+ * @param ray
+ * @param start
+ * @param m the map coordenate he are checking the collision in.
+ */
+void	pre_raycasting(t_ray_len sides, t_ray *ray, t_coor start, t_int_coor m)
 {
 	if (sides.x < 0)
 	{
 		ray->dir.x = -1;
-		ray->hypo_supreme.x = (start_pos.x - (float)map.x)
-			* ray->hypo_unitary.x;
+		ray->hypo_supreme.x = (start.x - (float)m.x) * ray->hypo_unitary.x;
 	}
 	else
 	{
 		ray->dir.x = 1;
-		ray->hypo_supreme.x = ((float)(map.x + 1) - start_pos.x)
+		ray->hypo_supreme.x = ((float)(m.x + 1) - start.x)
 			* ray->hypo_unitary.x;
 	}
 	if (sides.y < 0)
 	{
 		ray->dir.y = -1;
-		ray->hypo_supreme.y = (start_pos.y - (float)map.y)
-			* ray->hypo_unitary.y;
+		ray->hypo_supreme.y = (start.y - (float)m.y) * ray->hypo_unitary.y;
 	}
 	else
 	{
 		ray->dir.y = 1;
-		ray->hypo_supreme.y = ((float)(map.y + 1) - start_pos.y)
+		ray->hypo_supreme.y = ((float)(m.y + 1) - start.y)
 			* ray->hypo_unitary.y;
 	}
 }
 
-void	init_ray(t_coor start_pos, t_coor end_pos, t_ray *ray, t_int_coor *map)
+t_ray	raycasting(t_coor start, t_coor end, t_map map)
 {
-	t_ray_len	sides;
+	const t_ray_len		sides = {.x = end.x - start.x, .y = end.y - start.y};
+	t_ray				ray;
+	t_int_coor			map_coor;
 
-	map->x = (int)start_pos.x;
-	map->y = (int)start_pos.y;
-	sides.x = end_pos.x - start_pos.x;
-	sides.y = end_pos.y - start_pos.y;
-	ray->hypo_unitary.x = (float)sqrt(1 + (sides.y / sides.x) * (sides.y / sides.x));
-	ray->hypo_unitary.y = (float)sqrt(1 + (sides.x / sides.y) * (sides.x / sides.y));
-	set_dir(sides, ray, start_pos, *map);
-}
-
-
-t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map)
-{
-	t_ray		ray;
-	t_int_coor	map_coor;
-
-	init_ray(start_pos, end_pos, &ray, &map_coor);
+	map_coor.x = (int)start.x;
+	map_coor.y = (int)start.y;
+	gradienteitor(sides, &ray);
+	pre_raycasting(sides, &ray, start, map_coor);
 	while (map.array[map_coor.y][map_coor.x] != '1')
 	{
 		if (ray.hypo_supreme.x < ray.hypo_supreme.y)
@@ -83,9 +77,6 @@ t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map)
 			ray.hypo_supreme.y += ray.hypo_unitary.y;
 		}
 	}
-	ray.colision_point.x = start_pos.x + ray.dir.x *
-		(ray.colision_len / ray.hypo_unitary.x);
-	ray.colision_point.y = start_pos.y + ray.dir.y *
-		(ray.colision_len / ray.hypo_unitary.y);
+	set_collision_point(&ray, start);
 	return (ray);
 }

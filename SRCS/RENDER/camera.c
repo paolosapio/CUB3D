@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:23:38 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 14:16:14 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/07 21:51:02 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "t_game.h"
 #include "../REFRESH_GAME/refresh_game.h"
 #include "../TOOLS_GRAPHICS/tools_graphics.h"
-
-// player_v_angle : player_vision_angle
 
 void	init_struct_camera(t_camera *c, t_coor player_coor,
 		float x_pos_in_screen_aux, float player_v_angle)
@@ -34,20 +32,20 @@ void	init_struct_camera(t_camera *c, t_coor player_coor,
 	c->x_pos_in_screen = x_pos_in_screen_aux;
 }
 
-#define N_FRAMES 16
-// 360 / N_FRAMES; (22.5)
+#define N_FRAMES 16 // 360 / N_FRAMES; (22.5)
+
 void	cangro_map_rotation(t_game	*game, float player_v_angle)
 {
 	const float	step = 360 / N_FRAMES;
-	
+
 	game->images.greco_map[game->player.greco_map_dir]->enabled = false;
-	if(game->images.background_map->enabled == false)
+	if (game->images.background_map->enabled == false)
 		return ;
 	if (player_v_angle >= 360.0 - step && player_v_angle <= 360)
 		game->player.greco_map_dir = W_;
 	else if (player_v_angle >= 0.0 && player_v_angle <= 0 + step)
 		game->player.greco_map_dir = W_;
-	else if (player_v_angle >= 45.0 - step  && player_v_angle <= 45.0 + step)
+	else if (player_v_angle >= 45.0 - step && player_v_angle <= 45.0 + step)
 		game->player.greco_map_dir = NW;
 	else if (player_v_angle >= 90.0 - step && player_v_angle <= 90.0 + step)
 		game->player.greco_map_dir = N_;
@@ -61,7 +59,7 @@ void	cangro_map_rotation(t_game	*game, float player_v_angle)
 		game->player.greco_map_dir = S_;
 	else if (player_v_angle >= 315.0 - step && player_v_angle <= 315.0 + step)
 		game->player.greco_map_dir = SW;
-	game->images.greco_map[game->player.greco_map_dir]->enabled = true;	
+	game->images.greco_map[game->player.greco_map_dir]->enabled = true;
 }
 
 void	init_camera(t_game *game, t_coor player_coor, float player_v_angle)
@@ -86,11 +84,7 @@ void	init_camera(t_game *game, t_coor player_coor, float player_v_angle)
 				* (c.l_screen_point.y - player_coor.y));
 		c.ray.colision_len /= c.r;
 		c.ray.vertical_line = HEIGHT / c.ray.colision_len;
-		check_wall_texture(c.ray, game->player,
-			&game->images, c.x_pos_in_screen);
+		to_3d(c.ray, game, c.x_pos_in_screen);
 		c.x_pos_in_screen++;
 	}
-	// bresenham_algorithm(game->images.map_ray,
-	// 	(t_segment){player_coor, game->player.end, 0},
-	// 	ft_color(255, 255, 255, 255), game->tile_size);
 }

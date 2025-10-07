@@ -1,7 +1,7 @@
-SO ./PNG/wall_alga_S.png
-WE ./PNG/wall_alga_W.png
-EA ./PNG/wall_alga_E.png
-NO ./PNG/wall_alga_N.png
+SO ./PNG/check_side_S.png
+WE ./PNG/check_side_W.png
+EA ./PNG/check_side_E.png
+NO ./PNG/check_side_N.png
 
 F 220,100,0
 C 150,190,180

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_keys.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:29:30 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 15:54:34 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/07 13:24:48 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,10 @@ void	mouse_buttons(mouse_key_t button,
 
 void	kelas_movement(t_game *game);
 void	keys_kelas(mlx_key_data_t keydata, t_game *game);
+
+//special_keys_utils.c
+
+void	tab_mapeitor(t_game	*game);
+void	minimap_closer(t_game *game, bool info_img_state);
 
 #endif

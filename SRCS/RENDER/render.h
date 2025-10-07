@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:30:01 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 16:09:11 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/07 21:52:54 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 // FOV : FIELD OF VIEW (campo visual, lo que vemos en pantalla)
 // distancia de la pantalla del jugador y tamaño de la pantalla varian la vis
 
-typedef t_coor t_hypo2_len;
-typedef t_coor t_ray_len;
-typedef t_int_coor t_dir;
+typedef t_coor		t_hypo2_len;
+typedef t_coor		t_ray_len;
+typedef t_int_coor	t_dir;
 
 typedef enum e_texture_dir
 {
@@ -41,6 +41,15 @@ typedef enum e_texture_dir
 	WEST
 }			t_texture_dir;
 
+typedef struct s_texture_line
+{
+	t_texture_dir	dir;
+	t_coor			texture_coor;
+	t_coor			screen_coor;
+	mlx_texture_t	*texture;
+	float			screen_wall_height;
+}				t_texture_line;
+
 /**
  * dir: The direction on the y and x axys. Either 1 or -1.
  * hypo_unitary: How much does the hypothenuse increase when you move one unit
@@ -48,11 +57,10 @@ typedef enum e_texture_dir
  */
 typedef struct s_ray
 {
-	t_coor	colision_point;
-	float	colision_len;
-	float	vertical_line;
-	float	darkener_percent;
-
+	t_coor		colision_point;
+	float		colision_len;
+	float		vertical_line;
+	float		darkener_percent;
 	t_dir		dir;
 	t_ray_len	hypo_unitary;
 	t_ray_len	hypo_supreme;
@@ -69,20 +77,23 @@ typedef struct s_camera
 	float		r; //???
 }		t_camera;
 
+// draw_wall_texture.c
+void	to_3d(t_ray ray, t_game *game, float ray_index);
+void	draw_texture_line(mlx_image_t *img, t_ray ray, t_texture_line t);
+
+// check_wall_texture.c
+void	check_north_south(t_ray ray, t_game *game, float ray_i, t_coor rounded);
+void	check_east_west(t_ray ray, t_game *game, float ray_i, t_coor rounded);
 
 void	minimap_closer(t_game *game, bool info_img_state);
 
 void	init_camera(t_game *game, t_coor player_coor,
 			float player_vision_angle);
 t_ray	raycasting(t_coor start_pos, t_coor end_pos, t_map map);
-void	check_wall_texture(t_ray ray, t_player player, t_images *images,
-			float ray_index);
 
-void	to_3d(mlx_image_t *image, t_ray ray, int x_step,
-			mlx_texture_t *texture);
+//raycasting_utils.c
 
-int		check_side_pixel(t_ray ray, t_player player);
-void	print_centered_line(mlx_image_t *screen, t_ray ray,
-			int x_step, mlx_texture_t *wall);
+void	gradienteitor(t_ray_len sides, t_ray *ray);
+void	set_collision_point(t_ray *ray, t_coor start);
 
 #endif
