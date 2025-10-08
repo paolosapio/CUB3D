@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements_wasd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:55:46 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 00:08:08 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/08 19:01:32 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ void	angulator_move(float vision_angle, int tile_size, t_game *game)
 }
 
 /**
- * @brief This function is an intermediate function neede for the norminette.
- * I'm not quite sure what its name means, but anyways, it calls angulator_move
- * and renders the game.
+ * @brief It calls angulator_move and handles the rendering of the new frame.
  */
-void	grade_movement_change(t_game *game, int grade)
+void	go_player_direction(t_game *game, int grade)
 {
 	angulator_move(game->player.vision_angle + grade, game->tile_size, game);
 	clean_game_images(&game->images);
@@ -51,11 +49,11 @@ void	grade_movement_change(t_game *game, int grade)
 void	movement_wasd(t_game *game)
 {
 	if (game->player.movements.key_w_is_down == true)
-		grade_movement_change(game, 0);
+		go_player_direction(game, 0);
 	if (game->player.movements.key_d_is_down == true)
-		grade_movement_change(game, 90);
+		go_player_direction(game, 90);
 	if (game->player.movements.key_s_is_down == true)
-		grade_movement_change(game, 180);
+		go_player_direction(game, 180);
 	if (game->player.movements.key_a_is_down == true)
-		grade_movement_change(game, 270);
+		go_player_direction(game, 270);
 }

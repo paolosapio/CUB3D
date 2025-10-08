@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:42:51 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 18:53:06 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/08 19:34:51 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,15 @@ void	move_line_direction(t_player *player, float sen, float cos)
 		player->end.x += cos * player->speed;
 }
 
+// [../../PNG/POST-IT/sen_cos.png]
+// [../../PNG/POST-IT/player_movement.png]
 /**
- * @brief Recieves the sen and cos that determine where the player 
+ * @brief Checks if the player can move to the position it wants to go to, and
+ * if so, updates the players position.
+ * 
+ * Being the new direction a vector, it will check first the player position
+ * only modifying the y axys, and update it if no wall was found, and then
+ * the same with the x axys.
  */
 void	move_player(t_player *player, t_map *map, float sen, float cos)
 {
