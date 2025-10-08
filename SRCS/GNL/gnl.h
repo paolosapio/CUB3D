@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time.c                                         :+:      :+:    :+:   */
+/*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 23:13:39 by anfi              #+#    #+#             */
-/*   Updated: 2025/10/08 11:50:16 by psapio           ###   ########.fr       */
+/*   Created: 2025/10/08 15:43:57 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/08 15:54:15 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools_generics.h"
+#ifndef GNL_H
+# define GNL_H
 
-/**A function that returns in *milliseconds* the elapsed time since the last
- * time the loop_hook animation 
- */
-unsigned long	get_time(void)
-{
-	struct timeval	time;
+# include "libft.h"
 
-	if (gettimeofday(&time, NULL))
-		return (0);
-	return ((time.tv_sec * 1000 + time.tv_usec / 1000));
-}
+//get_next_line.c
+
+char	*get_next_line(int fd);
+char	*ft_read(int fd, char *remain);
+char	*clean_remain(char *remain);
+int		ft_find_end_line(char *line);
+char	*gnl_strnjoin(char *s1, char *s2, int n);
+
+//get_next_line_utils.c
+
+void	ft_free(char **str);
+char	*gnl_strdup(char *s1, int n);
+
+#endif

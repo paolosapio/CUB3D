@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:31:06 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/07 23:21:03 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/08 16:00:12 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,27 @@
 
 #define SENSITIVITY 10
 #define MOUSE_MOVEMENT_TIME_MARGIN 5
+
+void	mouse_left(double first_step_x, double mouse_x, t_game *game)
+{
+	float	move;
+
+	move = ((first_step_x - mouse_x) / SENSITIVITY);
+	carousel(game->images.fauna, CAROUSEL_LEFT_MOVEMENT + move);
+	carousel_reverse(game->images.ambient, CAROUSEL_LEFT_MOVEMENT);
+	change_player_rotation(&game->player, game->player.vision_angle - move);
+}
+
+void	mouse_right(double first_step_x, double mouse_x, t_game *game)
+{
+	float	move;
+
+	move = ((mouse_x - first_step_x) / SENSITIVITY) + 1;
+	carousel(game->images.fauna, CAROUSEL_RIGHT_MOVEMENT - move);
+	carousel_reverse(game->images.ambient, CAROUSEL_RIGHT_MOVEMENT);
+	change_player_rotation(&game->player, game->player.vision_angle + move);
+}
+
 /**
  * @brief The mouse hook to control the mouse position and rotate the character
  * 
@@ -26,8 +47,7 @@
  */
 void	mouse_movements(double mouse_x, double mouse_y, void *params)
 {
-	float			move;
-	t_game			*game;
+	t_game					*game;
 	static double			first_step_x;
 	static unsigned long	last_frame;
 
@@ -39,26 +59,11 @@ void	mouse_movements(double mouse_x, double mouse_y, void *params)
 		last_frame = get_time();
 	}
 	if (get_time() - last_frame < MOUSE_MOVEMENT_TIME_MARGIN)
-	{
-		printf("------------------\n");
 		return ;
-	}
-	else
-		printf("++++++++++++++++\n");
 	if (mouse_x < first_step_x)
-	{
-		move = ((first_step_x - mouse_x) / SENSITIVITY);
-		carousel(game->images.fauna, CAROUSEL_LEFT_MOVEMENT + move);
-		carousel_reverse(game->images.ambient, CAROUSEL_LEFT_MOVEMENT);
-		change_player_rotation(&game->player, game->player.vision_angle - move);
-	}
+		mouse_left(first_step_x, mouse_x, game);
 	else if (mouse_x > first_step_x)
-	{
-		move = ((mouse_x - first_step_x) / SENSITIVITY) + 1;
-		carousel(game->images.fauna, CAROUSEL_RIGHT_MOVEMENT - move);
-		carousel_reverse(game->images.ambient, CAROUSEL_RIGHT_MOVEMENT);
-		change_player_rotation(&game->player, game->player.vision_angle + move);
-	}
+		mouse_right(first_step_x, mouse_x, game);
 	else
 		return ;
 	clean_game_images(&game->images);

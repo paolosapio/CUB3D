@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_images.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/08 15:49:47 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/08 15:54:39 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef T_IMAGES_H
 # define T_IMAGES_H
 
-typedef struct mlx_image mlx_image_t;
-typedef struct mlx_texture mlx_texture_t;
+# include "../MLX42/include/MLX42/MLX42.h"
 
-typedef struct	s_images
+typedef struct s_images
 {
 	mlx_image_t		*sky;
 	mlx_image_t		*floor;
@@ -25,22 +36,16 @@ typedef struct	s_images
 	mlx_image_t		*info;
 	mlx_image_t		*waves[2];
 	mlx_image_t		*frame[6];
-
-
-
-
-	mlx_image_t	*kelas_open;
-	mlx_image_t	*kelas_closed;
-	mlx_image_t	*kelas_sx;
-	mlx_image_t	*kelas_dx;
-	mlx_image_t	*kelas_up[2];
-
+	mlx_image_t		*kelas_open;
+	mlx_image_t		*kelas_closed;
+	mlx_image_t		*kelas_sx;
+	mlx_image_t		*kelas_dx;
+	mlx_image_t		*kelas_up[2];
 	mlx_texture_t	*wall_alga;
-	mlx_texture_t	*map_texture_N;
-	mlx_texture_t	*map_texture_S;
-	mlx_texture_t	*map_texture_E;
-	mlx_texture_t	*map_texture_W;
-
+	mlx_texture_t	*map_texture_n;
+	mlx_texture_t	*map_texture_s;
+	mlx_texture_t	*map_texture_e;
+	mlx_texture_t	*map_texture_w;
 	mlx_texture_t	*greco_texture;
 }				t_images;
 

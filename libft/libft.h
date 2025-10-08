@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:35:09 by psapio            #+#    #+#             */
-/*   Updated: 2025/07/24 18:30:44 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:40:30 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ char	*ft_ltoa(long n);
 long	ft_atol(const char *nptr);
 size_t	ft_arraylen(const char **s);
 bool	ft_isdigit_str(char *str);
-
-
 
 // GET_NEXT_LINE
 # ifndef BUFFER_SIZE

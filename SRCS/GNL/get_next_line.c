@@ -6,11 +6,11 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:28:24 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/10/01 19:43:16 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/08 15:45:17 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "gnl.h"
 
 char	*gnl_strnjoin(char *s1, char *s2, int n)
 {

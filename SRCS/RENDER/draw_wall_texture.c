@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:25:21 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/07 21:53:21 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/08 17:58:57 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
 #define SCREEN_LIMIT_Y 0
+#define BOH 0.001
 
 unsigned int	color_picker(t_coor pixel_texture_porcent,
 		mlx_texture_t *texture, float darkener)
@@ -45,9 +46,9 @@ float	get_x_pos_texture(t_texture_dir dir, t_coor colision_point)
 
 	x = 0;
 	if (dir == SOUTH)
-		x = ((int)(colision_point.x + 1) - colision_point.x) - 0.001;//???
+		x = ((int)(colision_point.x + 1) - colision_point.x) - BOH;
 	else if (dir == WEST)
-		x = ((int)(colision_point.y + 1) - colision_point.y) - 0.001;
+		x = ((int)(colision_point.y + 1) - colision_point.y) - BOH;
 	else if (dir == EAST)
 		x = colision_point.y - (int)colision_point.y;
 	else if (dir == NORTH)

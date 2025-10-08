@@ -2,13 +2,13 @@ NAME = cub3D
 
 CC = cc
 
-CFLAGS	 =	-Wextra -Wall -Werror -Wno-unused-result
+CFLAGS	 =	#-Wextra -Wall -Werror
 # CFLAGS	+= -I INC
 CFLAGS	+= -I libft
-CFLAGS	+= -O3 #-> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS //*bueno quizás en verdad si mejora mucho el rendimiento
+CFLAGS	+= #-O3 #-> NO DESCOMENTAR HASTA EL FINAL PORQUE EVITA DETECTAR LEAKS //*bueno quizás en verdad si mejora mucho el rendimiento
 #CFLAGS	+= -lglfw
 
-DEBUG	 =	-g3 -fsanitize=address,leak
+DEBUG	 =	-g3 -fsanitize=address
 
 CPPFLAGS = -MMD
 
@@ -55,7 +55,6 @@ $(LIBFT_LIB):
 	@make -C $(LIBFT)
 
 $(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS)
-	echo $(OBJS)
 	$(CC) $(DEBUG) $(CFLAGS) $(OBJS) $(LIBS)  $(HEADERS) -o $(NAME) && printf "Linking: $(NAME)\n"
 
 objs/srcs/%.o: ./SRCS/%.c

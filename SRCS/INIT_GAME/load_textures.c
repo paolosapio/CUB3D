@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:13:37 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 15:53:10 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/08 15:53:41 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	set_greco_icon(mlx_t *mlx, t_images *imgs)
 void	load_textures(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 {
 	set_greco_icon(mlx, imgs);
-	imgs->map_texture_N = load_n_check_texture(mlx, imgs, parser_map->path_s);
-	imgs->map_texture_S = load_n_check_texture(mlx, imgs, parser_map->path_n);
-	imgs->map_texture_E = load_n_check_texture(mlx, imgs, parser_map->path_w);
-	imgs->map_texture_W = load_n_check_texture(mlx, imgs, parser_map->path_e);
+	imgs->map_texture_n = load_n_check_texture(mlx, imgs, parser_map->path_s);
+	imgs->map_texture_s = load_n_check_texture(mlx, imgs, parser_map->path_n);
+	imgs->map_texture_e = load_n_check_texture(mlx, imgs, parser_map->path_w);
+	imgs->map_texture_w = load_n_check_texture(mlx, imgs, parser_map->path_e);
 }

@@ -1,13 +1,23 @@
-#ifndef PLAYER_H
-# define PLAYER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_player.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/08 15:48:33 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/08 15:49:25 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef T_PLAYER_H
+# define T_PLAYER_H
 
 # include "t_coordinate.h"
 # include <stdbool.h>
 # include "t_player_movements.h"
 
-#define PLAYER_MAP_COLOR 0xFF6600FF //naranja
-#define CENTER_PLAYER 0.5 //FACTOR DE DESPLAZAMIENTO DE LA CASILLA EN EL CENTRO EDL JUGADOR PARA QUE NO SEA LA EZQUINA ARRIBA A LA EZQUERDA
-
+# define CENTER_PLAYER 0.5
 
 typedef enum e_greco_dir
 {
@@ -21,9 +31,8 @@ typedef enum e_greco_dir
 	SW,
 }		t_greco_dir;
 
-typedef struct			s_player
+typedef struct s_player
 {
-	//t_vector	pos;
 	t_coor				pos;
 	t_coor				end;
 	float				vision_angle;
@@ -31,6 +40,6 @@ typedef struct			s_player
 	t_player_movements	movements;
 	t_greco_dir			greco_map_dir;
 	int					view;
-}						t_player;
+}				t_player;
 
 #endif

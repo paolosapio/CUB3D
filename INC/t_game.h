@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_game.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/08 15:53:52 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/08 17:22:05 by psapio           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef T_GAME_H
 # define T_GAME_H
 
@@ -20,7 +32,7 @@
  * based on the map size.
  * @param map_is_closed bool: Wether the user opened or closed the map.
 */
-typedef struct	s_game
+typedef struct s_game
 {
 	t_images	images;
 	t_map		map;
@@ -28,7 +40,6 @@ typedef struct	s_game
 	mlx_t		*mlx;
 	int			tile_size;
 	bool		map_is_closed;
-	bool		new_frame;
 }				t_game;
 
 #endif
