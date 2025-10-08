@@ -6,7 +6,7 @@
 /*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:04:17 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 22:18:17 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/08 18:43:38 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
-# define LIMIT_FOV 1.5 //! TEMPORAL
+# define LIMIT_FOV 1.5
 
 /*   Errors    */
 typedef enum e_staterror

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements_player.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:42:51 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 00:05:39 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/08 18:53:06 by psapio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	move_line_direction(t_player *player, float sen, float cos)
 		player->end.x += cos * player->speed;
 }
 
+/**
+ * @brief Recieves the sen and cos that determine where the player 
+ */
 void	move_player(t_player *player, t_map *map, float sen, float cos)
 {
 	t_coor			new_player_pos;
@@ -29,8 +32,6 @@ void	move_player(t_player *player, t_map *map, float sen, float cos)
 
 	new_player_pos.y = (player->pos.y + sen * player->speed);
 	new_player_pos.x = (player->pos.x + cos * player->speed);
-	printf("new_player_pos.y: %f\n", new_player_pos.y);
-	printf("new_player_pos.x: %f\n", new_player_pos.x);
 	tile.y = (int)(new_player_pos.y + stop_collision.y);
 	tile.x = (int)(new_player_pos.x + stop_collision.x);
 	if ((map->array[(int)player->pos.y][tile.x] && !ft_strchr(COLLITIONS,
