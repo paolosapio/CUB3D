@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sky_and_floor_create.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:46 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 19:40:53 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/12 10:35:55 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ mlx_image_t	*create_half_screen_rectangle(mlx_t *mlx, int color)
 	return (half_rectangle);
 }
 
+/**
+ * @brief adds or substracts the gradient_color based on wether we are halfway
+ * through the screen.
+ */
 void	condition_little_jump(int y, float *gradient_color)
 {
 	const float	little_jump = 255.0 / (HEIGHT / 2.0);
@@ -41,6 +45,10 @@ void	condition_little_jump(int y, float *gradient_color)
 		*gradient_color -= little_jump;
 }
 
+/**
+ * @brief Creates the background gradient, a part of our "trampantojo" to
+ * emulate the darkening of the world the farther away you are to a wall.
+ */
 mlx_image_t	*create_gradient_bgr(mlx_t *mlx)
 {
 	mlx_image_t	*gradient_bgr;

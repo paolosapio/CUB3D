@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_extension.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/08/11 20:48:49 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/10/12 12:33:25 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+/**
+ * @brief Checks that the map has the .cub extension.
+ */
 t_errok	check_file_extension(char *path_map)
 {
 	char	*last_slash;

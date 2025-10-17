@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/10/01 22:17:11 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/12 12:36:04 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+/**
+ * @brief Tries to open the map and exits the program in case the file
+ * was not found or an error ocured during the process.
+ * 
+ * @param path_map 
+ * @return The file fd.
+ */
 int	fd_open_or_exit(char *path_map)
 {
 	int	fd;

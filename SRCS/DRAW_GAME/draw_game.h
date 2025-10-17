@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_game.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:56:33 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 16:07:42 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/12 10:28:59 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 // create_images.c
 
 mlx_image_t	*create_empty_img(mlx_t *mlx, int width, int height);
-mlx_image_t	*create_background_map(mlx_t *mlx, t_map *map);
+mlx_image_t	*create_background_map(mlx_t *mlx);
 
 // draw_game_utils.c
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_non_png_images.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:00:11 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 18:01:41 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/12 10:39:27 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #define N_COLORS 3
 #define COLOR_ERROR -1
 
+/**
+ * @brief Checks and casts the color received inside the .cub file
+ * @param color_str The color as the string.
+ * @return The color transformed into an int, or -1 in case the color was not
+ * valid.
+ */
 int	extract_color_from_str(char *color_str)
 {
 	int			rgba_array[N_COLORS];
@@ -39,12 +45,23 @@ int	extract_color_from_str(char *color_str)
 	return (color);
 }
 
+/**
+ * @brief Creates all the game imgs that don't use a png but rather have to be
+ * painted pixel by pixel based on the map information, such as:
+ * 
+ * - Sky and Floor with the specified color
+ * 
+ * - The minimap.
+ * 
+ * - The 3D game itself with the raycasting based on the players position and
+ * map info.
+ */
 void	load_non_png_images(mlx_t *mlx, t_map *map, t_images *imgs,
 			t_parser_map *p_map)
 {
 	int	color;
 
-	imgs->background_map = create_background_map(mlx, map);
+	imgs->background_map = create_background_map(mlx);
 	imgs->gradient_bgr = create_gradient_bgr(mlx);
 	color = extract_color_from_str(p_map->info_sky);
 	if (color == COLOR_ERROR)
