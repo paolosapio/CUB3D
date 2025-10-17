@@ -6,12 +6,21 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/10/12 12:42:16 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/17 20:29:53 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+/**
+ * @brief Saves the color or texture path read from the .cub into parser_map.
+ * Doesn't check the texture or the color are valid, only checks it's format.
+
+ * @param line_map_to_check A correct line should look something  like:
+ 	"NO ./file.png". An invalid one: "NO" or "NO ./file.png something_else"
+ * @param map_info The pointer to the char * that will hold the path or the
+ 	color.
+ */
 int	save_map_info(char *line_map_to_check, char **map_info)
 {
 	char	**splitted;
@@ -30,6 +39,10 @@ int	save_map_info(char *line_map_to_check, char **map_info)
 	return (ERROR);
 }
 
+/**
+ * @brief Reads the remaining file to know how big the map is in order to
+ * allocate the array for it.
+ */
 void	allocate_map_size(char *line_map_to_check, t_map *map, int fd)
 {
 	int	map_len;
@@ -46,6 +59,11 @@ void	allocate_map_size(char *line_map_to_check, t_map *map, int fd)
 	map->array[map_len + 1] = NULL;
 }
 
+/**
+ * @brief Checks that all the information needed for the game to work was inside
+ * the .cub file. If any of these char * inside the parser_map is NULL means
+ * there was no line containing the information for it.
+  */
 void	check_textures_path(t_parser_map *map)
 {
 	if (map->path_n == NULL
@@ -62,7 +80,7 @@ void	check_textures_path(t_parser_map *map)
 
 /**
  * @brief This function is called for each line gnl reads from the .cub file.
- * It enters the specified if to save inside the map structure the information
+ * It enters the specified `if` to save inside the map structure the information
  * relative to the textures path or the color code.
  * If some other information is found it will return ERROR leading the program
  * to end.
@@ -74,7 +92,7 @@ void	check_textures_path(t_parser_map *map)
  * @param p_map 
  * @param fd 
  * @return int 
- */
+ */ 
 int	check_line(char *line_map_to_check, t_map *map, t_parser_map *p_map, int fd)
 {
 	if (is_empty_line(line_map_to_check) == true)

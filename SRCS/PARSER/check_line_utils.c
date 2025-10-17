@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_line.c                                       :+:      :+:    :+:   */
+/*   check_line_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymunoz-m <ymunoz-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/08/11 20:19:38 by ymunoz-m         ###   ########.fr       */
+/*   Updated: 2025/10/17 20:21:37 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_errok	is_empty_line(char *line)
+/**
+ * @brief Checks if the line has only spaces and or \\n to stop further
+ * comprobations.
+ */
+bool	is_empty_line(char *line)
 {
 	int	i;
 
 	i = 0;
 	while (line[i])
 	{
-		if (ft_strchr(" \n", line[i]) == NULL)
+		if (ft_strchr(SPACES, line[i]) == NULL)
 			return (false);
 		i++;
 	}
 	return (true);
 }
 
+/**
+ * @brief A very lovely function that checks that the characters inside the
+ * first map line are only valid characters.
+ */
 t_errok	check_first_line_map(char *line_map_to_check)
 {
 	int	i;

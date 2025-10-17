@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:04:17 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 18:43:38 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/17 19:49:25 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef enum e_error_ok
 
 //#define VALID_CHARS "10NSEW \n"
 # define VALID_CHARS "10NEWS \n"
+# define SPACES " \f\n\r\t\v"
 
 // parser.c
 t_parser_map	parser(char *map_path, t_map *map);
@@ -96,7 +97,7 @@ void			check_valid_map(t_parser_map *parser_map, t_map *map);
 
 // check_line.c
 
-t_errok			is_empty_line(char *line);
+bool			is_empty_line(char *line);
 int				is_valid_line(char **map, int current);
 t_errok			check_first_line_map(char *line_map_to_check);
 

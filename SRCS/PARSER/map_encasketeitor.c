@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_encasketeitor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:03:30 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/01 22:03:31 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/17 20:51:48 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int	line_len(int size_line, int old_bigger_line)
 	return (old_bigger_line);
 }
 
+/**
+ * @brief Saves the map array inside the map structure. The only comprobation
+ * it makes is that the last line doesn't have a \\n at the end of the map to
+ * avoid maps that have a lot of empty lines after the map itself, since this
+ * affects the way the map is viewed inside the game.
+ */
 int	str_map_encasketeitor(t_parser_map *parser_map, t_map *map, int fd)
 {
 	char	*line;
@@ -52,7 +58,8 @@ int	str_map_encasketeitor(t_parser_map *parser_map, t_map *map, int fd)
 		map_line_index++;
 	}
 	map->map_len = map_line_index;
-	if (ft_strcmp(map->array[map->map_len - 1], "\n") == 0)
+	if (is_empty_line(map->array[map->map_len - 1]) == true &&
+		is_empty_line(map->array[map->map_len - 2]) == true)
 		return (ERROR);
 	return (OK);
 }
