@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:29:07 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/07 21:46:54 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/21 22:31:22 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * camera plane. Either positive or negative, such as the axys direction.
  * @param ray
  * @param start
- * @param m the map coordenate he are checking the collision in.
+ * @param m the map coordenate we are checking the collision in.
  */
 void	pre_raycasting(t_ray_len sides, t_ray *ray, t_coor start, t_int_coor m)
 {
@@ -52,6 +52,15 @@ void	pre_raycasting(t_ray_len sides, t_ray *ray, t_coor start, t_int_coor m)
 	}
 }
 
+/**
+ * @brief finds the ray length to a collision thanks to the gradient and
+ * pythagoras.
+ *
+ * @param start The player's position.
+ * @param end The camera plane position, a fake end to have the vectors dir.
+ * @param map The map array needed to check the collisions.
+ * @return t_ray 
+ */
 t_ray	raycasting(t_coor start, t_coor end, t_map map)
 {
 	const t_ray_len		sides = {.x = end.x - start.x, .y = end.y - start.y};

@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:23:38 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/07 21:51:02 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/21 23:53:07 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include "../REFRESH_GAME/refresh_game.h"
 #include "../TOOLS_GRAPHICS/tools_graphics.h"
 
+//[../../INFO/plano_camara.jpeg]
+/**
+ * @brief Initialices the camera struct with the coordinates relevant for the
+ * camera plane.
+ */
 void	init_struct_camera(t_camera *c, t_coor player_coor,
 		float x_pos_in_screen_aux, float player_v_angle)
 {
@@ -34,6 +39,11 @@ void	init_struct_camera(t_camera *c, t_coor player_coor,
 
 #define N_FRAMES 16 // 360 / N_FRAMES; (22.5)
 
+// [../../INFO/cangro_rotation.jpeg]
+/**
+ * @brief Decides the direction of the minimap cangro based on it's vision
+ * angle.
+ */
 void	cangro_map_rotation(t_game	*game, float player_v_angle)
 {
 	const float	step = 360 / N_FRAMES;
@@ -78,11 +88,11 @@ void	init_camera(t_game *game, t_coor player_coor, float player_v_angle)
 				ft_color(0, 0, 255, 100), game->tile_size);
 		c.l_screen_point.x += c.pixel_offset_cos;
 		c.l_screen_point.y += c.pixel_offset_sen;
-		c.r = sqrtf((c.l_screen_point.x - player_coor.x)
+		c.player_to_camera_len = sqrtf((c.l_screen_point.x - player_coor.x)
 				* (c.l_screen_point.x - player_coor.x)
 				+ (c.l_screen_point.y - player_coor.y)
 				* (c.l_screen_point.y - player_coor.y));
-		c.ray.colision_len /= c.r;
+		c.ray.colision_len /= c.player_to_camera_len;
 		c.ray.vertical_line = HEIGHT / c.ray.colision_len;
 		to_3d(c.ray, game, c.x_pos_in_screen);
 		c.x_pos_in_screen++;

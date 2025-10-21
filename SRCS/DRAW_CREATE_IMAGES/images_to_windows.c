@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   image_to_windows.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:57:14 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 16:19:49 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 23:11:21 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_game.h"
+#include "draw_create_images.h"
 
+/**
+ * @brief Loads on screen some of the images that belong to the 3d part of the
+ * game. Mainly the ones that only have 1 or 2 frames.
+ * @param game 
+ */
 void	tridy_images_to_window(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->images.sky, 0, 0);
@@ -23,6 +28,9 @@ void	tridy_images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.tridy, 0, 0);
 }
 
+/**
+ * @brief puts on screen the kelas images.
+ */
 void	kelas_images_to_window(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->images.kelas_open, 0, 0);
@@ -33,6 +41,10 @@ void	kelas_images_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->images.kelas_up[1], 0, 0);
 }
 
+/**
+ * @brief Puts every single image onto the screen. Hides some of then, resizes
+ * others... layer by layer it visually creates the game.
+ */
 void	images_to_window(t_game *game)
 {
 	tridy_images_to_window(game);

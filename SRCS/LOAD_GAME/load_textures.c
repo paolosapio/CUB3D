@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:13:37 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 15:53:41 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 21:38:23 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init_game.h"
+#include "load_game.h"
 
+/**
+ * @brief Sets the greco icon. Nothing more, nothing else.
+ */
 void	set_greco_icon(mlx_t *mlx, t_images *imgs)
 {
 	imgs->greco_texture = load_n_check_texture(mlx, imgs, "PNG/greco.png");
@@ -19,6 +22,11 @@ void	set_greco_icon(mlx_t *mlx, t_images *imgs)
 	mlx_delete_texture(imgs->greco_texture);
 }
 
+/**
+ * @brief Loads the mlx_texture_t images (basically the wall textures received
+ * in the .cub file) and since is something that needs a texture and not an
+ * image, this function also sets the greco icon :D
+ */
 void	load_textures(mlx_t *mlx, t_images *imgs, t_parser_map *parser_map)
 {
 	set_greco_icon(mlx, imgs);

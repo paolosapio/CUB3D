@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   movements.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:43:18 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 17:56:31 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 21:23:09 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MOVEMENTS_H
 # define MOVEMENTS_H
 
-# include "../DRAW_GAME/draw_game.h"
+# include "../DRAW_CREATE_IMAGES/draw_create_images.h"
 # include "../REFRESH_GAME/refresh_game.h"
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "t_game.h"

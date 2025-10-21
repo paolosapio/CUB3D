@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.h                                        :+:      :+:    :+:   */
+/*   load_game.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:59:50 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 16:14:14 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 21:34:09 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_GAME_H
-# define INIT_GAME_H
+#ifndef LOAD_GAME_H
+# define LOAD_GAME_H
 
-# include "../DRAW_GAME/draw_game.h"
+# include "../DRAW_CREATE_IMAGES/draw_create_images.h"
 # include "../FUNKY_DESTROY/funky_destroy.h"
 # include "../PARSER/parser.h"
 # include "../RENDER/render.h"
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "t_game.h"
 
-// init_game.c
+// load_game.c
 
 void			init_map_foundations(t_map *map, t_game *game);
-void			init_game(t_game *game, t_parser_map *parser_map);
+void			load_game(t_game *game, t_parser_map *parser_map);
 
 // load_non_png_images.c
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements_player.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:42:51 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 19:34:51 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/21 23:02:52 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	move_line_direction(t_player *player, float sen, float cos)
 		player->end.x += cos * player->speed;
 }
 
-// [../../PNG/POST-IT/sen_cos.png]
 // [../../PNG/POST-IT/player_movement.png]
 /**
  * @brief Checks if the player can move to the position it wants to go to, and

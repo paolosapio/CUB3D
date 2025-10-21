@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_game.h                                        :+:      :+:    :+:   */
+/*   draw_create_images.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:56:33 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/12 10:28:59 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/21 23:54:22 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAW_GAME_H
-# define DRAW_GAME_H
+#ifndef DRAW_CREATE_IMAGES_H
+# define DRAW_CREATE_IMAGES_H
 
 # include "../../MLX42/include/MLX42/MLX42.h"
 # include "../TOOLS_GRAPHICS/tools_graphics.h"
@@ -31,7 +31,8 @@ mlx_image_t	*create_background_map(mlx_t *mlx);
 
 void		transparentator(int value_of_trasparence, mlx_image_t *image);
 void		hide_images(t_images *image);
-void		images_resizeitor(t_images *images, int tile_size, int n_images);
+void		greco_minimap_resizeitor(t_images *images, int tile_size,
+				int n_images);
 
 // image_array_to_windows.c
 
@@ -46,8 +47,7 @@ void		images_to_window(t_game *game);
 
 // minimap_to_windows.c
 
-void		sand_rock_to_win(mlx_t *mlx, t_map *map, t_images *images,
-				int slider);
+void		sand_rock_to_win(mlx_t *mlx, t_map *map, t_images *images);
 void		minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images);
 
 // sky_and_floor_create.c

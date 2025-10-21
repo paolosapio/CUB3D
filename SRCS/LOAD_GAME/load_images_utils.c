@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   load_images_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:44:47 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 15:53:03 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 21:34:09 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init_game.h"
+#include "load_game.h"
 
+/**
+ * @brief loads a png file into an mlx_texture_t and in case it failed, frees
+ * the memory and exits the program.
+ */
 mlx_texture_t	*load_n_check_texture(mlx_t *mlx, t_images *images,
 		char *texture_path)
 {
@@ -28,6 +32,10 @@ mlx_texture_t	*load_n_check_texture(mlx_t *mlx, t_images *images,
 	return (texture);
 }
 
+/**
+ * @brief loads a png file into an mlx_image_t and in case it failed, frees
+ * the memory and exits the program.
+ */
 mlx_image_t	*load_n_check_image(mlx_t *mlx, t_images *imgs, char *texture_path)
 {
 	mlx_texture_t	*texture;

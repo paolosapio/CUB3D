@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:19:54 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 18:13:01 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/21 23:53:32 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,18 @@ int	main(int argc, char **argv)
 		destroy_map(&game.map);
 		exit(1);
 	}
-	init_game(&game, &parser_map);
+	load_game(&game, &parser_map);
 	await_user_input(&game);
 	sayonara_baby(game.mlx, &game.images, &game.map);
 	return (0);
 }
-
 
 // cc main.c MLX42/build/libmlx42.a -ldl -lglfw 
 
 // int	main(void)
 // {
 // 	mlx_t	*mlx = NULL;
-	
+
 // 	mlx_set_setting(MLX_FULLSCREEN, true);
 // 	mlx = mlx_init(500,500, "hola", false);
 // 	mlx_close_window(mlx);

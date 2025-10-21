@@ -6,11 +6,11 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:00:11 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/12 10:39:27 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/18 21:34:09 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init_game.h"
+#include "load_game.h"
 #define N_COLORS 3
 #define COLOR_ERROR -1
 

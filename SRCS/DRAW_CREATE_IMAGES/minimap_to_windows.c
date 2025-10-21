@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_to_windows.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:21:07 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 16:20:19 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 23:07:56 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_game.h"
+#include "draw_create_images.h"
 
-void	sand_rock_to_win(mlx_t *mlx, t_map *map, t_images *images, int slider)
+/**
+ * @brief Draws the minimap. Once the sand and rock images have been loaded, we
+ * iterate over the map array, put on screen a one of the images,
+ * taking into consideration the x and y coordinates and the tile_size.
+ */
+void	sand_rock_to_win(mlx_t *mlx, t_map *map, t_images *images)
 {
 	int	x;
 	int	y;
@@ -20,7 +25,6 @@ void	sand_rock_to_win(mlx_t *mlx, t_map *map, t_images *images, int slider)
 	y = -1;
 	while (map->array[++y])
 	{
-		slider++;
 		x = -1;
 		while (map->array[y][++x])
 		{
@@ -40,19 +44,20 @@ void	sand_rock_to_win(mlx_t *mlx, t_map *map, t_images *images, int slider)
 	}
 }
 
+/**
+ * @brief Makes the minimap, loading tile by tile, image by image.
+ * Many z instances.
+ */
 void	minimap_images_to_window(mlx_t *mlx, t_map *map, t_images *images)
 {
-	int	slider;
-
-	slider = 0;
 	mlx_resize_image(images->map_sand, map->tile_size, map->tile_size);
 	mlx_resize_image(images->map_rock, map->tile_size, map->tile_size);
 	transparentator(127, images->map_sand);
 	transparentator(127, images->map_rock);
 	transparentator(100, images->mirilla);
 	mlx_image_to_window(mlx, images->background_map, 0, 0);
-	sand_rock_to_win(mlx, map, images, slider);
+	sand_rock_to_win(mlx, map, images);
 	mlx_image_to_window(mlx, images->map_ray, map->draw_offset.x,
 		map->draw_offset.y);
-	images_resizeitor(images, map->tile_size, 8);
+	greco_minimap_resizeitor(images, map->tile_size, 8);
 }

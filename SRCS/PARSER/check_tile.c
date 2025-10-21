@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_player.c                                     :+:      :+:    :+:   */
+/*   check_tile.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:39:47 by ymunoz-m          #+#    #+#             */
-/*   Updated: 2025/10/06 16:23:19 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 14:21:14 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	error_exit_invalid_map(t_parser_map *parser_map, t_map *map, int error)
-{
-	destroy_parser_map(parser_map);
-	destroy_map(map);
-	write(2, "ERROR: ", 7);
-	if (error == INVALID_CHAR)
-		write(2, "Found an invalid char inside the map\n", 37);
-	else if (error == NOT_ENCLOSED_MAP)
-		write(2, "The map is not fully enclosed\n", 30);
-	else if (error == TOO_MANY_PLAYERS)
-		write(2, "More than one player initial position\n", 38);
-	else if (error == INVALID_PLAYER_POSITION)
-		write(2, "The player initial position is invalid\n", 39);
-	else if (error == NO_PLAYER)
-		write(2, "No player initial position\n", 27);
-	else if (error == EMPTY_MAP)
-		write(2, "The map is empty\n", 17);
-	else
-		write(2, "Undefined error\n", 16);
-	exit(1);
-}
-
+/**
+ * @brief Is called whenever the player or a floor tile is found to check if the
+ * map is properly enclosed. It checks the orthogonally adjacent tiles, the four
+ * of them need to be another floor tile (0), a wall tile (1) or the player tile
+ * (N,S,E,O). If it finds a space, the map is not enclosed. Invalid map.
+ * 
+ * @param map
+ * @param x,y Tile coordinates
+ */
 t_errok	is_around_space_ok(t_map *map, int x, int y)
 {
 	if (y == 0 || x > (int)ft_strlen(map->array[y - 1])
@@ -57,7 +44,15 @@ t_errok	is_around_space_ok(t_map *map, int x, int y)
 	return (OK);
 }
 
-void	collisions_movements(t_map *map, t_coor pos, int vision_angle,
+/**
+ * @brief Initialices the player's information.
+ * 
+ * @param map The map, holding a pointer to the player's struct.
+ * @param pos  the player's coordinates.
+ * @param vision_angle E->0, N->90, W->180, S->270.
+ * @param dir t_greco_dir.
+ */
+static void	collisions_movements(t_map *map, t_coor pos, int vision_angle,
 			t_greco_dir dir)
 {
 	map->player_pointer->vision_angle = vision_angle;
@@ -66,6 +61,11 @@ void	collisions_movements(t_map *map, t_coor pos, int vision_angle,
 	map->player_pointer->end.y = pos.y + CENTER_PLAYER - LIMIT_FOV;
 }
 
+/**
+ * @brief Checks that the map has a valid player initial position, that being
+ * having only one and it being around floor or walls and initialices
+ * some values inside the player's struct.
+ */
 void	check_player(t_parser_map *parser_map, t_map *map, int x, int y)
 {
 	if (map->player_pointer->pos.x != 0)
@@ -82,32 +82,4 @@ void	check_player(t_parser_map *parser_map, t_map *map, int x, int y)
 		collisions_movements(map, (t_coor){x, y}, 270, S_);
 	else if (map->array[y][x] == 'W')
 		collisions_movements(map, (t_coor){x, y}, 180, W_);
-}
-
-void	check_valid_map(t_parser_map *parser_map, t_map *map)
-{
-	int	x;
-	int	y;
-
-	if (!map->array)
-		error_exit_invalid_map(parser_map, map, EMPTY_MAP);
-	y = 0;
-	while (map->array[y])
-	{
-		x = 0;
-		while (map->array[y][x])
-		{
-			if (ft_strchr(VALID_CHARS, map->array[y][x]) == NULL)
-				error_exit_invalid_map(parser_map, map, INVALID_CHAR);
-			if (ft_strchr(PLAYER, map->array[y][x]) != NULL)
-				check_player(parser_map, map, x, y);
-			if (ft_strchr(FLOOR, map->array[y][x]) != NULL)
-			{
-				if (is_around_space_ok(map, x, y) == ERROR)
-					error_exit_invalid_map(parser_map, map, NOT_ENCLOSED_MAP);
-			}
-			x++;
-		}
-		y++;
-	}
 }

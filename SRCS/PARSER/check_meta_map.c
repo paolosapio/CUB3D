@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:58 by anfi              #+#    #+#             */
-/*   Updated: 2025/10/17 20:29:53 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/18 14:21:06 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	check_textures_path(t_parser_map *map)
  * Once all information has been saved, str_map_encasketeitor will start to
  * save the map array.
  * @param line_map_to_check the line read with gnl.
- * @param map the map struct 
- * @param p_map 
- * @param fd 
- * @return int 
- */ 
+ * @param map the map struct
+ * @param p_map
+ * @param fd
+ * @return int
+ */
 int	check_line(char *line_map_to_check, t_map *map, t_parser_map *p_map, int fd)
 {
 	if (is_empty_line(line_map_to_check) == true)

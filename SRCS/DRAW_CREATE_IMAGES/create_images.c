@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sky_and_floor_create.c                             :+:      :+:    :+:   */
+/*   create_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 18:51:46 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/12 10:35:55 by anfi             ###   ########.fr       */
+/*   Created: 2025/09/30 20:53:42 by psapio            #+#    #+#             */
+/*   Updated: 2025/10/18 21:22:41 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_game.h"
+#include "draw_create_images.h"
 
+/**
+ * @brief Creates an an img with the specified color that covers half the screen
+ * Used for the sky and the floor.
+ */
 mlx_image_t	*create_half_screen_rectangle(mlx_t *mlx, int color)
 {
 	int			x;
@@ -74,4 +78,42 @@ mlx_image_t	*create_gradient_bgr(mlx_t *mlx)
 		condition_little_jump(y, &gradient_color);
 	}
 	return (gradient_bgr);
+}
+
+/**
+ * @brief Creates and returns an empty mlx_image_t with the specified measures
+ * 
+ * @param mlx the mlx instance needed to call mlx_new_image.
+ * @param width the width of the new image.
+ * @param height the height of the new image.
+ */
+mlx_image_t	*create_empty_img(mlx_t *mlx, int width, int height)
+{
+	mlx_image_t	*map_ray;
+
+	map_ray = mlx_new_image(mlx, width + 1, height + 1);
+	return (map_ray);
+}
+
+/**
+ * @brief Creates the minimap background, a semi transparent black background
+ * that covers all the screen.
+ */
+mlx_image_t	*create_background_map(mlx_t *mlx)
+{
+	int			x;
+	int			y;
+	mlx_image_t	*img_sky;
+
+	img_sky = mlx_new_image(mlx, WIDTH, HEIGHT);
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			mlx_put_pixel(img_sky, x, y, 0x00000099);
+		}
+	}
+	return (img_sky);
 }

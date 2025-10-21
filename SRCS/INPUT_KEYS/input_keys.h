@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:29:30 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/07 23:17:26 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/18 21:23:08 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <sys/time.h>
 
-# include "../DRAW_GAME/draw_game.h"
+# include "../DRAW_CREATE_IMAGES/draw_create_images.h"
 # include "t_game.h"
 # include "../ANIMATIONS/animations.h"
 # include "../MOVEMENTS/movements.h"

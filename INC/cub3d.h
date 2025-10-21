@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 15:42:45 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 15:47:13 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 21:34:09 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "t_map.h"
 # include "t_player.h"
 # include "t_game.h"
-# include "../SRCS/INIT_GAME/init_game.h"
+# include "../SRCS/LOAD_GAME/load_game.h"
 # include "../SRCS/INPUT_KEYS/input_keys.h"
 
 /* DEFINES DE ft_putendl_fd */

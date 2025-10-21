@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   load_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:39:16 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/06 16:08:25 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 21:44:05 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init_game.h"
+#include "load_game.h"
 
+/**
+ * @brief The name couldn't be any clearer.
+ */
 void	load_kelas_images(mlx_t *mlx, t_images *imgs)
 {
 	imgs->kelas_open = load_n_check_image(mlx, imgs, "PNG/kelas_open.png");
@@ -22,6 +25,9 @@ void	load_kelas_images(mlx_t *mlx, t_images *imgs)
 	imgs->kelas_up[1] = load_n_check_image(mlx, imgs, "PNG/kelas_up1.png");
 }
 
+/**
+ * @brief The frame frames. hehe.
+ */
 void	load_frame_images(mlx_t *mlx, t_images *imgs)
 {
 	imgs->frame[0] = load_n_check_image(mlx, imgs, "PNG/frame/0.png");
@@ -32,6 +38,9 @@ void	load_frame_images(mlx_t *mlx, t_images *imgs)
 	imgs->frame[5] = load_n_check_image(mlx, imgs, "PNG/frame/5.png");
 }
 
+/**
+ * @brief Loads the greco images you see in the minimap inside the imgs array.
+ */
 void	load_map_greco(mlx_t *mlx, t_images *imgs)
 {
 	imgs->greco_map[W_] = load_n_check_image(mlx, imgs, "PNG/greco_map/W.png");
@@ -44,6 +53,9 @@ void	load_map_greco(mlx_t *mlx, t_images *imgs)
 	imgs->greco_map[SW] = load_n_check_image(mlx, imgs, "PNG/greco_map/SW.png");
 }
 
+/**
+ * @brief omg so many frames for the bubbles but they dance so gracefully
+ */
 void	load_bubbles(mlx_t *mlx, mlx_image_t **bubble_array, t_images *images)
 {
 	bubble_array[0] = load_n_check_image(mlx, images, "PNG/bubble/b0.png");
@@ -68,6 +80,10 @@ void	load_bubbles(mlx_t *mlx, mlx_image_t **bubble_array, t_images *images)
 	bubble_array[19] = load_n_check_image(mlx, images, "PNG/bubble/b19.png");
 }
 
+/**
+ * @brief Loads ALL the game images. The minimap images, the different frames
+ * for each animation, the kelas, the info map...
+ */
 void	load_images(mlx_t *mlx, t_images *imgs)
 {
 	imgs->mirilla = load_n_check_image(mlx, imgs, "PNG/mirilla.png");

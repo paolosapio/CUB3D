@@ -6,14 +6,13 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:04:17 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/17 19:49:25 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/18 20:31:02 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-// open
 # include "../../INC/t_map.h"
 # include "libft.h"
 # include <fcntl.h>
@@ -34,25 +33,25 @@ typedef enum e_staterror
 	EMPTY_MAP,
 }				t_staterror;
 
-/*
-typedef struct s_parser_map
-{
-	int		line_that_start_map;  // parseo
-	char*	arg_map_fd;         // parseo
-	char*	path_n; // parseo + imagen
-	char*	path_e;  // parseo + imagen
-	char*	path_s; // parseo + imagen
-	char*	path_w;  // parseo + imagen
-	char*	info_floor;         // parseo + imagen
-	char*	info_sky;           // parseo + imagen
-}				t_parser_map;
-
-*/
-
+/**
+ * @brief Keeps information that is only needed before starting the game loop.
+ * Once each texture image has already been loaded as an mlx_image_t,
+ * it's path is no longer needed so all that kind of information is stored in 
+ * this sruct that will be freed and forgotten.
+ * 
+ * - line_that_start_map: the line index where the map array starts after the
+ * texture's paths and the color codes. Used when reopening the .cub file.
+ *
+ * - map_path: The path to the map.
+ * 
+ * - path_?: The path to each texture.
+ * 
+ * - info_floor / info_sky: The color code.
+ */
 typedef struct s_parser_map
 {
 	int		line_that_start_map;
-	char	*arg_map_fd;
+	char	*map_path;
 	char	*path_n;
 	char	*path_e;
 	char	*path_s;
@@ -73,49 +72,51 @@ typedef enum e_error_ok
 # define PLAYER "NEWS"
 # define SPACE " "
 
-//#define VALID_CHARS "10NSEW \n"
 # define VALID_CHARS "10NEWS \n"
 # define SPACES " \f\n\r\t\v"
 
-// parser.c
+/* parser.c */
+
 t_parser_map	parser(char *map_path, t_map *map);
 
-// get_map_info.c
-
-void			get_map_info(t_map map);
-
-// check_meta_map.c
-
-int				check_line(char *line_map_to_check, t_map *map,
-					t_parser_map *parser_map, int fd);
-void			allocate_map_size(char *line_map_to_check, t_map *map, int fd);
-
-// check_map.c
-
-void			check_map(char *path_map, t_parser_map *parser_map, t_map *map);
-void			check_valid_map(t_parser_map *parser_map, t_map *map);
-
-// check_line.c
-
-bool			is_empty_line(char *line);
-int				is_valid_line(char **map, int current);
-t_errok			check_first_line_map(char *line_map_to_check);
-
-// check_file.c
+/* check_file_extension.c */
 
 t_errok			check_file_extension(char *path_map);
 
-// destroy_parser_map.c
+/* check_map.c */
 
-void			destroy_parser_map(t_parser_map *parser_map);
-void			destroy_map(t_map *map);
+void			check_map(char *path_map, t_parser_map *parser_map, t_map *map);
+int				fd_open_or_exit(char *path_map);
+void			check_valid_map(t_parser_map *parser_map, t_map *map);
+void			error_exit_invalid_map(t_parser_map *parser_map, t_map *map,
+					int error);
 
-// map_encasketeitor.c
+/* check_meta_map.c */
+
+int				check_line(char *line_map_to_check, t_map *map,
+					t_parser_map *parser_map, int fd);
+int				save_map_info(char *line_map_to_check, char **map_info);
+void			check_textures_path(t_parser_map *map);
+void			allocate_map_size(char *line_map_to_check, t_map *map, int fd);
+
+/* check_line_utils.c */
+
+bool			is_empty_line(char *line);
+t_errok			check_first_line_map(char *line_map_to_check);
+
+/* map_encasketeitor.c */
 
 int				str_map_encasketeitor(t_parser_map *parser_map, t_map *map,
 					int fd);
-// check_map.c
-void			error_exit_invalid_map(t_parser_map *parser_map, t_map *map,
-					int error);
+
+/* check_tile.c */
+void			check_player(t_parser_map *parser_map, t_map *map,
+					int x, int y);
+t_errok			is_around_space_ok(t_map *map, int x, int y);
+
+/* destroy_parser_map.c */
+
+void			destroy_parser_map(t_parser_map *parser_map);
+void			destroy_map(t_map *map);
 
 #endif

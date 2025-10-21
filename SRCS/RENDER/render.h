@@ -6,7 +6,7 @@
 /*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 22:30:01 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/07 21:52:54 by anfi             ###   ########.fr       */
+/*   Updated: 2025/10/21 23:06:43 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,16 @@
 # include <math.h>
 # include <stdio.h>
 # include "t_coordinate.h"
-# include "../INIT_GAME/init_game.h"
+# include "../LOAD_GAME/load_game.h"
 # include "../TOOLS_GENERICS/tools_generics.h"
 # include "../TOOLS_GRAPHICS/tools_graphics.h"
 
-// # define HALF_SCREEN  SCREEN / 2 //!celdas!
-
-# define SCREEN 1.2 //!celdas!
-# define HALF_SCREEN  0.6 //!celdas!
-# define DISTANCE_SCREEN 0.5 //!celdas!
+# define SCREEN 1.2
+# define HALF_SCREEN 0.6
+# define DISTANCE_SCREEN 0.5
 
 // FOV : FIELD OF VIEW (campo visual, lo que vemos en pantalla)
-// distancia de la pantalla del jugador y tamaño de la pantalla varian la vis
+// distancia de la pantalla del jugador y tamaño de la pantalla varian la vista
 
 typedef t_coor		t_hypo2_len;
 typedef t_coor		t_ray_len;
@@ -66,6 +64,27 @@ typedef struct s_ray
 	t_ray_len	hypo_supreme;
 }				t_ray;
 
+/**
+ * @brief 
+ * 
+ * @param middle_screen_point (t_coor)
+ * The point inside the player's dir vector that is at DISTANCE_SCREEN.
+ * We will draw a new vector with -90° dir at HALF_SCREEN distance which will
+ * be the start of the camera plane -> l_screen_point.
+ * @param l_screen_point (t_coor)
+ * The start of the camera plane.
+ * @param pixel_offset_cos (float)
+ * the x offset of the camera plane for each new ray (1 ray per screen pixel).
+ * @param pixel_offset_sin (float)
+ * the y offset of the camera plane for each new ray (1 ray per screen pixel).
+ * @param ray (t_ray)
+ * the ray we are launching each time with all it's information needed to draw
+ * the pseudo 3d game.
+ * @param x_pos_in_screen (int)
+ * The x coordinate inside the screen, which equals to the ray index.
+ * @param player_to_camera_len (float) the hipothenuse formed between the player
+ * and l_screen_point, used to fix the fish eye.
+ */
 typedef struct s_camera
 {
 	t_coor		middle_screen_point;
@@ -74,7 +93,7 @@ typedef struct s_camera
 	float		pixel_offset_sen;
 	t_ray		ray;
 	int			x_pos_in_screen;
-	float		r; //???
+	float		player_to_camera_len;
 }		t_camera;
 
 // draw_wall_texture.c

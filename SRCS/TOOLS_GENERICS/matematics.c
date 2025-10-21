@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matematics.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:18:07 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/02 12:18:16 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/21 19:02:32 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	tile_size_calculator(int map_height, int map_width)
 	return (HEIGHT / map_height / 2);
 }
 
+/**
+ * @brief Transforms degrees to radians.
+ */
 float	to_radians(float degrees)
 {
 	return ((degrees / 180) * M_PI);

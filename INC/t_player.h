@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_player.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psapio <psapio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anfi <anfi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 15:48:33 by psapio            #+#    #+#             */
-/*   Updated: 2025/10/08 15:49:25 by psapio           ###   ########.fr       */
+/*   Updated: 2025/10/18 13:26:23 by anfi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 
 # define CENTER_PLAYER 0.5
 
+/**
+ * @brief We added the greco's rotation in the minimap, but since rotating an
+ * image is not something easy to do, we have 8 frames for 8 positions, and this
+ * enum is used to keep track of which direction greco is looking at.
+ */
 typedef enum e_greco_dir
 {
 	W_,
