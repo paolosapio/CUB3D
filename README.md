@@ -2,9 +2,13 @@
 
 A small 3D exploration game written in C as part of the 42 curriculum. The project combines a raycasting renderer with a custom underwater-inspired scene, animated visual elements, mouse-based camera control, and a map parser for `.cub` files.
 
-![Gameplay](INFO/cub3d.png)
-![Start screen](INFO/main_title.png)
-![Minimap](INFO/minimap.png)
+<p align="center">
+  <img src="INFO/cub3d.png" width="100%" alt="Gameplay" />
+  <br>
+  <img src="INFO/main_title.png" width="100%" alt="Start screen" />
+  <br>
+  <img src="INFO/minimap.png" width="100%" alt="Minimap" />
+</p>
 
 ## Features
 
