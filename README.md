@@ -37,7 +37,7 @@ The game follows a setup-and-render pipeline:
   <img src="INFO/controls.png" width="100%" alt="Controls" />
 </p>
 
-<table style="width: 100%; border-collapse: collapse; text-align: center;">
+<table style="border-collapse: collapse; text-align: center;">
   <thead>
     <tr style="border-bottom: 2px solid #ccc;">
       <th style="padding: 10px;">Input</th>
