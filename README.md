@@ -35,7 +35,9 @@ The game follows a setup-and-render pipeline:
 
 <p align="center">
   <img src="INFO/controls.png" width="100%" alt="Controls" />
-<table style="width: 100%; border-collapse: collapse; text-align: left;">
+</p>
+
+<table style="width: 100%; border-collapse: collapse; text-align: center;">
   <thead>
     <tr style="border-bottom: 2px solid #ccc;">
       <th style="padding: 10px;">Input</th>
@@ -81,7 +83,6 @@ The game follows a setup-and-render pipeline:
     </tr>
   </tbody>
 </table>
-</p>
 
 
 ## Map format
