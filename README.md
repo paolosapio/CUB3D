@@ -33,7 +33,8 @@ The game follows a setup-and-render pipeline:
 
 ## Controls
 
-![Controls](INFO/controls.png)
+<p align="center">
+  <img src="INFO/controls.png" width="100%" alt="Controls" />
 | Input | Action |
 |---|---|
 | `W` / `A` / `S` / `D` | Move forward, left, backward, and right |
@@ -45,6 +46,7 @@ The game follows a setup-and-render pipeline:
 | `Q` / `E` or left/right mouse buttons | Change the character's expression/pose |
 | `Enter` | Continue from the start screen |
 | `Esc` | Close the overlay or exit the game |
+</p>
 
 ## Map format
 
