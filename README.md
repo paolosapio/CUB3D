@@ -35,18 +35,53 @@ The game follows a setup-and-render pipeline:
 
 <p align="center">
   <img src="INFO/controls.png" width="100%" alt="Controls" />
-| Input | Action |
-|---|---|
-| `W` / `A` / `S` / `D` | Move forward, left, backward, and right |
-| Mouse movement | Rotate the view |
-| `←` / `→` | Rotate the view |
-| `Left Shift` | Move forward faster |
-| `Tab` | Toggle the map overlay |
-| `F` | Toggle the map/info view |
-| `Q` / `E` or left/right mouse buttons | Change the character's expression/pose |
-| `Enter` | Continue from the start screen |
-| `Esc` | Close the overlay or exit the game |
 </p>
+<table style="width: 100%; border-collapse: collapse; text-align: left;">
+  <thead>
+    <tr style="border-bottom: 2px solid #ccc;">
+      <th style="padding: 10px;">Input</th>
+      <th style="padding: 10px;">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 8px;"><code>W</code> / <code>A</code> / <code>S</code> / <code>D</code></td>
+      <td style="padding: 8px;">Move forward, left, backward, and right</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 8px;">Mouse movement</td>
+      <td style="padding: 8px;">Rotate the view</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 8px;"><code>←</code> / <code>→</code></td>
+      <td style="padding: 8px;">Rotate the view</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 8px;"><code>Left Shift</code></td>
+      <td style="padding: 8px;">Move forward faster</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 8px;"><code>Tab</code></td>
+      <td style="padding: 8px;">Toggle the map overlay</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 8px;"><code>F</code></td>
+      <td style="padding: 8px;">Toggle the map/info view</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 8px;"><code>Q</code> / <code>E</code> or left/right mouse buttons</td>
+      <td style="padding: 8px;">Change the character's expression/pose</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 8px;"><code>Enter</code></td>
+      <td style="padding: 8px;">Continue from the start screen</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;"><code>Esc</code></td>
+      <td style="padding: 8px;">Close the overlay or exit the game</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Map format
 
