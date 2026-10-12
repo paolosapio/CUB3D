@@ -29,6 +29,7 @@ The game follows a setup-and-render pipeline:
 
 ## Controls
 
+![Controls](INFO/controls.png)
 | Input | Action |
 |---|---|
 | `W` / `A` / `S` / `D` | Move forward, left, backward, and right |
